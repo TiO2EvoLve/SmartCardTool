@@ -1,0 +1,89 @@
+﻿<Window x:Class="WindowUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        xmlns:samples="clr-namespace:WindowUI.Pages"
+        Title="Main" Height="800" Width="1000">
+
+    <Grid Background="#FEFEFE">
+        <ui:NavigationView
+            MinHeight="300"
+            Margin="0"
+            IsBackButtonVisible="Auto"
+            IsPaneToggleVisible="True"
+            PaneDisplayMode="Left"
+             
+            PaneTitle="华冠智能工具箱">
+            <ui:NavigationView.AutoSuggestBox>
+                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
+            </ui:NavigationView.AutoSuggestBox>
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="主页"
+                    Icon="{ui:SymbolIcon Home24}"
+                    TargetPageType="{x:Type samples:Page1}"
+                     />
+                <ui:NavigationViewItem
+                    Content="生成"
+                    Icon="{ui:SymbolIcon Library24}"
+                    TargetPageType="{x:Type samples:Page2}" />
+                <ui:NavigationViewItem
+                    Content="设计"
+                    Icon="{ui:SymbolIcon Library24}"
+                    TargetPageType="{x:Type samples:Page1}" />
+            </ui:NavigationView.MenuItems>
+            
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem
+                    Content="Settings"
+                    Icon="{ui:SymbolIcon Settings24}"
+                    TargetPageType="{x:Type samples:Page1}" />
+            </ui:NavigationView.FooterMenuItems>
+            <ui:NavigationView.Header>
+                <Border
+                    Margin="8"
+                    Background="{DynamicResource StripedBackgroundBrush}"
+                    CornerRadius="4">
+                    <TextBlock
+                        Margin="24"
+                        VerticalAlignment="Center"
+                        FontWeight="Medium"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="NavigationView Header" />
+                </Border>
+            </ui:NavigationView.Header>
+            <ui:NavigationView.PaneHeader>
+                <Border
+                    Margin="0,0,0,8"
+                    Background="{DynamicResource StripedBackgroundBrush}"
+                    CornerRadius="4">
+                    <TextBlock
+                        Margin="24"
+                        VerticalAlignment="Center"
+                        FontWeight="Medium"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Pane Header" />
+                </Border>
+            </ui:NavigationView.PaneHeader>
+            <ui:NavigationView.PaneFooter>
+                <Border
+                    Margin="0,8,0,0"
+                    Background="{DynamicResource StripedBackgroundBrush}"
+                    CornerRadius="4">
+                    <TextBlock
+                        Margin="24"
+                        VerticalAlignment="Center"
+                        FontWeight="Medium"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Pane Footer" />
+                </Border>
+            </ui:NavigationView.PaneFooter>
+            
+        </ui:NavigationView>
+
+    </Grid>
+</Window>

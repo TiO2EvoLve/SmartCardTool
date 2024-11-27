@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace WindowUI.Pages
 {
-    /// <summary>
-    /// ZIBo.xaml 的交互逻辑
-    /// </summary>
     public partial class ZIBoPage : Window
     {
         public ZIBoPage()

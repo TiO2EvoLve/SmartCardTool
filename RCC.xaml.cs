@@ -20,7 +20,6 @@ public partial class RCC : Window
     private readonly string[] disableButtonRegions = { "兰州工作证", "青岛博研加气站", "抚顺夕阳红卡", "潍坊夕阳红卡、爱心卡", "国网技术学院职工卡",
         "哈尔滨城市通敬老优待卡","运城盐湖王府学校" ,"南通地铁","长沙公交荣誉卡","泸州公交","青岛理工大学","西安交通大学","呼和浩特","重庆33A-A1"
     ,"西藏林芝","西藏拉萨","淄博公交"};
-
     public RCC()
     {
         InitializeComponent();
@@ -49,7 +48,6 @@ public partial class RCC : Window
             mktextbox.Text = mkFileName;
         }
     }
-
     //打开Excel文件
     private void OpenFile(object sender, RoutedEventArgs e)
     {
@@ -85,6 +83,12 @@ public partial class RCC : Window
                 SelectMKButton.IsEnabled = !Array.Exists(disableButtonRegions, region => region == Region);
                 if (!SelectMKButton.IsEnabled) mk.Foreground = Brushes.LightGreen; else mk.Foreground = Brushes.Red;
             }
+            //根据不同地区进行提示
+            switch (Region)
+            { 
+                case "泸州公交": tip.Text="根据卡类型进行制作"; break;
+            }
+
         }
 
     }
@@ -123,11 +127,6 @@ public partial class RCC : Window
             case "其他地区": Other(); break;
             default: MessageBox.Show("请选择地区"); break;
         }
-    }
-
-    private void Test(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("暂未开发");
     }
     //天津的处理逻辑
     private void TianJin()
@@ -184,7 +183,6 @@ public partial class RCC : Window
 
         System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
-
     //兰州工作证的处理逻辑
     private void LanZhouGongZuoZheng()
     {
@@ -293,7 +291,6 @@ public partial class RCC : Window
 
 
     }
-
     //青岛博研加气站的处理逻辑
     private void QingDaoBoYangJiaQiZhan()
     {
@@ -383,7 +380,6 @@ public partial class RCC : Window
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
     }
-
     //郴州老人卡、优抚卡的处理逻辑
     private void ChenZhou()
     {
@@ -719,7 +715,10 @@ public partial class RCC : Window
     //泸州公交的处理逻辑
     private void LuZhou()
     {
-        MessageBox.Show($"请根据不同卡类型在代码中替换成不同的前缀");
+        LuZhou luzhou = new LuZhou();
+        luzhou.ShowDialog();
+        string cardtype = luzhou.CardType;
+        if (cardtype == "") { MessageBox.Show("未选择卡类型"); return; }
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> uid_10Data = new List<string>();
@@ -733,8 +732,11 @@ public partial class RCC : Window
             {
                 string uid_10Value = worksheet.Cells[row, 5].Text;
                 string cardValue = worksheet.Cells[row, 1].Text;
-                cardValue = cardValue.Substring(11, 8);
-                cardValue = "47806083" + cardValue;
+                if(cardValue.Length == 19)
+                {
+                    cardValue = cardValue.Substring(11, 8);
+                }
+                cardValue = cardtype + cardValue;
 
                 uid_10Data.Add(uid_10Value);
                 cardData.Add(cardValue);
@@ -1009,7 +1011,6 @@ public partial class RCC : Window
         }
         System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
-    //
     //西藏拉萨地区的处理逻辑
     private void XIZangLaSa()
     {
@@ -1131,5 +1132,9 @@ public partial class RCC : Window
     {
       
     }
-    
+
+    private void Test(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("未开发");
+    }
 }

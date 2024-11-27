@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WindowUI.Pages
 {
-    /// <summary>
-    /// Page1.xaml 的交互逻辑
-    /// </summary>
     public partial class Page1 : Page
     {
         public Page1()
@@ -29,6 +26,11 @@ namespace WindowUI.Pages
         {
             new RCC().Show();
         }
-       
+        private void OpenScriptWindow(object sender, MouseButtonEventArgs e)
+        {
+            new ScriptChange().Show();
+        }
+
+
     }
 }

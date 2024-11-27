@@ -19,27 +19,27 @@
              
             PaneTitle="华冠智能工具箱">
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
+                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="搜索" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem
-                    Content="主页"
+                    Content="RCC"
                     Icon="{ui:SymbolIcon Home24}"
                     TargetPageType="{x:Type samples:Page1}"
                      />
                 <ui:NavigationViewItem
-                    Content="生成"
-                    Icon="{ui:SymbolIcon Library24}"
+                    Content="转换"
+                    Icon="{ui:SymbolIcon ArrowSync24}"
                     TargetPageType="{x:Type samples:Page2}" />
                 <ui:NavigationViewItem
-                    Content="设计"
-                    Icon="{ui:SymbolIcon Library24}"
+                    Content="读写"
+                    Icon="{ui:SymbolIcon CalendarEdit24}"
                     TargetPageType="{x:Type samples:Page1}" />
             </ui:NavigationView.MenuItems>
             
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
-                    Content="Settings"
+                    Content="设置"
                     Icon="{ui:SymbolIcon Settings24}"
                     TargetPageType="{x:Type samples:Page1}" />
             </ui:NavigationView.FooterMenuItems>

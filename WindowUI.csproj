@@ -28,6 +28,40 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="icon\csv.png" />
+      <None Remove="icon\file.png" />
+      <None Remove="icon\ini.png" />
+      <None Remove="icon\pdi.png" />
+      <None Remove="icon\save.png" />
+      <None Remove="icon\snd.png" />
+      <None Remove="icon\sndevts.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="icon\csv.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\file.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\ini.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\pdi.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\save.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\snd.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="icon\sndevts.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="EPPlus" Version="7.5.0" />
       <PackageReference Include="WPF-UI" Version="4.0.0-rc.2" />
     </ItemGroup>

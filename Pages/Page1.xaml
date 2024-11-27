@@ -61,8 +61,8 @@
                         <GradientStop Color="#F6416C" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
-                    <Label Background="Transparent"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                        <TextBlock FontSize="15px" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FEFEFE">数据加密</TextBlock>
+                    <Label Background="Transparent" MouseDown="OpenScriptWindow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBlock FontSize="15px" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FEFEFE">脚本转换</TextBlock>
                     </Label>
                 </Border>
         </StackPanel>

@@ -41,22 +41,10 @@
       <Resource Include="icon\csv.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="icon\file.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
       <Resource Include="icon\ini.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="icon\pdi.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
       <Resource Include="icon\save.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="icon\snd.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="icon\sndevts.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>

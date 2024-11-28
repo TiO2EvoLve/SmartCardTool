@@ -8,7 +8,6 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         WindowStartupLocation="CenterScreen"
         Title="脚本转换器 V2024.11.26 - 山东华冠智能卡" Height="800" Width="1000">
-
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +17,7 @@
 
         <StackPanel>
             <Menu Grid.Row="0">
-                <MenuItem Header="_文件" >
+                <MenuItem Header="_文件">
                     <MenuItem Header="_打开" Click="SelectFile"/>
                     <MenuItem Header="_保存" Click="SaveFile"/>
                     <MenuItem Header="_退出" Click="ExitWindow"/>
@@ -33,9 +32,9 @@
                 </MenuItem>
             </Menu>
             <StackPanel Orientation="Horizontal" Margin="10,0,0,0" >
-                <Image Source="D:\Project\C#\WindowUI\icon\csv.png" Margin="5" Height="20" Width="20"></Image>
-                <Image Source="D:\Project\C#\WindowUI\icon\ini.png" Margin="5" Height="20" Width="20"></Image>
-                <Image Source="D:\Project\C#\WindowUI\icon\save.png" Margin="5" Height="20" Width="20"></Image>
+                <Image Source="D:\Project\C#\WindowUI\icon\csv.png" Margin="5" Height="20" Width="20" MouseDown="SelectFile"></Image>
+                <Image Source="D:\Project\C#\WindowUI\icon\ini.png" Margin="5" Height="20" Width="20" MouseDown="Image_MouseDown_OpenScript"></Image>
+                <Image Source="D:\Project\C#\WindowUI\icon\save.png" Margin="5" Height="20" Width="20" MouseDown="SaveFile"></Image>
             </StackPanel>
         </StackPanel>
 
@@ -53,6 +52,12 @@
                 Content="处理文件"
                 MouseOverBackground="#A8E063"
                 Margin="10,0,0,0" Foreground="#E4FFFFFF" />
+                <ui:Button
+                Background="#E6A23C"
+                Content="保存文件"
+                Click="SaveFile"
+                MouseOverBackground="#ffbc58"
+                Margin="10,0,10,0" Foreground="#E4FFFFFF"/>
             </StackPanel>
         </Border>
 
@@ -72,7 +77,7 @@
                         <RichTextBox x:Name="Script" Height="Auto" Width="Auto">
                         </RichTextBox>
                     </TabItem>
-                    <TabItem >
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="ArrowDownload16" />
@@ -85,6 +90,5 @@
                 </TabControl>
             </Border>
         </Grid>
-
     </Grid>
 </Window>

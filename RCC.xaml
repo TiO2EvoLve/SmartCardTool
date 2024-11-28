@@ -55,6 +55,7 @@
                     <ComboBoxItem Content="西藏林芝" />
                     <ComboBoxItem Content="西藏拉萨" />
                     <ComboBoxItem Content="淄博公交" />
+                    <ComboBoxItem Content="平凉公交" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"

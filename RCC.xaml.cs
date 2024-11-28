@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using WindowUI.Pages;
+using Microsoft.VisualBasic;
 namespace WindowUI;
 public partial class RCC : Window
 {
@@ -19,7 +20,7 @@ public partial class RCC : Window
     // 定义不需要选择MK文件的地区
     private readonly string[] disableButtonRegions = { "兰州工作证", "青岛博研加气站", "抚顺夕阳红卡", "潍坊夕阳红卡、爱心卡", "国网技术学院职工卡",
         "哈尔滨城市通敬老优待卡","运城盐湖王府学校" ,"南通地铁","长沙公交荣誉卡","泸州公交","青岛理工大学","西安交通大学","呼和浩特","重庆33A-A1"
-    ,"西藏林芝","西藏拉萨","淄博公交"};
+    ,"西藏林芝","西藏拉萨","淄博公交","平凉公交"};
     public RCC()
     {
         InitializeComponent();
@@ -58,7 +59,7 @@ public partial class RCC : Window
         };
         if (openFileDialog2.ShowDialog() == true)
         {
-            if(openFileDialog2.FileName == null) return;
+            if (openFileDialog2.FileName == null) return;
             //记录Excel文件名
             excelFileName = System.IO.Path.GetFileName(openFileDialog2.FileName);
             //去掉扩展名.slsx
@@ -85,8 +86,8 @@ public partial class RCC : Window
             }
             //根据不同地区进行提示
             switch (Region)
-            { 
-                case "泸州公交": tip.Text="根据卡类型进行制作"; break;
+            {
+                case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
             }
 
         }
@@ -124,7 +125,7 @@ public partial class RCC : Window
             case "西藏林芝": XIZang(); break;
             case "西藏拉萨": XIZangLaSa(); break;
             case "淄博公交": ZiBo(); break;
-            case "其他地区": Other(); break;
+            case "平凉公交": Pingliang(); break;
             default: MessageBox.Show("请选择地区"); break;
         }
     }
@@ -559,7 +560,7 @@ public partial class RCC : Window
         }
 
         System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
-      
+
     }
     //运城盐湖王府学校的处理逻辑
     private void YunCheng()
@@ -732,7 +733,7 @@ public partial class RCC : Window
             {
                 string uid_10Value = worksheet.Cells[row, 5].Text;
                 string cardValue = worksheet.Cells[row, 1].Text;
-                if(cardValue.Length == 19)
+                if (cardValue.Length == 19)
                 {
                     cardValue = cardValue.Substring(11, 8);
                 }
@@ -905,24 +906,6 @@ public partial class RCC : Window
             System.Windows.MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
     }
-    //转换为调整16进制或不调整16进制
-    private string SwapHexPairs(string hex)
-    {
-        if (hex.Length % 2 != 0)
-        {
-            throw new ArgumentException("数据长度不合法");
-        }
-
-        char[] reversedHex = new char[hex.Length];
-        int j = 0;
-        for (int i = hex.Length - 2; i >= 0; i -= 2)
-        {
-            reversedHex[j++] = hex[i];
-            reversedHex[j++] = hex[i + 1];
-        }
-
-        return new string(reversedHex);
-    }
     //重庆地区的331-A1模块的处理逻辑
     private void ChongQingA1()
     {
@@ -970,7 +953,7 @@ public partial class RCC : Window
     //西藏林芝地区的处理逻辑
     private void XIZang()
     {
-       
+
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
@@ -1014,7 +997,7 @@ public partial class RCC : Window
     //西藏拉萨地区的处理逻辑
     private void XIZangLaSa()
     {
-      
+
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
@@ -1127,14 +1110,60 @@ public partial class RCC : Window
         Match match = Regex.Match(input, pattern);
         return match.Success ? match.Groups[1].Value : string.Empty;
     }
-    //其他地区的处理逻辑
-    private void Other()
+    //平凉地区的处理逻辑
+    private void Pingliang()
     {
-      
-    }
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> UIDData = new List<string>();
+        List<string> SNData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string UIDValue = worksheet.Cells[row, 2].Text;
+                UIDValue = Convert.ToUInt32(SwapHexPairs(UIDValue), 16).ToString();
+                UIDData.Add(UIDValue);
+                string SNValue = worksheet.Cells[row, 8].Text;
+                SNData.Add(SNValue);
+            }
+        }
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"{excelFileName}.txt";
+        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            for (int i = 0; i < SNData.Count; i++)
+            {
+                writer.WriteLine($"{UIDData[i]}\t74400000{SNData[i]}\t1");
+            }
+        }
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
 
+    }
     private void Test(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("未开发");
+    }
+    //调整16进制与不调整16进制互相转换
+    private string SwapHexPairs(string hex)
+    {
+        if (hex.Length % 2 != 0)
+        {
+            throw new ArgumentException("数据长度不合法");
+        }
+
+        char[] reversedHex = new char[hex.Length];
+        int j = 0;
+        for (int i = hex.Length - 2; i >= 0; i -= 2)
+        {
+            reversedHex[j++] = hex[i];
+            reversedHex[j++] = hex[i + 1];
+        }
+
+        return new string(reversedHex);
     }
 }

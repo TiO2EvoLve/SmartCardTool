@@ -1043,12 +1043,12 @@ public partial class RCC : Window
         string date1;//日期,格式2024-11-15
         string cardtype;//卡类型
         //打开二级窗口
-        ZIBoPage zibo = new ZIBoPage();
+        ZiBoPage zibo = new ZiBoPage();
         zibo.ShowDialog();
         //获取二级窗口的数据
         cardtype = zibo.CardType;
-        date = zibo.date14;
-        date1 = zibo.date10;
+        date = zibo.Date14;
+        date1 = zibo.Date10;
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> xmlData = new List<string>();

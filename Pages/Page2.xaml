@@ -9,8 +9,6 @@
       Title="Page2">
 
     <Grid>
-        <Label Width="200" Height="50" Background="AliceBlue" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-            <TextBox Text="Hello" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        </Label>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="100"></Button>
     </Grid>
 </Page>

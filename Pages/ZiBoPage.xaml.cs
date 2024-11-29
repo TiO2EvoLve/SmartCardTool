@@ -1,36 +1,24 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WindowUI.Pages
 {
-    public partial class ZIBoPage : Window
+    public partial class ZiBoPage
     {
-        public ZIBoPage()
+        public ZiBoPage()
         {
             InitializeComponent();
         }
 
         public string CardType { set; get; }
-        public string date14 { set; get; }
-        public string date10 { set; get; }
+        public string Date14 { set; get; }
+        public string Date10 { set; get; }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Select.SelectedItem is ComboBoxItem selectedItem && selectedItem.DataContext != null)
@@ -43,31 +31,34 @@ namespace WindowUI.Pages
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "XD文件|*.xd";
             openFileDialog.ShowDialog();
-            if (openFileDialog.FileName == null) return;
-            String FileName = System.IO.Path.GetFileName(openFileDialog.FileName);
-            if (FileName != null)
+            if (String.IsNullOrEmpty(openFileDialog.FileName)) return;
+            String fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+            if (fileName == "") return;
+
+            if (fileName.Length < 24)
             {
-
-                date14 = FileName.Substring(8,8) + FileName.Substring(17, 6);
-                DateTime date = DateTime.ParseExact(date14.Substring(0,8), "yyyyMMdd", null);
-                // 转换为目标格式
-                date10 = date.ToString("yyyy-MM-dd");
-                datetext.Text = date14;
-                date2text.Text = date10;
+                MessageBox.Show("文件名长度不足，无法处理。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-        }
 
+            Date14 = fileName.Substring(8, 8) + fileName.Substring(17, 6);
+            DateTime date = DateTime.ParseExact(Date14.Substring(0, 8), "yyyyMMdd", null);
+            // 转换为目标格式
+            Date10 = date.ToString("yyyy-MM-dd");
+            datetext.Text = Date14;
+            date2text.Text = Date10;
+        }
         private void datetext_TextChanged(object sender, TextChangedEventArgs e)
         {
-            date14 = datetext.Text;
-            if (date14.Length != 14)
+            Date14 = datetext.Text;
+            if (Date14.Length != 14)
             {
                 return;
             }
-            DateTime date = DateTime.ParseExact(date14.Substring(0, 8), "yyyyMMdd", null);
+            DateTime date = DateTime.ParseExact(Date14.Substring(0, 8), "yyyyMMdd", null);
             // 转换为目标格式
-            date10 = date.ToString("yyyy-MM-dd");
-            date2text.Text = date10;
+            Date10 = date.ToString("yyyy-MM-dd");
+            date2text.Text = Date10;
         }
     }
 }

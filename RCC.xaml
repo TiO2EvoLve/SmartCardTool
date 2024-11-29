@@ -80,7 +80,7 @@
                 Content="检查文件"
                 MouseOverBackground="#ffbc58"
                 Margin="10,0,10,0" Foreground="#E4FFFFFF"
-                Click="Test" />
+                Click="Test"/>
             </StackPanel>
         </Border>
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Orientation="Vertical">

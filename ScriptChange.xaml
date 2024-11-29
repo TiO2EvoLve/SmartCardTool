@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WindowUI"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         WindowStartupLocation="CenterScreen"
-        Title="脚本转换器 V2024.11.26 - 山东华冠智能卡" Height="800" Width="1000">
+        Title="脚本转换器 V2024.11.28 - 山东华冠智能卡" Height="800" Width="1000">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <Menu Grid.Row="0">
+            <Menu>
                 <MenuItem Header="_文件">
                     <MenuItem Header="_打开" Click="SelectFile"/>
                     <MenuItem Header="_保存" Click="SaveFile"/>
@@ -39,7 +38,7 @@
         </StackPanel>
 
         <Border Grid.Row="1" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10" Background="#FFFEFEFE">
-            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,20,0,20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
                 <ui:AutoSuggestBox PlaceholderText="Search..." Width="500px" x:Name="ScriptName"/>
                 <ui:Button
                 Click="SelectFile"
@@ -65,9 +64,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="2" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10" Background="#FFFEFEFE">
+            <Border BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10" Background="#FFFEFEFE">
                 <TabControl Margin="10" >
-                    <TabItem IsSelected="True" >
+                    <TabItem IsSelected="True">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="Code24" />
@@ -84,7 +83,7 @@
                                 <TextBlock Text="转换后"/>
                             </StackPanel>
                         </TabItem.Header>
-                        <RichTextBox x:Name="MyScript" Height="Auto" Width="Auto">
+                             <RichTextBox x:Name="MyScript" Height="Auto" Width="Auto">
                         </RichTextBox>
                     </TabItem>
                 </TabControl>

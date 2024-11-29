@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace WindowUI
@@ -80,9 +79,9 @@ namespace WindowUI
                     fileContent = reader.ReadToEnd();
                 }
                 Paragraph paragraph = new Paragraph();
-                // 创建并添加文本
+                //创建并添加文本
                 paragraph.Inlines.Add(new Run(fileContent));
-                // 清空富文本框并插入新的段落
+                //清空富文本框并插入新的段落
                 Script.Document.Blocks.Clear();
                 Script.Document.Blocks.Add(paragraph);
             }

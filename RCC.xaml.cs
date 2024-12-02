@@ -17,9 +17,7 @@ public partial class RCC
     Microsoft.Win32.OpenFileDialog openFileDialog; //MK文件处理流
     Microsoft.Win32.OpenFileDialog openFileDialog2; //Excel文件处理流
     // 定义不需要选择MK文件的地区
-    private readonly string[] disableButtonRegions = { "兰州工作证", "青岛博研加气站", "抚顺夕阳红卡", "潍坊夕阳红卡、爱心卡", "国网技术学院职工卡",
-        "哈尔滨城市通敬老优待卡","运城盐湖王府学校" ,"南通地铁","长沙公交荣誉卡","泸州公交","青岛理工大学","西安交通大学","呼和浩特","重庆33A-A1"
-    ,"西藏林芝","西藏拉萨","淄博公交","平凉公交","桂林公交"};
+    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区"};
     public RCC()
     {
         InitializeComponent();
@@ -76,17 +74,18 @@ public partial class RCC
     {
         if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
         {
-            Region = selectedItem.Content.ToString();
+            Region = selectedItem.Content.ToString() ?? throw new InvalidOperationException();
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
-                SelectMKButton.IsEnabled = !Array.Exists(disableButtonRegions, region => region == Region);
+                SelectMKButton.IsEnabled = Array.Exists(disableButtonRegions, region => region == Region);
                 if (!SelectMKButton.IsEnabled) mk.Foreground = Brushes.LightGreen; else mk.Foreground = Brushes.Red;
             }
             //根据不同地区进行提示
             switch (Region)
             {
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
+                default:tip.Text = "该地区暂无提示"; break;
             }
 
         }
@@ -97,7 +96,7 @@ public partial class RCC
     {
         if (ExcelData is null)
         {
-            System.Windows.MessageBox.Show("请选择文件");
+            MessageBox.Show("请选择文件");
             return;
         }
 
@@ -182,7 +181,7 @@ public partial class RCC
             }
         }
 
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //兰州工作证的处理逻辑
     private void LanZhouGongZuoZheng()
@@ -237,8 +236,7 @@ public partial class RCC
                 writer.WriteLine(line);
             }
         }
-
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //抚顺夕阳红卡的处理逻辑
     private void FuShunXiYangHongKa()
@@ -287,7 +285,7 @@ public partial class RCC
                 }
             }
         }
-        System.Windows.MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+        MessageBox.Show($"数据已处理并保存到文件: {filePath}");
 
 
 
@@ -336,8 +334,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-
-            System.Windows.MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
     }
     //青岛理工大学的处理逻辑
@@ -433,8 +430,7 @@ public partial class RCC
                 }
             }
         }
-
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //潍坊的处理逻辑
     private void WeiFang()
@@ -456,8 +452,7 @@ public partial class RCC
                 processedData.Add(newRow);
             }
         }
-
-
+        
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HG2610{excelFileName}01";
         string filePath = System.IO.Path.Combine(desktopPath, fileName);
@@ -469,8 +464,7 @@ public partial class RCC
                 writer.WriteLine(processedData[i]);
             }
         }
-
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
         //将文件后缀改为.RCC
         string newFilePath = filePath + ".RCC";
         File.Move(filePath, newFilePath);
@@ -516,7 +510,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
 
         }
     }
@@ -558,8 +552,7 @@ public partial class RCC
                 }
             }
         }
-
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
 
     }
     //运城盐湖王府学校的处理逻辑
@@ -602,7 +595,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到文件: {filePath},请根据制卡数据重命名RCC文件");
+            MessageBox.Show($"数据已处理并保存到文件: {filePath},请根据制卡数据重命名RCC文件");
         }
     }
     //南通地铁的处理逻辑
@@ -627,7 +620,7 @@ public partial class RCC
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("日期格式不正确");
+                    MessageBox.Show("日期格式不正确");
                 }
 
                 timeData.Add(timeValue);
@@ -649,7 +642,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
         }
     }
     //长沙公交荣誉卡的处理逻辑
@@ -692,8 +685,7 @@ public partial class RCC
             worksheet.Cells[1, 3].Value = "UID_16_";
             worksheet.Cells[1, 4].Value = "UID_10";
             worksheet.Cells[1, 5].Value = "UID_10_";
-
-
+            
             for (int i = 0; i < SerialNumData.Count; i++)
             {
 
@@ -709,7 +701,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
         }
 
     }
@@ -762,7 +754,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
         }
     }
     //合肥通的处理逻辑
@@ -858,7 +850,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
     }
     //呼和浩特的处理逻辑
@@ -903,7 +895,7 @@ public partial class RCC
             string fileName = $"{excelFileName}.xlsx";
             string filePath = System.IO.Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            System.Windows.MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
     }
     //重庆地区的331-A1模块的处理逻辑
@@ -948,7 +940,7 @@ public partial class RCC
                 }
             }
         }
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //西藏林芝地区的处理逻辑
     private void XIZang()
@@ -992,7 +984,7 @@ public partial class RCC
                 }
             }
         }
-        System.Windows.MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //西藏拉萨地区的处理逻辑
     private void XIZangLaSa()
@@ -1103,6 +1095,7 @@ public partial class RCC
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
+    //查找逻辑
     static string ExtractValue(string input, string startKey, string endKey)
     {
         // 匹配以startKey开始到endKey之前的内容
@@ -1159,16 +1152,19 @@ public partial class RCC
             for (int row = 2; row <= rowCount; row++)
             {
                 string UIDValue = worksheet.Cells[row, 3].Text;
+                UIDValue = "00908670" + UIDValue;
                 UIDData.Add(UIDValue);
                 string SNValue = worksheet.Cells[row, 2].Text;
                 SNData.Add(SNValue);
             }
         }
+        GuiLin guiLin= new();
+        guiLin.ShowDialog();
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         int linecount = SNData.Count;
         string total = linecount.ToString("D8");
-        string fileName = $"GXJT_0{SNData[0]}_{total}_00_V100.rdi";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string fileName = $"GXJT_0{guiLin.SN.Text}_{guiLin.Count.Text}_00_V100-{SNData.Count}.rdi";
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             for (int i = 0; i < SNData.Count; i++)
@@ -1187,7 +1183,9 @@ public partial class RCC
     }
     private void Test(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("未开发");
+        DateTime today = DateTime.Now;
+        Console.WriteLine(today.AddMonths(12).ToString("u"));
+        //MessageBox.Show("未开发");
     }
     //调整16进制与不调整16进制互相转换
     private string SwapHexPairs(string hex)
@@ -1196,7 +1194,6 @@ public partial class RCC
         {
             throw new ArgumentException("数据长度不合法");
         }
-
         char[] reversedHex = new char[hex.Length];
         int j = 0;
         for (int i = hex.Length - 2; i >= 0; i -= 2)
@@ -1204,7 +1201,6 @@ public partial class RCC
             reversedHex[j++] = hex[i];
             reversedHex[j++] = hex[i + 1];
         }
-
         return new string(reversedHex);
     }
 }

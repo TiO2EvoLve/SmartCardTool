@@ -9,6 +9,6 @@
       Title="Page2">
 
     <Grid>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="100"></Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="100" Click="Button_Click"></Button>
     </Grid>
 </Page>

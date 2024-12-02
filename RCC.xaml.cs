@@ -6,9 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using WindowUI.Pages;
-using Microsoft.VisualBasic;
 namespace WindowUI;
-public partial class RCC : Window
+public partial class RCC
 {
     private string mkFileName; // 记录MK文件名
     private List<string> MKDate; // 临时存储读取的MK文件的数据
@@ -20,7 +19,7 @@ public partial class RCC : Window
     // 定义不需要选择MK文件的地区
     private readonly string[] disableButtonRegions = { "兰州工作证", "青岛博研加气站", "抚顺夕阳红卡", "潍坊夕阳红卡、爱心卡", "国网技术学院职工卡",
         "哈尔滨城市通敬老优待卡","运城盐湖王府学校" ,"南通地铁","长沙公交荣誉卡","泸州公交","青岛理工大学","西安交通大学","呼和浩特","重庆33A-A1"
-    ,"西藏林芝","西藏拉萨","淄博公交","平凉公交"};
+    ,"西藏林芝","西藏拉萨","淄博公交","平凉公交","桂林公交"};
     public RCC()
     {
         InitializeComponent();
@@ -41,7 +40,7 @@ public partial class RCC : Window
             //将文件暂时存储到MKDate中
             MKDate = File.ReadAllLines(openFileDialog.FileName).ToList();
             //记录MK文件名
-            mkFileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+            mkFileName = Path.GetFileName(openFileDialog.FileName);
             //去掉MK文件名的前两个字符
             mkFileName = mkFileName.Substring(2);
             mk.Foreground = Brushes.LightGreen;
@@ -61,7 +60,7 @@ public partial class RCC : Window
         {
             if (openFileDialog2.FileName == null) return;
             //记录Excel文件名
-            excelFileName = System.IO.Path.GetFileName(openFileDialog2.FileName);
+            excelFileName = Path.GetFileName(openFileDialog2.FileName);
             //去掉扩展名.slsx
             excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
             //将文件暂时存储到ExcelDate中
@@ -126,6 +125,7 @@ public partial class RCC : Window
             case "西藏拉萨": XIZangLaSa(); break;
             case "淄博公交": ZiBo(); break;
             case "平凉公交": Pingliang(); break;
+            case "桂林公交": GuiLin(); break;
             default: MessageBox.Show("请选择地区"); break;
         }
     }
@@ -439,7 +439,7 @@ public partial class RCC : Window
     //潍坊的处理逻辑
     private void WeiFang()
     {
-        int rowCount;//execl文件的行数
+        int rowCount;//excel文件的行数
                      //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> processedData = new List<string>();
@@ -1143,6 +1143,47 @@ public partial class RCC : Window
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
 
+    }
+    //桂林公交的处理逻辑
+    private void GuiLin()
+    {
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> UIDData = new List<string>();
+        List<string> SNData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string UIDValue = worksheet.Cells[row, 3].Text;
+                UIDData.Add(UIDValue);
+                string SNValue = worksheet.Cells[row, 2].Text;
+                SNData.Add(SNValue);
+            }
+        }
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        int linecount = SNData.Count;
+        string total = linecount.ToString("D8");
+        string fileName = $"GXJT_0{SNData[0]}_{total}_00_V100.rdi";
+        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            for (int i = 0; i < SNData.Count; i++)
+            {
+                if (i == SNData.Count - 1)
+                {
+                    writer.Write($"{UIDData[i]} {SNData[i]}"); 
+                }
+                else
+                {
+                    writer.WriteLine($"{UIDData[i]} {SNData[i]}"); 
+                }
+            }
+        }
+        MessageBox.Show($"数据保存到桌面: {filePath}"); 
     }
     private void Test(object sender, RoutedEventArgs e)
     {

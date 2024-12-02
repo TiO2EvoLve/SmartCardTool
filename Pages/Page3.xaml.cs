@@ -3,38 +3,18 @@ using System.Windows.Controls;
 
 namespace WindowUI.Pages
 {
-    public partial class Page3 : Page, INotifyPropertyChanged
+    public partial class Page3 : Page
     {
-        public Page3()
-        {
-            InitializeComponent();
-            this.DataContext = this;  //设置 DataContext 为当前 Page 实例
-        }
-
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));  // 通知 UI 更新
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+      
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            Console.WriteLine(Name);  // 输出绑定的 Name 属性
+            // 获取今天的日期
+            DateTime today = DateTime.Today;
+            Console.WriteLine("今天的日期是: " + today.ToString("yyyy-MM-dd"));
+
+            // 计算4个月后的日期
+            DateTime fourMonthsLater = today.AddMonths(4);
+            Console.WriteLine("4个月后的日期是: " + fourMonthsLater.ToString("yyyy-MM-dd"));
         }
     }
 }

@@ -9,15 +9,15 @@ using WindowUI.Pages;
 namespace WindowUI;
 public partial class RCC
 {
-    private string mkFileName; // 记录MK文件名
-    private List<string> MKDate; // 临时存储读取的MK文件的数据
-    private string excelFileName; // 记录Excel文件名
-    private MemoryStream ExcelData; // 临时存储读取的Excel的数据
-    private string Region; // 下拉框选则的地区
-    Microsoft.Win32.OpenFileDialog openFileDialog; //MK文件处理流
-    Microsoft.Win32.OpenFileDialog openFileDialog2; //Excel文件处理流
+    private string mkFileName { get; set; } // 记录MK文件名
+    private List<string> MKDate{ get; set; } // 临时存储读取的MK文件的数据
+    private string excelFileName{ get; set; }// 记录Excel文件名
+    private MemoryStream ExcelData{ get; set; }// 临时存储读取的Excel的数据
+    private string Region{ get; set; }// 下拉框选则的地区
+    Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } //MK文件处理流
+    Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }//Excel文件处理流
     // 定义不需要选择MK文件的地区
-    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区"};
+    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区"}; 
     public RCC()
     {
         InitializeComponent();
@@ -34,7 +34,7 @@ public partial class RCC
         };
         if (openFileDialog.ShowDialog() == true)
         {
-            if (openFileDialog.FileName == null) return;
+            if (openFileDialog.FileName == "") return;
             //将文件暂时存储到MKDate中
             MKDate = File.ReadAllLines(openFileDialog.FileName).ToList();
             //记录MK文件名
@@ -56,17 +56,24 @@ public partial class RCC
         };
         if (openFileDialog2.ShowDialog() == true)
         {
-            if (openFileDialog2.FileName == null) return;
+            if (openFileDialog2.FileName == "") return;
             //记录Excel文件名
             excelFileName = Path.GetFileName(openFileDialog2.FileName);
-            //去掉扩展名.slsx
+            //去掉扩展名.xlsx
             excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
             //将文件暂时存储到ExcelDate中
-            ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
-            //打印ExcelData的长度
-            data.Foreground = Brushes.LightGreen;
-            datatextbox.Foreground = Brushes.Green;
-            datatextbox.Text = excelFileName;
+            try
+            {
+                ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
+                data.Foreground = Brushes.LightGreen;
+                datatextbox.Foreground = Brushes.Green;
+                datatextbox.Text = excelFileName;
+            }
+            catch(IOException ex)
+            {
+                MessageBox.Show("文件已被占用，请关闭Excel表格。",
+                    "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }  
         }
     }
     //下拉框选择地区
@@ -125,6 +132,10 @@ public partial class RCC
             case "淄博公交": ZiBo(); break;
             case "平凉公交": Pingliang(); break;
             case "桂林公交": GuiLin(); break;
+            case "陕西师范大学": ShanXi(); break;
+            case "西安文理学院": XiAnXueYuan(); break;
+            case "滨州公交" : BinZhou(); break;
+            case "云南朗坤" : WangKun(); break;
             default: MessageBox.Show("请选择地区"); break;
         }
     }
@@ -162,7 +173,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}001";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(MKDate[0]);
@@ -924,7 +935,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HG-{excelFileName}";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(ATSData.Count);
@@ -1181,11 +1192,174 @@ public partial class RCC
         }
         MessageBox.Show($"数据保存到桌面: {filePath}"); 
     }
+    //陕西师范大学
+    private void ShanXi()
+    {
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string UidValue = worksheet.Cells[row, 5].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+
+            }
+        }
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = SNData[i];
+                worksheet.Cells[i + 1, 2].Value = UidData[i];
+               
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            package.SaveAs(new FileInfo(filePath));
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        } 
+    }
+    //西安文理学院
+    private void XiAnXueYuan()
+    {
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 8].Text;
+                string UidValue = worksheet.Cells[row, 2].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+
+            }
+        }
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "Index";
+            worksheet.Cells[1, 2].Value = "SerialNumber";
+            worksheet.Cells[1, 3].Value = "UID";
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value = i + 1;
+                worksheet.Cells[i + 2, 2].Value = SNData[i];
+                worksheet.Cells[i + 2, 3].Value = UidData[i];
+               
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            package.SaveAs(new FileInfo(filePath));
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        } 
+    }
+    //滨州公交的处理逻辑
+    private void BinZhou()
+    {
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string UidValue = worksheet.Cells[row, 6].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+
+            }
+        }
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = SNData[i];
+                worksheet.Cells[i + 1, 2].Value = UidData[i];
+               
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            package.SaveAs(new FileInfo(filePath));
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        } 
+    }
+    //云南朗坤
+    private void WangKun()
+    {
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+        List<string> Uid_Data = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 7].Text;
+                string UidValue = worksheet.Cells[row, 2].Text;
+                string Uid_Value = worksheet.Cells[row, 3].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+                Uid_Data.Add(Uid_Value);
+            }
+        }
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = SNData[i];
+                worksheet.Cells[i + 1, 2].Value = UidData[i];
+                worksheet.Cells[i + 1, 3].Value = Uid_Data[i];
+                worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
+                worksheet.Cells[i + 1, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
+               
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            package.SaveAs(new FileInfo(filePath));
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        }  
+    }
     private void Test(object sender, RoutedEventArgs e)
     {
-        DateTime today = DateTime.Now;
-        Console.WriteLine(today.AddMonths(12).ToString("u"));
-        //MessageBox.Show("未开发");
+        MessageBox.Show("未开发");
     }
     //调整16进制与不调整16进制互相转换
     private string SwapHexPairs(string hex)

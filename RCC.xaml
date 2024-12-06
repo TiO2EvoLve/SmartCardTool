@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="tip" Text="请选择地区获取提示" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red">
         </TextBlock>
-        <ui:TextBlock FontTypography="TitleLarge" Text="RCC文件生成器" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="1"  Height="52" Width="282" >
+        <ui:TextBlock Grid.Row="0" FontTypography="TitleLarge" Text="RCC文件生成器" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Height="52" Width="282" >
             <ui:TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF9FE4FF" Offset="1"/>
@@ -27,7 +27,7 @@
             </ui:TextBlock.Foreground>
         </ui:TextBlock>
         <Border Grid.Row="2" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,10" Background="#FFFEFEFE">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" >
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <ComboBox
                 x:Name="LocationComboBox"
                 SelectionChanged="ComboBox_SelectionChanged"
@@ -57,6 +57,10 @@
                     <ComboBoxItem Content="淄博公交" />
                     <ComboBoxItem Content="平凉公交" />
                     <ComboBoxItem Content="桂林公交" />
+                    <ComboBoxItem Content="陕西师范大学" />
+                    <ComboBoxItem Content="西安文理学院" />
+                    <ComboBoxItem Content="滨州公交" />
+                    <ComboBoxItem Content="云南朗坤" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"
@@ -84,12 +88,12 @@
                 Click="Test"/>
             </StackPanel>
         </Border>
-        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Orientation="Vertical">
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical">
             <ProgressBar IsIndeterminate="True" Height="5" Width="700" />
         </StackPanel>
 
         <Border Grid.Row="3" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,50" Background="#FFFEFEFE">
-            <StackPanel Grid.Row="3">
+            <StackPanel>
                 <TabControl Margin="10">
                     <TabItem IsSelected="True">
                         <TabItem.Header>
@@ -107,16 +111,15 @@
                             </Grid.RowDefinitions>
                             <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" >
                                 <TextBlock Text="MK文件名:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="mktextbox" Text="未选择文件" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+                                <TextBlock x:Name="mktextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
                                 <TextBlock Text="制卡数据名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <TextBlock x:Name="datatextbox" Text="未选择文件" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+                                <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
                             </StackPanel>
                             
                             <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
                                 <TextBlock Text="保存文件名：" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80"/>
                                 <TextBox x:Name="savename" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="500"/>
                             </StackPanel>
-
                         </Grid>
                     </TabItem>
                     <TabItem >

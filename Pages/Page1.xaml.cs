@@ -32,5 +32,9 @@ namespace WindowUI.Pages
         }
 
 
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new SyncTest().Show();
+        }
     }
 }

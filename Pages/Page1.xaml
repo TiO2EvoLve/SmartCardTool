@@ -37,7 +37,7 @@
                         <GradientStop Color="#56AB2F" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
-                    <Label Background="Transparent" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                    <Label Background="Transparent" MouseDown="UIElement_OnMouseDown" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
                         <TextBlock FontSize="15" Foreground="#FEFEFE">卡片读取</TextBlock>
                     </Label>
                 </Border>

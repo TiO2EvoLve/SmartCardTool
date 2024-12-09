@@ -8,6 +8,6 @@
         Title="SyncTest" Height="450" Width="800">
     <Grid>
         <Button Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Width="100" Height="50">Test</Button>
-        <TextBlock Text="123" x:Name="text" HorizontalAlignment="Center" Foreground="Red" Margin="0,20,0,0"></TextBlock>
+        <TextBlock Text="" x:Name="text" HorizontalAlignment="Center" Foreground="Red" Margin="0,20,0,0"></TextBlock>
     </Grid>
 </Window>

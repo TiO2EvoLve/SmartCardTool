@@ -1,5 +1,4 @@
 ﻿using OfficeOpenXml;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,7 +68,7 @@ public partial class RCC
                 datatextbox.Foreground = Brushes.Green;
                 datatextbox.Text = excelFileName;
             }
-            catch(IOException ex)
+            catch(IOException)
             {
                 MessageBox.Show("文件已被占用，请关闭Excel表格。",
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -99,48 +98,48 @@ public partial class RCC
 
     }
     //点击处理文件按钮
-    private void ProcessTheFile(object sender, RoutedEventArgs e)
+    private async void ProcessTheFile(object sender, RoutedEventArgs e)
     {
         if (ExcelData is null)
         {
             MessageBox.Show("请选择文件");
             return;
         }
-
-        //根据不同地区处理文件
-        switch (Region)
-        {
-            case "天津": TianJin(); break;
-            case "兰州工作证": LanZhouGongZuoZheng(); break;
-            case "青岛博研加气站": QingDaoBoYangJiaQiZhan(); break;
-            case "抚顺夕阳红卡": FuShunXiYangHongKa(); break;
-            case "郴州": ChenZhou(); break;
-            case "潍坊夕阳红卡、爱心卡": WeiFang(); break;
-            case "国网技术学院职工卡": GuoWang(); break;
-            case "哈尔滨城市通敬老优待卡": HaErBin(); break;
-            case "运城盐湖王府学校": YunCheng(); break;
-            case "南通地铁": NanTong(); break;
-            case "长沙公交荣誉卡": ChangSha(); break;
-            case "泸州公交": LuZhou(); break;
-            case "合肥通": HeFei(); break;
-            case "青岛理工大学": QingDaoDaXue(); break;
-            case "西安交通大学": XiAnDaXue(); break;
-            case "呼和浩特": HuHeHaoTe(); break;
-            case "重庆33A-A1": ChongQingA1(); break;
-            case "西藏林芝": XIZang(); break;
-            case "西藏拉萨": XIZangLaSa(); break;
-            case "淄博公交": ZiBo(); break;
-            case "平凉公交": Pingliang(); break;
-            case "桂林公交": GuiLin(); break;
-            case "陕西师范大学": ShanXi(); break;
-            case "西安文理学院": XiAnXueYuan(); break;
-            case "滨州公交" : BinZhou(); break;
-            case "云南朗坤" : WangKun(); break;
-            default: MessageBox.Show("请选择地区"); break;
-        }
+            //根据不同地区处理文件
+            switch (Region)
+            {
+                case "天津": await TianJin(); break;
+                case "兰州工作证": LanZhouGongZuoZheng(); break;
+                case "青岛博研加气站": QingDaoBoYangJiaQiZhan(); break;
+                case "抚顺夕阳红卡": FuShunXiYangHongKa(); break;
+                case "郴州": ChenZhou(); break;
+                case "潍坊夕阳红卡、爱心卡": WeiFang(); break;
+                case "国网技术学院职工卡": GuoWang(); break;
+                case "哈尔滨城市通敬老优待卡": HaErBin(); break;
+                case "运城盐湖王府学校": YunCheng(); break;
+                case "南通地铁": NanTong(); break;
+                case "长沙公交荣誉卡": ChangSha(); break;
+                case "泸州公交": LuZhou(); break;
+                case "合肥通": HeFei(); break;
+                case "青岛理工大学": QingDaoDaXue(); break;
+                case "西安交通大学": XiAnDaXue(); break;
+                case "呼和浩特": HuHeHaoTe(); break;
+                case "重庆33A-A1": ChongQingA1(); break;
+                case "西藏林芝": XIZang(); break;
+                case "西藏拉萨": XIZangLaSa(); break;
+                case "淄博公交": ZiBo(); break;
+                case "平凉公交": Pingliang(); break;
+                case "桂林公交": GuiLin(); break;
+                case "陕西师范大学": ShanXi(); break;
+                case "西安文理学院": XiAnXueYuan(); break;
+                case "滨州公交": BinZhou(); break;
+                case "云南朗坤": await LangKun(); break;
+                case "盱眙": await XuYi(); break;
+                default: MessageBox.Show("请选择地区"); break;
+            }
     }
     //天津的处理逻辑
-    private void TianJin()
+    private async Task TianJin()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -149,7 +148,6 @@ public partial class RCC
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
-                                                     //遍历Excel文件的每一行
             for (int row = 2; row <= rowCount; row++)
             {
                 string firstColumnValue = worksheet.Cells[row, 1].Text;
@@ -159,8 +157,6 @@ public partial class RCC
                 processedData.Add(newRow);
             }
         }
-
-        //处理MK文件
         //截取MK文件第二行的前42个字节
         MKDate[1] = MKDate[1].Substring(0, 42);
         //获取Excel总数据的条数
@@ -170,29 +166,30 @@ public partial class RCC
         //将MK文件的第二行的后6位替换为总数据条数
         MKDate[1] = MKDate[1].Substring(0, MKDate[1].Length - 6) + totalLinesFormatted;
         //将MK文件与Excel文件的数据合并
-
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}001";
         string filePath = Path.Combine(desktopPath, fileName);
-        using (StreamWriter writer = new StreamWriter(filePath))
+        await Task.Run(() =>
         {
-            writer.WriteLine(MKDate[0]);
-            writer.WriteLine(MKDate[1]);
-
-            for (int i = 0; i < processedData.Count; i++)
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                if (i == processedData.Count - 1)
+                writer.WriteLine(MKDate[0]);
+                writer.WriteLine(MKDate[1]);
+
+                for (int i = 0; i < processedData.Count; i++)
                 {
-                    writer.Write(processedData[i]);
-                }
-                else
-                {
-                    writer.WriteLine(processedData[i]);
+                    if (i == processedData.Count - 1)
+                    {
+                        writer.Write(processedData[i]);
+                    }
+                    else
+                    {
+                        writer.WriteLine(processedData[i]);
+                    }
                 }
             }
-        }
-
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        });
+        MessageBox.Show($"数据已合并并保存到桌面: {filePath}");
     }
     //兰州工作证的处理逻辑
     private void LanZhouGongZuoZheng()
@@ -208,7 +205,7 @@ public partial class RCC
                                                      //遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
-                string firstColumnValue = worksheet.Cells[row, 7].Text;
+                string firstColumnValue = worksheet.Cells[row, 8].Text;
                 processedData.Add(firstColumnValue);
             }
         }
@@ -224,11 +221,9 @@ public partial class RCC
             {
                 string firstColumnValue = worksheet.Cells[row, 3].Text;
                 string firstColumnValue2 = Convert.ToUInt32(firstColumnValue, 16).ToString();
-                Debug.WriteLine(firstColumnValue2);
                 processedData2.Add(firstColumnValue2);
             }
         }
-
         //将processedData和processedData2合并起来，中间用','分隔，最后保存为txt文件到桌面
         List<string> mergedData = new List<string>();
         for (int i = 0; i < processedData.Count; i++)
@@ -239,7 +234,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = excelFileName + ".txt";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             foreach (var line in mergedData)
@@ -1070,7 +1065,7 @@ public partial class RCC
         //保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"ACPU{date}_Report.xml";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
@@ -1137,7 +1132,7 @@ public partial class RCC
         }
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"{excelFileName}.txt";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             for (int i = 0; i < SNData.Count; i++)
@@ -1172,8 +1167,6 @@ public partial class RCC
         GuiLin guiLin= new();
         guiLin.ShowDialog();
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        int linecount = SNData.Count;
-        string total = linecount.ToString("D8");
         string fileName = $"GXJT_0{guiLin.SN.Text}_{guiLin.Count.Text}_00_V100-{SNData.Count}.rdi";
         string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
@@ -1226,7 +1219,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         } 
@@ -1269,7 +1262,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         } 
@@ -1313,19 +1306,21 @@ public partial class RCC
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         } 
     }
-    //云南朗坤
-    private void WangKun()
+    //云南朗坤的处理逻辑
+    private async Task LangKun()
     {
-        //取出Excle文件的数据
+        // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         List<string> Uid_Data = new List<string>();
+        
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+            // 异步遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
                 string SNValue = worksheet.Cells[row, 7].Text;
@@ -1336,6 +1331,7 @@ public partial class RCC
                 Uid_Data.Add(Uid_Value);
             }
         }
+
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -1347,15 +1343,67 @@ public partial class RCC
                 worksheet.Cells[i + 1, 3].Value = Uid_Data[i];
                 worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
                 worksheet.Cells[i + 1, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
-               
             }
-            // 保存文件到桌面
+            // 异步保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
-            package.SaveAs(new FileInfo(filePath));
+            string filePath = Path.Combine(desktopPath, fileName);
+            // 使用异步的文件保存
+            await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
+            // 显示提示消息
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
-        }  
+        }
+    }
+    //盱眙的处理逻辑
+    private async Task XuYi()
+    {
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+      
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+            // 异步遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 6].Text;
+                string UidValue = worksheet.Cells[row, 2].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+            }
+        }
+
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "SerialNumber";
+            worksheet.Cells[1, 2].Value = "UID";
+            worksheet.Cells[1, 3].Value = "CUSTOMUID";
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value = SNData[i];
+                worksheet.Cells[i + 2, 2].Value = UidData[i];
+                worksheet.Cells[i + 2, 3].Value = SwapHexPairs(UidData[i]);
+            }
+            // 异步保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = Path.Combine(desktopPath, fileName);
+            // 使用异步的文件保存
+            await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
+            // 显示提示消息
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        }
+    }
+    //TODO:柳州公交的处理逻辑
+    private async Task LiuZhou()
+    {
+        await  Task.Delay(1000);
     }
     private void Test(object sender, RoutedEventArgs e)
     {

@@ -61,6 +61,8 @@
                     <ComboBoxItem Content="西安文理学院" />
                     <ComboBoxItem Content="滨州公交" />
                     <ComboBoxItem Content="云南朗坤" />
+                    <ComboBoxItem Content="柳州公交" />
+                    <ComboBoxItem Content="盱眙" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"

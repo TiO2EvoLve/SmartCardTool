@@ -35,7 +35,7 @@ public partial class SyncTest
         // 将所有 Action 包装为 Task 并等待完成
         List<Task> tasks = new List<Task>();
         foreach (var action in actions)
-        {
+        { 
             tasks.Add(Task.Run(action));
         }
         await Task.WhenAll(tasks);

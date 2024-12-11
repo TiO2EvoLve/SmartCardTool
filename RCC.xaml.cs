@@ -16,7 +16,7 @@ public partial class RCC
     Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } //MK文件处理流
     Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }//Excel文件处理流
     // 定义不需要选择MK文件的地区
-    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区"}; 
+    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区","兰州"}; 
     public RCC()
     {
         InitializeComponent();
@@ -91,6 +91,7 @@ public partial class RCC
             switch (Region)
             {
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
+                case "兰州":tip.Text = "只有兰州工作证不需要MK文件"; break;
                 default:tip.Text = "该地区暂无提示"; break;
             }
 
@@ -108,38 +109,38 @@ public partial class RCC
             //根据不同地区处理文件
             switch (Region)
             {
-                case "天津": await TianJin(); break;
-                case "兰州工作证": LanZhouGongZuoZheng(); break;
-                case "青岛博研加气站": QingDaoBoYangJiaQiZhan(); break;
-                case "抚顺夕阳红卡": FuShunXiYangHongKa(); break;
-                case "郴州": ChenZhou(); break;
-                case "潍坊夕阳红卡、爱心卡": WeiFang(); break;
-                case "国网技术学院职工卡": GuoWang(); break;
-                case "哈尔滨城市通敬老优待卡": HaErBin(); break;
-                case "运城盐湖王府学校": YunCheng(); break;
-                case "南通地铁": NanTong(); break;
-                case "长沙公交荣誉卡": ChangSha(); break;
-                case "泸州公交": LuZhou(); break;
-                case "合肥通": HeFei(); break;
-                case "青岛理工大学": QingDaoDaXue(); break;
-                case "西安交通大学": XiAnDaXue(); break;
-                case "呼和浩特": HuHeHaoTe(); break;
-                case "重庆33A-A1": ChongQingA1(); break;
-                case "西藏林芝": XIZang(); break;
-                case "西藏拉萨": XIZangLaSa(); break;
-                case "淄博公交": ZiBo(); break;
-                case "平凉公交": Pingliang(); break;
-                case "桂林公交": GuiLin(); break;
-                case "陕西师范大学": ShanXi(); break;
-                case "西安文理学院": XiAnXueYuan(); break;
-                case "滨州公交": BinZhou(); break;
-                case "云南朗坤": await LangKun(); break;
-                case "盱眙": await XuYi(); break;
+                case "天津": await 天津(); break;
+                case "兰州": 兰州(); break;
+                case "青岛博研加气站": 青岛博研加气站(); break;
+                case "抚顺": 抚顺(); break;
+                case "郴州": 郴州(); break;
+                case "潍坊": 潍坊(); break;
+                case "国网技术学院职工卡": 国网技术学院(); break;
+                case "哈尔滨城市通": 哈尔滨(); break;
+                case "运城盐湖王府学校": 运城盐湖王府学校(); break;
+                case "南通地铁": 南通(); break;
+                case "长沙公交荣誉卡": 长沙(); break;
+                case "泸州公交": 泸州(); break;
+                case "合肥通": 合肥通(); break;
+                case "青岛理工大学": 青岛理工大学(); break;
+                case "西安交通大学": 西安交通大学(); break;
+                case "呼和浩特": 呼和浩特(); break;
+                case "重庆33A-A1": 重庆(); break;
+                case "西藏林芝": 西藏林芝(); break;
+                case "西藏拉萨": 西藏拉萨(); break;
+                case "淄博公交": 淄博公交(); break;
+                case "平凉公交": 平凉公交(); break;
+                case "桂林公交": 桂林公交(); break;
+                case "陕西师范大学": 陕西师范大学(); break;
+                case "西安文理学院": 西安文理学院(); break;
+                case "滨州公交": 滨州公交(); break;
+                case "云南朗坤": await 云南朗坤(); break;
+                case "盱眙": await 盱眙(); break;
                 default: MessageBox.Show("请选择地区"); break;
             }
     }
     //天津的处理逻辑
-    private async Task TianJin()
+    private async Task 天津()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -191,47 +192,49 @@ public partial class RCC
         });
         MessageBox.Show($"数据已合并并保存到桌面: {filePath}");
     }
-    //兰州工作证的处理逻辑
-    private void LanZhouGongZuoZheng()
+    //兰州的处理逻辑
+    private void 兰州()
     {
+        LanZhou lanzhou = new ();
+        lanzhou.ShowDialog();
+        string cardtype = lanzhou.CardType;
+        
+        if (cardtype == "1")
+        {
+            兰州工作证();
+        }else if (cardtype == "2")
+        {
+            兰州公交();
+        }
+        
+    }
+    private void 兰州工作证()
+    {
+        List<string> SNData = new List<string>();
+        List<string> UIDData = new List<string>();
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-                                                                    //取出第七列流水号数据
-        List<string> processedData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
-                                                     //遍历Excel文件的每一行
+            //遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
                 string firstColumnValue = worksheet.Cells[row, 8].Text;
-                processedData.Add(firstColumnValue);
-            }
-        }
-
-        //将ExcelDate第三列的十六进制数转为10进制
-        List<string> processedData2 = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
-                                                     //遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
-            {
-                string firstColumnValue = worksheet.Cells[row, 3].Text;
+                SNData.Add(firstColumnValue);
+                firstColumnValue = worksheet.Cells[row, 3].Text;
                 string firstColumnValue2 = Convert.ToUInt32(firstColumnValue, 16).ToString();
-                processedData2.Add(firstColumnValue2);
+                UIDData.Add(firstColumnValue2);
             }
         }
         //将processedData和processedData2合并起来，中间用','分隔，最后保存为txt文件到桌面
         List<string> mergedData = new List<string>();
-        for (int i = 0; i < processedData.Count; i++)
+        for (int i = 0; i < SNData.Count; i++)
         {
-            string mergedRow = $"{processedData[i]},{processedData2[i]}";
+            string mergedRow = $"{SNData[i]},{UIDData[i]}";
             mergedData.Add(mergedRow);
         }
-
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = excelFileName + ".txt";
         string filePath = Path.Combine(desktopPath, fileName);
@@ -244,8 +247,60 @@ public partial class RCC
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
+    private void 兰州公交()
+    {
+       //先处理Excel文件
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> processedData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+                                                     //遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string firstColumnValue = worksheet.Cells[row, 1].Text;
+                string secondColumnValue = worksheet.Cells[row, 2].Text;
+                string newRow =
+                    $"{firstColumnValue}      {firstColumnValue}      {secondColumnValue}          00                         FFFFFFFFFFFFFFFFFFFF";
+                processedData.Add(newRow);
+            }
+        }
+
+        //处理MK文件
+        //截取MK文件第二行的前42个字节
+        MKDate[1] = MKDate[1].Substring(0, 42);
+        //获取Excel总数据的条数
+        int totalLines = processedData.Count;
+        //将总数据条数转为6位数
+        string totalLinesFormatted = totalLines.ToString("D6");
+        //将MK文件的第二行的后6位替换为总数据条数
+        MKDate[1] = MKDate[1].Substring(0, MKDate[1].Length - 6) + totalLinesFormatted;
+        //将MK文件与Excel文件的数据合并
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"RC{mkFileName}";
+        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            writer.WriteLine(MKDate[0]);
+            writer.WriteLine(MKDate[1]);
+
+            for (int i = 0; i < processedData.Count; i++)
+            {
+                if (i == processedData.Count - 1)
+                {
+                    writer.Write(processedData[i]);
+                }
+                else
+                {
+                    writer.WriteLine(processedData[i]);
+                }
+            }
+        }
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}"); 
+    }
     //抚顺夕阳红卡的处理逻辑
-    private void FuShunXiYangHongKa()
+    private void 抚顺()
     {
         //取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -297,7 +352,7 @@ public partial class RCC
 
     }
     //青岛博研加气站的处理逻辑
-    private void QingDaoBoYangJiaQiZhan()
+    private void 青岛博研加气站()
     {
         //取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -344,7 +399,7 @@ public partial class RCC
         }
     }
     //青岛理工大学的处理逻辑
-    private void QingDaoDaXue()
+    private void 青岛理工大学()
     {
         //取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -384,8 +439,8 @@ public partial class RCC
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
     }
-    //郴州老人卡、优抚卡的处理逻辑
-    private void ChenZhou()
+    //郴州的处理逻辑
+    private void 郴州()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -418,7 +473,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(MKDate[0]);
@@ -439,7 +494,7 @@ public partial class RCC
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //潍坊的处理逻辑
-    private void WeiFang()
+    private void 潍坊()
     {
         int rowCount;//excel文件的行数
                      //先处理Excel文件
@@ -476,7 +531,7 @@ public partial class RCC
         File.Move(filePath, newFilePath);
     }
     //国网技术学院职工卡的处理逻辑
-    private void GuoWang()
+    private void 国网技术学院()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -521,7 +576,7 @@ public partial class RCC
         }
     }
     //哈尔滨城市通敬老优待卡的处理逻辑
-    private void HaErBin()
+    private void 哈尔滨()
     {
         int rowCount;//execl文件的行数
                      //先处理Excel文件
@@ -562,7 +617,7 @@ public partial class RCC
 
     }
     //运城盐湖王府学校的处理逻辑
-    private void YunCheng()
+    private void 运城盐湖王府学校()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -605,7 +660,7 @@ public partial class RCC
         }
     }
     //南通地铁的处理逻辑
-    private void NanTong()
+    private void 南通()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -652,7 +707,7 @@ public partial class RCC
         }
     }
     //长沙公交荣誉卡的处理逻辑
-    private void ChangSha()
+    private void 长沙()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -712,7 +767,7 @@ public partial class RCC
 
     }
     //泸州公交的处理逻辑
-    private void LuZhou()
+    private void 泸州()
     {
         LuZhou luzhou = new LuZhou();
         luzhou.ShowDialog();
@@ -764,7 +819,7 @@ public partial class RCC
         }
     }
     //合肥通的处理逻辑
-    private void HeFei()
+    private void 合肥通()
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -820,7 +875,7 @@ public partial class RCC
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //西安交通大学的处理逻辑
-    private void XiAnDaXue()
+    private void 西安交通大学()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -860,7 +915,7 @@ public partial class RCC
         }
     }
     //呼和浩特的处理逻辑
-    private void HuHeHaoTe()
+    private void 呼和浩特()
     {
         //提示
         tip.Text = "无注意事项";
@@ -894,7 +949,7 @@ public partial class RCC
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 worksheet.Cells[i + 2, 3].Value = UidData[i];
-                worksheet.Cells[i + 2, 2].Value = SwapHexPairs(UidData[i]);
+                worksheet.Cells[i + 2, 2].Value = ChangeHexPairs(UidData[i]);
             }
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -905,7 +960,7 @@ public partial class RCC
         }
     }
     //重庆地区的331-A1模块的处理逻辑
-    private void ChongQingA1()
+    private void 重庆()
     {
         //提示
         tip.Text = "无注意事项";
@@ -949,7 +1004,7 @@ public partial class RCC
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //西藏林芝地区的处理逻辑
-    private void XIZang()
+    private void 西藏林芝()
     {
 
         //取出Excle文件的数据
@@ -993,7 +1048,7 @@ public partial class RCC
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //西藏拉萨地区的处理逻辑
-    private void XIZangLaSa()
+    private void 西藏拉萨()
     {
 
         //取出Excle文件的数据
@@ -1035,7 +1090,7 @@ public partial class RCC
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //淄博公交地区的处理逻辑
-    private void ZiBo()
+    private void 淄博公交()
     {
         string date;//日期,格式20241115112548
         string date1;//日期,格式2024-11-15
@@ -1110,7 +1165,7 @@ public partial class RCC
         return match.Success ? match.Groups[1].Value : string.Empty;
     }
     //平凉地区的处理逻辑
-    private void Pingliang()
+    private void 平凉公交()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1124,7 +1179,7 @@ public partial class RCC
             for (int row = 1; row <= rowCount; row++)
             {
                 string UIDValue = worksheet.Cells[row, 2].Text;
-                UIDValue = Convert.ToUInt32(SwapHexPairs(UIDValue), 16).ToString();
+                UIDValue = Convert.ToUInt32(ChangeHexPairs(UIDValue), 16).ToString();
                 UIDData.Add(UIDValue);
                 string SNValue = worksheet.Cells[row, 8].Text;
                 SNData.Add(SNValue);
@@ -1144,7 +1199,7 @@ public partial class RCC
 
     }
     //桂林公交的处理逻辑
-    private void GuiLin()
+    private void 桂林公交()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1186,7 +1241,7 @@ public partial class RCC
         MessageBox.Show($"数据保存到桌面: {filePath}"); 
     }
     //陕西师范大学
-    private void ShanXi()
+    private void 陕西师范大学()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1225,7 +1280,7 @@ public partial class RCC
         } 
     }
     //西安文理学院
-    private void XiAnXueYuan()
+    private void 西安文理学院()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1268,7 +1323,7 @@ public partial class RCC
         } 
     }
     //滨州公交的处理逻辑
-    private void BinZhou()
+    private void 滨州公交()
     {
         //取出Excle文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1307,7 +1362,7 @@ public partial class RCC
         } 
     }
     //云南朗坤的处理逻辑
-    private async Task LangKun()
+    private async Task 云南朗坤()
     {
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1355,7 +1410,7 @@ public partial class RCC
         }
     }
     //盱眙的处理逻辑
-    private async Task XuYi()
+    private async Task 盱眙()
     {
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -1388,7 +1443,7 @@ public partial class RCC
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 worksheet.Cells[i + 2, 2].Value = UidData[i];
-                worksheet.Cells[i + 2, 3].Value = SwapHexPairs(UidData[i]);
+                worksheet.Cells[i + 2, 3].Value = ChangeHexPairs(UidData[i]);
             }
             // 异步保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -1403,14 +1458,14 @@ public partial class RCC
     //TODO:柳州公交的处理逻辑
     private async Task LiuZhou()
     {
-        await  Task.Delay(1000);
+        
     }
     private void Test(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("未开发");
     }
     //调整16进制与不调整16进制互相转换
-    private string SwapHexPairs(string hex)
+    private string ChangeHexPairs(string hex)
     {
         if (hex.Length % 2 != 0)
         {

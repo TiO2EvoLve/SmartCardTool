@@ -63,6 +63,8 @@
                     <ComboBoxItem Content="云南朗坤" />
                     <ComboBoxItem Content="柳州公交" />
                     <ComboBoxItem Content="盱眙" />
+                    <ComboBoxItem Content="漯河" />
+                    <ComboBoxItem Content="随州" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"
@@ -120,7 +122,7 @@
                             
                             <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
                                 <TextBlock Text="保存文件名：" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80"/>
-                                <TextBox x:Name="savename" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="500"/>
+                                <TextBox x:Name="saveName" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="500"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -132,13 +134,11 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid>
-                            <TextBlock Margin="12" Text="未开发" />
+                            <TextBlock Margin="12" Text="未开发"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
             </StackPanel>
         </Border>
-        
-        
     </Grid>
 </Window>

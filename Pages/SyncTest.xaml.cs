@@ -41,6 +41,12 @@ public partial class SyncTest
         await Task.WhenAll(tasks);
         Console.WriteLine("All Actions completed");
         text.Text = "已全部完成";
+        List<int> test = new List<int>{ 1,2,3,4,5};
+        var number = test.Where(t => t >= 4);
+        foreach (var i in number)
+        {
+            Console.WriteLine(i);
+        }
     }
 
 }

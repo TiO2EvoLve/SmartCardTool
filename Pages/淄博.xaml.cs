@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace WindowUI.Pages
 {
-    public partial class ZiBoPage
+    public partial class 淄博
     {
-        public ZiBoPage()
+        public 淄博()
         {
             InitializeComponent();
         }

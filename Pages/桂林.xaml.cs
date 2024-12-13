@@ -2,9 +2,9 @@
 
 namespace WindowUI.Pages;
 
-public partial class GuiLin
+public partial class 桂林
 {
-    public GuiLin()
+    public 桂林()
     {
         InitializeComponent();
     }

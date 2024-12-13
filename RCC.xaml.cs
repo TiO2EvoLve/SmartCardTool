@@ -16,7 +16,7 @@ public partial class RCC
     Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } //MK文件处理流
     Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }//Excel文件处理流
     // 定义不需要选择MK文件的地区
-    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区","兰州"}; 
+    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区","兰州","柳州公交"}; 
     public RCC()
     {
         InitializeComponent();
@@ -136,6 +136,9 @@ public partial class RCC
                 case "滨州公交": 滨州公交(); break;
                 case "云南朗坤": await 云南朗坤(); break;
                 case "盱眙": await 盱眙(); break;
+                case "柳州公交" : await 柳州公交(); break; 
+                case "漯河" : await 漯河(); break; 
+                case "随州" : await 随州(); break; 
                 default: MessageBox.Show("请选择地区"); break;
             }
     }
@@ -195,7 +198,7 @@ public partial class RCC
     //兰州的处理逻辑
     private void 兰州()
     {
-        LanZhou lanzhou = new ();
+        兰州 lanzhou = new ();
         lanzhou.ShowDialog();
         string cardtype = lanzhou.CardType;
         
@@ -769,7 +772,7 @@ public partial class RCC
     //泸州公交的处理逻辑
     private void 泸州()
     {
-        LuZhou luzhou = new LuZhou();
+        泸州 luzhou = new 泸州();
         luzhou.ShowDialog();
         string cardtype = luzhou.CardType;
         if (cardtype == "") { MessageBox.Show("未选择卡类型"); return; }
@@ -801,14 +804,14 @@ public partial class RCC
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
             // 插入数据
-            //worksheet.Cells[1, 1].Value = "UID_10";
-            // worksheet.Cells[1, 2].Value = "卡号(16位)";
-            // worksheet.Cells[1, 3].Value = "卡商标志";
+            worksheet.Cells[1, 1].Value = "UID_10";
+            worksheet.Cells[1, 2].Value = "卡号(16位)";
+            worksheet.Cells[1, 3].Value = "卡商标志";
             for (int i = 0; i < uid_10Data.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = uid_10Data[i];
-                worksheet.Cells[i + 1, 2].Value = cardData[i];
-                worksheet.Cells[i + 1, 3].Value = 0;
+                worksheet.Cells[i + 2, 1].Value = uid_10Data[i];
+                worksheet.Cells[i + 2, 2].Value = cardData[i];
+                worksheet.Cells[i + 2, 3].Value = 8670;
             }
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -1096,7 +1099,7 @@ public partial class RCC
         string date1;//日期,格式2024-11-15
         string cardtype;//卡类型
         //打开二级窗口
-        ZiBoPage zibo = new ZiBoPage();
+        淄博 zibo = new 淄博();
         zibo.ShowDialog();
         //获取二级窗口的数据
         cardtype = zibo.CardType;
@@ -1219,7 +1222,7 @@ public partial class RCC
                 SNData.Add(SNValue);
             }
         }
-        GuiLin guiLin= new();
+        桂林 guiLin= new();
         guiLin.ShowDialog();
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"GXJT_0{guiLin.SN.Text}_{guiLin.Count.Text}_00_V100-{SNData.Count}.rdi";
@@ -1455,10 +1458,174 @@ public partial class RCC
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
     }
-    //TODO:柳州公交的处理逻辑
-    private async Task LiuZhou()
+    //柳州公交的处理逻辑
+    private async Task 柳州公交()
     {
-        
+       string Order = MKDate[0].Substring(3, 20);
+       string CardBin = MKDate[0].Substring(47, 4);
+       string CardNumber = MKDate[0].Substring(42, 4);
+       string StartSN = MKDate[0].Substring(52, 8);
+       string EndSN = MKDate[0].Substring(61, 8);
+      
+       // 取出Excel文件的数据
+       ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+       List<string> SNData = new List<string>();
+       List<string> ATSData = new List<string>();
+      
+       using (var package = new ExcelPackage(ExcelData))
+       {
+           var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+           int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+           // 异步遍历Excel文件的每一行
+           for (int row = 2; row <= rowCount; row++)
+           {
+               string SNValue = worksheet.Cells[row, 1].Text;
+               string ATSValue = worksheet.Cells[row, 2].Text;
+               SNData.Add(SNValue);
+               ATSData.Add(ATSValue);
+           }
+       }
+       string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+       string date = Order.Substring(3, 8);
+       string fileName = $"RC_{date}_54500000_0004_{Order}_{StartSN}_{CardNumber}";
+       string filePath = Path.Combine(desktopPath, fileName);
+       
+       await Task.Run(() =>
+       {
+           using (StreamWriter writer = new StreamWriter(filePath))
+           {
+               writer.WriteLine($"01;{Order};{CardBin};{StartSN};{EndSN};{CardNumber};");
+               for (int i = 0; i < SNData.Count; i++)
+               {
+                   if (i == SNData.Count - 1)
+                   {
+                       writer.Write($"{SNData[i]};{SNData[i]};{ATSData[i]};");
+                   }
+                   else
+                   {
+                       writer.WriteLine($"{SNData[i]};{SNData[i]};{ATSData[i]};");
+                   }
+               }
+           }
+       });
+       MessageBox.Show($"文件已保存到桌面{filePath}");
+    }
+    //漯河的处理逻辑
+    private async Task 漯河()
+    {
+        string cardtype;
+        漯河 window = new();
+        window.ShowDialog();
+        cardtype = window.CardType;
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UIDData = new List<string>();
+        string StartSN;
+        string EndSN;
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            StartSN = worksheet.Cells[2, 1].Text;
+            EndSN = worksheet.Cells[rowCount, 1].Text;
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string UIDValue = worksheet.Cells[row, 4].Text;
+                //计算UID校验码
+                string stra=UIDValue.Substring(0, 2);
+                string strb=UIDValue.Substring(2, 2);
+                string strc=UIDValue.Substring(4, 2);
+                string strd=UIDValue.Substring(6, 2);
+                int a=Convert.ToInt32(stra,16);
+                int b=Convert.ToInt32(strb,16);
+                int c=Convert.ToInt32(strc,16);
+                int d=Convert.ToInt32(strd,16);
+                int s=a^b^c^d;
+                UIDValue += s.ToString("X").PadLeft(2, '0');
+                UIDValue = UIDValue.ToUpper();
+                //计算SN校验码
+                string strNUM = SNValue + "F";
+                string stre = strNUM.Substring(0, 2);
+                string strf = strNUM.Substring(2, 2);
+                string strg = strNUM.Substring(4, 2);
+                string strh = strNUM.Substring(6, 2);
+                string stri = strNUM.Substring(8, 2);
+                string strj = strNUM.Substring(10, 2);
+                string strk = strNUM.Substring(12, 2);
+                string strl = strNUM.Substring(14, 2);
+                string strm = strNUM.Substring(16, 2);
+                string strn = strNUM.Substring(18, 2);
+                Int32 intnew = (Convert.ToInt32(stre, 16) ^ Convert.ToInt32(strf, 16) ^ Convert.ToInt32(strg, 16) ^ Convert.ToInt32(strh, 16) ^ Convert.ToInt32(stri, 16) ^ Convert.ToInt32(strj, 16) ^ Convert.ToInt32(strk, 16) ^ Convert.ToInt32(strl, 16) ^ Convert.ToInt32(strm, 16) ^ Convert.ToInt32(strn, 16));
+                string strXOR_2 = intnew.ToString("X").PadLeft(2, '0');
+                SNValue = strNUM + strXOR_2;
+                SNData.Add(SNValue);
+                UIDData.Add(UIDValue);
+            }
+        }
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"CardNoHY{StartSN} - {EndSN}.xml";
+        string filePath = Path.Combine(desktopPath, fileName);
+        await Task.Run(() =>
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
+                writer.WriteLine($"<CardList Total=\"{SNData.Count}\" CardType=\"{cardtype}\" Start=\"{StartSN}\" End=\"{EndSN}\">");
+                for (int i = 0; i < SNData.Count; i++)
+                {
+                    writer.WriteLine($"<Card UID=\"{UIDData[i]}\" AppID=\"{SNData[i]}\"/>");
+                }
+                writer.Write("</CardList>");
+            }
+        });
+        MessageBox.Show($"文件已保存到桌面{filePath}");
+    }
+    //随州的处理逻辑
+    private async Task 随州()
+    {
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+      
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+            // 异步遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 8].Text;
+                string UidValue = worksheet.Cells[row, 3].Text;
+                UidValue = Convert.ToUInt32(UidValue, 16).ToString();
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+            }
+        }
+
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+           
+            for (int i = 0; i < UidData.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = SNData[i];
+                worksheet.Cells[i + 1, 2].Value = UidData[i];
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = Path.Combine(desktopPath, fileName);
+            // 使用异步的文件保存
+            await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
+            // 显示提示消息
+            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        } 
     }
     private void Test(object sender, RoutedEventArgs e)
     {
@@ -1480,4 +1647,5 @@ public partial class RCC
         }
         return new string(reversedHex);
     }
+    
 }

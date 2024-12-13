@@ -4,9 +4,9 @@ using System.Windows.Controls;
 namespace WindowUI.Pages
 {
     
-    public partial class LuZhou : Window
+    public partial class 泸州 : Window
     {
-        public LuZhou()
+        public 泸州()
         {
             InitializeComponent();
         }

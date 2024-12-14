@@ -92,6 +92,8 @@ public partial class RCC
             {
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
                 case "兰州":tip.Text = "只有兰州工作证不需要MK文件"; break;
+                
+                case "随州": tip.Text = "Excel文件有时列数会不对应";break;
                 default:tip.Text = "该地区暂无提示"; break;
             }
 
@@ -1590,13 +1592,11 @@ public partial class RCC
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
-      
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; // 获取行数
-
-            // 异步遍历Excel文件的每一行
+            // 遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
                 string SNValue = worksheet.Cells[row, 8].Text;
@@ -1606,7 +1606,6 @@ public partial class RCC
                 UidData.Add(UidValue);
             }
         }
-
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -1636,7 +1635,7 @@ public partial class RCC
     {
         if (hex.Length % 2 != 0)
         {
-            throw new ArgumentException("数据长度不合法");
+            MessageBox.Show("数据不合法，可能需要删除表头行");
         }
         char[] reversedHex = new char[hex.Length];
         int j = 0;

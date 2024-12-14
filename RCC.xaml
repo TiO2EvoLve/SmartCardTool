@@ -119,11 +119,6 @@
                                 <TextBlock Text="制卡数据名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                 <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
                             </StackPanel>
-                            
-                            <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
-                                <TextBlock Text="保存文件名：" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80"/>
-                                <TextBox x:Name="saveName" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="500"/>
-                            </StackPanel>
                         </Grid>
                     </TabItem>
                     <TabItem >

@@ -3,13 +3,14 @@ using System.Windows.Controls;
 
 namespace WindowUI.Pages;
 
-public partial class 兰州 : Window
+public partial class 兰州
 {
     public 兰州()
     {
         InitializeComponent();
     }
-    public string CardType { set; get; }
+
+    public string CardType { set; get; } = "";
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {

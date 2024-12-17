@@ -20,6 +20,7 @@
                     <ComboBoxItem Content="老年卡" DataContext="0300" />
                     <ComboBoxItem Content="退役军人卡" DataContext="0302" />
                     <ComboBoxItem Content="学生卡" DataContext="0200" />
+                    <ComboBoxItem Content="献血荣誉卡" DataContext="0801" />
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Left">

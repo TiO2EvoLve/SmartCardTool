@@ -8,7 +8,7 @@
         <UseWPF>true</UseWPF>
         <SignAssembly>False</SignAssembly>
         <UseWindowsForms>False</UseWindowsForms>
-        <LangVersion>14</LangVersion>
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

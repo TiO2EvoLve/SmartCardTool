@@ -8,15 +8,15 @@ using WindowUI.Pages;
 namespace WindowUI;
 public partial class RCC
 {
-    private string mkFileName { get; set; } // 记录MK文件名
+    private string mkFileName { get; set; } //  记录MK文件名
     private List<string> MKDate{ get; set; } // 临时存储读取的MK文件的数据
     private string excelFileName{ get; set; }// 记录Excel文件名
     private MemoryStream ExcelData{ get; set; }// 临时存储读取的Excel的数据
     private string Region{ get; set; }// 下拉框选则的地区
-    Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } //MK文件处理流
-    Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }//Excel文件处理流
-    // 定义不需要选择MK文件的地区
-    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","其他地区","兰州","柳州公交"}; 
+    private Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } // MK文件处理流
+    private Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }// Excel文件处理流
+    // 定义需要MK文件的地区
+    private readonly string[] disableButtonRegions = {"天津","郴州","合肥","兰州","柳州公交"}; 
     public RCC()
     {
         InitializeComponent();
@@ -142,6 +142,7 @@ public partial class RCC
                 case "柳州公交" : await 柳州公交(); break; 
                 case "漯河" : await 漯河(); break; 
                 case "随州" : await 随州(); break; 
+                case "昆明" : await 昆明(); break; 
                 default: MessageBox.Show("请选择地区"); break;
             }
     }
@@ -1228,7 +1229,7 @@ public partial class RCC
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
-    //查找逻辑
+    //淄博公交查找替换逻辑
     static string ExtractValue(string input, string startKey, string endKey)
     {
         // 匹配以startKey开始到endKey之前的内容
@@ -1691,6 +1692,69 @@ public partial class RCC
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         } 
     }
+    private async Task 昆明()
+    {
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> SN16Data = new List<string>();
+        List<string> Uid16Data = new List<string>();
+        List<string> Uid10Data = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            // 遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string SN16Value = worksheet.Cells[row, 10].Text;
+                string Uid16Value = worksheet.Cells[row, 4].Text;
+                string Uid10Value = worksheet.Cells[row, 6].Text;
+                SNData.Add(SNValue);
+                SN16Data.Add(SN16Value);
+                Uid16Data.Add(Uid16Value);
+                Uid10Data.Add(Uid10Value);
+            }
+        }
+        // 保存文件到桌面
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"1342680response867020241218.xlsx";
+        string filePath = Path.Combine(desktopPath, fileName);
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+           
+            for (int i = 0; i < Uid16Data.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = Uid16Data[i];
+                worksheet.Cells[i + 1, 2].Value = Uid10Data[i];
+                worksheet.Cells[i + 1, 3].Value = 8684241208000000 + i;
+                worksheet.Cells[i + 1, 4].Value = "8670";
+                worksheet.Cells[i + 1, 5].Value = "0" + SN16Data[i];
+                worksheet.Cells[i + 1, 5].Value = "ZP18010302";
+            }
+            // 使用异步的文件保存
+            await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
+        } 
+        fileName = $"{excelFileName}.xlsx";
+        filePath = Path.Combine(desktopPath, fileName);
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "卡面号";
+            worksheet.Cells[1, 2].Value = "UID_10_";
+            for (int i = 0; i < Uid16Data.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value = SN16Data[i];
+                worksheet.Cells[i + 2, 2].Value = Uid10Data[i];
+            }
+            // 使用异步的文件保存
+            await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
+        }  
+        MessageBox.Show($"数据已处理并保存到桌面");
+    }
     private void Test(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("未开发");
@@ -1711,5 +1775,4 @@ public partial class RCC
         }
         return new string(reversedHex);
     }
-    
 }

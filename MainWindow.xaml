@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         xmlns:samples="clr-namespace:WindowUI.Pages"
-        Title="华冠智能卡工具箱" Height="800" Width="1000">
+        Title="华冠智能卡工具箱" Height="800" Width="1000"
+        >
 
     <Grid Background="#FEFEFE">
         <ui:NavigationView
@@ -16,7 +17,7 @@
             IsBackButtonVisible="Auto"
             IsPaneToggleVisible="True"
             PaneDisplayMode="Left"
-             
+            Loaded="NavigationView_Loaded"
             PaneTitle="华冠智能工具箱">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="搜索" />
@@ -34,7 +35,7 @@
                 <ui:NavigationViewItem
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
-                    TargetPageType="{x:Type samples:Page3}" />
+                    TargetPageType="{x:Type samples:Page2}" />
             </ui:NavigationView.MenuItems>
             
             <ui:NavigationView.FooterMenuItems>
@@ -53,7 +54,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="NavigationView Header" />
+                        Text="" />
                 </Border>
             </ui:NavigationView.Header>
             <ui:NavigationView.PaneHeader>
@@ -64,9 +65,11 @@
                     <TextBlock
                         Margin="24"
                         VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
                         FontWeight="Medium"
+                        FontSize="20"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Pane Header" />
+                        x:Name="TimeTextBlock" Text="{Binding CurrentTime}" />
                 </Border>
             </ui:NavigationView.PaneHeader>
             <ui:NavigationView.PaneFooter>

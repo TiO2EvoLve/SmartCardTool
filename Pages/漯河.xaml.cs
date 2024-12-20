@@ -9,8 +9,7 @@ public partial class 漯河 : Window
     {
         InitializeComponent();
     }
-    
-    public string CardType { set; get; }
+    public string CardType { set; get; } = "";
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {

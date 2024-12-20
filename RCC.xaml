@@ -66,6 +66,7 @@
                     <ComboBoxItem Content="盱眙" />
                     <ComboBoxItem Content="漯河" />
                     <ComboBoxItem Content="随州" />
+                    <ComboBoxItem Content="昆明" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"

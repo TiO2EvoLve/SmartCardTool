@@ -408,6 +408,22 @@ public partial class RCC
     //青岛理工大学的处理逻辑
     private void 青岛理工大学()
     {
+        青岛理工大学 qingdao = new ();
+        qingdao.ShowDialog();
+        string campus = qingdao.SelectedCampus;
+        if(campus == "青岛校区")
+        {
+            青岛理工大学青岛校区();
+        }
+        else if(campus == "临沂校区")
+        {
+            青岛理工大学临沂校区();
+        } 
+    }
+
+    //青岛理工大学临沂校区的处理逻辑
+    private void 青岛理工大学临沂校区()
+    {
         //取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> DateData = new List<string>();
@@ -437,6 +453,46 @@ public partial class RCC
                 worksheet.Cells[i + 1, 1].Value = i + 1;
                 worksheet.Cells[i + 1, 2].Value = DateData[i];
                 worksheet.Cells[i + 1, 3].Value = uidData[i];
+            }
+            // 保存文件到桌面
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fileName = $"{excelFileName}.xlsx";
+            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            package.SaveAs(new FileInfo(filePath));
+            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+        }
+    }
+    //青岛理工大学青岛校区的处理逻辑
+    private void 青岛理工大学青岛校区()
+    {
+        //取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> uid6Data = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string uid16Value = worksheet.Cells[row, 4].Text;
+                SNData.Add(SNValue);
+                uid6Data.Add(uid16Value);
+            }
+        }
+        // 创建一个新的Excel文件
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+
+            // 插入数据
+            for (int i = 0; i < SNData.Count; i++)
+            {
+                worksheet.Cells[i + 1, 1].Value = SNData[i];
+                worksheet.Cells[i + 1, 2].Value = uid6Data[i];
             }
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -682,15 +738,8 @@ public partial class RCC
             {
                 string uidValue = worksheet.Cells[row, 4].Text;
                 string timeValue = worksheet.Cells[row, 12].Text;
-                if (DateTime.TryParseExact(timeValue, "yyyy/MM/dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime dateTime))
-                {
-                    timeValue = "HG" + dateTime.ToString("yyyyMMdd") + uidValue;
-                }
-                else
-                {
-                    MessageBox.Show("日期格式不正确");
-                }
-
+                DateTime parsedDate = DateTime.ParseExact(timeValue, "yyyy/MM/dd H:mm:ss", null);
+                timeValue = "HG" + parsedDate.ToString("yyyyMMdd") + uidValue;
                 timeData.Add(timeValue);
                 uidData.Add(uidValue);
             }
@@ -1504,7 +1553,6 @@ public partial class RCC
                 UidData.Add(UidValue);
             }
         }
-
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -1531,53 +1579,57 @@ public partial class RCC
     //柳州公交的处理逻辑
     private async Task 柳州公交()
     {
-       string Order = MKDate[0].Substring(3, 20);
-       string CardBin = MKDate[0].Substring(47, 4);
-       string CardNumber = MKDate[0].Substring(42, 4);
-       string StartSN = MKDate[0].Substring(52, 8);
-       string EndSN = MKDate[0].Substring(61, 8);
-       // 取出Excel文件的数据
-       ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-       List<string> SNData = new List<string>();
-       List<string> ATSData = new List<string>();
-      
-       using (var package = new ExcelPackage(ExcelData))
-       {
-           var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-           int rowCount = worksheet.Dimension.Rows; // 获取行数
+        //根据逗号切割MKdate
+        string[] KCdata = MKDate[0].Split(';');
+        Console.WriteLine(KCdata);
+        string Order = KCdata[1];
+        string CardBin = KCdata[5];
+        string CardNumber = KCdata[4];
+        string StartSN = KCdata[6];
+        string EndSN = KCdata[7];
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> ATSData = new List<string>();
 
-           // 异步遍历Excel文件的每一行
-           for (int row = 2; row <= rowCount; row++)
-           {
-               string SNValue = worksheet.Cells[row, 1].Text;
-               string ATSValue = worksheet.Cells[row, 2].Text;
-               SNData.Add(SNValue);
-               ATSData.Add(ATSValue);
-           }
-       }
-       string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-       string date = Order.Substring(3, 8);
-       string fileName = $"RC_{date}_54500000_0004_{Order}_{StartSN}_{CardNumber}";
-       string filePath = Path.Combine(desktopPath, fileName);
-       await Task.Run(() =>
-       {
-           using (StreamWriter writer = new StreamWriter(filePath))
-           {
-               writer.WriteLine($"01;{Order};{CardBin};{StartSN};{EndSN};{CardNumber};");
-               for (int i = 0; i < SNData.Count; i++)
-               {
-                   if (i == SNData.Count - 1)
-                   {
-                       writer.Write($"{SNData[i]};{SNData[i]};{ATSData[i]};");
-                   }
-                   else
-                   {
-                       writer.WriteLine($"{SNData[i]};{SNData[i]};{ATSData[i]};");
-                   }
-               }
-           }
-       });
-       MessageBox.Show($"文件已保存到桌面{filePath}");
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+
+            // 异步遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string ATSValue = worksheet.Cells[row, 2].Text;
+                SNData.Add(SNValue);
+                ATSData.Add(ATSValue);
+            }
+        }
+
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string date = Order.Substring(3, 8);
+        string fileName = $"RC_{date}_54500000_0004_{Order}_{StartSN}_{CardNumber}";
+        string filePath = Path.Combine(desktopPath, fileName);
+        await Task.Run(() =>
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine($"01;{Order};{CardBin};{StartSN};{EndSN};{CardNumber};");
+                for (int i = 0; i < SNData.Count; i++)
+                {
+                    if (i == SNData.Count - 1)
+                    {
+                        writer.Write($"{SNData[i]};{SNData[i]};{ATSData[i]};");
+                    }
+                    else
+                    {
+                        writer.WriteLine($"{SNData[i]};{SNData[i]};{ATSData[i]};");
+                    }
+                }
+            }
+        });
+        MessageBox.Show($"文件已保存到桌面{filePath}");
     }
     //漯河的处理逻辑
     private async Task 漯河()

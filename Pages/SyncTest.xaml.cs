@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.DirectoryServices.ActiveDirectory;
+using System.Windows;
 
 namespace WindowUI.Pages;
 
@@ -43,5 +44,4 @@ public partial class SyncTest
         text.Text = "已全部完成";
         
     }
-
 }

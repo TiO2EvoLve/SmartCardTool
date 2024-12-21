@@ -1,0 +1,28 @@
+﻿<Window x:Class="WindowUI.Pages.青岛理工大学"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WindowUI.Pages"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="青岛理工大学附加菜单" Height="300" Width="500">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="请选择校区：" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <RadioButton
+                    Content="临沂校区"
+                    Checked="RadioButton_Checked"
+                    GroupName="radio_group"/>
+                <RadioButton
+                    Content="青岛校区"
+                    Checked="RadioButton_Checked"
+                    GroupName="radio_group"/>
+            </StackPanel>
+           
+            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+        </StackPanel>
+    </Grid>
+</Window>

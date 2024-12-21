@@ -1,4 +1,5 @@
 ﻿
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WindowUI.Pages
@@ -9,6 +10,12 @@ namespace WindowUI.Pages
         {
             InitializeComponent();
         }
-        
+      
+        private void ButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Button clicked!");
+        }
     }
+    
+   
 }

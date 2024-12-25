@@ -9,28 +9,29 @@ public partial class SyncTest
     {
         InitializeComponent();
     }
-    private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    private async void Button_OnClick(object sender, RoutedEventArgs e)
     {
+        text.Text = "开始任务";
         List<Action> actions = new List<Action>
         {
             () =>
             {
-                Console.WriteLine("Action 1 started");
-                Task.Delay(2000).Wait();
-                Console.WriteLine("Action 1 completed");
-            },
-            () =>
-            {
-                Console.WriteLine("测试");
-                Console.WriteLine("Action 2 started");
+                Console.WriteLine("任务一开始");
                 Task.Delay(1000).Wait();
-                Console.WriteLine("Action 2 completed");
+                Console.WriteLine("任务一完成");
             },
             () =>
             {
-                Console.WriteLine("Action 3 started");
+                Console.WriteLine("任务二开始");
+                Task.Delay(2000).Wait();
+                Console.WriteLine("任务二完成");
+            },
+            () =>
+            {
+                Console.WriteLine("任务三开始");
                 Task.Delay(3000).Wait();
-                Console.WriteLine("Action 3 completed");
+                Console.WriteLine("任务三完成");
+                
             }
         };
         // 将所有 Action 包装为 Task 并等待完成
@@ -38,10 +39,12 @@ public partial class SyncTest
         foreach (var action in actions)
         { 
             tasks.Add(Task.Run(action));
+            
         }
+        await Task.WhenAny(tasks);
+        Console.WriteLine("至少有一个完成");
         await Task.WhenAll(tasks);
         Console.WriteLine("已全部完成");
         text.Text = "已全部完成";
-        
     }
 }

@@ -64,15 +64,16 @@ public partial class RCC
             try
             {
                 ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
-                data.Foreground = Brushes.LightGreen;
-                datatextbox.Foreground = Brushes.Green;
+               
                 datatextbox.Text = excelFileName;
             }
             catch(IOException)
             {
-                MessageBox.Show("文件已被占用，请关闭Excel表格。",
+                MessageBox.Show("文件已被占用，请先关闭Excel表格。",
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
             }  
+            data.Foreground = Brushes.LightGreen;
+            datatextbox.Foreground = Brushes.Green;
         }
     }
     //下拉框选择地区
@@ -1827,5 +1828,10 @@ public partial class RCC
             reversedHex[j++] = hex[i + 1];
         }
         return new string(reversedHex);
+    }
+    //其他地区的处理逻辑
+    private async Task Other()
+    {
+        await Task.Run(() => Console.WriteLine("Hello World"));
     }
 }

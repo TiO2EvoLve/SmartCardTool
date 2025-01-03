@@ -1,10 +1,12 @@
-﻿using OfficeOpenXml;
-using System.IO;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using OfficeOpenXml;
 using WindowUI.Pages;
+
 namespace WindowUI;
 public partial class RCC
 {
@@ -13,8 +15,8 @@ public partial class RCC
     private string excelFileName{ get; set; }// 记录Excel文件名
     private MemoryStream ExcelData{ get; set; }// 临时存储读取的Excel的数据
     private string Region{ get; set; }// 下拉框选则的地区
-    private Microsoft.Win32.OpenFileDialog openFileDialog{ get; set; } // MK文件处理流
-    private Microsoft.Win32.OpenFileDialog openFileDialog2{ get; set; }// Excel文件处理流
+    private OpenFileDialog openFileDialog{ get; set; } // MK文件处理流
+    private OpenFileDialog openFileDialog2{ get; set; }// Excel文件处理流
     // 定义需要MK文件的地区
     private readonly string[] disableButtonRegions = {"天津","郴州","合肥","兰州","柳州公交"}; 
     public RCC()
@@ -26,7 +28,7 @@ public partial class RCC
     {
 
         //打开一个文件选择器，类型为任意
-        openFileDialog = new Microsoft.Win32.OpenFileDialog
+        openFileDialog = new OpenFileDialog
         {
             Filter = "All files (*.*)|*.*", // 允许选择所有文件
             Title = "选择一个文件"
@@ -48,7 +50,7 @@ public partial class RCC
     //打开Excel文件
     private void OpenFile(object sender, RoutedEventArgs e)
     {
-        openFileDialog2 = new Microsoft.Win32.OpenFileDialog
+        openFileDialog2 = new OpenFileDialog
         {
             Filter = "Excel Files (*.xlsx)|*.xlsx;",
             Title = "选择一个文件"
@@ -144,6 +146,8 @@ public partial class RCC
                 case "漯河" : await 漯河(); break; 
                 case "随州" : await 随州(); break; 
                 case "昆明" : await 昆明(); break; 
+                case "徐州地铁": await 徐州地铁(); break;
+                case "江苏乾翔": await 江苏乾翔(); break;
                 default: MessageBox.Show("请选择地区"); break;
             }
     }
@@ -287,7 +291,7 @@ public partial class RCC
         //将MK文件与Excel文件的数据合并
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(MKDate[0]);
@@ -339,7 +343,7 @@ public partial class RCC
         //保存为txt文件
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"{excelFileName}.txt";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             for (int i = 0; i < mergedData.Count; i++)
@@ -401,7 +405,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
@@ -421,7 +425,6 @@ public partial class RCC
             青岛理工大学临沂校区();
         } 
     }
-
     //青岛理工大学临沂校区的处理逻辑
     private void 青岛理工大学临沂校区()
     {
@@ -458,7 +461,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
@@ -498,7 +501,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
         }
@@ -580,7 +583,7 @@ public partial class RCC
         
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HG2610{excelFileName}01";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(rowCount - 1);
@@ -633,7 +636,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到文件: {filePath}");
 
@@ -661,7 +664,7 @@ public partial class RCC
         }
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HY1500{excelFileName}01.rcc";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(rowCount - 1);
@@ -718,7 +721,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到文件: {filePath},请根据制卡数据重命名RCC文件");
         }
@@ -758,9 +761,9 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
         }
     }
     //长沙公交荣誉卡的处理逻辑
@@ -817,9 +820,9 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
         }
 
     }
@@ -870,9 +873,9 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到桌面，请修改文件名");
+            MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
         }
     }
     //合肥通的处理逻辑
@@ -910,7 +913,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}001";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(MKDate[0]);
@@ -944,7 +947,7 @@ public partial class RCC
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
             //遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
+            for (int row = 2; row <= rowCount; row++)
             {
                 string DataValue = worksheet.Cells[row, 7].Text;
                 string UidValue = worksheet.Cells[row, 2].Text;
@@ -966,7 +969,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
@@ -1011,7 +1014,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
@@ -1085,7 +1088,7 @@ public partial class RCC
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HP-04377740{date}165931.TXT";
-        string filePath = System.IO.Path.Combine(desktopPath, fileName);
+        string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine(SNData.Count + date);
@@ -1479,7 +1482,7 @@ public partial class RCC
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
-            string filePath = System.IO.Path.Combine(desktopPath, fileName);
+            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         } 
@@ -1773,7 +1776,7 @@ public partial class RCC
         }
         // 保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"1342680response867020241218.xlsx";
+        string fileName = "1342680response867020241218.xlsx";
         string filePath = Path.Combine(desktopPath, fileName);
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
@@ -1807,7 +1810,93 @@ public partial class RCC
             // 使用异步的文件保存
             await Task.Run(() => package.SaveAs(new FileInfo(filePath)));
         }  
-        MessageBox.Show($"数据已处理并保存到桌面");
+        MessageBox.Show("数据已处理并保存到桌面");
+    }
+    //徐州的处理逻辑
+    private async Task 徐州地铁()
+    {
+        await Task.Run(() =>
+        {
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UidData = new List<string>();
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            // 遍历Excel文件的每一行
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 6].Text;
+                string UidValue = worksheet.Cells[row, 2].Text;
+                SNData.Add(SNValue);
+                UidData.Add(UidValue);
+            }
+        }
+        // 保存文件到桌面
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"{excelFileName}.txt";
+        string filePath = Path.Combine(desktopPath, fileName);
+        
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                for (int i = 0; i < SNData.Count; i++)
+                {
+                    if (i == SNData.Count - 1)
+                    {
+                        writer.Write($"{SNData[i]}\t{UidData[i]}00000000");
+                    }
+                    else
+                    { 
+                        writer.WriteLine($"{SNData[i]}\t{UidData[i]}00000000");
+                    }
+                }
+            }
+       
+        MessageBox.Show($"文件已保存到桌面{filePath}");
+        });
+    }
+    //江苏乾翔的处理逻辑
+    private async Task 江苏乾翔()
+    {
+        await Task.Run(() =>
+        {
+            // 取出Excel文件的数据
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+            List<string> SNData = new List<string>();
+            List<string> UidData = new List<string>();
+            using (var package = new ExcelPackage(ExcelData))
+            {
+                var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+                int rowCount = worksheet.Dimension.Rows; // 获取行数
+                // 遍历Excel文件的每一行
+                for (int row = 2; row <= rowCount; row++)
+                {
+                    string SNValue = worksheet.Cells[row, 7].Text;
+                    string UidValue = worksheet.Cells[row, 3].Text;
+                    SNData.Add(SNValue);
+                    UidData.Add(UidValue);
+                }
+            }
+            //新建一个Excel文件
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+                for (int i = 0; i < UidData.Count; i++)
+                {
+                    worksheet.Cells[i + 1, 1].Value = SNData[i];
+                    worksheet.Cells[i + 1, 2].Value = UidData[i];
+                }
+
+                // 保存文件到桌面
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string fileName = $"{excelFileName}.xlsx";
+                string filePath = Path.Combine(desktopPath, fileName);
+                package.SaveAs(new FileInfo(filePath));
+                MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            }
+        });
     }
     private void Test(object sender, RoutedEventArgs e)
     {
@@ -1828,10 +1917,5 @@ public partial class RCC
             reversedHex[j++] = hex[i + 1];
         }
         return new string(reversedHex);
-    }
-    //其他地区的处理逻辑
-    private async Task Other()
-    {
-        await Task.Run(() => Console.WriteLine("Hello World"));
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
+using Microsoft.Win32;
 
 namespace WindowUI
 {
@@ -51,18 +53,18 @@ namespace WindowUI
             {
                 writer.Write(new TextRange(Script.Document.ContentStart, Script.Document.ContentEnd).Text);
             }
-            System.Windows.MessageBox.Show("保存成功！");
+            MessageBox.Show("保存成功！");
         }
-        private void Image_MouseEnter_Save(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Image_MouseEnter_Save(object sender, MouseEventArgs e)
         {
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\转换后脚本.txt";
             using (StreamWriter writer = new StreamWriter(savePath))
             {
                 writer.Write(new TextRange(Script.Document.ContentStart, Script.Document.ContentEnd).Text);
             }
-            System.Windows.MessageBox.Show("保存成功！");
+            MessageBox.Show("保存成功！");
         }
-        private void Image_MouseDown_Open(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Image_MouseDown_Open(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -86,18 +88,18 @@ namespace WindowUI
                 Script.Document.Blocks.Add(paragraph);
             }
         }
-        private void Image_MouseDown_OpenScript(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Image_MouseDown_OpenScript(object sender, MouseButtonEventArgs e)
         {
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\转换后脚本.txt";
             //打开文件路径
             if (savePath != null)
             {
-                var processStartInfo = new System.Diagnostics.ProcessStartInfo
+                var processStartInfo = new ProcessStartInfo
                 {
                     FileName = savePath,
                     UseShellExecute = true
                 };
-                System.Diagnostics.Process.Start(processStartInfo);
+                Process.Start(processStartInfo);
             }
         }
     }

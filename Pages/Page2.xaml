@@ -13,7 +13,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-
         <ui:TextBox
             TextChanged="Text_OnTextChanged"
             Text="{Binding Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -30,6 +29,8 @@
                 MouseOverBackground="LightSkyBlue">
                 Button
             </ui:Button>
+            <CheckBox Margin="20,0,0,0" >女</CheckBox>
+            
         </StackPanel>
     </Grid>
 </Page>

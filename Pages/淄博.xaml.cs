@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 
 namespace WindowUI.Pages
 {
@@ -28,11 +30,11 @@ namespace WindowUI.Pages
         }
         private void OpenFile(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "XD文件|*.xd";
             openFileDialog.ShowDialog();
             if (String.IsNullOrEmpty(openFileDialog.FileName)) return;
-            String fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+            String fileName = Path.GetFileName(openFileDialog.FileName);
             if (fileName == "") return;
 
             if (fileName.Length < 24)

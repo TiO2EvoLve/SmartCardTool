@@ -95,7 +95,6 @@ public partial class RCC
             {
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
                 case "兰州":tip.Text = "只有兰州工作证不需要MK文件"; break;
-                
                 case "随州": tip.Text = "Excel文件有时列数会不对应";break;
                 default:tip.Text = "该地区暂无提示"; break;
             }
@@ -149,6 +148,7 @@ public partial class RCC
                 case "徐州地铁": await 徐州地铁(); break;
                 case "江苏乾翔": await 江苏乾翔(); break;
                 case "石家庄": await 石家庄(); break;
+                case "淮北": await 淮北(); break;
                 default: MessageBox.Show("请选择地区"); break;
             }
     }
@@ -311,6 +311,43 @@ public partial class RCC
             }
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}"); 
+        //第二个文件
+        List<string> SNData = new List<string>();
+        List<string> UIDData = new List<string>();
+        //取出Excle文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; //获取行数
+            //遍历Excel文件的每一行
+            for (int row = 1; row <= rowCount; row++)
+            {
+                string firstColumnValue = worksheet.Cells[row, 8].Text;
+                SNData.Add(firstColumnValue);
+                firstColumnValue = worksheet.Cells[row, 3].Text;
+                string firstColumnValue2 = Convert.ToUInt32(firstColumnValue, 16).ToString();
+                UIDData.Add(firstColumnValue2);
+            }
+        }
+        //将processedData和processedData2合并起来，中间用','分隔，最后保存为txt文件到桌面
+        List<string> mergedData = new List<string>();
+        for (int i = 0; i < SNData.Count; i++)
+        {
+            string mergedRow = $"{SNData[i]},{UIDData[i]}";
+            mergedData.Add(mergedRow);
+        }
+        desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        fileName = excelFileName + ".txt";
+        filePath = Path.Combine(desktopPath, fileName);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            foreach (var line in mergedData)
+            {
+                writer.WriteLine(line);
+            }
+        }
+        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
     //抚顺夕阳红卡的处理逻辑
     private void 抚顺()
@@ -1959,6 +1996,76 @@ public partial class RCC
             }
         }); 
         MessageBox.Show("数据已处理并保存到桌面");
+    }
+    //淮北的处理逻辑
+    private async Task 淮北()
+    {
+        string cardtype;
+        // 取出Excel文件的数据
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        List<string> SNData = new List<string>();
+        List<string> UIDData = new List<string>();
+        string StartSN;
+        string EndSN;
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            StartSN = worksheet.Cells[2,1].Text;
+            EndSN = worksheet.Cells[rowCount, 1].Text;
+            cardtype = StartSN.Substring(8,2);
+            for (int row = 2; row <= rowCount; row++)
+            {
+                string SNValue = worksheet.Cells[row, 1].Text;
+                string UIDValue = worksheet.Cells[row, 4].Text;
+                //计算UID校验码
+                string stra=UIDValue.Substring(0, 2);
+                string strb=UIDValue.Substring(2, 2);
+                string strc=UIDValue.Substring(4, 2);
+                string strd=UIDValue.Substring(6, 2);
+                int a=Convert.ToInt32(stra,16);
+                int b=Convert.ToInt32(strb,16);
+                int c=Convert.ToInt32(strc,16);
+                int d=Convert.ToInt32(strd,16);
+                int s=a^b^c^d;
+                UIDValue += s.ToString("X").PadLeft(2, '0');
+                UIDValue = UIDValue.ToUpper();
+                //计算SN校验码
+                SNValue += "F";
+                string stre = SNValue.Substring(0, 2);
+                string strf = SNValue.Substring(2, 2);
+                string strg = SNValue.Substring(4, 2);
+                string strh = SNValue.Substring(6, 2);
+                string stri = SNValue.Substring(8, 2);
+                string strj = SNValue.Substring(10, 2);
+                string strk = SNValue.Substring(12, 2);
+                string strl = SNValue.Substring(14, 2);
+                string strm = SNValue.Substring(16, 2);
+                string strn = SNValue.Substring(18, 2);
+                Int32 intnew = (Convert.ToInt32(stre, 16) ^ Convert.ToInt32(strf, 16) ^ Convert.ToInt32(strg, 16) ^ Convert.ToInt32(strh, 16) ^ Convert.ToInt32(stri, 16) ^ Convert.ToInt32(strj, 16) ^ Convert.ToInt32(strk, 16) ^ Convert.ToInt32(strl, 16) ^ Convert.ToInt32(strm, 16) ^ Convert.ToInt32(strn, 16));
+                string strXOR_2 = intnew.ToString("X").PadLeft(2, '0');
+                SNValue += strXOR_2;
+                SNData.Add(SNValue);
+                UIDData.Add(UIDValue);
+            }
+        }
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"CardNoTM{StartSN}-{EndSN}.xml";
+        string filePath = Path.Combine(desktopPath, fileName);
+        await Task.Run(() =>
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
+                writer.WriteLine($"<CardList Total=\"{SNData.Count}\" CardType=\"{cardtype}\" Start=\"{StartSN}\" End=\"{EndSN}\">");
+                for (int i = 0; i < SNData.Count; i++)
+                {
+                    writer.WriteLine($"<Card UID=\"{UIDData[i]}\" AppID=\"{SNData[i]}\"/>");
+                }
+                writer.Write("</CardList>");
+            }
+        });
+        MessageBox.Show($"文件已保存到桌面{filePath}"); 
     }
     private void Test(object sender, RoutedEventArgs e)
     {

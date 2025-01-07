@@ -70,6 +70,7 @@
                     <ComboBoxItem Content="徐州地铁" />
                     <ComboBoxItem Content="江苏乾翔" />
                     <ComboBoxItem Content="石家庄" />
+                    <ComboBoxItem Content="淮北" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"

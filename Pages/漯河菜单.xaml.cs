@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace WindowUI.Pages;
 
-public partial class 漯河 : Window
+public partial class 漯河菜单 : Window
 {
-    public 漯河()
+    public 漯河菜单()
     {
         InitializeComponent();
     }

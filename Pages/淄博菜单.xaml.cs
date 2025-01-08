@@ -5,9 +5,9 @@ using Microsoft.Win32;
 
 namespace WindowUI.Pages
 {
-    public partial class 淄博
+    public partial class 淄博菜单
     {
-        public 淄博()
+        public 淄博菜单()
         {
             InitializeComponent();
         }

@@ -2,9 +2,9 @@
 
 namespace WindowUI.Pages;
 
-public partial class 桂林
+public partial class 桂林菜单
 {
-    public 桂林()
+    public 桂林菜单()
     {
         InitializeComponent();
     }

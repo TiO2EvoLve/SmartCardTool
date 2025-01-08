@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace WindowUI.Pages;
 
-public partial class 青岛理工大学 : Window
+public partial class 青岛理工大学菜单 : Window
 {
-    public 青岛理工大学()
+    public 青岛理工大学菜单()
     {
         InitializeComponent();
     }

@@ -4,9 +4,9 @@ using System.Windows.Controls;
 namespace WindowUI.Pages
 {
     
-    public partial class 泸州 : Window
+    public partial class 泸州菜单 : Window
     {
-        public 泸州()
+        public 泸州菜单()
         {
             InitializeComponent();
         }

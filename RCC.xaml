@@ -36,17 +36,17 @@
                 SelectedIndex="0">
                     <ComboBoxItem Content="请选择地区" />
                     <ComboBoxItem Content="天津" />
-                    <ComboBoxItem Content="兰州" />
+                    <ComboBoxItem Content="兰州菜单" />
                     <ComboBoxItem Content="青岛博研加气站" />
-                    <ComboBoxItem Content="青岛理工大学" />
+                    <ComboBoxItem Content="青岛理工大学菜单" />
                     <ComboBoxItem Content="抚顺" />
                     <ComboBoxItem Content="郴州" />
                     <ComboBoxItem Content="潍坊" />
-                    <ComboBoxItem Content="国网技术学院职工卡" />
+                    <ComboBoxItem Content="国网技术学院" />
                     <ComboBoxItem Content="哈尔滨城市通" />
                     <ComboBoxItem Content="运城盐湖王府学校" />
                     <ComboBoxItem Content="南通地铁" />
-                    <ComboBoxItem Content="长沙公交荣誉卡" />
+                    <ComboBoxItem Content="长沙公交" />
                     <ComboBoxItem Content="泸州公交" />
                     <ComboBoxItem Content="合肥通" />
                     <ComboBoxItem Content="西安交通大学" />
@@ -71,6 +71,9 @@
                     <ComboBoxItem Content="江苏乾翔" />
                     <ComboBoxItem Content="石家庄" />
                     <ComboBoxItem Content="淮北" />
+                    <ComboBoxItem Content="山西医科大学" />
+                    <ComboBoxItem Content="济南地铁UL" />
+                    <ComboBoxItem Content="测试地区" />
                 </ComboBox>
                 <ui:Button
                 x:Name="SelectMKButton"

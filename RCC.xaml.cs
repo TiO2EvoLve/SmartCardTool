@@ -13,9 +13,7 @@ public partial class RCC
     private MemoryStream ExcelData { get; set; } // 临时存储读取的Excel的数据
     private string Region { get; set; } // 下拉框选则的地区
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
-
     private OpenFileDialog openFileDialog2 { get; set; } // Excel文件处理流
-
     // 定义需要MK文件的地区
     private readonly string[] disableButtonRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
 

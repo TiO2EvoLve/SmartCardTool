@@ -31,11 +31,11 @@
                 <ui:NavigationViewItem
                     Content="转换"
                     Icon="{ui:SymbolIcon ArrowSync24}"
-                    TargetPageType="{x:Type samples:Page2}" />
+                    TargetPageType="{x:Type samples:Page1}" />
                 <ui:NavigationViewItem
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
-                    TargetPageType="{x:Type samples:Page2}" />
+                    TargetPageType="{x:Type samples:Page1}" />
             </ui:NavigationView.MenuItems>
             
             <ui:NavigationView.FooterMenuItems>

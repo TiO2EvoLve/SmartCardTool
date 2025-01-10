@@ -142,7 +142,7 @@ public partial class RCC
             case "陕西师范大学": 陕西师范大学.Run(ExcelData, excelFileName); break;
             case "西安文理学院": 西安文理学院.Run(ExcelData, excelFileName); break;
             case "滨州公交": 滨州公交.Run(ExcelData, excelFileName); break;
-            case "云南朗坤": 云南朗坤.Run(ExcelData, excelFileName); break;
+            case "云南朗坤": 云南朗坤.PlanB(ExcelData, excelFileName); break;
             case "盱眙": 盱眙.Run(ExcelData, excelFileName); break;
             case "柳州公交": 柳州公交.Run(ExcelData, MKData); break;
             case "漯河": 漯河.Run(ExcelData); break;

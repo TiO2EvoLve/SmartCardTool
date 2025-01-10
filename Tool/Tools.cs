@@ -28,4 +28,9 @@ public class Tools
         Match match = Regex.Match(input, pattern);
         return match.Success ? match.Groups[1].Value : string.Empty;
     }
+    //转为10进制
+    public static string ChangeDecimalSystem(string input)
+    {
+        return Convert.ToUInt32(input, 16).ToString();
+    }
 }

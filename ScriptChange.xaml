@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         WindowStartupLocation="CenterScreen"
-        Title="脚本转换器 V2024.11.28 - 山东华冠智能卡" Height="800" Width="1000">
+        Title="脚本转换器 V2024.11.28 " Height="800" Width="1000">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

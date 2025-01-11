@@ -29,7 +29,6 @@ public class 云南朗坤
                 Uid_Data.Add(Uid_Value);
             }
         }
-
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -52,7 +51,7 @@ public class 云南朗坤
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }    
     }
-
+    
     public static void PlanB(MemoryStream ExcelData, string excelFileName)
     {
         // 取出Excel文件的数据

@@ -62,8 +62,7 @@ public class 淄博公交
                 string issueTime = Tools.ExtractValue(xmlData[i], "ISSUETIME", "STATUS");
                 issueTime = date.Substring(0, 8) + issueTime.Substring(8);
                 // 创建 XML 格式字符串
-                string status = "Good"; // 假设默认状态为 "Good"
-                xmlData[i] = $"<Card UID=\"{cardUid}\" AppID=\"{appId}\" IssueSN=\"{issueSn}\" IssueTime=\"{issueTime}\" Status=\"{status}\"/>";
+                xmlData[i] = $"<Card UID=\"{cardUid}\" AppID=\"{appId}\" IssueSN=\"{issueSn}\" IssueTime=\"{issueTime}\" Status=\"Good\"/>";
                 writer.WriteLine(xmlData[i]);
             }
             writer.WriteLine("</CardList>");

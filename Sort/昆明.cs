@@ -30,21 +30,21 @@ public class 昆明
 
         // 保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = "1342680response867020241218.xlsx";
+        string fileName = "1342680response867020250113.xlsx";
         string filePath = Path.Combine(desktopPath, fileName);
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
-            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            var worksheet = package.Workbook.Worksheets.Add(fileName);
 
             for (int i = 0; i < Uid16Data.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = Uid16Data[i];
                 worksheet.Cells[i + 1, 2].Value = Uid10Data[i];
-                worksheet.Cells[i + 1, 3].Value = 8684241208000000 + i;
+                worksheet.Cells[i + 1, 3].Value = (8684250103000001 + i).ToString();
                 worksheet.Cells[i + 1, 4].Value = "8670";
-                worksheet.Cells[i + 1, 5].Value = "0" + SN16Data[i];
-                worksheet.Cells[i + 1, 5].Value = "ZP18010302";
+                worksheet.Cells[i + 1, 5].Value = "0" + SNData[i];
+                worksheet.Cells[i + 1, 6].Value = "ZP18010302";
             }
 
             package.SaveAs(new FileInfo(filePath));

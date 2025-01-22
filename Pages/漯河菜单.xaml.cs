@@ -10,6 +10,8 @@ public partial class 漯河菜单 : Window
         InitializeComponent();
     }
     public string CardType { set; get; } = "";
+    public bool 英才卡 = false;
+    public string CardSN;
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
@@ -25,6 +27,16 @@ public partial class 漯河菜单 : Window
         if (LuZhouCardType.SelectedItem is ComboBoxItem selectedItem && selectedItem.DataContext != null)
         {
             CardType = selectedItem.DataContext.ToString();
+            if (selectedItem.Content.ToString() == "英才卡")
+            {
+                英才卡 = true;
+                SN.IsEnabled = true;
+            }
         }
+    }
+
+    private void SN_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        CardSN = SN.Text;
     }
 }

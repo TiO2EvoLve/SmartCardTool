@@ -89,7 +89,7 @@ public class 兰州
         MKData[1] = MKData[1].Substring(0, MKData[1].Length - 6) + totalLinesFormatted;
         //将MK文件与Excel文件的数据合并
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"RC{mkFileName}";
+        string fileName = $"RC{mkFileName}001";
         string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
@@ -108,7 +108,8 @@ public class 兰州
                 }
             }
         }
-        
+        //异型卡需要打开
+        return; 
         //第二个文件
         List<string> SNData = new List<string>();
         List<string> UIDData = new List<string>();

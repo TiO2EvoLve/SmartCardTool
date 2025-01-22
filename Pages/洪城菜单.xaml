@@ -1,0 +1,30 @@
+﻿<Window x:Class="WindowUI.Pages.洪城菜单"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WindowUI.Pages"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="洪城菜单" Height="450" Width="800">
+    <Grid>
+        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="请选择标准：" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                    <RadioButton
+                        Content="住建部1208"
+                        DataContext="1208"
+                        Checked="ToggleButton_OnChecked"
+                        GroupName="radio_group"/>
+                    <RadioButton
+                        Content="交通部1280"
+                        DataContext="1280"
+                        Checked="ToggleButton_OnChecked"
+                        GroupName="radio_group"/>
+                </StackPanel>
+                <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

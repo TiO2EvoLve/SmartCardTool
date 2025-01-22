@@ -24,11 +24,15 @@
                     <ComboBoxItem Content="普通卡" DataContext="08" />
                     <ComboBoxItem Content="学生卡" DataContext="09" />
                     <ComboBoxItem Content="员工卡" DataContext="07" />
+                    <ComboBoxItem Content="英才卡" DataContext="07" />
                     <ComboBoxItem Content="敬老卡" DataContext="0A" />
                     <ComboBoxItem Content="爱心卡" DataContext="OB" />
                 </ComboBox>
             </StackPanel>
-           
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
+                <TextBlock Text="英才卡首位号" VerticalAlignment="Center"/>
+                <TextBox TextChanged="SN_OnTextChanged" IsEnabled="False" x:Name="SN" Width="200" Margin="10,0,0,0"></TextBox>
+            </StackPanel>
             <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
         </StackPanel>
         </Border>

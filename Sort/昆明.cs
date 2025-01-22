@@ -41,7 +41,7 @@ public class 昆明
             {
                 worksheet.Cells[i + 1, 1].Value = Uid16Data[i];
                 worksheet.Cells[i + 1, 2].Value = Uid10Data[i];
-                worksheet.Cells[i + 1, 3].Value = (8684250103000001 + i).ToString();
+                worksheet.Cells[i + 1, 3].Value = (8684250113000001 + i).ToString();
                 worksheet.Cells[i + 1, 4].Value = "8670";
                 worksheet.Cells[i + 1, 5].Value = "0" + SNData[i];
                 worksheet.Cells[i + 1, 6].Value = "ZP18010302";
@@ -65,7 +65,8 @@ public class 昆明
 
             package.SaveAs(new FileInfo(filePath));
         }
-
+        
         MessageBox.Show("数据已处理并保存到桌面");
+        
     }
 }

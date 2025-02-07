@@ -22,7 +22,14 @@
                         DataContext="1280"
                         Checked="ToggleButton_OnChecked"
                         GroupName="radio_group"/>
+                    <RadioButton
+                        Content="全部"
+                        DataContext="all"
+                        IsChecked="True"
+                        Checked="ToggleButton_OnChecked"
+                        GroupName="radio_group"/>
                 </StackPanel>
+                
                 <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
             </StackPanel>
         </Border>

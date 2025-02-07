@@ -73,6 +73,7 @@
                     <ComboBoxItem Content="淮北" />
                     <ComboBoxItem Content="山西医科大学" />
                     <ComboBoxItem Content="济南地铁UL" />
+                    <ComboBoxItem Content="洪城" />
                     <ComboBoxItem Content="测试地区" />
                 </ComboBox>
                 <ui:Button
@@ -123,14 +124,14 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" >
-                                <TextBlock Text="MK文件名:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="MK文件:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock x:Name="mktextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
-                                <TextBlock Text="制卡数据名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <TextBlock Text="制卡数据：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                 <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
                             </StackPanel>
                         </Grid>
                     </TabItem>
-                    <TabItem >
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="AddCircle28" />
@@ -138,7 +139,7 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid>
-                            <TextBlock Margin="12" Text="未开发"/>
+                            <TextBlock Margin="12" Text="暂未开发"/>
                         </Grid>
                     </TabItem>
                 </TabControl>

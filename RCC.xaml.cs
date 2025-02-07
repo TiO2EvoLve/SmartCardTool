@@ -16,7 +16,7 @@ public partial class RCC
     private OpenFileDialog openFileDialog2 { get; set; } // Excel文件处理流
     // 定义需要MK文件的地区
     private readonly string[] disableButtonRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
-
+    public string value { get; set; }
     public RCC()
     {
         InitializeComponent();
@@ -70,7 +70,7 @@ public partial class RCC
             }
             catch (IOException)
             {
-                MessageBox.Show("文件已被占用，请先关闭Excel表格。",
+                MessageBox.Show("文件已被占用，请先关闭Excel表格!",
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
@@ -89,16 +89,24 @@ public partial class RCC
             if (SelectMKButton != null)
             {
                 SelectMKButton.IsEnabled = Array.Exists(disableButtonRegions, region => region == Region);
-                if (!SelectMKButton.IsEnabled) mk.Foreground = Brushes.LightGreen;
+                if (!SelectMKButton.IsEnabled)
+                {
+                    mk.Foreground = Brushes.LightGreen;
+                    mktextbox.Foreground = Brushes.LightGreen;
+                    mktextbox.Text = "无需mk文件";
+                }
                 else mk.Foreground = Brushes.Red;
+                
             }
 
             //根据不同地区进行提示
             switch (Region)
             {
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
-                case "兰州菜单": tip.Text = "只有兰州工作证不需要MK文件"; break;
-                case "随州": tip.Text = "Excel文件有时列数会不对应"; break;
+                case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
+                case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
+                case "洪城": tip.Text = "多个文件注意修改编号"; break;
+                case "测试地区": tip.Text = "测试地区"; break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
         }
@@ -154,11 +162,11 @@ public partial class RCC
             case "淮北": 淮北.Run(ExcelData); break;
             case "山西医科大学": 山西医科大学.Run(ExcelData, excelFileName); break;
             case "济南地铁UL": 济南地铁UL.Run(ExcelData, excelFileName); break;
+            case "洪城": 洪城.Run(ExcelData); break;
             case "测试地区": 测试地区.Run(ExcelData, excelFileName); break;
             default: MessageBox.Show("请选择地区"); break;
         }
     }
-
     private void Test(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("未开发");

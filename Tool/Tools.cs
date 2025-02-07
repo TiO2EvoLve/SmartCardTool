@@ -33,4 +33,24 @@ public class Tools
     {
         return Convert.ToUInt32(input, 16).ToString();
     }
+    //使用LUHN算法计算校验值
+    public static string LuhnCheck(string input)
+    {
+        int sum = 0;
+        int length = input.Length;
+        for (int i = 0; i < length; i++)
+        {
+            int num = int.Parse(input.Substring(i, 1));
+            if ((length - i) % 2 == 0)
+            {
+                num *= 2;
+                if (num > 9)
+                {
+                    num -= 9;
+                }
+            }
+            sum += num;
+        }
+        return (10 - sum % 10).ToString();
+    }
 }

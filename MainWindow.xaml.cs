@@ -46,6 +46,4 @@ public partial class MainWindow : INotifyPropertyChanged
         var navigationView = sender as NavigationView;
         navigationView?.Navigate(typeof(Page1));
     }
-   
-
 }

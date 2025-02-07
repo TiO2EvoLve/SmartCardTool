@@ -18,7 +18,7 @@ public class 云南朗坤
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; // 获取行数
 
-            // 异步遍历Excel文件的每一行
+            // 遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
                 string SNValue = worksheet.Cells[row, 7].Text;
@@ -41,11 +41,10 @@ public class 云南朗坤
                 worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
                 worksheet.Cells[i + 1, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
             }
-            // 异步保存文件到桌面
+            // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
-            // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");
@@ -66,7 +65,7 @@ public class 云南朗坤
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; // 获取行数
 
-            // 异步遍历Excel文件的每一行
+            // 遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
                 string SNValue = worksheet.Cells[row, 7].Text;
@@ -89,11 +88,10 @@ public class 云南朗坤
                 worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(Uid16Data[i], 16).ToString();
                 worksheet.Cells[i + 1, 5].Value = Uid10Data[i];
             }
-            // 异步保存文件到桌面
+            // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
-            // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
             MessageBox.Show($"数据已处理并保存到桌面{filePath}");

@@ -65,7 +65,6 @@ public partial class RCC
             try
             {
                 ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
-
                 datatextbox.Text = excelFileName;
             }
             catch (IOException)
@@ -73,7 +72,6 @@ public partial class RCC
                 MessageBox.Show("文件已被占用，请先关闭Excel表格!",
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
             data.Foreground = Brushes.LightGreen;
             datatextbox.Foreground = Brushes.Green;
         }
@@ -171,4 +169,5 @@ public partial class RCC
     {
         MessageBox.Show("未开发");
     }
+    
 }

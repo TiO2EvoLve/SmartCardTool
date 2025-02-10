@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         Title="RCC快速生成器" Height="800" Width="1000">
     <Grid>
-
+ 
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="0.3*" />
@@ -143,6 +143,7 @@
                         </Grid>
                     </TabItem>
                 </TabControl>
+                
             </StackPanel>
         </Border>
     </Grid>

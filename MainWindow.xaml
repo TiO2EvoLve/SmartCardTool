@@ -9,7 +9,6 @@
         xmlns:samples="clr-namespace:WindowUI.Pages"
         Title="智能卡工具箱" Height="800" Width="1000"
         >
-
     <Grid Background="#FEFEFE">
         <ui:NavigationView
             MinHeight="300"
@@ -18,7 +17,7 @@
             IsPaneToggleVisible="True"
             PaneDisplayMode="Left"
             Loaded="NavigationView_Loaded"
-            PaneTitle="华冠智能工具箱">
+            PaneTitle="智能卡工具箱">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="搜索" />
             </ui:NavigationView.AutoSuggestBox>
@@ -54,7 +53,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="" />
+                       />
                 </Border>
             </ui:NavigationView.Header>
             <ui:NavigationView.PaneHeader>
@@ -84,10 +83,9 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="V2025-1-11"/>
+                        Text="v-25.2.8"/>
                 </Border>
             </ui:NavigationView.PaneFooter>
         </ui:NavigationView>
-
     </Grid>
 </Window>

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Threading;
 using WindowUI.Pages;
@@ -11,6 +13,7 @@ public partial class MainWindow : INotifyPropertyChanged
     private string _currentTime;
     private DispatcherTimer _timer;
     public event PropertyChangedEventHandler PropertyChanged;
+
     public string CurrentTime
     {
         get => _currentTime;
@@ -20,6 +23,7 @@ public partial class MainWindow : INotifyPropertyChanged
             OnPropertyChanged(nameof(CurrentTime));
         }
     }
+
     public MainWindow()
     {
         InitializeComponent();
@@ -32,18 +36,22 @@ public partial class MainWindow : INotifyPropertyChanged
         _timer.Tick += Timer_Tick;
         _timer.Start();
     }
+
     private void Timer_Tick(object sender, EventArgs e)
     {
         CurrentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
     }
+
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
     private void NavigationView_Loaded(object sender, RoutedEventArgs e)
     {
         // Navigate to the default page
         var navigationView = sender as NavigationView;
         navigationView?.Navigate(typeof(Page1));
     }
+    
 }

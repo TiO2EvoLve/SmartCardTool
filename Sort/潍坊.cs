@@ -1,41 +1,88 @@
-﻿namespace WindowUI.Sort;
+﻿
+using System.Text.RegularExpressions;
+
+namespace WindowUI.Sort;
 
 public class 潍坊
 {
-    public static void Run(MemoryStream ExcelData,string excelFileName)
+      public static void Run(string FilePath, string FileName)
     {
-        int rowCount;//excel文件的行数
-        //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
+        int Count = 0; // 记录文件的数量
+        string Date = ""; // 记录日期
+
+        // 读取mdb文件
+        List<string> ATS = new List<string>();
+        List<string> CardID = new List<string>();
+
+        // 读取ATS参数
+        string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
+        ATS = Mdb.Select(FilePath, sql);
+        if (ATS == null || ATS.Count == 0)
         {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
+            MessageBox.Show("ATS数据读取失败");
+            return;
+        }
+        // 读取卡标识参数
+        sql = "SELECT 卡标识 FROM kahao order by SerialNum ASC";
+        CardID = Mdb.Select(FilePath, sql);
+        if (CardID == null || CardID.Count == 0)
+        {
+            MessageBox.Show("CardID数据读取失败");
+            return;
+        }
+        // 使用正则表达式匹配数量和日期
+        Regex regex = new Regex(@"(\d+)-(\d{8})");
+        Match match = regex.Match(FileName);
+
+        if (match.Success)
+        {
+            // 提取数量
+            if (int.TryParse(match.Groups[1].Value, out int number))
             {
-                string firstColumnValue = worksheet.Cells[row, 2].Text;
-                string secondColumnValue = worksheet.Cells[row, 8].Text;
-                string newRow = $"{firstColumnValue}                {secondColumnValue}";
-                processedData.Add(newRow);
+                Count = number;
+            }
+            else
+            {
+                MessageBox.Show("无法解析数量");
+                return;
+            }
+            // 提取并解析日期
+            string dateStr = match.Groups[2].Value;
+            if (dateStr.Length == 8)
+            {
+                Date = dateStr;
+            }
+            else
+            {
+                MessageBox.Show("无效的日期格式");
+                return;
             }
         }
-        
+        else
+        {
+            MessageBox.Show("未找到匹配的数量和日期");
+            return;
+        }
+        // 生成RCC文件
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"HG2610{excelFileName}01";
+        string fileName = $"HG2610{Date}01.RCC";
         string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
-            writer.WriteLine(rowCount - 1);
-            for (int i = 0; i < processedData.Count; i++)
+            writer.WriteLine(Count);
+            for (int i = 0; i < Count; i++)
             {
-                writer.WriteLine(processedData[i]);
+                if (i < ATS.Count && i < CardID.Count)
+                {
+                    writer.WriteLine($"{ATS[i]}                {CardID[i]}");
+                }
+                else
+                {
+                    MessageBox.Show("数据行数不匹配");
+                    return;
+                }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
-        //将文件后缀改为.RCC
-        string newFilePath = filePath + ".RCC";
-        File.Move(filePath, newFilePath);    
+        MessageBox.Show($"数据已保存到桌面: {filePath},请手动修改序号");
     }
 }

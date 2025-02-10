@@ -18,11 +18,6 @@ namespace WindowUI.Pages
         {
             new ScriptChange().Show();
         }
-
-
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
+        
     }
 }

@@ -11,12 +11,12 @@ public partial class RCC
     private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
     private string excelFileName { get; set; } // 记录Excel文件名
     private MemoryStream ExcelData { get; set; } // 临时存储读取的Excel的数据
+    private string FilePath { get; set; } // 记录文件的路径
     private string Region { get; set; } // 下拉框选则的地区
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
     private OpenFileDialog openFileDialog2 { get; set; } // Excel文件处理流
     // 定义需要MK文件的地区
     private readonly string[] disableButtonRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
-    public string value { get; set; }
     public RCC()
     {
         InitializeComponent();
@@ -51,12 +51,14 @@ public partial class RCC
     {
         openFileDialog2 = new OpenFileDialog
         {
-            Filter = "Excel Files (*.xlsx)|*.xlsx;",
+            Filter = "Excel Files (*.xlsx)|*.xlsx | Access Database Files (*.mdb)|*.mdb",
             Title = "选择一个文件"
         };
         if (openFileDialog2.ShowDialog() == true)
         {
             if (openFileDialog2.FileName == "") return;
+            FilePath = openFileDialog2.FileName;
+            Console.WriteLine(FilePath);
             //记录Excel文件名
             excelFileName = Path.GetFileName(openFileDialog2.FileName);
             //去掉扩展名.xlsx
@@ -69,7 +71,7 @@ public partial class RCC
             }
             catch (IOException)
             {
-                MessageBox.Show("文件已被占用，请先关闭Excel表格!",
+                MessageBox.Show("文件已被占用，请先关闭源文件!",
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             data.Foreground = Brushes.LightGreen;
@@ -90,8 +92,7 @@ public partial class RCC
                 if (!SelectMKButton.IsEnabled)
                 {
                     mk.Foreground = Brushes.LightGreen;
-                    mktextbox.Foreground = Brushes.LightGreen;
-                    mktextbox.Text = "无需mk文件";
+                    mktextbox.Foreground = Brushes.Green;
                 }
                 else mk.Foreground = Brushes.Red;
                 
@@ -104,6 +105,7 @@ public partial class RCC
                 case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
                 case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
                 case "洪城": tip.Text = "多个文件注意修改编号"; break;
+                case "潍坊": tip.Text = "需要手动修改序号"; break;
                 case "测试地区": tip.Text = "测试地区"; break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
@@ -127,7 +129,7 @@ public partial class RCC
             case "青岛博研加气站": 青岛博研加气站.Run(ExcelData, excelFileName); break;
             case "抚顺": 抚顺.Run(ExcelData, excelFileName); break;
             case "郴州": 郴州.Run(ExcelData, MKData, mkFileName); break;
-            case "潍坊": 潍坊.Run(ExcelData, excelFileName); break;
+            case "潍坊": 潍坊.Run(FilePath, excelFileName); break;
             case "国网技术学院": 国网技术学院.Run(ExcelData, excelFileName); break;
             case "哈尔滨城市通": 哈尔滨城市通.Run(ExcelData, excelFileName); break;
             case "运城盐湖王府学校": 运城盐湖王府学校.Run(ExcelData, excelFileName); break;

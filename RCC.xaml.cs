@@ -17,6 +17,7 @@ public partial class RCC
     private OpenFileDialog openFileDialog2 { get; set; } // Excel文件处理流
     // 定义需要MK文件的地区
     private readonly string[] disableButtonRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
+    
     public RCC()
     {
         InitializeComponent();
@@ -34,15 +35,22 @@ public partial class RCC
         if (openFileDialog.ShowDialog() == true)
         {
             if (openFileDialog.FileName == "") return;
-            //将文件暂时存储到MKDate中
-            MKData = File.ReadAllLines(openFileDialog.FileName).ToList();
-            //记录MK文件名
-            mkFileName = Path.GetFileName(openFileDialog.FileName);
-            //去掉MK文件名的前两个字符
-            mkFileName = mkFileName.Substring(2);
-            mk.Foreground = Brushes.LightGreen;
-            mktextbox.Foreground = Brushes.Green;
-            mktextbox.Text = mkFileName;
+            try
+            {
+                //将文件暂时存储到MKDate中
+                MKData = File.ReadAllLines(openFileDialog.FileName).ToList();
+                //记录MK文件名
+                mkFileName = Path.GetFileName(openFileDialog.FileName);
+                //去掉MK文件名的前两个字符
+                mkFileName = mkFileName.Substring(2);
+                mk.Foreground = Brushes.LightGreen;
+                mktextbox.Foreground = Brushes.LightGreen;
+                mktextbox.Text = mkFileName;
+            }catch
+            {
+                MessageBox.Show("错误的MK文件");
+            }
+            
         }
     }
 
@@ -51,19 +59,20 @@ public partial class RCC
     {
         openFileDialog2 = new OpenFileDialog
         {
-            Filter = "Excel Files (*.xlsx)|*.xlsx | Access Database Files (*.mdb)|*.mdb",
+            Filter = "Access文件(*.mdb)|*.mdb|Excel文件(*.xlsx)|*.xlsx",
             Title = "选择一个文件"
         };
         if (openFileDialog2.ShowDialog() == true)
         {
             if (openFileDialog2.FileName == "") return;
+            //记录文件路径
             FilePath = openFileDialog2.FileName;
-            Console.WriteLine(FilePath);
             //记录Excel文件名
             excelFileName = Path.GetFileName(openFileDialog2.FileName);
             //去掉扩展名.xlsx
             excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
             //将文件暂时存储到ExcelDate中
+            // TODO: 改为根据文件类型判断
             try
             {
                 ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
@@ -75,7 +84,7 @@ public partial class RCC
                     "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             data.Foreground = Brushes.LightGreen;
-            datatextbox.Foreground = Brushes.Green;
+            datatextbox.Foreground = Brushes.LightGreen;
         }
     }
 
@@ -89,18 +98,19 @@ public partial class RCC
             if (SelectMKButton != null)
             {
                 SelectMKButton.IsEnabled = Array.Exists(disableButtonRegions, region => region == Region);
+                Console.WriteLine(SelectMKButton.IsEnabled);
                 if (!SelectMKButton.IsEnabled)
                 {
                     mk.Foreground = Brushes.LightGreen;
-                    mktextbox.Foreground = Brushes.Green;
+                    mktextbox.Foreground = Brushes.LimeGreen;
                 }
                 else mk.Foreground = Brushes.Red;
-                
             }
 
             //根据不同地区进行提示
             switch (Region)
             {
+                case "请选择地区": ButtonDisable();break;
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
                 case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
                 case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
@@ -115,7 +125,7 @@ public partial class RCC
     //点击处理文件按钮
     private void ProcessTheFile(object sender, RoutedEventArgs e)
     {
-        if (ExcelData is null)
+        if (ExcelData is null )
         {
             MessageBox.Show("请选择文件");
             return;
@@ -128,7 +138,7 @@ public partial class RCC
             case "兰州菜单": 兰州.Run(ExcelData, excelFileName, MKData, mkFileName); break;
             case "青岛博研加气站": 青岛博研加气站.Run(ExcelData, excelFileName); break;
             case "抚顺": 抚顺.Run(ExcelData, excelFileName); break;
-            case "郴州": 郴州.Run(ExcelData, MKData, mkFileName); break;
+            case "郴州": 郴州.Run(MKData, mkFileName,FilePath); break;
             case "潍坊": 潍坊.Run(FilePath, excelFileName); break;
             case "国网技术学院": 国网技术学院.Run(ExcelData, excelFileName); break;
             case "哈尔滨城市通": 哈尔滨城市通.Run(ExcelData, excelFileName); break;
@@ -143,7 +153,7 @@ public partial class RCC
             case "重庆33A-A1": 重庆.Run(ExcelData, excelFileName); break;
             case "西藏林芝": 西藏林芝.Run(ExcelData); break;
             case "西藏拉萨": 西藏拉萨.Run(ExcelData); break;
-            case "淄博公交": 淄博公交.Run(ExcelData); break;
+            case "淄博公交": 淄博公交.Run(FilePath); break;
             case "淄博血站不开通": 淄博血站不开通.Run(ExcelData); break;
             case "平凉公交": 平凉公交.Run(ExcelData, excelFileName); break;
             case "桂林公交": 桂林公交.Run(ExcelData); break;
@@ -163,13 +173,20 @@ public partial class RCC
             case "山西医科大学": 山西医科大学.Run(ExcelData, excelFileName); break;
             case "济南地铁UL": 济南地铁UL.Run(ExcelData, excelFileName); break;
             case "洪城": 洪城.Run(ExcelData); break;
+            case "第一医科大学": 第一医科大学.Run(ExcelData, excelFileName); break;
             case "测试地区": 测试地区.Run(ExcelData, excelFileName); break;
             default: MessageBox.Show("请选择地区"); break;
         }
     }
     private void Test(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("未开发");
+       MessageBox.Show("未开发", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+        
+    }
+
+    private void ButtonDisable()
+    {
+       
     }
     
 }

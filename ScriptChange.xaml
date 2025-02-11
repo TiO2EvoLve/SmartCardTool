@@ -31,9 +31,9 @@
                 </MenuItem>
             </Menu>
             <StackPanel Orientation="Horizontal" Margin="10,0,0,0" >
-                <Image Source="D:\Project\C#\WindowUI\icon\csv.png" Margin="5" Height="20" Width="20" MouseDown="SelectFile"></Image>
-                <Image Source="D:\Project\C#\WindowUI\icon\ini.png" Margin="5" Height="20" Width="20" MouseDown="Image_MouseDown_OpenScript"></Image>
-                <Image Source="D:\Project\C#\WindowUI\icon\save.png" Margin="5" Height="20" Width="20" MouseDown="SaveFile"></Image>
+                <Image Source="/icon/csv.png" Margin="5" Height="20" Width="20" MouseDown="SelectFile"></Image>
+                <Image Source="/icon/ini.png" Margin="5" Height="20" Width="20" MouseDown="Image_MouseDown_OpenScript"></Image>
+                <Image Source="/icon/save.png" Margin="5" Height="20" Width="20" MouseDown="SaveFile"></Image>
             </StackPanel>
         </StackPanel>
 

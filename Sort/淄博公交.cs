@@ -5,7 +5,7 @@ namespace WindowUI.Sort;
 
 public class 淄博公交
 {
-    public static void Run(MemoryStream ExcelData)
+    public static void Run(string FilePath)
     {
         string date;//日期,格式20241115112548
         string date1;//日期,格式2024-11-15
@@ -17,21 +17,18 @@ public class 淄博公交
         cardtype = zibo.CardType;
         date = zibo.Date14;
         date1 = zibo.Date10;
-        //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> xmlData = new List<string>();
-        if (ExcelData == null && ExcelData.Length == 0) { MessageBox.Show("Excel数据为空"); return; }
-        using (var package = new ExcelPackage(ExcelData))
+        
+        
+        List<string> XmlData = new List<string>();
+        string sql = "SELECT time1 FROM RCC order by SN ASC";
+        XmlData = Mdb.Select(FilePath, sql);
+
+        if (XmlData == null || XmlData.Count == 0)
         {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
-            {
-                string SNValue = worksheet.Cells[row, 3].Text;
-                xmlData.Add(SNValue);
-            }
+            MessageBox.Show("查询数据库错误");
+            return;
         }
+        
         //保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"ACPU{date}_Report.xml";
@@ -44,8 +41,8 @@ public class 淄博公交
             writer.WriteLine("<Type>ACPU</Type>");
             writer.WriteLine("<AppType>01</AppType>");
             writer.WriteLine($"<CardType>{cardtype}</CardType>");
-            writer.WriteLine($"<Amount>{xmlData.Count}</Amount>");
-            writer.WriteLine($"<GoodAmount>{xmlData.Count}</GoodAmount>");
+            writer.WriteLine($"<Amount>{XmlData.Count}</Amount>");
+            writer.WriteLine($"<GoodAmount>{XmlData.Count}</GoodAmount>");
             writer.WriteLine("<BadAmount>0</BadAmount>");
             writer.WriteLine("<InitOperator>000000</InitOperator>");
             writer.WriteLine($"<IssueDate>{date1}</IssueDate>");
@@ -54,16 +51,16 @@ public class 淄博公交
             writer.WriteLine("</Task>");
             writer.WriteLine("<CardList>");
             // 提取数据
-            for (int i = 0; i < xmlData.Count; i++)
+            for (int i = 0; i < XmlData.Count; i++)
             {
-                string cardUid = Tools.ExtractValue(xmlData[i], "CARDUID", "APPID");
-                string appId = Tools.ExtractValue(xmlData[i], "APPID", "ISSUESN");
-                string issueSn = Tools.ExtractValue(xmlData[i], "ISSUESN", "ISSUETIME");
-                string issueTime = Tools.ExtractValue(xmlData[i], "ISSUETIME", "STATUS");
+                string cardUid = Tools.ExtractValue(XmlData[i], "CARDUID", "APPID");
+                string appId = Tools.ExtractValue(XmlData[i], "APPID", "ISSUESN");
+                string issueSn = Tools.ExtractValue(XmlData[i], "ISSUESN", "ISSUETIME");
+                string issueTime = Tools.ExtractValue(XmlData[i], "ISSUETIME", "STATUS");
                 issueTime = date.Substring(0, 8) + issueTime.Substring(8);
                 // 创建 XML 格式字符串
-                xmlData[i] = $"<Card UID=\"{cardUid}\" AppID=\"{appId}\" IssueSN=\"{issueSn}\" IssueTime=\"{issueTime}\" Status=\"Good\"/>";
-                writer.WriteLine(xmlData[i]);
+                XmlData[i] = $"<Card UID=\"{cardUid}\" AppID=\"{appId}\" IssueSN=\"{issueSn}\" IssueTime=\"{issueTime}\" Status=\"Good\"/>";
+                writer.WriteLine(XmlData[i]);
             }
             writer.WriteLine("</CardList>");
             writer.Write("</TaskBack>");

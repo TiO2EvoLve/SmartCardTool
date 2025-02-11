@@ -3,9 +3,9 @@ using System.Windows.Input;
 
 namespace WindowUI.Pages
 {
-    public partial class Page1 : Page
+    public partial class Home : Page
     {
-        public Page1()
+        public Home()
         {
             InitializeComponent();
         }

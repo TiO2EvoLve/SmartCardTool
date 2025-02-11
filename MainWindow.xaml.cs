@@ -51,7 +51,7 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         // Navigate to the default page
         var navigationView = sender as NavigationView;
-        navigationView?.Navigate(typeof(Page1));
+        navigationView?.Navigate(typeof(Home));
     }
     
 }

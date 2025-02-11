@@ -25,23 +25,23 @@
                 <ui:NavigationViewItem
                     Content="主页"
                     Icon="{ui:SymbolIcon Home24}"
-                    TargetPageType="{x:Type samples:Page1}"
+                    TargetPageType="{x:Type samples:Home}"
                      />
                 <ui:NavigationViewItem
                     Content="转换"
                     Icon="{ui:SymbolIcon ArrowSync24}"
-                    TargetPageType="{x:Type samples:Page1}" />
+                    TargetPageType="{x:Type samples:制卡数据}" />
                 <ui:NavigationViewItem
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
-                    TargetPageType="{x:Type samples:Page1}" />
+                    TargetPageType="{x:Type samples:Home}" />
             </ui:NavigationView.MenuItems>
             
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
                     Content="设置"
                     Icon="{ui:SymbolIcon Settings24}"
-                    TargetPageType="{x:Type samples:Page1}" />
+                    TargetPageType="{x:Type samples:Home}" />
             </ui:NavigationView.FooterMenuItems>
             <ui:NavigationView.Header>
                 <Border

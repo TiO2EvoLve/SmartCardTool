@@ -74,6 +74,7 @@
                     <ComboBoxItem Content="山西医科大学" />
                     <ComboBoxItem Content="济南地铁UL" />
                     <ComboBoxItem Content="洪城" />
+                    <ComboBoxItem Content="第一医科大学" />
                     <ComboBoxItem Content="测试地区" />
                 </ComboBox>
                 <ui:Button
@@ -83,7 +84,7 @@
                 MouseOverBackground="#66b1ff" Margin="10,0,0,0"
                 Click="OpenMKFile" Foreground="#E4FFFFFF" />
                 <ui:SymbolIcon x:Name="mk" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red"/>
-                <ui:Button
+                <ui:Button x:Name="SelectDataButton"
                 Background="#FF409EFF"
                 Content="选择制卡数据文件"
                 MouseOverBackground="#66b1ff" Margin="10,0,0,0"

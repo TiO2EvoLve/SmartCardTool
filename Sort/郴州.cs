@@ -2,37 +2,43 @@
 
 public class 郴州
 {
-    public static void Run(MemoryStream ExcelData,List<string> MKData,string mkFileName)
+    public static void Run(List<string> MKData,string mkFileName,string FilePath)
     {
-        //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
+        
+        List<string> SN = new List<string>();
+        List<string> ATS = new List<string>();
+        
+        // 读取SN参数
+        string sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
+        SN = Mdb.Select(FilePath, sql);
+        if (SN == null || SN.Count == 0)
         {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
-                                                     //遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
-            {
-                string firstColumnValue = worksheet.Cells[row, 1].Text;
-                string secondColumnValue = worksheet.Cells[row, 2].Text;
-                string newRow =
-                    $"{firstColumnValue}      {firstColumnValue}      {secondColumnValue}              00                         FFFFFFFFFFFFFFFFFFFF";
-                processedData.Add(newRow);
-            }
+            MessageBox.Show("SN数据读取失败");
+            return;
         }
-
+        // 读取ATS参数
+        sql = "SELECT ATS FROM kahao order by SerialNum ASC";
+        ATS = Mdb.Select(FilePath, sql);
+        if (ATS == null || ATS.Count == 0)
+        {
+            MessageBox.Show("ATS数据读取失败");
+            return;
+        }
         //处理MK文件
         //截取MK文件第二行的前42个字节
         MKData[1] = MKData[1].Substring(0, 42);
-        //获取Excel总数据的条数
-        int totalLines = processedData.Count;
+        //获取总数据的条数
+        int totalLines = SN.Count;
         //将总数据条数转为6位数
         string totalLinesFormatted = totalLines.ToString("D6");
         //将MK文件的第二行的后6位替换为总数据条数
         MKData[1] = MKData[1].Substring(0, MKData[1].Length - 6) + totalLinesFormatted;
-        //将MK文件与Excel文件的数据合并
-
+        if (MKData[1].Length != 42)
+        {
+            MessageBox.Show("MK文件格式错误");
+            return;
+        }
+        //输出rcc文件
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"RC{mkFileName}";
         string filePath = Path.Combine(desktopPath, fileName);
@@ -40,19 +46,18 @@ public class 郴州
         {
             writer.WriteLine(MKData[0]);
             writer.WriteLine(MKData[1]);
-
-            for (int i = 0; i < processedData.Count; i++)
+            for (int i = 0; i < SN.Count; i++)
             {
-                if (i == processedData.Count - 1)
+                if (i == SN.Count - 1)
                 {
-                    writer.Write(processedData[i]);
+                    writer.Write($"{SN[i]}      {SN[i]}      {ATS[i]}              00                         FFFFFFFFFFFFFFFFFFFF");
                 }
                 else
                 {
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{SN[i]}      {SN[i]}      {ATS[i]}              00                         FFFFFFFFFFFFFFFFFFFF");
                 }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");    
+        MessageBox.Show($"数据已保存到桌面: {filePath}");    
     }
 }

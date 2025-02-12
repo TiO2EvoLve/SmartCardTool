@@ -35,13 +35,18 @@ public partial class RCC
         if (openFileDialog.ShowDialog() == true)
         {
             if (openFileDialog.FileName == "") return;
+            if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK"))
+            { 
+                MessageBox.Show("请选择正确的MK文件");
+                return; 
+            }
             try
             {
                 //将文件暂时存储到MKDate中
                 MKData = File.ReadAllLines(openFileDialog.FileName).ToList();
                 //记录MK文件名
                 mkFileName = Path.GetFileName(openFileDialog.FileName);
-                //去掉MK文件名的前两个字符
+                //去掉MK文件名的前两个字符"MK"
                 mkFileName = mkFileName.Substring(2);
                 mk.Foreground = Brushes.LightGreen;
                 mktextbox.Foreground = Brushes.LightGreen;
@@ -54,7 +59,7 @@ public partial class RCC
         }
     }
 
-    //打开Excel文件
+    //打开Excel或Mdb文件
     private void OpenFile(object sender, RoutedEventArgs e)
     {
         openFileDialog2 = new OpenFileDialog
@@ -65,24 +70,29 @@ public partial class RCC
         if (openFileDialog2.ShowDialog() == true)
         {
             if (openFileDialog2.FileName == "") return;
-            //记录文件路径
-            FilePath = openFileDialog2.FileName;
-            //记录Excel文件名
-            excelFileName = Path.GetFileName(openFileDialog2.FileName);
-            //去掉扩展名.xlsx
-            excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
-            //将文件暂时存储到ExcelDate中
-            // TODO: 改为根据文件类型判断
-            try
+            //根据选择的文件类型进行处理
+            if (openFileDialog2.FileName.EndsWith(".mdb"))
             {
-                ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
-                datatextbox.Text = excelFileName;
-            }
-            catch (IOException)
+                //记录文件路径
+                FilePath = openFileDialog2.FileName;
+            }else if (openFileDialog2.FileName.EndsWith(".xlsx"))
             {
-                MessageBox.Show("文件已被占用，请先关闭源文件!",
-                    "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //记录Excel文件名
+                excelFileName = Path.GetFileName(openFileDialog2.FileName);
+                //去掉扩展名.xlsx
+                excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
+                //将文件暂时存储到ExcelDate中
+                try
+                {
+                    ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("文件已被占用，请先关闭源文件!",
+                        "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
+                } 
             }
+            datatextbox.Text = excelFileName;
             data.Foreground = Brushes.LightGreen;
             datatextbox.Foreground = Brushes.LightGreen;
         }
@@ -98,7 +108,6 @@ public partial class RCC
             if (SelectMKButton != null)
             {
                 SelectMKButton.IsEnabled = Array.Exists(disableButtonRegions, region => region == Region);
-                Console.WriteLine(SelectMKButton.IsEnabled);
                 if (!SelectMKButton.IsEnabled)
                 {
                     mk.Foreground = Brushes.LightGreen;
@@ -110,7 +119,6 @@ public partial class RCC
             //根据不同地区进行提示
             switch (Region)
             {
-                case "请选择地区": ButtonDisable();break;
                 case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
                 case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
                 case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
@@ -181,12 +189,6 @@ public partial class RCC
     private void Test(object sender, RoutedEventArgs e)
     {
        MessageBox.Show("未开发", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-        
-    }
-
-    private void ButtonDisable()
-    {
-       
     }
     
 }

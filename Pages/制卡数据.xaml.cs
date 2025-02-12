@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Xml;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 
 namespace WindowUI.Pages;
 
@@ -12,10 +11,8 @@ public partial class 制卡数据 : Page
     {
         InitializeComponent();
     }
-
     private string XdFilePath { get; set; }
     private string KeyFilePath { get; set; }
-
     private void SelectXdFile(object sender, RoutedEventArgs e)
     {
         // 注册编码提供程序
@@ -32,7 +29,6 @@ public partial class 制卡数据 : Page
             XdFilePath = openFileDialog.FileName;
         }
     }
-
     private void SelectKeyFile(object sender, RoutedEventArgs e)
     {
         //打开一个文件选择器，类型为任意
@@ -47,7 +43,6 @@ public partial class 制卡数据 : Page
             KeyFilePath = openFileDialog.FileName;
         }
     }
-
     private void CreateFile(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(XdFilePath))
@@ -57,7 +52,6 @@ public partial class 制卡数据 : Page
         }
 
         XmlDocument document = new XmlDocument();
-        Console.WriteLine(XdFilePath);
         document.Load(XdFilePath);
         XmlElement rootElem = document.DocumentElement;
 
@@ -80,7 +74,6 @@ public partial class 制卡数据 : Page
         readout(rootElem, destinationFilePath);
         readkey(KeyFilePath,destinationFilePath);
     }
-
     public static void readout(XmlElement rootElem, string destinationFilePath)
     {
         Dictionary<string, string> dicry = new Dictionary<string, string>();
@@ -242,15 +235,12 @@ public partial class 制卡数据 : Page
 
         MessageBox.Show("数据已保存到桌面");
     }
-
     public static void setValue(ref Dictionary<string, string> dicry, string key, string val)
     {
         if (dicry.ContainsKey(key))
             dicry.Remove(key);
         dicry.Add(key, val.ToUpper());
     }
-
-    
     private static void readkey(string KeyFilePath,string destinationFilePath)
     {
         //将二进制文件转为文本文件

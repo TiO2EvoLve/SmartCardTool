@@ -23,6 +23,10 @@ public class 第一医科大学
             }
         }
         // 创建一个新的Excel文件
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string fileName = $"{excelFileName}.xlsx";
+        string filePath = Path.Combine(desktopPath, fileName);
+        
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
@@ -35,11 +39,8 @@ public class 第一医科大学
                 worksheet.Cells[i + 2, 2].Value = UID[i];
             }
             // 保存文件到桌面
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string fileName = $"{excelFileName}.xlsx";
-            string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
         }
+        MessageBox.Show($"数据已处理并保存到桌面{filePath}");
     }
 }

@@ -34,4 +34,23 @@ public class Mdb
             return null;
         }
     }
+    public static void Execute(string filePath,string sql)
+    {
+        string _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
+        
+        using (OleDbConnection connection = new OleDbConnection(_connectionString))
+        {
+            try
+            {
+                connection.Open();
+                OleDbCommand command = new OleDbCommand(sql, connection);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+    }
+    
 }

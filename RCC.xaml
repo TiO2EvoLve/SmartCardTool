@@ -114,7 +114,7 @@
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="Settings28" />
-                                <TextBlock Text="配置" />
+                                <TextBlock Text="参数" />
                             </StackPanel>
                         </TabItem.Header>
                         <Grid Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -129,6 +129,10 @@
                                 <TextBlock x:Name="mktextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
                                 <TextBlock Text="制卡数据：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                 <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                                
                             </StackPanel>
                         </Grid>
                     </TabItem>

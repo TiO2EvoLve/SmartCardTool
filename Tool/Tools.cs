@@ -34,7 +34,7 @@ public class Tools
         return Convert.ToUInt32(input, 16).ToString();
     }
     //使用LUHN算法计算校验值
-    public static string LuhnCheck(string input)
+    public static string Luhn(string input)
     {
         int sum = 0;
         int length = input.Length;

@@ -11,7 +11,7 @@ public partial class 漯河菜单 : Window
     }
     public string CardType { set; get; } = "";
     public bool 英才卡 = false;
-    public string CardSN;
+    public string 英才卡卡号;
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
@@ -37,6 +37,6 @@ public partial class 漯河菜单 : Window
 
     private void SN_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        CardSN = SN.Text;
+        英才卡卡号 ="31050714" + SN.Text;
     }
 }

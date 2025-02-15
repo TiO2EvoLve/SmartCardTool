@@ -1,6 +1,4 @@
 ﻿
-using WindowUI.Tool;
-
 namespace WindowUI.Sort;
 
 public class 云南朗坤
@@ -65,7 +63,7 @@ public class 云南朗坤
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; // 获取行数
-
+            
             // 遍历Excel文件的每一行
             for (int row = 1; row <= rowCount; row++)
             {
@@ -81,13 +79,18 @@ public class 云南朗坤
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "SN";
+            worksheet.Cells[1, 2].Value = "Uid16";
+            worksheet.Cells[1, 3].Value = "Uid16(调整)";
+            worksheet.Cells[1, 4].Value = "Uid10";
+            worksheet.Cells[1, 5].Value = "Uid10(调整)";
             for (int i = 0; i < SNData.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = Uid16Data[i];
-                worksheet.Cells[i + 1, 3].Value = Tools.ChangeHexPairs(Uid16Data[i]);
-                worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(Uid16Data[i], 16).ToString();
-                worksheet.Cells[i + 1, 5].Value = Uid10Data[i];
+                worksheet.Cells[i + 2, 1].Value = SNData[i];
+                worksheet.Cells[i + 2, 2].Value = Uid16Data[i];
+                worksheet.Cells[i + 2, 3].Value = Tools.ChangeHexPairs(Uid16Data[i]);
+                worksheet.Cells[i + 2, 4].Value = Convert.ToUInt32(Uid16Data[i], 16).ToString();
+                worksheet.Cells[i + 2, 5].Value = Uid10Data[i];
             }
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

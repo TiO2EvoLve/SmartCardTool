@@ -9,6 +9,12 @@ public class 南通地铁
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> timeData = new List<string>();
         List<string> uidData = new List<string>();
+        
+        // string sql = "SELECT UID FROM kahao";
+        // uidData = Mdb.Select(filePath,sql);
+        // sql = "SELECT Time FROM kahao";
+        // timeData = Mdb.Select(filePath,sql);
+        
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
@@ -39,7 +45,7 @@ public class 南通地铁
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
-        }    
+        } 
+        MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
     }
 }

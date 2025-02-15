@@ -28,7 +28,7 @@
                     TargetPageType="{x:Type samples:Home}"
                      />
                 <ui:NavigationViewItem
-                    Content="转换"
+                    Content="解析"
                     Icon="{ui:SymbolIcon ArrowSync24}"
                     TargetPageType="{x:Type samples:制卡数据}" />
                 <ui:NavigationViewItem

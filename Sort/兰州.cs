@@ -111,12 +111,12 @@ public class 兰州
                 }
             }
         }
-        //异型卡需要两个文件
         if (type == 0)
         {
             MessageBox.Show("文件已保存到桌面");
             return;
         } 
+        //异型卡需要两个文件
         //第二个文件
         List<string> SNData = new List<string>();
         List<string> UIDData = new List<string>();
@@ -153,6 +153,6 @@ public class 兰州
                 writer.WriteLine(line);
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        MessageBox.Show($"数据已保存到桌面: {filePath}");
     }
 }

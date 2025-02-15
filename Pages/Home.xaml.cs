@@ -18,6 +18,10 @@ namespace WindowUI.Pages
         {
             new ScriptChange().Show();
         }
-        
+
+        private void Test(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("未开发");
+        }
     }
 }

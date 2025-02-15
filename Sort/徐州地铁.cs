@@ -2,25 +2,17 @@
 
 public class 徐州地铁
 {
-    public static void Run(MemoryStream ExcelData, string excelFileName)
+    public static void Run(string FilePath, string excelFileName)
     {
-        // 取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; // 获取行数
-            // 遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
-            {
-                string SNValue = worksheet.Cells[row, 6].Text;
-                string UidValue = worksheet.Cells[row, 2].Text;
-                SNData.Add(SNValue);
-                UidData.Add(UidValue);
-            }
-        }
+        
+        string sql = "SELECT NUM FROM kahao order by NUM ASC";
+        SNData = Mdb.Select(FilePath, sql);
+        
+        sql = "SELECT UID_ FROM kahao order by NUM ASC";
+        UidData = Mdb.Select(FilePath, sql);
 
         // 保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

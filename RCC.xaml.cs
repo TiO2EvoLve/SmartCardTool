@@ -71,27 +71,24 @@ public partial class RCC
         {
             if (openFileDialog2.FileName == "") return;
             //根据选择的文件类型进行处理
-            if (openFileDialog2.FileName.EndsWith(".mdb"))
+
+            //记录文件路径
+            FilePath = openFileDialog2.FileName;
+            //记录Excel文件名
+            excelFileName = Path.GetFileName(openFileDialog2.FileName);
+            //去掉扩展名.xlsx
+            excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
+            //将文件暂时存储到ExcelDate中
+            try
             {
-                //记录文件路径
-                FilePath = openFileDialog2.FileName;
-            }else if (openFileDialog2.FileName.EndsWith(".xlsx"))
-            {
-                //记录Excel文件名
-                excelFileName = Path.GetFileName(openFileDialog2.FileName);
-                //去掉扩展名.xlsx
-                excelFileName = excelFileName.Substring(0, excelFileName.Length - 5);
-                //将文件暂时存储到ExcelDate中
-                try
-                {
-                    ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
-                }
-                catch (IOException)
-                {
-                    MessageBox.Show("文件已被占用，请先关闭源文件!",
-                        "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
-                } 
+                ExcelData = new MemoryStream(File.ReadAllBytes(openFileDialog2.FileName));
             }
+            catch (IOException)
+            {
+                MessageBox.Show("文件已被占用，请先关闭源文件!",
+                    "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } 
+            
             datatextbox.Text = excelFileName;
             data.Foreground = Brushes.LightGreen;
             datatextbox.Foreground = Brushes.LightGreen;
@@ -171,10 +168,10 @@ public partial class RCC
             case "云南朗坤": 云南朗坤.PlanB(ExcelData, excelFileName); break;
             case "盱眙": 盱眙.Run(ExcelData, excelFileName); break;
             case "柳州公交": 柳州公交.Run(ExcelData, MKData); break;
-            case "漯河": 漯河.Run(ExcelData); break;
+            case "漯河": 漯河.Run(FilePath); break;
             case "随州": 随州.Run(ExcelData, excelFileName); break;
             case "昆明": 昆明.Run(ExcelData, excelFileName); break;
-            case "徐州地铁": 徐州地铁.Run(ExcelData, excelFileName); break;
+            case "徐州地铁": 徐州地铁.Run(FilePath, excelFileName); break;
             case "江苏乾翔": 江苏乾翔.Run(ExcelData, excelFileName); break;
             case "石家庄": 石家庄.Run(ExcelData, excelFileName); break;
             case "淮北": 淮北.Run(ExcelData); break;

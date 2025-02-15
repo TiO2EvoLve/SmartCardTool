@@ -16,8 +16,11 @@ public class 兰州
             兰州工作证(ExcelData,excelFileName);
         }else if (cardtype == "2")
         {
-            兰州公交(ExcelData,excelFileName,MKData,mkFileName);
-        }   
+            兰州公交(ExcelData,excelFileName,MKData,mkFileName,0);
+        }else if (cardtype == "3")
+        {
+            兰州公交(ExcelData,excelFileName,MKData,mkFileName,1);
+        }
     }
      private static void 兰州工作证(MemoryStream ExcelData,string excelFileName)
     {
@@ -58,7 +61,7 @@ public class 兰州
         }
         MessageBox.Show($"数据已合并并保存到文件: {filePath}");
     }
-    private static void 兰州公交(MemoryStream ExcelData,string excelFileName,List<string> MKData,string mkFileName)
+    private static void 兰州公交(MemoryStream ExcelData,string excelFileName,List<string> MKData,string mkFileName,int type)
     {
        //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -108,8 +111,12 @@ public class 兰州
                 }
             }
         }
-        //异型卡需要打开
-        return; 
+        //异型卡需要两个文件
+        if (type == 0)
+        {
+            MessageBox.Show("文件已保存到桌面");
+            return;
+        } 
         //第二个文件
         List<string> SNData = new List<string>();
         List<string> UIDData = new List<string>();

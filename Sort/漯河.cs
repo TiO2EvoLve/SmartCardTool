@@ -1,5 +1,4 @@
-﻿using System.Windows.Documents;
-using WindowUI.Pages;
+﻿using WindowUI.Pages;
 
 namespace WindowUI.Sort;
 
@@ -91,7 +90,6 @@ public class 漯河
 
             writer.Write("</CardList>");
         }
-
-        MessageBox.Show($"文件已保存到桌面{filePath}");
+        Message.ShowSnack();
     }
 }

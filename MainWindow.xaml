@@ -35,13 +35,14 @@
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
                     TargetPageType="{x:Type samples:Home}" />
+                
             </ui:NavigationView.MenuItems>
             
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
                     Content="设置"
                     Icon="{ui:SymbolIcon Settings24}"
-                    TargetPageType="{x:Type samples:Home}" />
+                    TargetPageType="{x:Type samples:Setting}" />
             </ui:NavigationView.FooterMenuItems>
             <ui:NavigationView.Header>
                 <Border
@@ -83,7 +84,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="v-25.2.8"/>
+                        Text="25.02.15"/>
                 </Border>
             </ui:NavigationView.PaneFooter>
         </ui:NavigationView>

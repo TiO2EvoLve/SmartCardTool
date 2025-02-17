@@ -2,6 +2,8 @@
 using System.Windows.Media;
 using Microsoft.Win32;
 using WindowUI.Sort;
+using Wpf.Ui.Controls;
+using MessageBox = System.Windows.MessageBox;
 
 namespace WindowUI;
 
@@ -42,7 +44,6 @@ public partial class RCC
             }
             try
             {
-                
                 //将文件暂时存储到MKDate中
                 MKData = File.ReadAllLines(openFileDialog.FileName).ToList();
                 //记录MK文件名
@@ -50,7 +51,7 @@ public partial class RCC
                 //去掉MK文件名的前两个字符"MK"
                 mkFileName = mkFileName.Substring(2);
                 mk.Foreground = Brushes.LightGreen;
-                mktextbox.Foreground = Brushes.LightGreen;
+                mktextbox.Foreground = Brushes.LimeGreen;
                 mktextbox.Text = mkFileName;
             }catch
             {
@@ -84,12 +85,11 @@ public partial class RCC
             }
             catch (IOException)
             {
-                MessageBox.Show("文件已被占用，请先关闭源文件!",
-                    "文件占用", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序", "确定");
             } 
             datatextbox.Text = excelFileName;
             data.Foreground = Brushes.LightGreen;
-            datatextbox.Foreground = Brushes.LightGreen;
+            datatextbox.Foreground = Brushes.LimeGreen;
         }
     }
 
@@ -108,7 +108,11 @@ public partial class RCC
                     mk.Foreground = Brushes.LightGreen;
                     mktextbox.Foreground = Brushes.LimeGreen;
                 }
-                else mk.Foreground = Brushes.Red;
+                else
+                {
+                    mk.Foreground = Brushes.Red;
+                    mktextbox.Foreground = Brushes.Red;
+                }
             }
 
             //根据不同地区进行提示
@@ -119,7 +123,7 @@ public partial class RCC
                 case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
                 case "洪城": tip.Text = "多个文件注意修改编号"; break;
                 case "潍坊": tip.Text = "需要手动修改序号"; break;
-                case "测试地区": tip.Text = "测试地区"; break;
+                case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
         }
@@ -130,7 +134,7 @@ public partial class RCC
     {
         if (ZhikaStream is null )
         {
-            MessageBox.Show("请选择文件");
+            Message.ShowMessageBox("错误", "未选择数据文件", "确定");
             return;
         }
 
@@ -177,13 +181,12 @@ public partial class RCC
             case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, excelFileName); break;
             case "洪城": 洪城.Run(ZhikaStream); break;
             case "第一医科大学": 第一医科大学.Run(ZhikaStream, excelFileName); break;
-            case "测试地区": 测试地区.Run(ZhikaStream, excelFileName); break;
-            default: MessageBox.Show("请选择地区"); break;
+            default: Message.ShowMessageBox("警告","请先选择地区","确认"); break;
         }
     }
     private void Test(object sender, RoutedEventArgs e)
     {
-       MessageBox.Show("未开发", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+       Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
     }
-    
+   
 }

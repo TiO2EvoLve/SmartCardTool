@@ -47,6 +47,7 @@ namespace WindowUI
         }
         private void SaveFile(object sender, RoutedEventArgs e)
         {
+            if(_currentFilePath == "") return;
             // 保存富文本框内的内容到桌面
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\转换后脚本.txt";
             using (StreamWriter writer = new StreamWriter(savePath))

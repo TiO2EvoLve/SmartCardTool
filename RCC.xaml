@@ -8,32 +8,38 @@
         WindowStartupLocation="CenterScreen"
         Title="RCC快速生成器" Height="800" Width="1000">
     <Grid>
- 
+
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="0.3*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.5*" />
             <RowDefinition Height="6*" />
-
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="tip" Text="请选择地区获取提示" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red">
-        </TextBlock>
-        <ui:TextBlock Grid.Row="0" FontTypography="TitleLarge" Text="RCC文件生成器" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Height="52" Width="282" >
+        <!-- 第一行标题 -->
+        <ui:TextBlock Grid.Row="0" FontTypography="TitleLarge" Text="RCC文件生成器" HorizontalAlignment="Center"
+                      VerticalAlignment="Center" FontWeight="Bold" Height="52" Width="282">
             <ui:TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF9FE4FF" Offset="1"/>
-                    <GradientStop Color="#FF00B8FF" Offset="0"/>
+                    <GradientStop Color="#FF9FE4FF" Offset="1" />
+                    <GradientStop Color="#FF00B8FF" Offset="0" />
                 </LinearGradientBrush>
             </ui:TextBlock.Foreground>
         </ui:TextBlock>
-        <Border Grid.Row="2" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,10" Background="#FFFEFEFE">
+        <!-- 第二行提示词 -->
+        <TextBlock Grid.Row="1" x:Name="tip" Text="请选择地区获取提示" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Foreground="Red">
+        </TextBlock>
+        <!-- 第三行选择项 -->
+        <Border Grid.Row="2" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,10"
+                Background="#FFFEFEFE">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <ComboBox
-                x:Name="LocationComboBox"
-                SelectionChanged="ComboBox_SelectionChanged"
-                MinWidth="200"
-                HorizontalAlignment="Left"
-                SelectedIndex="0">
+                    x:Name="LocationComboBox"
+                    SelectionChanged="ComboBox_SelectionChanged"
+                    MinWidth="200"
+                    HorizontalAlignment="Left"
+                    SelectedIndex="0">
                     <ComboBoxItem Content="请选择地区" />
                     <ComboBoxItem Content="天津" />
                     <ComboBoxItem Content="兰州菜单" />
@@ -75,39 +81,41 @@
                     <ComboBoxItem Content="济南地铁UL" />
                     <ComboBoxItem Content="洪城" />
                     <ComboBoxItem Content="第一医科大学" />
-                    <ComboBoxItem Content="测试地区" />
                 </ComboBox>
                 <ui:Button
-                x:Name="SelectMKButton"
-                Background="#409EFF"
-                Content="选择MK文件"
-                MouseOverBackground="#66b1ff" Margin="10,0,0,0"
-                Click="OpenMKFile" Foreground="#E4FFFFFF" />
-                <ui:SymbolIcon x:Name="mk" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red"/>
+                    x:Name="SelectMKButton"
+                    Background="#409EFF"
+                    Content="选择MK文件"
+                    MouseOverBackground="#66b1ff" Margin="10,0,0,0"
+                    Click="OpenMKFile" Foreground="#E4FFFFFF" />
+                <ui:SymbolIcon x:Name="mk" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red" />
                 <ui:Button x:Name="SelectDataButton"
-                Background="#FF409EFF"
-                Content="选择制卡数据文件"
-                MouseOverBackground="#66b1ff" Margin="10,0,0,0"
-                Click="OpenFile" Foreground="#E4FFFFFF" />
-                <ui:SymbolIcon x:Name="data" Symbol="Circle48" FontSize="20" Filled="True" Foreground="red"/>
+                           Background="#FF409EFF"
+                           Content="选择制卡数据文件"
+                           MouseOverBackground="#66b1ff" Margin="10,0,0,0"
+                           Click="OpenFile" Foreground="#E4FFFFFF" />
+                <ui:SymbolIcon x:Name="data" Symbol="Circle48" FontSize="20" Filled="True" Foreground="red" />
                 <ui:Button
-                Background="#67C23A"
-                Content="处理文件"
-                MouseOverBackground="#A8E063"
-                Margin="10,0,0,0" Foreground="#E4FFFFFF" Click="ProcessTheFile" />
+                    Background="#67C23A"
+                    Content="处理文件"
+                    MouseOverBackground="#A8E063"
+                    Margin="10,0,0,0" Foreground="#E4FFFFFF" Click="ProcessTheFile" />
                 <ui:Button
-                Background="#E6A23C"
-                Content="检查文件"
-                MouseOverBackground="#ffbc58"
-                Margin="10,0,10,0" Foreground="#E4FFFFFF"
-                Click="Test"/>
+                    Background="#E6A23C"
+                    Content="检查文件"
+                    MouseOverBackground="#ffbc58"
+                    Margin="10,0,10,0" Foreground="#E4FFFFFF"
+                    Click="Test" />
             </StackPanel>
         </Border>
+        <!-- 第四行进度条 -->
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical">
             <ProgressBar IsIndeterminate="True" Height="5" Width="700" />
         </StackPanel>
-
-        <Border Grid.Row="3" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,50" Background="#FFFEFEFE">
+        <!-- 第四行属性栏 -->
+        <Border Grid.Row="3" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="100,10,100,0"
+                Background="#FFFEFEFE">
+            
             <StackPanel>
                 <TabControl Margin="10">
                     <TabItem IsSelected="True">
@@ -117,22 +125,35 @@
                                 <TextBlock Text="参数" />
                             </StackPanel>
                         </TabItem.Header>
-                        <Grid Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Width="800"  Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" >
-                                <TextBlock Text="MK文件:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="mktextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
-                                <TextBlock Text="制卡数据：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
-                            </StackPanel>
-                            
-                            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ui:CardControl Margin="0,0,20,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+                                    <ui:CardControl.Header>
+                                        <ui:TextBlock
+                                            FontTypography="Body"
+                                            Text="MK文件:" />
+                                    </ui:CardControl.Header>
+                                    <TextBlock x:Name="mktextbox" Text="未选择文件" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Foreground="Red" />
+                                </ui:CardControl>
                                 
+                                <ui:CardControl Icon="{ui:SymbolIcon CalendarCheckmark20}" >
+                                    <ui:CardControl.Header>
+                                        <ui:TextBlock
+                                            FontTypography="Body"
+                                            Text="制卡数据：" />
+                                    </ui:CardControl.Header>
+                                    <TextBlock x:Name="datatextbox" Text="未选择文件" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" Foreground="Red" />
+                                </ui:CardControl>
+                                
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                               <!-- TODO -->
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -144,11 +165,17 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid>
-                            <TextBlock Margin="12" Text="暂未开发"/>
+                            <TextBlock Margin="12" Text="暂未开发" />
                         </Grid>
                     </TabItem>
                 </TabControl>
             </StackPanel>
         </Border>
+        <!-- 第五行消息提示框 -->
+        <StackPanel Grid.Row="4" Margin="100,0,100,0" VerticalAlignment="Top">
+            <ui:SnackbarPresenter  x:Name="SnackbarPresenter" x:FieldModifier="public"/>
+            <ContentPresenter x:Name="RootContentDialog" x:FieldModifier="public"/>
+        </StackPanel>
+        
     </Grid>
 </Window>

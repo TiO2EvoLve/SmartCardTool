@@ -1,0 +1,159 @@
+﻿<Page x:Class="WindowUI.Pages.CardRead"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:WindowUI.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      Title="CardRead" d:DesignHeight="550" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ui:CardControl Margin="10">
+            <ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    
+                    <Button Click="OpenPort" Background="DodgerBlue" Foreground="Azure">打开端口</Button>
+                    <ui:SymbolIcon x:Name="port" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red" />
+                    
+                    <ui:CardControl Margin="10,0,0,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+                        <ui:CardControl.Header>
+                            <ui:TextBlock
+                                FontTypography="Body"
+                                Text="端口号:" />
+                        </ui:CardControl.Header>
+                        <TextBox Width="100" Text="100"></TextBox>
+                    </ui:CardControl>
+                    
+                    <ui:CardControl Margin="10,0,10,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+                        <ui:CardControl.Header>
+                            <ui:TextBlock
+                                FontTypography="Body"
+                                Text="波特率:" />
+                        </ui:CardControl.Header>
+                        <ComboBox
+                            x:Name="LocationComboBox"
+                            MinWidth="100"
+                            HorizontalAlignment="Left"
+                            SelectedIndex="0">
+                            <ComboBoxItem Content="100" />
+                            <ComboBoxItem Content="400" />
+                            <ComboBoxItem Content="600" />
+                            <ComboBoxItem Content="800" />
+                            <ComboBoxItem Content="192500" />
+                        </ComboBox>
+                    </ui:CardControl>
+                    
+                   
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+        
+        <ui:CardControl Grid.Row="1" Margin="10,0,10,10">
+            <ui:CardControl.Header>
+            <StackPanel>
+                <TabControl Margin="10">
+                    <TabItem IsSelected="True">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Margin="0,0,6,0" Symbol="Settings28" />
+                                <TextBlock Text="读取" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        
+                        <Grid Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock VerticalAlignment="Center">卡号</TextBlock>
+                                <TextBox Width="300" Margin="10,0,0,0"></TextBox>
+                                <Button Click="OpenPort" Background="LimeGreen" Foreground="Azure" Margin="10,0,0,0">读取</Button>
+                                
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,20,0,0">
+                               <ui:CardControl Margin="10,0,0,0" >
+                                   <ui:CardControl.Header>
+                                       <ui:TextBlock
+                                           FontTypography="Body"
+                                           Text="16进制芯片号:" />
+                                   </ui:CardControl.Header>
+                                   <TextBox Text="FFFFFFFF"></TextBox>
+                               </ui:CardControl>
+                            
+                               <ui:CardControl Margin="10,0,0,0">
+                                   <ui:CardControl.Header>
+                                       <ui:TextBlock
+                                           FontTypography="Body"
+                                           Text="16进制不调整芯片号:" />
+                                   </ui:CardControl.Header>
+                                   <TextBox Text="FFFFFFFF"></TextBox>
+                               </ui:CardControl>
+                           </StackPanel>
+                            
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                                <ui:CardControl Margin="10,0,0,0" >
+                                    <ui:CardControl.Header>
+                                        <ui:TextBlock
+                                            FontTypography="Body"
+                                            Text="10进制芯片号:" />
+                                    </ui:CardControl.Header>
+                                    <TextBox Text="FFFFFFFF"></TextBox>
+                                </ui:CardControl>
+                            
+                                <ui:CardControl Margin="10,0,0,0">
+                                    <ui:CardControl.Header>
+                                        <ui:TextBlock
+                                            FontTypography="Body"
+                                            Text="10进制不调整芯片号:" />
+                                    </ui:CardControl.Header>
+                                    <TextBox Text="FFFFFFFF"></TextBox>
+                                </ui:CardControl>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,20,0,0">
+                                <ui:CardControl Margin="10,0,0,0" >
+                                    <ui:CardControl.Header>
+                                        <ui:TextBlock
+                                            FontTypography="Body"
+                                            Text="ATS:" />
+                                    </ui:CardControl.Header>
+                                    <TextBox Text="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"></TextBox>
+                                </ui:CardControl>
+                                
+                            </StackPanel>
+                            
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Margin="0,0,6,0" Symbol="AddCircle28" />
+                                <TextBlock Text="写入" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <TextBlock Margin="12" Text="暂未开发" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+       
+
+        
+    </Grid>
+</Page>

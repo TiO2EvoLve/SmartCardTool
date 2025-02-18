@@ -47,7 +47,7 @@ public partial class 制卡数据 : Page
     {
         if (string.IsNullOrEmpty(XdFilePath))
         {
-            MessageBox.Show("请先选择一个xd文件", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            Message.ShowMessageBox("错误","请先选择一个xd文件","确认");
             return;
         }
 
@@ -208,8 +208,6 @@ public partial class 制卡数据 : Page
 
             ///////////////////////////////////////////////////////保存解析数据到数据库zhika
             string ss = dicry["卡号"];
-
-
             string ti = DateTime.Now.ToString();
             string sql =
                 "insert into zhika(SN,DCCK,DCMK,EF05,EF0101,EF0102,F1DACK,F1DAMK1,F1DAMK2,F1PINUL,F1PINRE,F1DPK,F1DLK,F1TAC,F1ALOCK,F1AUNLOCK,F1PIN,F1EF15,F1EF16,F1EF1701,F1EF1702,F1EF1703,F1EF1704,F1EF1705,F1EF1706,F1EF1707,F1EF1708,F1EF1709,F2DACK,F2DAMK1,F2DAMK2,F2PINUL,F2PINRE,F2DPK,F2DLK,F2TAC,F2ALOCK,F2AUNLOCK,F2PIN,F2EF15,F2EF1701,F2EF1702,F2EF1703,F2EF1704,F2EF1705,F2EF1706,DCCK_CC,F2PIN_CC,TIME0)values('" +
@@ -228,7 +226,6 @@ public partial class 制卡数据 : Page
                 dicry["F2ef17_05"] + "','" + dicry["F2ef17_06"] + "','" + dicry["主控CC"] + "','" + dicry["F2PINCC"] +
                 "','" + ti + "')";
             Mdb.Select(destinationFilePath, sql);
-
             //清空字典
             dicry.Clear();
         }

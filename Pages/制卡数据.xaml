@@ -7,9 +7,9 @@
       mc:Ignorable="d"
       Title="制卡数据" d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="1.3*" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -17,63 +17,68 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
-        <ui:TextBlock Grid.Row="0" FontTypography="TitleLarge" Text="制卡数据解析器" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Height="52" Width="282" >
+
+        <ui:TextBlock Grid.Row="0" FontTypography="TitleLarge" Text="制卡数据解析器" HorizontalAlignment="Center"
+                      VerticalAlignment="Center" FontWeight="Bold" Height="52" Width="282">
             <ui:TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#CFADFF" Offset="1"/>
-                    <GradientStop Color="#AC46FF" Offset="0"/>
+                    <GradientStop Color="#CFADFF" Offset="1" />
+                    <GradientStop Color="#AC46FF" Offset="0" />
                 </LinearGradientBrush>
             </ui:TextBlock.Foreground>
         </ui:TextBlock>
+
+        <ui:CardControl Grid.Row="1" Margin="20,0,20,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+            <ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" FontSize="15">淄博血站</TextBlock>
+                    <ui:Button x:Name="SelectDataButton"
+                               Background="#FF409EFF"
+                               Content="选择xd文件"
+                               MouseOverBackground="#66b1ff"
+                               Margin="10,0,0,0"
+                               Foreground="#E4FFFFFF"
+                               Click="SelectXdFile" />
+                    <ui:Button
+                        Background="#67C23A"
+                        Content="选择key文件"
+                        MouseOverBackground="#A8E063"
+                        Margin="10,0,0,0" Foreground="#E4FFFFFF"
+                        Click="SelectKeyFile" />
+                    <ui:Button
+                        Background="#E6A23C"
+                        Content="处理文件"
+                        MouseOverBackground="#ffbc58"
+                        Margin="10,0,10,0" Foreground="#E4FFFFFF"
+                        Click="CreateFile" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
         
-        <Border Grid.Row="1" BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
-                            Background="#FFFEFEFE">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock VerticalAlignment="Center" FontSize="15">淄博血站</TextBlock>
-                <ui:Button x:Name="SelectDataButton"
-                           Background="#FF409EFF"
-                           Content="选择xd文件"
-                           MouseOverBackground="#66b1ff"
-                           Margin="10,0,0,0"
-                           Foreground="#E4FFFFFF"
-                           Click="SelectXdFile" />
-                <ui:Button
-                    Background="#67C23A"
-                    Content="选择key文件"
-                    MouseOverBackground="#A8E063"
-                    Margin="10,0,0,0" Foreground="#E4FFFFFF"
-                    Click="SelectKeyFile" />
-                <ui:Button
-                    Background="#E6A23C"
-                    Content="处理文件"
-                    MouseOverBackground="#ffbc58"
-                    Margin="10,0,10,0" Foreground="#E4FFFFFF"
-                    Click="CreateFile" />
-            </StackPanel>
-        </Border>
-        <Border Grid.Row="2" BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
-                Background="#FFFEFEFE">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock VerticalAlignment="Center" FontSize="15">桂林公交</TextBlock>
-                <ui:Button 
-                           Background="#FF409EFF"
-                           Content="选择xd文件"
-                           MouseOverBackground="#66b1ff"
-                           Margin="10,0,0,0"
-                           Foreground="#E4FFFFFF"
-                           Click="SelectXdFile" />
-                <ui:Button
-                    Background="#67C23A"
-                    Content="选择key文件"
-                    MouseOverBackground="#A8E063"
-                    Margin="10,0,0,0" Foreground="#E4FFFFFF"/>
-                <ui:Button
-                    Background="#E6A23C"
-                    Content="处理文件"
-                    MouseOverBackground="#ffbc58"
-                    Margin="10,0,10,0" Foreground="#E4FFFFFF"/>
-            </StackPanel>
-        </Border>
+        
+        <ui:CardControl Grid.Row="2" Margin="20,0,20,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+            <ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" FontSize="15">桂林公交</TextBlock>
+                    <ui:Button
+                        Background="#FF409EFF"
+                        Content="选择xd文件"
+                        MouseOverBackground="#66b1ff"
+                        Margin="10,0,0,0"
+                        Foreground="#E4FFFFFF"
+                        Click="SelectXdFile" />
+                    <ui:Button
+                        Background="#67C23A"
+                        Content="选择key文件"
+                        MouseOverBackground="#A8E063"
+                        Margin="10,0,0,0" Foreground="#E4FFFFFF" />
+                    <ui:Button
+                        Background="#E6A23C"
+                        Content="处理文件"
+                        MouseOverBackground="#ffbc58"
+                        Margin="10,0,10,0" Foreground="#E4FFFFFF" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
     </Grid>
 </Page>

@@ -17,12 +17,12 @@ public partial class 漯河菜单 : Window
     {
         if(CardType is null || CardType =="")
         {
-            Message.ShowMessageBox("警告","请先选择卡类型","确定");
+            Message.ShowMessageBox("警告","请先选择卡类型");
             return;
         }
         if(英才卡 && 英才卡卡号.Length != 19)
         {
-            Message.ShowMessageBox("警告","请填写正确的卡号","确定");
+            Message.ShowMessageBox("警告","请填写正确的卡号");
             return;
         }
         Close();

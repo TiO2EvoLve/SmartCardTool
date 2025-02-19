@@ -47,7 +47,7 @@ public partial class 制卡数据 : Page
     {
         if (string.IsNullOrEmpty(XdFilePath))
         {
-            Message.ShowMessageBox("错误","请先选择一个xd文件","确认");
+            Message.ShowMessageBox("错误","请先选择一个xd文件");
             return;
         }
 

@@ -85,7 +85,7 @@ public partial class RCC
             }
             catch (IOException)
             {
-                Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序", "确定");
+                Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序");
             } 
             datatextbox.Text = excelFileName;
             data.Foreground = Brushes.LightGreen;
@@ -134,7 +134,7 @@ public partial class RCC
     {
         if (ZhikaStream is null )
         {
-            Message.ShowMessageBox("错误", "未选择数据文件", "确定");
+            Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
 
@@ -181,7 +181,7 @@ public partial class RCC
             case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, excelFileName); break;
             case "洪城": 洪城.Run(ZhikaStream); break;
             case "第一医科大学": 第一医科大学.Run(ZhikaStream, excelFileName); break;
-            default: Message.ShowMessageBox("警告","请先选择地区","确认"); break;
+            default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }
     }
     private void Test(object sender, RoutedEventArgs e)

@@ -41,10 +41,10 @@
                             MinWidth="100"
                             HorizontalAlignment="Left"
                             SelectedIndex="0">
-                            <ComboBoxItem Content="100" />
-                            <ComboBoxItem Content="400" />
-                            <ComboBoxItem Content="600" />
-                            <ComboBoxItem Content="800" />
+                            <ComboBoxItem Content="200" />
+                            <ComboBoxItem Content="500" />
+                            <ComboBoxItem Content="2000" />
+                            <ComboBoxItem Content="5000" />
                             <ComboBoxItem Content="192500" />
                         </ComboBox>
                     </ui:CardControl>

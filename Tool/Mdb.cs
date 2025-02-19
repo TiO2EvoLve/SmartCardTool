@@ -4,6 +4,7 @@ namespace WindowUI.Tool;
 
 public class Mdb
 {
+    //执行查找并将数据返回
     public static List<string> Select(string filePath,string sql)
     {
         string _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
@@ -34,6 +35,7 @@ public class Mdb
             return null;
         }
     }
+    //执行sql语句不返回数据，可以支持增删改
     public static void Execute(string filePath,string sql)
     {
         string _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
@@ -44,7 +46,11 @@ public class Mdb
             {
                 connection.Open();
                 OleDbCommand command = new OleDbCommand(sql, connection);
-                command.ExecuteNonQuery();
+                var result = command.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    Message.ShowMessageBox("错误","sql执行失败");
+                }
             }
             catch (Exception ex)
             {

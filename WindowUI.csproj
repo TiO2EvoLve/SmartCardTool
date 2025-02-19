@@ -9,6 +9,7 @@
         <SignAssembly>False</SignAssembly>
         <UseWindowsForms>False</UseWindowsForms>
         <LangVersion>12</LangVersion>
+        <Authors>TiO2 EvoLve</Authors>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

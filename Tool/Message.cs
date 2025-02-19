@@ -38,13 +38,13 @@ public static class Message
         uiMessageBox.ShowDialogAsync();
     }
     // 显示MessageBox消息框重载
-    public static void ShowMessageBox(string Title, string Content, string CloseButtonText)
+    public static void ShowMessageBox(string Title, string Content)
     {
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
             Title = Title,
             Content = Content,
-            CloseButtonText = CloseButtonText
+            CloseButtonText = "确定"
         };
         uiMessageBox.ShowDialogAsync();
     }

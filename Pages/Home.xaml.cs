@@ -21,7 +21,7 @@ namespace WindowUI.Pages
 
         private void Test(object sender, MouseButtonEventArgs e)
         {
-            Message.ShowMessageBox("提示","暂未开发","确认");
+            Message.ShowMessageBox("提示","暂未开发");
         }
     }
 }

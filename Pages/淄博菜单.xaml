@@ -28,14 +28,14 @@
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Left">
                 <TextBlock Text="日期一" VerticalAlignment="Center"/>
                 <TextBox Margin="10,0,0,0" x:Name="datetext"  MinWidth="200" TextChanged="datetext_TextChanged" />
-                <ui:Button Content="打开文件" Width="90" Click="OpenFile" Background="#FF409EFF"  MouseOverBackground="#66b1ff" Foreground="White" Margin="10,0,0,0"></ui:Button>
+                <ui:Button Content="打开文件" Width="90" Click="OpenFile" Background="#FF409EFF"  MouseOverBackground="#66b1ff" Foreground="White" Margin="10,0,0,0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                 <TextBlock Text="日期二" VerticalAlignment="Center"/>
                 <TextBox IsEnabled="False" Margin="10,0,0,0" x:Name="date2text" MinWidth="300" />
             </StackPanel>
 
-            <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+            <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
         </StackPanel>
             </Border>
     </Grid>

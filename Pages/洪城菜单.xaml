@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:WindowUI.Pages"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="洪城菜单" Height="450" Width="800">
@@ -30,7 +29,7 @@
                         GroupName="radio_group"/>
                 </StackPanel>
                 
-                <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+                <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
             </StackPanel>
         </Border>
     </Grid>

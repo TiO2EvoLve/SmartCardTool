@@ -1,5 +1,4 @@
 ﻿using Wpf.Ui.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace WindowUI.Sort;
 

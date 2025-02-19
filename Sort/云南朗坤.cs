@@ -31,14 +31,19 @@ public class 云南朗坤
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
-            // TODO:带上表头区分一下
+            // TODO:检查下表头是否正确
+            worksheet.Cells[1, 1].Value = "SN";
+            worksheet.Cells[1, 2].Value = "Uid16";
+            worksheet.Cells[1, 3].Value = "Uid16(调整)";
+            worksheet.Cells[1, 4].Value = "Uid10";
+            worksheet.Cells[1, 5].Value = "Uid10(调整)";
             for (int i = 0; i < UidData.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = UidData[i];
-                worksheet.Cells[i + 1, 3].Value = Uid_Data[i];
-                worksheet.Cells[i + 1, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
-                worksheet.Cells[i + 1, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
+                worksheet.Cells[i + 2, 1].Value = SNData[i];
+                worksheet.Cells[i + 2, 2].Value = UidData[i];
+                worksheet.Cells[i + 2, 3].Value = Uid_Data[i];
+                worksheet.Cells[i + 2, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
+                worksheet.Cells[i + 2, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
             }
             // 保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -57,7 +62,6 @@ public class 云南朗坤
         List<string> SNData = new List<string>();
         List<string> Uid16Data = new List<string>();
         List<string> Uid10Data = new List<string>();
-        
         
         using (var package = new ExcelPackage(ExcelData))
         {

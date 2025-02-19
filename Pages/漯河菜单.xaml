@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:WindowUI.Pages"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -32,9 +31,9 @@
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
                 <TextBlock Text="英才卡首位号" VerticalAlignment="Center"/>
                 <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" Foreground="Gray">31050714</TextBlock>
-                <TextBox TextChanged="SN_OnTextChanged" IsEnabled="False" x:Name="SN" Width="180" Margin="10,0,0,0"></TextBox>
+                <TextBox TextChanged="SN_OnTextChanged" IsEnabled="False" x:Name="SN" Width="180" Margin="10,0,0,0" />
             </StackPanel>
-            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
         </StackPanel>
         </Border>
     </Grid>

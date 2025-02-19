@@ -1,4 +1,5 @@
 ﻿using System.Data.OleDb;
+using Wpf.Ui.Controls;
 
 namespace WindowUI.Tool;
 
@@ -30,7 +31,7 @@ public class Mdb
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Message.ShowSnack("错误",ex.Message,ControlAppearance.Danger,new SymbolIcon(SymbolRegular.ErrorCircle20),3);
             }
             return null;
         }
@@ -54,7 +55,7 @@ public class Mdb
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Message.ShowSnack("错误",ex.Message,ControlAppearance.Danger,new SymbolIcon(SymbolRegular.ErrorCircle20),3);
             }
         }
     }

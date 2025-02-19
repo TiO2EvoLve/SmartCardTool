@@ -10,6 +10,7 @@
         <UseWindowsForms>False</UseWindowsForms>
         <LangVersion>12</LangVersion>
         <Authors>TiO2 EvoLve</Authors>
+        <UserSecretsId>83b02913-18c0-4d30-81ed-1b5c23238911</UserSecretsId>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

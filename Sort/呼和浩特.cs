@@ -1,6 +1,4 @@
-﻿using WindowUI.Tool;
-
-namespace WindowUI.Sort;
+﻿namespace WindowUI.Sort;
 
 public class 呼和浩特
 {

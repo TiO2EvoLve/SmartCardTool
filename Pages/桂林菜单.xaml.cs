@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace WindowUI.Pages;
+﻿namespace WindowUI.Pages;
 
 public partial class 桂林菜单
 {

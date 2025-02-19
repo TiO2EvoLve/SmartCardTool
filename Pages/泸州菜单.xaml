@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:local="clr-namespace:WindowUI.Pages"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="泸州公交附加菜单" Height="300" Width="500">
@@ -31,7 +30,7 @@
                 </ComboBox>
             </StackPanel>
            
-            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0"></ui:Button>
+            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
         </StackPanel>
             </Border>
     </Grid>

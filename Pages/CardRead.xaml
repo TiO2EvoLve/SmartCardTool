@@ -3,15 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:WindowUI.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
       Title="CardRead" d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <ui:CardControl Margin="10">
@@ -27,7 +26,7 @@
                                 FontTypography="Body"
                                 Text="端口号:" />
                         </ui:CardControl.Header>
-                        <TextBox Width="100" Text="100"></TextBox>
+                        <TextBox Width="100" Text="100" />
                     </ui:CardControl>
                     
                     <ui:CardControl Margin="10,0,10,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
@@ -69,15 +68,15 @@
                         
                         <Grid Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <TextBlock VerticalAlignment="Center">卡号</TextBlock>
-                                <TextBox Width="300" Margin="10,0,0,0"></TextBox>
+                                <TextBox Width="300" Margin="10,0,0,0" />
                                 <Button Click="OpenPort" Background="LimeGreen" Foreground="Azure" Margin="10,0,0,0">读取</Button>
                                 
                             </StackPanel>
@@ -89,7 +88,7 @@
                                            FontTypography="Body"
                                            Text="16进制芯片号:" />
                                    </ui:CardControl.Header>
-                                   <TextBox Text="FFFFFFFF"></TextBox>
+                                   <TextBox Text="FFFFFFFF" />
                                </ui:CardControl>
                             
                                <ui:CardControl Margin="10,0,0,0">
@@ -98,7 +97,7 @@
                                            FontTypography="Body"
                                            Text="16进制不调整芯片号:" />
                                    </ui:CardControl.Header>
-                                   <TextBox Text="FFFFFFFF"></TextBox>
+                                   <TextBox Text="FFFFFFFF" />
                                </ui:CardControl>
                            </StackPanel>
                             
@@ -109,7 +108,7 @@
                                             FontTypography="Body"
                                             Text="10进制芯片号:" />
                                     </ui:CardControl.Header>
-                                    <TextBox Text="FFFFFFFF"></TextBox>
+                                    <TextBox Text="FFFFFFFF" />
                                 </ui:CardControl>
                             
                                 <ui:CardControl Margin="10,0,0,0">
@@ -118,7 +117,7 @@
                                             FontTypography="Body"
                                             Text="10进制不调整芯片号:" />
                                     </ui:CardControl.Header>
-                                    <TextBox Text="FFFFFFFF"></TextBox>
+                                    <TextBox Text="FFFFFFFF" />
                                 </ui:CardControl>
                             </StackPanel>
                             
@@ -129,7 +128,7 @@
                                             FontTypography="Body"
                                             Text="ATS:" />
                                     </ui:CardControl.Header>
-                                    <TextBox Text="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"></TextBox>
+                                    <TextBox Text="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" />
                                 </ui:CardControl>
                                 
                             </StackPanel>

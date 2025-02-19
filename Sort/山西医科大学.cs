@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Windows;
-using OfficeOpenXml;
-
-namespace WindowUI.Sort;
+﻿namespace WindowUI.Sort;
 
 public class 山西医科大学
 {

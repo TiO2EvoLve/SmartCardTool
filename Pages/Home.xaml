@@ -69,21 +69,16 @@
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE">
-                </Border>
+                <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE" />
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Border Margin="10" BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10"  Background="#FFFEFEFE">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            
-                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
-                    <Border Grid.Row="1" Margin="10" BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10"  Background="#FFFEFEFE">
-                        
-                    </Border>
+                    <Border Grid.Row="1" Margin="10" BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10"  Background="#FFFEFEFE" />
                 </Grid>
             </Grid>
     </Grid>

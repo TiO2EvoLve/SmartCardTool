@@ -1,5 +1,6 @@
 ﻿using Wpf.Ui;
 using Wpf.Ui.Controls;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 namespace WindowUI.Tool;
 
@@ -29,7 +30,7 @@ public static class Message
     // 显示MessageBox消息框
     public static void ShowMessageBox()
     {
-        var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+        var uiMessageBox = new MessageBox
         {
             Title = "成功",
             Content = "文件已保存到桌面",
@@ -40,7 +41,7 @@ public static class Message
     // 显示MessageBox消息框重载
     public static void ShowMessageBox(string Title, string Content)
     {
-        var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+        var uiMessageBox = new MessageBox
         {
             Title = Title,
             Content = Content,

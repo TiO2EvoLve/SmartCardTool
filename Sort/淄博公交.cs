@@ -1,5 +1,4 @@
 ﻿using WindowUI.Pages;
-using WindowUI.Tool;
 
 namespace WindowUI.Sort;
 

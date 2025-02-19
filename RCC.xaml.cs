@@ -114,7 +114,6 @@ public partial class RCC
                     mktextbox.Foreground = Brushes.Red;
                 }
             }
-
             //根据不同地区进行提示
             switch (Region)
             {
@@ -132,12 +131,11 @@ public partial class RCC
     //点击处理文件按钮
     private void ProcessTheFile(object sender, RoutedEventArgs e)
     {
-        if (ZhikaStream is null )
+        if (ZhikaStream is null || ZhikaStream.Length == 0)
         {
             Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
-
         //根据不同地区处理文件
         switch (Region)
         {

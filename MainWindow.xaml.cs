@@ -1,7 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Net.Http;
-using System.Text.Json;
-using System.Windows;
 using System.Windows.Threading;
 using WindowUI.Pages;
 using Wpf.Ui.Controls;
@@ -12,7 +9,7 @@ public partial class MainWindow : INotifyPropertyChanged
 {
     private string _currentTime;
     private DispatcherTimer _timer;
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public string CurrentTime
     {

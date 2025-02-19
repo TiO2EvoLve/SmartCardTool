@@ -9,7 +9,7 @@ public class Tools
     {
         if (hex.Length % 2 != 0)
         {
-            MessageBox.Show("数据不合法，可能需要删除表头行");
+            Message.ShowMessageBox("错误","数据不合法，可能需要删除表头行");
         }
         char[] reversedHex = new char[hex.Length];
         int j = 0;

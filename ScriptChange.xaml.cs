@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO;
-using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Microsoft.Win32;

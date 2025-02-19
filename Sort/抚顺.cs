@@ -50,7 +50,6 @@ public class 抚顺
                 }
             }
         }
-
-        MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+        Message.ShowSnack();
     }
 }

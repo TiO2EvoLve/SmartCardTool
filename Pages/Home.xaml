@@ -70,7 +70,6 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE">
-                    
                 </Border>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>

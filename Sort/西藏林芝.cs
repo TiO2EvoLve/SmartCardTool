@@ -42,6 +42,6 @@ public class 西藏林芝
                 }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");    
+        Message.ShowSnack();   
     }
 }

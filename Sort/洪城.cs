@@ -55,7 +55,7 @@ public class 洪城
                 }
             }
         }
-        MessageBox.Show("住建部文件已保存到桌面");
+        Message.ShowSnack();
     }
 
     private static void 交通部(MemoryStream ExcelData)
@@ -99,6 +99,6 @@ public class 洪城
                 }
             }
         }
-        MessageBox.Show("交通部文件已保存到桌面");
+        Message.ShowSnack();
     }
 }

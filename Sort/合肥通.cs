@@ -55,7 +55,6 @@ public class 合肥通
                 }
             }
         }
-
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");    
+        Message.ShowSnack();
     }
 }

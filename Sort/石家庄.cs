@@ -59,6 +59,6 @@ public class 石家庄
                 }
             }
         }
-        MessageBox.Show("数据已处理并保存到桌面");
+        Message.ShowSnack();
     }
 }

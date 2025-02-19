@@ -83,6 +83,6 @@ public class 潍坊
                 }
             }
         }
-        MessageBox.Show($"数据已保存到桌面: {filePath},请手动修改序号");
+        Message.ShowSnack();
     }
 }

@@ -43,6 +43,6 @@ public class 桂林公交
                 }
             }
         }
-        MessageBox.Show($"数据保存到桌面: {filePath}"); 
+        Message.ShowSnack();
     }
 }

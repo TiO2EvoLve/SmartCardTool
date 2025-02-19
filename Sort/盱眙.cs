@@ -47,7 +47,7 @@ public class 盱眙
             // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
-            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            Message.ShowSnack();
         }
     }
 }

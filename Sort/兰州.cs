@@ -153,6 +153,6 @@ public class 兰州
                 writer.WriteLine(line);
             }
         }
-        MessageBox.Show($"数据已保存到桌面: {filePath}");
+        Message.ShowSnack();
     }
 }

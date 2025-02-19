@@ -41,6 +41,6 @@ public class 重庆
                 }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");      
+        Message.ShowSnack();       
     }
 }

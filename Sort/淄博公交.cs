@@ -65,6 +65,6 @@ public class 淄博公交
             writer.WriteLine("</CardList>");
             writer.Write("</TaskBack>");
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        Message.ShowSnack();
     }
 }

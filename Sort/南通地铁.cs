@@ -9,16 +9,24 @@ public class 南通地铁
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> timeData = new List<string>();
         List<string> uidData = new List<string>();
-        
+
+        // string FilePath = "";
         // string sql = "SELECT UID FROM kahao";
-        // uidData = Mdb.Select(filePath,sql);
+        // uidData = Mdb.Select(FilePath,sql);
         // sql = "SELECT Time FROM kahao";
-        // timeData = Mdb.Select(filePath,sql);
+        // timeData = Mdb.Select(FilePath,sql);
+        //
+        // for (int i = 0; i < timeData.Count; i++)
+        // {
+        //     DateTime parsedDate = DateTime.ParseExact(timeData[i], "yyyy/MM/dd H:mm:ss", null);
+        //     timeData[i] = "HG" + parsedDate.ToString("yyyyMMdd") + timeData[i];
+        // }
         
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
+            
             //遍历Excel文件的每一行
             for (int row = 2; row <= rowCount; row++)
             {
@@ -46,6 +54,6 @@ public class 南通地铁
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
         } 
-        MessageBox.Show("数据已处理并保存到桌面，请修改文件名");
+        Message.ShowSnack();
     }
 }

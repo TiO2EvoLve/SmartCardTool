@@ -78,6 +78,6 @@ public class 淮北
             writer.Write("</CardList>");
         }
 
-        MessageBox.Show($"文件已保存到桌面{filePath}");
+        Message.ShowSnack();
     }
 }

@@ -41,6 +41,6 @@ public class 第一医科大学
             // 保存文件到桌面
             package.SaveAs(new FileInfo(filePath));
         }
-        MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+        Message.ShowSnack();
     }
 }

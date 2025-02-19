@@ -52,7 +52,6 @@ public class 柳州公交
                 }
             }
         }
-
-        MessageBox.Show($"文件已保存到桌面{filePath}");
+        Message.ShowSnack();
     }
 }

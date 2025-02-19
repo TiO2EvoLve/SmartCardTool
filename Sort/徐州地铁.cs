@@ -33,7 +33,6 @@ public class 徐州地铁
                 }
             }
         }
-
-        MessageBox.Show($"文件已保存到桌面{filePath}");
+        Message.ShowSnack();
     }
 }

@@ -52,6 +52,6 @@ public class 天津
             }
         }
 
-        MessageBox.Show($"数据已合并并保存到桌面: {filePath}");
+        Message.ShowSnack();
     }
 }

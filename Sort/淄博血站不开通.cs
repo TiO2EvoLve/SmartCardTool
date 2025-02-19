@@ -49,13 +49,14 @@ public class 淄博血站不开通
                 SNValue += strXOR_2;
                 SNData.Add(SNValue);
                 UIDData.Add(UIDValue);
+                
             }
         }
 
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"{StartSN}-{EndSN}.xml";
         string filePath = Path.Combine(desktopPath, fileName);
-
+        //保存文件到桌面
         using (StreamWriter writer = new StreamWriter(filePath))
         {
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
@@ -65,10 +66,8 @@ public class 淄博血站不开通
             {
                 writer.WriteLine($"<Card UID=\"{UIDData[i]}\" AppID=\"{SNData[i]}\"/>");
             }
-
             writer.Write("</CardList>");
         }
-
-        MessageBox.Show($"文件已保存到桌面{filePath}");
+        Message.ShowMessageBox();
     }
 }

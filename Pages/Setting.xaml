@@ -38,7 +38,7 @@
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox
-                MinWidth="200" SelectionChanged="ChangeTheme" x:Name="ThemeComboBox">
+                MinWidth="200" SelectionChanged="ChangeTheme" x:Name="ThemeComboBox" SelectedIndex="0">
                 <ComboBoxItem Content="Light" />
                 <ComboBoxItem Content="Dark" />
             </ComboBox>
@@ -52,7 +52,7 @@
                     Text="Navigation style" />
             </ui:CardControl.Header>
             <ComboBox
-                MinWidth="200">
+                MinWidth="200" SelectedIndex="0">
                 <ComboBoxItem Content="Left" />
                 <ComboBoxItem Content="Right" />
                 <ComboBoxItem Content="Top" />
@@ -92,7 +92,7 @@
                         Margin="0,0,16,0"
                         VerticalAlignment="Center"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="3.000" />
+                        Text="3.0.0.0" />
                 </Grid>
             </ui:CardExpander.Header>
             <StackPanel>
@@ -143,7 +143,7 @@
                         <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                     </Grid>
                 </ui:Anchor>
-                <TextBlock Margin="16" Text="3.000" />
+                <TextBlock Margin="16" Text="3.0.0.0" />
             </StackPanel>
         </ui:CardExpander>
     </StackPanel>

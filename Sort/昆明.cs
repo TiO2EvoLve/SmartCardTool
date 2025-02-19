@@ -65,8 +65,6 @@ public class 昆明
 
             package.SaveAs(new FileInfo(filePath));
         }
-        
-        MessageBox.Show("数据已处理并保存到桌面");
-        
+        Message.ShowSnack();
     }
 }

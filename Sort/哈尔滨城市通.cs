@@ -39,6 +39,6 @@ public class 哈尔滨城市通
                 }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath},请修改文件名");
+        Message.ShowSnack();
     }
 }

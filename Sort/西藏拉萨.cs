@@ -40,6 +40,6 @@ public class 西藏拉萨
                 }
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        Message.ShowSnack();
     }
 }

@@ -45,7 +45,7 @@ public class 青岛博研加气站
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+            Message.ShowSnack(); 
         }    
     }
 }

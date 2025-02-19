@@ -38,7 +38,7 @@ public class 西安交通大学
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            Message.ShowSnack();
         }
     }
 }

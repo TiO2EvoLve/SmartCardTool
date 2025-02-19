@@ -41,6 +41,6 @@ public class 山西医科大学
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
         }
-        MessageBox.Show($"文件已保存到桌面");  
+        Message.ShowSnack();
     } 
 }

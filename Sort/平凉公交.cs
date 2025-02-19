@@ -34,6 +34,6 @@ public class 平凉公交
                 writer.WriteLine($"{UIDData[i]}\t74400000{SNData[i]}\t1");
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        Message.ShowSnack();
     }
 }

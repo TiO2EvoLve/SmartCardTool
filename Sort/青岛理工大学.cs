@@ -55,7 +55,7 @@ public class 青岛理工大学
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+            Message.ShowSnack(); 
         }
     }
     //青岛理工大学青岛校区的处理逻辑
@@ -95,7 +95,7 @@ public class 青岛理工大学
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到文件: {filePath}");
+            Message.ShowSnack(); 
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace WindowUI.Sort;
+﻿using Wpf.Ui.Controls;
+using MessageBox = System.Windows.MessageBox;
+
+namespace WindowUI.Sort;
 
 public class 运城盐湖王府学校
 {
@@ -41,7 +44,7 @@ public class 运城盐湖王府学校
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            MessageBox.Show($"数据已处理并保存到文件: {filePath},请根据制卡数据重命名RCC文件");
+            Message.ShowSnack("成功", "文件已保存到桌面,请根据制卡数据重命名RCC文件", ControlAppearance.Success, new SymbolIcon(SymbolRegular.Checkmark20), 3);
         }    
     }
 }

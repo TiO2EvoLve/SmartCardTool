@@ -10,7 +10,6 @@ public class 漯河
         漯河菜单 window = new();
         window.ShowDialog();
         cardtype = window.CardType;
-        //判断是否是英才卡
         
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -19,17 +18,20 @@ public class 漯河
         string StartSN;
         string EndSN;
 
-        string sql = "SELECT SerialNum FROM kahao";
+        string sql = "SELECT SerialNum FROM kahao order by SerialNum asc";
         List<string> SN = Mdb.Select(FilePath, sql);
 
-        sql = "SELECT UID_16_ FROM kahao";
+        sql = "SELECT UID_16_ FROM kahao order by SerialNum asc";
         List<string> UID = Mdb.Select(FilePath, sql);
 
+        Console.WriteLine(int.MaxValue);
         if (window.英才卡)
         {
             for (int i = 0; i < SN.Count; i++)
             {
-                SN[i] = window.英才卡卡号 + i + 1;
+                long number = long.Parse(window.英才卡卡号);
+                number += i;
+                SN[i] ="31050714" + number.ToString("D" + window.英才卡卡号.Length);
             }
         }
 
@@ -83,7 +85,7 @@ public class 漯河
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
             writer.WriteLine(
                 $"<CardList Total=\"{SNData.Count}\" CardType=\"{cardtype}\" Start=\"{StartSN}\" End=\"{EndSN}\">");
-            for (int j = 0; j < SNData.Count - 1; j++)
+            for (int j = 0; j < SNData.Count; j++)
             {
                 writer.WriteLine($"<Card UID=\"{UIDData[j]}\" AppID=\"{SNData[j]}\"/>");
             }

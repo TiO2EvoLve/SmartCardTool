@@ -59,7 +59,7 @@ public class 兰州
                 writer.WriteLine(line);
             }
         }
-        MessageBox.Show($"数据已合并并保存到文件: {filePath}");
+        Message.ShowSnack();
     }
     private static void 兰州公交(MemoryStream ExcelData,string excelFileName,List<string> MKData,string mkFileName,int type)
     {
@@ -113,7 +113,7 @@ public class 兰州
         }
         if (type == 0)
         {
-            MessageBox.Show("文件已保存到桌面");
+            Message.ShowSnack();
             return;
         } 
         //异型卡需要两个文件

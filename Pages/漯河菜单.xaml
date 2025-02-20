@@ -14,7 +14,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
                 <TextBlock Text="卡类型" VerticalAlignment="Center"/>
                 <ComboBox
-                    x:Name="LuZhouCardType"
+                    x:Name="LuoHeCardType"
                     SelectionChanged="ComboBox_SelectionChanged"
                     MinWidth="300"
                     Margin="10,0,0,0"
@@ -25,7 +25,7 @@
                     <ComboBoxItem Content="员工卡" DataContext="07" />
                     <ComboBoxItem Content="英才卡" DataContext="07" />
                     <ComboBoxItem Content="敬老卡" DataContext="0A" />
-                    <ComboBoxItem Content="爱心卡" DataContext="OB" />
+                    <ComboBoxItem Content="爱心卡" DataContext="0B" />
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >

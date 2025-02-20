@@ -86,6 +86,7 @@ public partial class RCC
             catch (IOException)
             {
                 Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序");
+                return;
             } 
             datatextbox.Text = excelFileName;
             data.Foreground = Brushes.LightGreen;

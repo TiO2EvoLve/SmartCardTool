@@ -11,7 +11,6 @@ public partial class CardRead : Page
 
     private void OpenPort(object sender, RoutedEventArgs e)
     {
-        int port = 100;
-        
+        Message.ShowMessageBox("失败","打开端口失败");
     }
 }

@@ -38,11 +38,10 @@ public class 盱眙
                 worksheet.Cells[i + 2, 3].Value = Tools.ChangeHexPairs(UidData[i]);
             }
 
-            // 异步保存文件到桌面
+            //保存文件到桌面
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = $"{excelFileName}.xlsx";
             string filePath = Path.Combine(desktopPath, fileName);
-            // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
             Message.ShowSnack();

@@ -17,7 +17,7 @@ public class 潍坊
         // 读取ATS参数
         string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-        if (ATS == null || ATS.Count == 0)
+        if (ATS.Count == 0)
         {
             MessageBox.Show("ATS数据读取失败");
             return;
@@ -25,9 +25,9 @@ public class 潍坊
         // 读取卡标识参数
         sql = "SELECT 卡标识 FROM kahao order by SerialNum ASC";
         CardID = Mdb.Select(FilePath, sql);
-        if (CardID == null || CardID.Count == 0)
+        if (CardID.Count == 0)
         {
-            MessageBox.Show("CardID数据读取失败");
+            MessageBox.Show("卡标识数据读取失败");
             return;
         }
         // 使用正则表达式匹配数量和日期

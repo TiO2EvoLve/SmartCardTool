@@ -6,7 +6,6 @@ public class 柳州公交
     {
         //根据逗号切割MKdate
         string[] KCdata = MKData[0].Split(';');
-        Console.WriteLine(KCdata);
         string Order = KCdata[1];
         string CardBin = KCdata[5];
         string CardNumber = KCdata[4];

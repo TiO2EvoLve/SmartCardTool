@@ -16,6 +16,8 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <Optimize>True</Optimize>
       <IsPublishable>True</IsPublishable>
+      <Prefer32bit>false</Prefer32bit>
+      <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -53,6 +55,8 @@
       <Resource Include="icon\save.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
+      <None Remove="temple\kahao.mdb" />
+      <Resource Include="temple\kahao.mdb" />
     </ItemGroup>
 
     <ItemGroup>

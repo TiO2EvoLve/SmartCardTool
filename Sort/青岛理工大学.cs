@@ -16,6 +16,9 @@ public class 青岛理工大学
         else if(campus == "临沂校区")
         {
             青岛理工大学临沂校区(ExcelData,excelFileName);
+        }else
+        {
+            Message.ShowMessageBox("错误","请选择校区");
         }      
     }
     private static void 青岛理工大学临沂校区(MemoryStream ExcelData,string excelFileName)

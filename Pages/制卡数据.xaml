@@ -35,6 +35,7 @@
                     <ui:Button x:Name="SelectDataButton"
                                Background="#FF409EFF"
                                Content="选择xd文件"
+                               BorderBrush="#FF409EFF"
                                MouseOverBackground="#66b1ff"
                                Margin="10,0,0,0"
                                Foreground="#E4FFFFFF"

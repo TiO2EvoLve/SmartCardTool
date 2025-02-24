@@ -163,7 +163,7 @@ public partial class RCC
             case "淄博公交": 淄博公交.Run(FilePath); break;
             case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;
             case "平凉公交": 平凉公交.Run(ZhikaStream, excelFileName); break;
-            case "桂林公交": 桂林公交.Run(ZhikaStream); break;
+            case "桂林公交": 桂林公交.Run(FilePath); break;
             case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, excelFileName); break;
             case "西安文理学院": 西安文理学院.Run(ZhikaStream, excelFileName); break;
             case "滨州公交": 滨州公交.Run(ZhikaStream, excelFileName); break;

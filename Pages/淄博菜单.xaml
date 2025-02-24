@@ -18,6 +18,7 @@
                 SelectedIndex="0">
                     <ComboBoxItem Content="请选择卡类型" DataContext="0000"/>
                     <ComboBoxItem Content="普通卡" DataContext="0100" />
+                    <ComboBoxItem Content="齐达通普通卡" DataContext="6510" />
                     <ComboBoxItem Content="爱心卡" DataContext="0301" />
                     <ComboBoxItem Content="老年卡" DataContext="0300" />
                     <ComboBoxItem Content="退役军人卡" DataContext="0302" />

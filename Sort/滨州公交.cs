@@ -19,7 +19,6 @@ public class 滨州公交
                 string UidValue = worksheet.Cells[row, 6].Text;
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);
-
             }
         }
         // 创建一个新的Excel文件

@@ -14,13 +14,18 @@ public class 兰州工作证
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
             //遍历Excel文件的每一行
-            Console.WriteLine(rowCount);
+            Console.WriteLine("总共：" + rowCount + "行");
             for (int row = 2; row <= rowCount; row++)
             {
                 string SNValue = worksheet.Cells[row, 7].Text;
-                SNData.Add(SNValue);
                 string UIDValue = worksheet.Cells[row, 3].Text;
+                if (UIDValue == "" || SNValue == "")
+                {
+                    Message.ShowMessageBox("异常","文件内有空白行,程序已自动处理，但请检查一遍数据是否正确");
+                    continue;
+                }
                 UIDValue = Tools.ChangeDecimalSystem(UIDValue);
+                SNData.Add(SNValue);
                 UIDData.Add(UIDValue);
             }
         }

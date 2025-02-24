@@ -27,6 +27,7 @@ public partial class CardRead : Page
     int st = 0;
     string revalue = "";
     int icdev;
+    int hz = 115200;
     public CardRead()
     {
         InitializeComponent();
@@ -36,16 +37,11 @@ public partial class CardRead : Page
     {
         string strport = port_input.Text;
         short Port = Convert.ToInt16(strport);
-        int hz = 115200;
-        if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.DataContext != null)
-        {
-            hz = int.Parse(selectedItem.DataContext.ToString()) ;
-        }
         
         Console.WriteLine($"{Port}---{hz}");
         st = dc_init(Port, hz);
-        
-        if (st <= 0)
+        Console.WriteLine(st);
+        if (st < 0)
         {
             Console.WriteLine(st);
             Message.ShowMessageBox("失败","打开端口失败");
@@ -156,5 +152,15 @@ public partial class CardRead : Page
             }
 
         }
-    
+
+    private void LocationComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
+        {
+            hz = int.Parse(selectedItem.Content.ToString()) ;
+            Console.WriteLine(hz); 
+        }
+            
+        
+    }
 }

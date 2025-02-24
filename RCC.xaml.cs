@@ -141,7 +141,8 @@ public partial class RCC
         switch (Region)
         {
             case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
-            case "兰州菜单": 兰州.Run(ZhikaStream, excelFileName, MKData, mkFileName); break;
+            case "兰州": 兰州.Run(ZhikaStream, excelFileName, MKData, mkFileName); break;
+            case "兰州工作证": 兰州工作证.Run(ZhikaStream,excelFileName);break;
             case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, excelFileName); break;
             case "抚顺": 抚顺.Run(ZhikaStream, excelFileName); break;
             case "郴州": 郴州.Run(MKData, mkFileName,FilePath); break;
@@ -180,6 +181,7 @@ public partial class RCC
             case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, excelFileName); break;
             case "洪城": 洪城.Run(ZhikaStream); break;
             case "第一医科大学": 第一医科大学.Run(ZhikaStream, excelFileName); break;
+            case "邹平": 邹平.Run(ZhikaStream, excelFileName); break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }
     }

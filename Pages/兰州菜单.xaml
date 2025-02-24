@@ -20,9 +20,8 @@
                     Margin="10,0,0,0"
                     SelectedIndex="0">
                     <ComboBoxItem Content="请选择类型" DataContext=""/>
-                    <ComboBoxItem Content="兰州工作证" DataContext="1"/>
-                    <ComboBoxItem Content="兰州公交" DataContext="2"/>
-                    <ComboBoxItem Content="兰州公交异型卡" DataContext="3"/>
+                    <ComboBoxItem Content="兰州公交" DataContext="0"/>
+                    <ComboBoxItem Content="兰州公交异型卡" DataContext="1"/>
                 </ComboBox>
             </StackPanel>
            

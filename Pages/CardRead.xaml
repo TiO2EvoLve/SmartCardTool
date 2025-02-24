@@ -40,7 +40,7 @@
                             SelectionChanged="LocationComboBox_OnSelectionChanged"
                             MinWidth="100"
                             HorizontalAlignment="Left"
-                            SelectedIndex="0">
+                            SelectedIndex="9">
                             <ComboBoxItem Content="1200" />
                             <ComboBoxItem Content="2400" />
                             <ComboBoxItem Content="4800" />

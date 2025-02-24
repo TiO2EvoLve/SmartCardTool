@@ -2,27 +2,21 @@
 
 public class 重庆
 {
-    public static void Run(MemoryStream ExcelData,string excelFileName)
+    public static void Run(string FilePath,string excelFileName)
     {
-        //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        //取出文件数据
         List<string> SNData = new List<string>();
         List<string> ATSData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
+        
+        string sql = "select 打码特殊算法 from kahao order by 打码特殊算法 ASC ";
+        SNData = Mdb.Select(FilePath,sql);
+        foreach (var item in SNData)
         {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
-            {
-                string SNValue = worksheet.Cells[row, 11].Text;
-                string ATSValue = worksheet.Cells[row, 2].Text;
-                SNData.Add(SNValue);
-                ATSData.Add(ATSValue);
-
-            }
+            Console.WriteLine(item);
         }
-
+        sql = "select ATS from kahao order by 打码特殊算法 ASC ";
+        ATSData = Mdb.Select(FilePath,sql);
+        
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"HG-{excelFileName}";
         string filePath = Path.Combine(desktopPath, fileName);

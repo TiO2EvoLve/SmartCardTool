@@ -38,12 +38,10 @@ public partial class CardRead : Page
         string strport = port_input.Text;
         short Port = Convert.ToInt16(strport);
         
-        Console.WriteLine($"{Port}---{hz}");
         st = dc_init(Port, hz);
         Console.WriteLine(st);
         if (st < 0)
         {
-            Console.WriteLine(st);
             Message.ShowMessageBox("失败","打开端口失败");
         }
         else
@@ -158,7 +156,6 @@ public partial class CardRead : Page
         if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
         {
             hz = int.Parse(selectedItem.Content.ToString()) ;
-            Console.WriteLine(hz); 
         }
             
         

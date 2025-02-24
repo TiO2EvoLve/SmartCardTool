@@ -57,7 +57,7 @@
                     <ComboBoxItem Content="合肥通" />
                     <ComboBoxItem Content="西安交通大学" />
                     <ComboBoxItem Content="呼和浩特" />
-                    <ComboBoxItem Content="重庆33A-A1" />
+                    <ComboBoxItem Content="重庆" />
                     <ComboBoxItem Content="西藏林芝" />
                     <ComboBoxItem Content="西藏拉萨" />
                     <ComboBoxItem Content="淄博公交" />

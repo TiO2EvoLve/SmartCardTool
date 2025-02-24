@@ -19,8 +19,8 @@
                 <TextBlock Text="制卡数据八位数量" VerticalAlignment="Center"/>
                 <TextBox x:Name="Count" Width="200" Margin="10,0,0,0" Text="00002000" />
             </StackPanel>
-            <TextBlock FontSize="12" Foreground="Red" HorizontalAlignment="Center" Margin="0,10,0,0">tips:默认参数随新的批次数据而更改</TextBlock>
-            <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
+            <TextBlock FontSize="12" Foreground="Red" HorizontalAlignment="Center" Margin="0,20,0,20">tips:根据对应的批次数据而更改</TextBlock>
+            <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,0,0,0" />
         </StackPanel>
             </Border>
     </Grid>

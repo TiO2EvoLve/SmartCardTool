@@ -124,6 +124,7 @@ public partial class RCC
                 case "洪城": tip.Text = "多个文件注意修改编号"; break;
                 case "潍坊": tip.Text = "需要手动修改序号"; break;
                 case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
+                case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改                                                                                                                                                                                                                                                                                                                                                                                         "; break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
         }
@@ -141,7 +142,7 @@ public partial class RCC
         switch (Region)
         {
             case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
-            case "兰州": 兰州.Run(ZhikaStream, excelFileName, MKData, mkFileName); break;
+            case "兰州": 兰州.Run(ZhikaStream, excelFileName, MKData, mkFileName); break;       
             case "兰州工作证": 兰州工作证.Run(ZhikaStream,excelFileName);break;
             case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, excelFileName); break;
             case "抚顺": 抚顺.Run(ZhikaStream, excelFileName); break;
@@ -157,7 +158,7 @@ public partial class RCC
             case "青岛理工大学菜单": 青岛理工大学.Run(ZhikaStream, excelFileName); break;
             case "西安交通大学": 西安交通大学.Run(ZhikaStream, excelFileName); break;
             case "呼和浩特": 呼和浩特.Run(ZhikaStream, excelFileName); break;
-            case "重庆33A-A1": 重庆.Run(ZhikaStream, excelFileName); break;
+            case "重庆": 重庆.Run(FilePath, excelFileName); break;
             case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
             case "西藏拉萨": 西藏拉萨.Run(ZhikaStream); break;
             case "淄博公交": 淄博公交.Run(FilePath); break;

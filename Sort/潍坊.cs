@@ -19,7 +19,7 @@ public class 潍坊
         ATS = Mdb.Select(FilePath, sql);
         if (ATS.Count == 0)
         {
-            MessageBox.Show("ATS数据读取失败");
+            Message.ShowMessageBox("错误","ATS数据读取失败");
             return;
         }
         // 读取卡标识参数
@@ -27,7 +27,7 @@ public class 潍坊
         CardID = Mdb.Select(FilePath, sql);
         if (CardID.Count == 0)
         {
-            MessageBox.Show("卡标识数据读取失败");
+            Message.ShowMessageBox("错误","卡标识数据读取失败");
             return;
         }
         // 使用正则表达式匹配数量和日期
@@ -43,7 +43,7 @@ public class 潍坊
             }
             else
             {
-                MessageBox.Show("无法解析数量");
+                Message.ShowMessageBox("异常","无法解析数量");
                 return;
             }
             // 提取并解析日期
@@ -54,13 +54,13 @@ public class 潍坊
             }
             else
             {
-                MessageBox.Show("无效的日期格式");
+                Message.ShowMessageBox("异常","无效的日期格式");
                 return;
             }
         }
         else
         {
-            MessageBox.Show("未找到匹配的数量和日期");
+            Message.ShowMessageBox("异常","未找到匹配的数量和日期");
             return;
         }
         // 生成RCC文件
@@ -78,7 +78,7 @@ public class 潍坊
                 }
                 else
                 {
-                    MessageBox.Show("数据行数不匹配");
+                    Message.ShowMessageBox("错误","数据行数不匹配");
                     return;
                 }
             }

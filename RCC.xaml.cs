@@ -37,7 +37,7 @@ public partial class RCC
         if (openFileDialog.ShowDialog() == true)
         {
             if (openFileDialog.FileName == "") return;
-            if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK"))
+            if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK") && !Path.GetFileName(openFileDialog.FileName).StartsWith("KC"))
             { 
                 MessageBox.Show("请选择正确的MK文件");
                 return; 
@@ -170,7 +170,7 @@ public partial class RCC
             case "滨州公交": 滨州公交.Run(ZhikaStream, excelFileName); break;
             case "云南朗坤": 云南朗坤.PlanB(ZhikaStream, excelFileName); break;
             case "盱眙": 盱眙.Run(ZhikaStream, excelFileName); break;
-            case "柳州公交": 柳州公交.Run(ZhikaStream, MKData); break;
+            case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
             case "漯河": 漯河.Run(FilePath); break;
             case "随州": 随州.Run(ZhikaStream, excelFileName); break;
             case "昆明": 昆明.Run(ZhikaStream, excelFileName); break;

@@ -31,8 +31,7 @@ public class 云南朗坤
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
-            // TODO:检查下表头是否正确
-            worksheet.Cells[1, 1].Value = "SN";
+            worksheet.Cells[1, 1].Value = "SerialNum";
             worksheet.Cells[1, 2].Value = "Uid16";
             worksheet.Cells[1, 3].Value = "Uid16(调整)";
             worksheet.Cells[1, 4].Value = "Uid10";
@@ -83,7 +82,7 @@ public class 云南朗坤
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
-            worksheet.Cells[1, 1].Value = "SN";
+            worksheet.Cells[1, 1].Value = "SerialNum";
             worksheet.Cells[1, 2].Value = "Uid16";
             worksheet.Cells[1, 3].Value = "Uid16(调整)";
             worksheet.Cells[1, 4].Value = "Uid10";

@@ -18,6 +18,10 @@ public class Mdb
                 OleDbCommand command = new OleDbCommand(sql, connection);
                 OleDbDataReader reader = command.ExecuteReader();
 
+                if(reader.FieldCount == 0)
+                {
+                    Message.ShowMessageBox("错误","未找到数据");
+                }
                 //将结果封装到List<string>集合中
                 List<string> result = new List<string>();
                 while (reader.Read())

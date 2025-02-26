@@ -124,7 +124,8 @@ public partial class RCC
                 case "洪城": tip.Text = "多个文件注意修改编号"; break;
                 case "潍坊": tip.Text = "需要手动修改序号"; break;
                 case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
-                case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改                                                                                                                                                                                                                                                                                                                                                                                         "; break;
+                case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"; break;
+                case "南通地铁": tip.Text = "具体格式要求见生产通知单"; break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
         }
@@ -151,7 +152,7 @@ public partial class RCC
             case "国网技术学院": 国网技术学院.Run(ZhikaStream, excelFileName); break;
             case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, excelFileName); break;
             case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, excelFileName); break;
-            case "南通地铁": 南通地铁.Run(ZhikaStream, excelFileName); break;
+            case "南通地铁": 南通地铁.Run(FilePath, excelFileName); break;
             case "长沙公交": 长沙公交.Run(ZhikaStream, excelFileName); break;
             case "泸州公交": 泸州公交.Run(ZhikaStream, excelFileName); break;
             case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;

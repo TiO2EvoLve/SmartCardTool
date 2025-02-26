@@ -28,7 +28,7 @@ public class 兰州
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             int rowCount = worksheet.Dimension.Rows; //获取行数
-                                                     //遍历Excel文件的每一行
+            //遍历Excel文件的每一行
             for (int row = 2; row <= rowCount; row++)
             {
                 string firstColumnValue = worksheet.Cells[row, 1].Text;

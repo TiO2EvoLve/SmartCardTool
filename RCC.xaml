@@ -82,6 +82,7 @@
                     <ComboBoxItem Content="洪城" />
                     <ComboBoxItem Content="第一医科大学" />
                     <ComboBoxItem Content="邹平" />
+                    <ComboBoxItem Content="盐城" />
                 </ComboBox>
                 <ui:Button
                     x:Name="SelectMKButton"

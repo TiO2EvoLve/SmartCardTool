@@ -11,14 +11,14 @@ public partial class RCC
 {
     private string mkFileName { get; set; } //  记录MK文件名
     private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
-    private string excelFileName { get; set; } // 记录Excel文件名
-    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的Excel的数据
+    private string FileName { get; set; } // 记录文件名
+    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的卡文件数据
     private string FilePath { get; set; } // 记录文件的路径
     private string Region { get; set; } // 下拉框选则的地区
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
-    private OpenFileDialog openFileDialog2 { get; set; } // Excel文件处理流
+    private OpenFileDialog openFileDialog2 { get; set; } // 文件处理流
     // 定义需要MK文件的地区
-    private readonly string[] disableButtonRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
+    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
     
     public RCC()
     {
@@ -36,7 +36,9 @@ public partial class RCC
         };
         if (openFileDialog.ShowDialog() == true)
         {
+            //如果什么也没有就返回
             if (openFileDialog.FileName == "") return;
+            //判断文件名是否以MK或者KC开头,如果不是就不是MK文件
             if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK") && !Path.GetFileName(openFileDialog.FileName).StartsWith("KC"))
             { 
                 MessageBox.Show("请选择正确的MK文件");
@@ -48,14 +50,14 @@ public partial class RCC
                 MKData = File.ReadAllLines(openFileDialog.FileName).ToList();
                 //记录MK文件名
                 mkFileName = Path.GetFileName(openFileDialog.FileName);
-                //去掉MK文件名的前两个字符"MK"
+                //去掉MK文件名的前两个字符"MK"或"KC"
                 mkFileName = mkFileName.Substring(2);
                 mk.Foreground = Brushes.LightGreen;
                 mktextbox.Foreground = Brushes.LimeGreen;
                 mktextbox.Text = mkFileName;
             }catch
             {
-                MessageBox.Show("错误的MK文件");
+                MessageBox.Show("MK文件读取错误");
             }
             
         }
@@ -75,9 +77,9 @@ public partial class RCC
             //记录文件路径
             FilePath = openFileDialog2.FileName;
             //记录Excel文件名
-            excelFileName = Path.GetFileNameWithoutExtension(openFileDialog2.FileName);
-            excelFileName = excelFileName.Replace("kahao", "");
-            excelFileName = excelFileName.Replace("_", "");
+            FileName = Path.GetFileNameWithoutExtension(openFileDialog2.FileName);
+            FileName = FileName.Replace("kahao", "");
+            FileName = FileName.Replace("_", "");
             //暂时存储文件流
             try
             {
@@ -88,7 +90,7 @@ public partial class RCC
                 Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序");
                 return;
             } 
-            datatextbox.Text = excelFileName;
+            datatextbox.Text = FileName;
             data.Foreground = Brushes.LightGreen;
             datatextbox.Foreground = Brushes.LimeGreen;
         }
@@ -103,7 +105,7 @@ public partial class RCC
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
-                SelectMKButton.IsEnabled = Array.Exists(disableButtonRegions, region => region == Region);
+                SelectMKButton.IsEnabled = Array.Exists(NeedMKFileRegions, region => region == Region);
                 if (!SelectMKButton.IsEnabled)
                 {
                     mk.Foreground = Brushes.LightGreen;
@@ -143,47 +145,48 @@ public partial class RCC
         switch (Region)
         {
             case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
-            case "兰州": 兰州.Run(ZhikaStream, excelFileName, MKData, mkFileName); break;       
-            case "兰州工作证": 兰州工作证.Run(ZhikaStream,excelFileName);break;
-            case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, excelFileName); break;
-            case "抚顺": 抚顺.Run(ZhikaStream, excelFileName); break;
+            case "兰州": 兰州.Run(ZhikaStream, FileName, MKData, mkFileName); break;       
+            case "兰州工作证": 兰州工作证.Run(ZhikaStream,FileName);break;
+            case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
+            case "抚顺": 抚顺.Run(ZhikaStream, FileName); break;
             case "郴州": 郴州.Run(MKData, mkFileName,FilePath); break;
-            case "潍坊": 潍坊.Run(FilePath, excelFileName); break;
-            case "国网技术学院": 国网技术学院.Run(ZhikaStream, excelFileName); break;
-            case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, excelFileName); break;
-            case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, excelFileName); break;
-            case "南通地铁": 南通地铁.Run(FilePath, excelFileName); break;
-            case "长沙公交": 长沙公交.Run(ZhikaStream, excelFileName); break;
-            case "泸州公交": 泸州公交.Run(ZhikaStream, excelFileName); break;
+            case "潍坊": 潍坊.Run(FilePath, FileName); break;
+            case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
+            case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, FileName); break;
+            case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
+            case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
+            case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
+            case "泸州公交": 泸州公交.Run(ZhikaStream, FileName); break;
             case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;
-            case "青岛理工大学菜单": 青岛理工大学.Run(ZhikaStream, excelFileName); break;
-            case "西安交通大学": 西安交通大学.Run(ZhikaStream, excelFileName); break;
-            case "呼和浩特": 呼和浩特.Run(ZhikaStream, excelFileName); break;
-            case "重庆": 重庆.Run(FilePath, excelFileName); break;
+            case "青岛理工大学菜单": 青岛理工大学.Run(ZhikaStream, FileName); break;
+            case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;
+            case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
+            case "重庆": 重庆.Run(FilePath, FileName); break;
             case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
             case "西藏拉萨": 西藏拉萨.Run(ZhikaStream); break;
             case "淄博公交": 淄博公交.Run(FilePath); break;
             case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;
-            case "平凉公交": 平凉公交.Run(ZhikaStream, excelFileName); break;
+            case "平凉公交": 平凉公交.Run(ZhikaStream, FileName); break;
             case "桂林公交": 桂林公交.Run(FilePath); break;
-            case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, excelFileName); break;
-            case "西安文理学院": 西安文理学院.Run(ZhikaStream, excelFileName); break;
-            case "滨州公交": 滨州公交.Run(ZhikaStream, excelFileName); break;
-            case "云南朗坤": 云南朗坤.PlanB(ZhikaStream, excelFileName); break;
-            case "盱眙": 盱眙.Run(ZhikaStream, excelFileName); break;
+            case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, FileName); break;
+            case "西安文理学院": 西安文理学院.Run(ZhikaStream, FileName); break;
+            case "滨州公交": 滨州公交.Run(ZhikaStream, FileName); break;
+            case "云南朗坤": 云南朗坤.PlanB(ZhikaStream, FileName); break;
+            case "盱眙": 盱眙.Run(ZhikaStream, FileName); break;
             case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
             case "漯河": 漯河.Run(FilePath); break;
-            case "随州": 随州.Run(ZhikaStream, excelFileName); break;
-            case "昆明": 昆明.Run(ZhikaStream, excelFileName); break;
-            case "徐州地铁": 徐州地铁.Run(FilePath, excelFileName); break;
-            case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, excelFileName); break;
-            case "石家庄": 石家庄.Run(ZhikaStream, excelFileName); break;
+            case "随州": 随州.Run(ZhikaStream, FileName); break;
+            case "昆明": 昆明.Run(ZhikaStream, FileName); break;
+            case "徐州地铁": 徐州地铁.Run(FilePath, FileName); break;
+            case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
+            case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
             case "淮北": 淮北.Run(ZhikaStream); break;
-            case "山西医科大学": 山西医科大学.Run(ZhikaStream, excelFileName); break;
-            case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, excelFileName); break;
+            case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
+            case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
             case "洪城": 洪城.Run(ZhikaStream); break;
-            case "第一医科大学": 第一医科大学.Run(ZhikaStream, excelFileName); break;
-            case "邹平": 邹平.Run(ZhikaStream, excelFileName); break;
+            case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
+            case "邹平": 邹平.Run(ZhikaStream, FileName); break;
+            case "盐城": 盐城.Run(FilePath, FileName); break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }
     }

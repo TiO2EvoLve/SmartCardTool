@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Net.Http;
+using System.Windows.Input;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 using WindowUI.Pages;
 using Wpf.Ui.Controls;
 
@@ -10,6 +13,9 @@ public partial class MainWindow : INotifyPropertyChanged
     private string _currentTime;
     private DispatcherTimer _timer;
     public event PropertyChangedEventHandler? PropertyChanged;
+    
+    // 创建一个静态的HttpClient实例
+    private static readonly HttpClient client = new ();
 
     public string CurrentTime
     {
@@ -32,6 +38,8 @@ public partial class MainWindow : INotifyPropertyChanged
         };
         _timer.Tick += Timer_Tick;
         _timer.Start();
+        
+        LoadApiDataAsync();
     }
 
     private void Timer_Tick(object sender, EventArgs e)
@@ -50,5 +58,30 @@ public partial class MainWindow : INotifyPropertyChanged
         var navigationView = sender as NavigationView;
         navigationView?.Navigate(typeof(Home));
     }
-    
+    private async void LoadApiDataAsync()
+    {
+        var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
+        //解析json
+        var json = JObject.Parse(apiResponse);
+        TitleTextBlock.Text = json["yiyan"]?.ToString();
+    }
+    //异步获取每日一句
+    static async Task<string> GetApiDataAsync(string url)
+    {
+       
+        // 发送异步GET请求
+        HttpResponseMessage response = await client.GetAsync(url);
+
+        // 确保请求成功
+        response.EnsureSuccessStatusCode();
+
+        // 读取响应内容
+        string responseBody = await response.Content.ReadAsStringAsync();
+        return responseBody;
+    }
+
+    private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        LoadApiDataAsync();
+    }
 }

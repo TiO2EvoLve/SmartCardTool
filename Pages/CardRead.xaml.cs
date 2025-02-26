@@ -69,7 +69,7 @@ public partial class CardRead : Page
                 st = dc_reset(icdev, 2);
                 if (st != 0)
                 {
-                    MessageBox.Show("dc_reset error!");
+                    Message.ShowMessageBox("错误","dc_reset error!");
                     return;
                 }
                 ////////////////////////////////////////////////////////////
@@ -108,7 +108,7 @@ public partial class CardRead : Page
                 st = dc_pro_resethex(icdev, ref crlen, ref recbuff[0]);
                 if (st != 0)
                 {
-                    MessageBox.Show("dc_pro_reset Card Error!");
+                    Message.ShowMessageBox("错误","dc_pro_reset Card Error!");
                     continue;
                 }
                 string textaaa = null;

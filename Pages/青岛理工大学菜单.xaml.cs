@@ -22,7 +22,7 @@ public partial class 青岛理工大学菜单 : Window
     {
         if (string.IsNullOrEmpty(SelectedCampus))
         {
-            MessageBox.Show("请先选择校区");
+            Message.ShowMessageBox("错误","请先选择校区");
             return;
         }
         Close();

@@ -16,7 +16,7 @@ namespace WindowUI.Pages
         {
             if(CardType is null || CardType =="")
             {
-                MessageBox.Show("请先选择卡类型");
+                Message.ShowMessageBox("错误","请先选择卡类型");
                 return;
             }
             Close();

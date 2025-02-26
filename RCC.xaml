@@ -155,7 +155,7 @@
                                 
                             </StackPanel>
                             <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                               <!-- TODO -->
+                               
                             </StackPanel>
                         </Grid>
                     </TabItem>
@@ -174,7 +174,7 @@
             </StackPanel>
         </Border>
         <!-- 第五行消息提示框 -->
-        <StackPanel Grid.Row="4" MinWidth="300" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="4" MinWidth="400" HorizontalAlignment="Right">
             <ui:SnackbarPresenter  x:Name="SnackbarPresenter" x:FieldModifier="public"/>
             <ContentPresenter x:Name="RootContentDialog" x:FieldModifier="public"/>
         </StackPanel>

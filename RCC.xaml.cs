@@ -41,7 +41,7 @@ public partial class RCC
             //判断文件名是否以MK或者KC开头,如果不是就不是MK文件
             if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK") && !Path.GetFileName(openFileDialog.FileName).StartsWith("KC"))
             { 
-                MessageBox.Show("请选择正确的MK文件");
+                Message.ShowMessageBox("错误","请选择正确的MK文件");
                 return; 
             }
             try
@@ -57,7 +57,7 @@ public partial class RCC
                 mktextbox.Text = mkFileName;
             }catch
             {
-                MessageBox.Show("MK文件读取错误");
+                Message.ShowMessageBox("错误","MK文件读取错误");
             }
             
         }

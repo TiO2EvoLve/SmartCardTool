@@ -50,7 +50,7 @@ public class 云南朗坤
             string filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
-            MessageBox.Show($"数据已处理并保存到桌面{filePath}");
+            Message.ShowSnack();
         }    
     }
     

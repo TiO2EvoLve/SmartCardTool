@@ -9,7 +9,7 @@ public class 泸州公交
         泸州菜单 luzhou = new();
         luzhou.ShowDialog();
         string cardtype = luzhou.CardType;
-        if (cardtype == "") { MessageBox.Show("未选择卡类型"); return; }
+        if (cardtype == "") { Message.ShowMessageBox("错误","未选择卡类型"); return; }
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> uid_10Data = new List<string>();

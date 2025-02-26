@@ -37,7 +37,7 @@ namespace WindowUI.Pages
 
             if (fileName.Length < 24)
             {
-                MessageBox.Show("文件名长度不足，无法处理。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Message.ShowMessageBox("错误","文件名长度不足，无法处理");
                 return;
             }
 

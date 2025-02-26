@@ -52,7 +52,7 @@ namespace WindowUI
             {
                 writer.Write(new TextRange(Script.Document.ContentStart, Script.Document.ContentEnd).Text);
             }
-            MessageBox.Show("保存成功！");
+            Message.ShowSnack();
         }
         private void Image_MouseEnter_Save(object sender, MouseEventArgs e)
         {
@@ -61,7 +61,7 @@ namespace WindowUI
             {
                 writer.Write(new TextRange(Script.Document.ContentStart, Script.Document.ContentEnd).Text);
             }
-            MessageBox.Show("保存成功！");
+            Message.ShowSnack();
         }
         private void Image_MouseDown_Open(object sender, MouseButtonEventArgs e)
         {

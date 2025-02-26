@@ -21,12 +21,6 @@ public class 淄博公交
         List<string> XmlData = new List<string>();
         string sql = "SELECT time1 FROM RCC order by SN ASC";
         XmlData = Mdb.Select(FilePath, sql);
-
-        if (XmlData == null || XmlData.Count == 0)
-        {
-            MessageBox.Show("查询数据库错误");
-            return;
-        }
         
         //保存文件到桌面
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

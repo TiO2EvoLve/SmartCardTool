@@ -11,19 +11,9 @@ public class 郴州
         // 读取SN参数
         string sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
-        if (SN == null || SN.Count == 0)
-        {
-            MessageBox.Show("SN数据读取失败");
-            return;
-        }
         // 读取ATS参数
         sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-        if (ATS == null || ATS.Count == 0)
-        {
-            MessageBox.Show("ATS数据读取失败");
-            return;
-        }
         //处理MK文件
         //截取MK文件第二行的前42个字节
         MKData[1] = MKData[1].Substring(0, 42);
@@ -35,7 +25,7 @@ public class 郴州
         MKData[1] = MKData[1].Substring(0, MKData[1].Length - 6) + totalLinesFormatted;
         if (MKData[1].Length != 42)
         {
-            MessageBox.Show("MK文件格式错误");
+            Message.ShowMessageBox("错误","MK文件格式错误");
             return;
         }
         //输出rcc文件

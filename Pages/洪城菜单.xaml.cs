@@ -21,7 +21,7 @@ public partial class 洪城菜单 : Window
     {
         if (string.IsNullOrEmpty(Cardtype))
         {
-            MessageBox.Show("请先选择校区");
+            Message.ShowMessageBox("错误","请先选择校区");
             return;
         }
         Close();

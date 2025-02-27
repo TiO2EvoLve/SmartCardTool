@@ -17,7 +17,7 @@
             IsPaneToggleVisible="True"
             PaneDisplayMode="Left"
             Loaded="NavigationView_Loaded"
-            PaneTitle="智能卡工具箱">
+            PaneTitle="">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="搜索" />
             </ui:NavigationView.AutoSuggestBox>
@@ -67,14 +67,7 @@
                     Margin="0,0,0,8"
                     Background="{DynamicResource StripedBackgroundBrush}"
                     CornerRadius="4">
-                    <TextBlock
-                        Margin="24"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        FontWeight="Medium"
-                        FontSize="20"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        x:Name="TimeTextBlock" Text="{Binding CurrentTime}" />
+                    <Image Source="icon/logo.jpg"></Image>
                 </Border>
             </ui:NavigationView.PaneHeader>
             <ui:NavigationView.PaneFooter>
@@ -89,7 +82,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="25.02.15"/>
+                        x:Name="TimeTextBlock" Text="{Binding CurrentTime}"/>
                 </Border>
             </ui:NavigationView.PaneFooter>
         </ui:NavigationView>

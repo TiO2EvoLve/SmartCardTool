@@ -57,6 +57,8 @@
       </Resource>
       <None Remove="temple\kahao.mdb" />
       <Resource Include="temple\kahao.mdb" />
+      <None Remove="icon\logo.jpg" />
+      <Resource Include="icon\logo.jpg" />
     </ItemGroup>
 
     <ItemGroup>

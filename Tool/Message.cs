@@ -60,9 +60,16 @@ public static class Message
     // 显示Snackbar消息框重载
     public static void ShowSnack(string Title, string Message, ControlAppearance ControlAppearance, SymbolIcon SymbolIcon, int Seconds)
     {
-        snackbarService.Show(Title,
-            Message,
-            ControlAppearance,
-            SymbolIcon, TimeSpan.FromSeconds(Seconds));
+        try
+        {
+            snackbarService.Show(Title,
+                Message,
+                ControlAppearance,
+                SymbolIcon, TimeSpan.FromSeconds(Seconds));
+        }catch (Exception e)
+        {
+            ShowMessageBox("错误", e.Message);
+        }
+       
     }
 }

@@ -193,9 +193,6 @@ public partial class RCC
     private void Test(object sender, RoutedEventArgs e)
     {
        Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
-       DateTime dt = DateTime.Now;
-       DateTime months = dt.AddMonths(6);
-       Message.ShowMessageBox("输出",$"6个月后时间为：{months.ToString("yyyy-M-d HH:mm:ss")}");
     }
    
 }

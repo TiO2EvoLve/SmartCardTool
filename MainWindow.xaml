@@ -54,9 +54,11 @@
                             x:Name="TitleTextBlock"
                             Margin="24,24,10,24"
                             VerticalAlignment="Center"
-                            FontWeight="Medium"
-                            Text=""
-                            FontStretch="Expanded"
+                            Foreground="Gray"
+                            FontFamily="kaiti"
+                            FontSize="20"
+                            Text="稍等获取每日一言"
+                            MouseDown="UIElement_OnMouseDown"
                         />
                         <ui:SymbolIcon Symbol="ArrowClockwise12" MouseDown="UIElement_OnMouseDown"/>
                     </StackPanel>

@@ -60,10 +60,17 @@ public partial class MainWindow : INotifyPropertyChanged
     }
     private async void LoadApiDataAsync()
     {
-        var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
-        //解析json
-        var json = JObject.Parse(apiResponse);
-        TitleTextBlock.Text = json["yiyan"]?.ToString();
+        try
+        {
+            var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
+            //解析json
+            var json = JObject.Parse(apiResponse);
+            TitleTextBlock.Text = json["yiyan"]?.ToString();
+        }
+        catch (Exception e)
+        {
+            TitleTextBlock.Text = "当前无网络连接";
+        }
     }
     //异步获取每日一句
     static async Task<string> GetApiDataAsync(string url)

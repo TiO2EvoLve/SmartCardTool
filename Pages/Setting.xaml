@@ -12,15 +12,14 @@
 
     <StackPanel Margin="20">
         <ui:TextBlock
-            Margin="0,0,0,8"
+            Margin="0,0,0,24"
             FontTypography="BodyStrong"
             FontSize="32"
-            Text="Setting" />
+            Text="设置" />
         <ui:TextBlock
-            Margin="0,0,0,8"
             FontTypography="BodyStrong"
-            Text="Appearance &amp; behavior" />
-        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
+            Text="系统设置" />
+        <ui:CardControl Margin="0,20,0,12" Icon="{ui:SymbolIcon Color24}">
             <ui:CardControl.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -30,17 +29,17 @@
                     <ui:TextBlock
                         Grid.Row="0"
                         FontTypography="Body"
-                        Text="App theme" />
+                        Text="主题" />
                     <ui:TextBlock
                         Grid.Row="1"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Select which app theme to display" />
+                        Text="选择一个主题" />
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox
                 MinWidth="200" SelectionChanged="ChangeTheme" x:Name="ThemeComboBox" SelectedIndex="0">
-                <ComboBoxItem Content="Light" />
-                <ComboBoxItem Content="Dark" />
+                <ComboBoxItem Content="亮色" />
+                <ComboBoxItem Content="暗色" />
             </ComboBox>
         </ui:CardControl>
 
@@ -49,21 +48,21 @@
                 <ui:TextBlock
                     Grid.Row="0"
                     FontTypography="Body"
-                    Text="Navigation style" />
+                    Text="界面风格" />
             </ui:CardControl.Header>
             <ComboBox
                 MinWidth="200" SelectedIndex="0">
-                <ComboBoxItem Content="Left" />
-                <ComboBoxItem Content="Right" />
-                <ComboBoxItem Content="Top" />
-                <ComboBoxItem Content="Bottom" />
+                <ComboBoxItem Content="靠左" />
+                <ComboBoxItem Content="靠右" />
+                <ComboBoxItem Content="靠上" />
+                <ComboBoxItem Content="靠下" />
             </ComboBox>
         </ui:CardControl>
 
         <ui:TextBlock
             Margin="0,24,0,8"
             FontTypography="BodyStrong"
-            Text="About" />
+            Text="关于" />
         <ui:CardExpander ContentPadding="0">
             <ui:CardExpander.Header>
                 <Grid>
@@ -79,12 +78,12 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         FontTypography="Body"
-                        Text="WPF UI" />
+                        Text="Smart Card Tool" />
                     <ui:TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="© 2025 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                        Text="© 2025 lepo.co | 版权所有 : @TiO2 EvoLve" />
                     <TextBlock
                         Grid.Row="0"
                         Grid.RowSpan="2"
@@ -101,11 +100,11 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock Grid.Column="0" Text="clone此储存库" />
                     <TextBlock
                         Grid.Column="1"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                        Text="git clone https://github.com/TiO2EvoLve/SmartCardTool.git" />
                 </Grid>
                 <ui:Anchor
                     Margin="0"
@@ -115,13 +114,13 @@
                     Background="Transparent"
                     BorderThickness="0,1,0,0"
                     CornerRadius="0"
-                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    NavigateUri="https://github.com/TiO2EvoLve/SmartCardTool/issues">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <TextBlock Grid.Column="0" Text="报告bug和提交功能请求" />
                         <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                     </Grid>
                 </ui:Anchor>
@@ -139,7 +138,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <TextBlock Grid.Column="0" Text="鸣谢" />
                         <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                     </Grid>
                 </ui:Anchor>

@@ -73,7 +73,7 @@ public partial class MainWindow : INotifyPropertyChanged
         }
     }
     //异步获取每日一句
-    static async Task<string> GetApiDataAsync(string url)
+    private static async Task<string> GetApiDataAsync(string url)
     {
        
         // 发送异步GET请求

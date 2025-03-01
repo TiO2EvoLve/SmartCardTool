@@ -128,6 +128,9 @@ public partial class RCC
                 case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
                 case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"; break;
                 case "南通地铁": tip.Text = "具体格式要求见生产通知单"; break;
+                case "滨州公交": tip.Text = "芯片号的名字叫法复旦跟华翼相反";break;
+                case "淄博公交": tip.Text = "分为开通和不开通两种类型"; break;
+                case "淄博血站不开通": tip.Text = "开通的类型使用淄博公交的逻辑即可";break;
                 default: tip.Text = "该地区暂无提示"; break;
             }
         }
@@ -142,6 +145,8 @@ public partial class RCC
             return;
         }
         //根据不同地区处理文件
+        try
+        {
         switch (Region)
         {
             case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
@@ -170,7 +175,7 @@ public partial class RCC
             case "桂林公交": 桂林公交.Run(FilePath); break;
             case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, FileName); break;
             case "西安文理学院": 西安文理学院.Run(ZhikaStream, FileName); break;
-            case "滨州公交": 滨州公交.Run(ZhikaStream, FileName); break;
+            case "滨州公交": 滨州公交.Run(FilePath, FileName); break;
             case "云南朗坤": 云南朗坤.PlanB(ZhikaStream, FileName); break;
             case "盱眙": 盱眙.Run(ZhikaStream, FileName); break;
             case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
@@ -188,6 +193,11 @@ public partial class RCC
             case "邹平": 邹平.Run(ZhikaStream, FileName); break;
             case "盐城": 盐城.Run(FilePath, FileName); break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
+        }
+        }
+        catch (Exception exception)
+        {
+            Message.ShowMessageBox("错误", exception.Message);
         }
     }
     private void Test(object sender, RoutedEventArgs e)

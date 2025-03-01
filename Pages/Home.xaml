@@ -33,8 +33,8 @@
                         <GradientStop Color="#56AB2F" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
-                    <Label MouseDown="Test" Background="Transparent" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
-                        <TextBlock FontSize="15" Foreground="#FEFEFE">卡片读取</TextBlock>
+                    <Label MouseDown="OpenCheckWindow" Background="Transparent" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock FontSize="15" Foreground="#FEFEFE">文件检验</TextBlock>
                     </Label>
                 </Border>
             <Border BorderBrush="AliceBlue" BorderThickness="5" CornerRadius="5,5,5,5" MinWidth="100" Height="50"

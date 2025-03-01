@@ -1,4 +1,6 @@
 ﻿
+using System.Globalization;
+
 namespace WindowUI.Sort;
 
 public class 南通地铁
@@ -27,8 +29,8 @@ public class 南通地铁
             for (int i = 0; i < uidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = uidData[i];
-                DateTime parsedDate = DateTime.ParseExact(timeData[i], "yyyy/MM/dd H:mm:ss", null);
-                timeData[i] = $"HG{parsedDate.ToString("yyyyMMdd")}uidData[i]";
+                DateTime parsedDate = DateTime.ParseExact(timeData[i], "yyyy/M/d H:mm:ss", CultureInfo.InvariantCulture);
+                timeData[i] = $"HG{parsedDate.ToString("yyyyMMdd")}{uidData[i]}";
                 worksheet.Cells[i + 1, 2].Value = timeData[i];
             }
             package.SaveAs(new FileInfo(filePath));

@@ -23,5 +23,11 @@ namespace WindowUI.Pages
         {
             Message.ShowMessageBox("提示","暂未开发");
         }
+
+        private void OpenCheckWindow(object sender, MouseButtonEventArgs e)
+        {
+            数据检查 check = new();
+            check.ShowDialog();
+        }
     }
 }

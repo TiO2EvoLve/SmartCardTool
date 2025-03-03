@@ -161,7 +161,7 @@ public partial class RCC
             case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
             case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
             case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
-            case "泸州公交": 泸州公交.Run(ZhikaStream, FileName); break;
+            case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
             case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;
             case "青岛理工大学菜单": 青岛理工大学.Run(ZhikaStream, FileName); break;
             case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;

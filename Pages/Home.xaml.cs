@@ -26,7 +26,7 @@ namespace WindowUI.Pages
 
         private void OpenCheckWindow(object sender, MouseButtonEventArgs e)
         {
-            数据检查 check = new();
+            DataCheck check = new();
             check.ShowDialog();
         }
     }

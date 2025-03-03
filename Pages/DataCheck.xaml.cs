@@ -3,9 +3,9 @@ using Microsoft.Win32;
 using System.Windows.Forms;
 namespace WindowUI.Pages;
 
-public partial class 数据检查
+public partial class DataCheck
 {
-    public 数据检查()
+    public DataCheck()
     {
         InitializeComponent();
     }

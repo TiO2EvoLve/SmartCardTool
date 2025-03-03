@@ -6,8 +6,8 @@ public class 抚顺
     {
         //取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> snData = new List<string>();
-        List<string> uidData = new List<string>();
+        List<string> SnData = new List<string>();
+        List<string> UidData = new List<string>();
 
         using (var package = new ExcelPackage(ExcelData))
         {
@@ -19,34 +19,27 @@ public class 抚顺
             {
                 string snValue = worksheet.Cells[row, 7].Text;
                 string uidValue = worksheet.Cells[row, 3].Text;
-                snData.Add(snValue);
-                uidData.Add(uidValue);
+                uidValue = Tools.ChangeDecimalSystem(uidValue);
+                SnData.Add(snValue);
+                UidData.Add(uidValue);
             }
         }
-
-        //将snDate与uidData合并起来,最后保存为txt文件到桌面
-        List<string> mergedData = new List<string>();
-        for (int i = 0; i < snData.Count; i++)
-        {
-            string mergedRow = $"{snData[i]} {uidData[i]}";
-            mergedData.Add(mergedRow);
-        }
-
+        
         //保存为txt文件
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string fileName = $"{excelFileName}.txt";
         string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
-            for (int i = 0; i < mergedData.Count; i++)
+            for (int i = 0; i < SnData.Count; i++)
             {
-                if (i == mergedData.Count - 1)
+                if (i == SnData.Count - 1)
                 {
-                    writer.Write(mergedData[i]);
+                    writer.Write($"{SnData[i]} {UidData[i]}");
                 }
                 else
                 {
-                    writer.WriteLine(mergedData[i]);
+                    writer.WriteLine($"{SnData[i]} {UidData[i]}");
                 }
             }
         }

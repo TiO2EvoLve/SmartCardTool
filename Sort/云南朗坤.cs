@@ -3,58 +3,7 @@ namespace WindowUI.Sort;
 
 public class 云南朗坤
 {
-    public static void Run(MemoryStream ExcelData,string excelFileName)
-    {
-        // 取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> SNData = new List<string>();
-        List<string> UidData = new List<string>();
-        List<string> Uid_Data = new List<string>();
-        
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; // 获取行数
-
-            // 遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
-            {
-                string SNValue = worksheet.Cells[row, 7].Text;
-                string UidValue = worksheet.Cells[row, 2].Text;
-                string Uid_Value = worksheet.Cells[row, 3].Text;
-                SNData.Add(SNValue);
-                UidData.Add(UidValue);
-                Uid_Data.Add(Uid_Value);
-            }
-        }
-        // 创建一个新的Excel文件
-        using (var package = new ExcelPackage())
-        {
-            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
-            worksheet.Cells[1, 1].Value = "SerialNum";
-            worksheet.Cells[1, 2].Value = "Uid16";
-            worksheet.Cells[1, 3].Value = "Uid16(调整)";
-            worksheet.Cells[1, 4].Value = "Uid10";
-            worksheet.Cells[1, 5].Value = "Uid10(调整)";
-            for (int i = 0; i < UidData.Count; i++)
-            {
-                worksheet.Cells[i + 2, 1].Value = SNData[i];
-                worksheet.Cells[i + 2, 2].Value = UidData[i];
-                worksheet.Cells[i + 2, 3].Value = Uid_Data[i];
-                worksheet.Cells[i + 2, 4].Value = Convert.ToUInt32(UidData[i], 16).ToString();
-                worksheet.Cells[i + 2, 5].Value = Convert.ToUInt32(Uid_Data[i], 16).ToString();
-            }
-            // 保存文件到桌面
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string fileName = $"{excelFileName}.xlsx";
-            string filePath = Path.Combine(desktopPath, fileName);
-            package.SaveAs(new FileInfo(filePath));
-            // 显示提示消息
-            Message.ShowSnack();
-        }    
-    }
-    
-    public static void PlanB(MemoryStream ExcelData, string excelFileName)
+    public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
@@ -82,11 +31,11 @@ public class 云南朗坤
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
-            worksheet.Cells[1, 1].Value = "SerialNum";
-            worksheet.Cells[1, 2].Value = "Uid16";
-            worksheet.Cells[1, 3].Value = "Uid16(调整)";
-            worksheet.Cells[1, 4].Value = "Uid10";
-            worksheet.Cells[1, 5].Value = "Uid10(调整)";
+            worksheet.Cells[1, 1].Value = "卡号";
+            worksheet.Cells[1, 2].Value = "Uid16进制";
+            worksheet.Cells[1, 3].Value = "Uid16进制调整";
+            worksheet.Cells[1, 4].Value = "Uid10进制";
+            worksheet.Cells[1, 5].Value = "Uid10进制调整";
             for (int i = 0; i < SNData.Count; i++)
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];

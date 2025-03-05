@@ -192,6 +192,7 @@ public partial class RCC
             case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
             case "邹平": 邹平.Run(ZhikaStream, FileName); break;
             case "盐城": 盐城.Run(FilePath, FileName); break;
+            case "穆棱" : 穆棱.Run(FilePath, FileName);break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }
         }
@@ -203,6 +204,7 @@ public partial class RCC
     private void Test(object sender, RoutedEventArgs e)
     {
        Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
+       
     }
    
 }

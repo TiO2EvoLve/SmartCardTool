@@ -13,7 +13,7 @@ public class 泸州公交
         List<string> SnData = new List<string>();
         List<string> Uid10Data = new List<string>();
         
-        string sql = "select SerialNum from kahao order by SerialNum ASC ";
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
         SnData = Mdb.Select(FilePath, sql);
 
         for (int i = 0; i < SnData.Count; i++)

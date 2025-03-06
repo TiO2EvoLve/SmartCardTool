@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
 using WindowUI.Sort;
@@ -204,7 +205,12 @@ public partial class RCC
     private void Test(object sender, RoutedEventArgs e)
     {
        Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
+       LogManage.AddLog("未开发");
        
     }
-   
+
+    private void ClearLog(object sender, MouseButtonEventArgs e)
+    {
+        LogManage.Clear();
+    }
 }

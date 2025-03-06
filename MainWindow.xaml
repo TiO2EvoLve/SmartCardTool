@@ -46,6 +46,7 @@
             </ui:NavigationView.FooterMenuItems>
             <ui:NavigationView.Header>
                 <Border
+                    MouseDown="UIElement_OnMouseDown"
                     Margin="8"
                     Background="{DynamicResource StripedBackgroundBrush}"
                     CornerRadius="4">
@@ -58,9 +59,8 @@
                             FontFamily="kaiti"
                             FontSize="20"
                             Text="稍等获取每日一言"
-                            MouseDown="UIElement_OnMouseDown"
+                            
                         />
-                        <ui:SymbolIcon Symbol="ArrowClockwise12" MouseDown="UIElement_OnMouseDown"/>
                     </StackPanel>
                 </Border>
             </ui:NavigationView.Header>

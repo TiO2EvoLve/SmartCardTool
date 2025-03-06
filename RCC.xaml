@@ -154,9 +154,15 @@
                                 </ui:CardControl>
                                 
                             </StackPanel>
-                            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <RichTextBox x:Name="log_text" Height="200" Width="700"/>
-                            </StackPanel>
+                            <Canvas Grid.Row="1" Margin="10" Height="200" Width="700">
+                                <RichTextBox x:Name="log_text" Height="200" Width="700">
+                                    <FlowDocument>
+                                        <Paragraph LineHeight="5" FontFamily="Microsoft YaHei" FontSize="12">
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                                <ui:SymbolIcon MouseDown="ClearLog" Symbol="Clipboard32" Canvas.Right="20" Canvas.Bottom="20"/>
+                            </Canvas>
                         </Grid>
                     </TabItem>
                     <TabItem>

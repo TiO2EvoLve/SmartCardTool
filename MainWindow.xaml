@@ -59,7 +59,6 @@
                             FontFamily="kaiti"
                             FontSize="20"
                             Text="稍等获取每日一言"
-                            
                         />
                     </StackPanel>
                 </Border>

@@ -17,7 +17,8 @@ public partial class DataCheck
         {
             string folderPath = openFolderDialog.FolderName;
             var files = Directory.GetFiles(folderPath);
-
+            
+            //检查文件大小和行数
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
@@ -36,7 +37,6 @@ public partial class DataCheck
                     if (lines.Length != 46)
                     {
                         Console.WriteLine($"[行数错误] {file}（实际行数：{lines.Length}）");
-                        continue;
                     }
                 }
                 catch (Exception ex)
@@ -44,6 +44,8 @@ public partial class DataCheck
                     Console.WriteLine($"[读取失败] {file} - {ex.Message}");
                 }
             }
+
+            Console.WriteLine("检查完毕！");
         }
 
     }

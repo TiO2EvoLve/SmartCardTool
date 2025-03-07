@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace WindowUI.Tool;
 
@@ -15,12 +16,15 @@ public static class LogManage
             richTextBox = rccWindow.log_text;
         }
     }
-    
     public static void Clear()
     {
         richTextBox.Document.Blocks.Clear();
+        Paragraph paragraph = new Paragraph();
+        paragraph.LineHeight = 5;
+        paragraph.FontFamily = new FontFamily("Microsoft YaHei");
+        paragraph.FontSize = 12;
+        richTextBox.Document.Blocks.Add(paragraph);
     }
-    
     public static void AddLog(string log)
     {
         DateTime now = DateTime.Now;

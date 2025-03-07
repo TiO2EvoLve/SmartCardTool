@@ -37,6 +37,7 @@ public static class Message
             CloseButtonText = "确定"
         };
         uiMessageBox.ShowDialogAsync();
+        
     }
     // 显示MessageBox消息框重载
     public static void ShowMessageBox(string Title, string Content)
@@ -56,6 +57,7 @@ public static class Message
             "文件已保存到桌面",
             ControlAppearance.Success,
             new SymbolIcon(SymbolRegular.Checkmark20), TimeSpan.FromSeconds(3));
+            LogManage.AddLog("执行成功，文件已保存到桌面");
     }
     // 显示Snackbar消息框重载
     public static void ShowSnack(string Title, string Message, ControlAppearance ControlAppearance, SymbolIcon SymbolIcon, int Seconds)

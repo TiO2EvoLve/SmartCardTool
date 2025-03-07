@@ -13,7 +13,7 @@ public partial class RCC
     private string mkFileName { get; set; } //  记录MK文件名
     private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
     private string FileName { get; set; } // 记录文件名
-    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的卡文件数据
+    private MemoryStream ZhikaStream { get; set; }// 临时存储读取的卡文件数据
     private string FilePath { get; set; } // 记录文件的路径
     private string Region { get; set; } // 下拉框选则的地区
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
@@ -37,6 +37,7 @@ public partial class RCC
         };
         if (openFileDialog.ShowDialog() == true)
         {
+            LogManage.AddLog($"成功选择MK文件:{openFileDialog.FileName}");
             //如果什么也没有就返回
             if (openFileDialog.FileName == "") return;
             //判断文件名是否以MK或者KC开头,如果不是就不是MK文件
@@ -74,6 +75,7 @@ public partial class RCC
         };
         if (openFileDialog2.ShowDialog() == true)
         {
+            LogManage.AddLog($"成功选择数据文件:{openFileDialog2.FileName}");
             if (openFileDialog2.FileName == "") return;
             //记录文件路径
             FilePath = openFileDialog2.FileName;
@@ -106,6 +108,15 @@ public partial class RCC
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
+                try
+                {
+                    LogManage.AddLog($"选择地区为：{Region}");
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                
                 SelectMKButton.IsEnabled = Array.Exists(NeedMKFileRegions, region => region == Region);
                 if (!SelectMKButton.IsEnabled)
                 {
@@ -118,6 +129,9 @@ public partial class RCC
                     mktextbox.Foreground = Brushes.Red;
                 }
             }
+
+          
+            
             //根据不同地区进行提示
             switch (Region)
             {
@@ -145,6 +159,7 @@ public partial class RCC
             Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
+        LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
         try
         {
@@ -200,6 +215,7 @@ public partial class RCC
         catch (Exception exception)
         {
             Message.ShowMessageBox("错误", exception.Message);
+            LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
         }
     }
     private void Test(object sender, RoutedEventArgs e)
@@ -208,7 +224,6 @@ public partial class RCC
        LogManage.AddLog("未开发");
        
     }
-
     private void ClearLog(object sender, MouseButtonEventArgs e)
     {
         LogManage.Clear();

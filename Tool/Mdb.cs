@@ -28,7 +28,7 @@ public class Mdb
                 {
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        result.Add(reader[i].ToString());
+                        result.Add(reader[i].ToString() ?? throw new InvalidOperationException());
                     }
                 }
                 return result;
@@ -36,6 +36,7 @@ public class Mdb
             catch (Exception ex)
             {
                 Message.ShowSnack("错误",ex.Message,ControlAppearance.Danger,new SymbolIcon(SymbolRegular.ErrorCircle20),3);
+                LogManage.AddLog("数据库指令执行出错！\n"+ex.Message);
             }
             return null;
         }
@@ -60,6 +61,7 @@ public class Mdb
             catch (Exception ex)
             {
                 Message.ShowSnack("错误",ex.Message,ControlAppearance.Danger,new SymbolIcon(SymbolRegular.ErrorCircle20),3);
+                LogManage.AddLog("数据库指令执行出错！\n"+ex.Message);
             }
         }
     }

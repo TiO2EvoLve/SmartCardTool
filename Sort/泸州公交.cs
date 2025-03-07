@@ -21,7 +21,7 @@ public class 泸州公交
             SnData[i] = SnData[i].Substring(3, 16);
             if (!SnData[i].StartsWith(cardtype))
             {
-                Message.ShowMessageBox("错误","卡类型不正确");
+                Message.ShowMessageBox("错误","检查到卡类型不正确");
                 return;
             }
         }

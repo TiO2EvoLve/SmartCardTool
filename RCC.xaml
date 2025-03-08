@@ -84,6 +84,7 @@
                     <ComboBoxItem Content="邹平" />
                     <ComboBoxItem Content="盐城" />
                     <ComboBoxItem Content="穆棱" />
+                    <ComboBoxItem Content="上海树维" />
                 </ComboBox>
                 <ui:Button
                     x:Name="SelectMKButton"

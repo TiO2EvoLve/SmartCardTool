@@ -209,6 +209,7 @@ public partial class RCC
             case "邹平": 邹平.Run(ZhikaStream, FileName); break;
             case "盐城": 盐城.Run(FilePath, FileName); break;
             case "穆棱" : 穆棱.Run(FilePath, FileName);break;
+            case "上海树维" : 上海树维.Run(FilePath, FileName);break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }
         }

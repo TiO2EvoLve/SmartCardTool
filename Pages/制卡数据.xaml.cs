@@ -40,7 +40,7 @@ public partial class 制卡数据 : Page
 
     private void CreateFile(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(XdFilePath))
+        if (string.IsNullOrEmpty(XdFilePath) || string.IsNullOrEmpty(KeyFilePath))
         {
             Message.ShowMessageBox("错误", "请先选择一个xd文件");
             return;
@@ -182,7 +182,7 @@ public partial class 制卡数据 : Page
            .Append(dicry["F2PINCC"]).Append("','")
            .Append(DateTime.Now.ToString()).Append("')");
 
-        Mdb.Select(destinationFilePath, sql.ToString());
+        Mdb.Execute(destinationFilePath, sql.ToString());
     }
 
     public static void SetValue(Dictionary<string, string> dicry, string key, string val)
@@ -205,7 +205,7 @@ public partial class 制卡数据 : Page
             byte[] buffer = File.ReadAllBytes(keyFilePath);
             string hexString = BitConverter.ToString(buffer).Replace("-", "");
             string sql = $"update safekey set KK = '{hexString}'";
-            Mdb.Select(destinationFilePath, sql);
+            Mdb.Execute(destinationFilePath, sql);
         }
         catch (Exception ex)
         {

@@ -4,7 +4,10 @@
 rcc文件自动生成
 
 注意事项：
-- Excel文件需要xlsx格式
+- 本项目需要下载.net 9
+- Excel文件需要手动转为xlsx格式
+- 需要额外下载Access Database engine处理旧版mdb文件
+
 
 ### 2、数据解析
 解析制卡数据，生成数据库文件

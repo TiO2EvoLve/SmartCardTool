@@ -13,11 +13,6 @@ public class 琴岛通
        
         string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-
-        for (int i = 0; i < ATS.Count(); i++)
-        {
-            ATS[i] = ATS[i].Trim();
-        }
         
         sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
@@ -56,11 +51,11 @@ public class 琴岛通
             {
                 if (i == ATS.Count - 1)
                 {
-                    writer.Write($"{ATS[i]}              {SN[i]}");
+                    writer.Write($"{ATS[i]}{SN[i]}");
                 }
                 else
                 {
-                    writer.WriteLine($"{ATS[i]}              {SN[i]}");
+                    writer.WriteLine($"{ATS[i]}{SN[i]}");
                 }
                 
             }

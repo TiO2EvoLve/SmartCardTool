@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using WindowUI.Pages;
 
 namespace WindowUI.Sort;
 
@@ -10,11 +11,25 @@ public class 琴岛通
         List<string> ATS = new List<string>();
         List<string> SN = new List<string>();
         string Date = ""; // 记录日期
-       
+        string cardtype;
+        string space = "";
+
+        琴岛通菜单 menu = new 琴岛通菜单();
+        menu.ShowDialog();
+        cardtype = menu.Cardtype;
+        
         string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-        
-        sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
+
+        if (cardtype == "1280")
+        {
+            sql = "SELECT 卡类型 FROM kahao order by SerialNum ASC";
+            space = "              ";
+        }else if (cardtype == "1208")
+        {
+            sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
+            space = "";
+        }
         SN = Mdb.Select(FilePath, sql);
             
         // 使用正则表达式匹配数量和日期
@@ -37,12 +52,12 @@ public class 琴岛通
         }
         else
         {
-            Message.ShowMessageBox("异常","未找到匹配的数量和日期");
-            return;
+            LogManage.AddLog("没有匹配到日期，已自动使用当前时间");
+            Date = DateTime.Now.ToString("yyyyMMdd");
         }
         
         string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"HG2660{Date}01.rcc";
+        string fileName = $"HG2660{Date}01.RCC";
         string filePath = Path.Combine(desktopPath, fileName);
         using (StreamWriter writer = new StreamWriter(filePath))
         {
@@ -51,11 +66,11 @@ public class 琴岛通
             {
                 if (i == ATS.Count - 1)
                 {
-                    writer.Write($"{ATS[i]}{SN[i]}");
+                    writer.Write($"{ATS[i]}{space}{SN[i]}");
                 }
                 else
                 {
-                    writer.WriteLine($"{ATS[i]}{SN[i]}");
+                    writer.WriteLine($"{ATS[i]}{space}{SN[i]}");
                 }
                 
             }

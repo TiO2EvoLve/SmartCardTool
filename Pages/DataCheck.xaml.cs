@@ -126,5 +126,71 @@ public partial class DataCheck
             }
             return candidate;
         }
-    
+
+        private void CheckLossSn(object sender, RoutedEventArgs e)
+        {
+            List<long> SN = new List<long>();
+            OpenFileDialog open = new OpenFileDialog()
+            {
+                Filter = "mdb文件(*.mdb) | *.mdb",
+                Title = "请选择数据库文件"
+            };
+            if (open.ShowDialog() == true)
+            {
+                string sql = "select SN from RCC order by SN ASC ";
+                List<string> stringList = Mdb.Select(open.FileName, sql);
+                SN = stringList.Where(s => long.TryParse(s, out _))
+                    .Select(s => long.Parse(s))
+                    .ToList();
+            }
+            // 找出不连续的号码
+            List<long> nonConsecutiveNumbers = FindNonConsecutiveNumbers(SN);
+
+            // 输出不连续的号码
+            if (nonConsecutiveNumbers.Count > 0)
+            {
+                Console.WriteLine("不连续的号码有：");
+                foreach (long number in nonConsecutiveNumbers)
+                {
+                    Console.WriteLine(number);
+                }
+            }
+            else
+            {
+                Console.WriteLine("号码是连续的。");
+            }
+        }
+        private List<long> FindNonConsecutiveNumbers(List<long> numbers)
+        {
+            List<long> nonConsecutive = new List<long>();
+            if (numbers.Count <= 1)
+            {
+                return nonConsecutive;
+            }
+
+            for (int i = 0; i < numbers.Count - 1; i++)
+            {
+                long current = numbers[i];
+                long next = numbers[i + 1];
+
+                long expectedNext = GetNextExpectedNumber(current);
+
+                if (next != expectedNext)
+                {
+                    nonConsecutive.Add(current);
+                }
+            }
+
+            return nonConsecutive;
+        }
+
+        private long GetNextExpectedNumber(long current)
+        {
+            long next = current + 1;
+            while (next % 10 == 4)
+            {
+                next++;
+            }
+            return next;
+        }
 }

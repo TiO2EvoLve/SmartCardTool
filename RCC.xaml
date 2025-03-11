@@ -97,7 +97,7 @@
                 <ui:SymbolIcon x:Name="mk" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red" />
                 <ui:Button x:Name="SelectDataButton"
                            Background="#FF409EFF"
-                           Content="选择制卡数据文件"
+                           Content="选择数据文件"
                            MouseOverBackground="#66b1ff" Margin="10,0,0,0"
                            Click="OpenFile" Foreground="#E4FFFFFF" />
                 <ui:SymbolIcon x:Name="data" Symbol="Circle48" FontSize="20" Filled="True" Foreground="red" />

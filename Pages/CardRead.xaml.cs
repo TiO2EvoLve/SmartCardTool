@@ -35,20 +35,27 @@ public partial class CardRead : Page
 
     private void OpenPort(object sender, RoutedEventArgs e)
     {
-        string strport = port_input.Text;
-        short Port = Convert.ToInt16(strport);
-        
-        st = dc_init(Port, hz);
-        Console.WriteLine(st);
-        if (st < 0)
+        try
         {
-            Message.ShowMessageBox("失败","打开端口失败");
+            string strport = port_input.Text;
+            short Port = Convert.ToInt16(strport);
+
+            st = dc_init(Port, hz);
+            Console.WriteLine(st);
+            if (st < 0)
+            {
+                Message.ShowMessageBox("失败", "打开端口失败");
+            }
+            else
+            {
+                port_show.Foreground = Brushes.LimeGreen;
+                icdev = st;
+                dc_beep(icdev, 10);
+            }
         }
-        else
+        catch (DllNotFoundException)
         {
-            port_show.Foreground = Brushes.LimeGreen;
-            icdev = st;
-            dc_beep(icdev, 10);
+            Message.ShowMessageBox("错误", "还没有设置dcrf32.dll");
         }
     }
     private void bt_start_Click(object sender, EventArgs e)

@@ -19,7 +19,7 @@ public partial class RCC
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
     private OpenFileDialog openFileDialog2 { get; set; } // 文件处理流
     // 定义需要MK文件的地区
-    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交"];
+    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交","琴岛通1280"];
     
     public RCC()
     {
@@ -130,7 +130,7 @@ public partial class RCC
                 }
             }
 
-          
+            
             
             //根据不同地区进行提示
             switch (Region)
@@ -211,6 +211,7 @@ public partial class RCC
             case "穆棱" : 穆棱.Run(FilePath, FileName);break;
             case "上海树维" : 上海树维.Run(FilePath, FileName);break;
             case "琴岛通" : 琴岛通.Run(FilePath, FileName);break;
+            case "琴岛通1280" : 琴岛通1280.Run(MKData, mkFileName,FilePath, FileName);break;
             case "广水" : 广水.Run(FilePath, FileName);break;
             default: Message.ShowMessageBox("警告","请先选择地区"); break;
         }

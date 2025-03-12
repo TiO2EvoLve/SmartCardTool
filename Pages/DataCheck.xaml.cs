@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Win32;
-using System.Windows.Forms;
+using Tommy;
+
 namespace WindowUI.Pages;
 
 public partial class DataCheck
@@ -49,9 +50,10 @@ public partial class DataCheck
                     Console.WriteLine($"[读取失败] {file} - {ex.Message}");
                 }
             }
-
             Console.WriteLine("检查完毕！");
+            
         }
+        
 
     }
      void ValidateFileNumberSequence(string directoryPath)
@@ -193,4 +195,6 @@ public partial class DataCheck
             }
             return next;
         }
+
+    
 }

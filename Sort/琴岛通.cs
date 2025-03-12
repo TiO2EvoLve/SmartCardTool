@@ -11,27 +11,11 @@ public class 琴岛通
         List<string> ATS = new List<string>();
         List<string> SN = new List<string>();
         string Date = ""; // 记录日期
-        string cardtype;
-        string space = "";
-
-        琴岛通菜单 menu = new 琴岛通菜单();
-        menu.ShowDialog();
-        cardtype = menu.Cardtype;
         
         string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-
-        if (cardtype == "1280")
-        {
-            sql = "SELECT 卡类型 FROM kahao order by SerialNum ASC";
-            space = "              ";
-        }else if (cardtype == "1208")
-        {
-            sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
-            space = "";
-        }
+        sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
-            
         // 使用正则表达式匹配数量和日期
         Regex regex = new Regex(@"(\d+)-(\d{8})");
         Match match = regex.Match(FileName);
@@ -64,15 +48,7 @@ public class 琴岛通
             writer.WriteLine(ATS.Count);
             for (int i = 0; i < ATS.Count; i++)
             {
-                if (i == ATS.Count - 1)
-                {
-                    writer.Write($"{ATS[i]}{space}{SN[i]}");
-                }
-                else
-                {
-                    writer.WriteLine($"{ATS[i]}{space}{SN[i]}");
-                }
-                
+                writer.WriteLine($"{ATS[i]}{SN[i]}");
             }
         }
         Message.ShowSnack();

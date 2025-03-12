@@ -33,6 +33,9 @@
       <None Update="temple\淄博血站.mdb">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Config\config.toml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -68,6 +71,7 @@
       <PackageReference Include="Prism.Wpf" Version="9.0.537" />
       <PackageReference Include="System.Data.OleDb" Version="9.0.1" />
       <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.1" />
+      <PackageReference Include="Tommy" Version="3.1.2" />
       <PackageReference Include="WPF-UI" Version="4.0.0-rc.2" />
     </ItemGroup>
 

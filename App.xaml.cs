@@ -1,9 +1,5 @@
-﻿
-namespace WindowUI;
+﻿namespace WindowUI;
 
 public partial class App : Application
 {
 }
-
-
-

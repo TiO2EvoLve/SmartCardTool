@@ -10,38 +10,35 @@ public class 西藏林芝
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; //获取行数
+            var rowCount = worksheet.Dimension.Rows; //获取行数
             //遍历Excel文件的每一行
-            for (int row = 2; row <= rowCount; row++)
+            for (var row = 2; row <= rowCount; row++)
             {
-                string SNValue = worksheet.Cells[row, 1].Text;
+                var SNValue = worksheet.Cells[row, 1].Text;
                 SNData.Add(SNValue);
             }
         }
-        string date = "20241115";
-        string cardtype = "01";
-        string startdate = "20241107";
-        string fnishdate = "20401231";
 
-        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"HP-04377740{date}165931.TXT";
-        string filePath = Path.Combine(desktopPath, fileName);
-        using (StreamWriter writer = new StreamWriter(filePath))
+        var date = "20241115";
+        var cardtype = "01";
+        var startdate = "20241107";
+        var fnishdate = "20401231";
+
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var fileName = $"HP-04377740{date}165931.TXT";
+        var filePath = Path.Combine(desktopPath, fileName);
+        using (var writer = new StreamWriter(filePath))
         {
             writer.WriteLine(SNData.Count + date);
-            for (int i = 0; i < SNData.Count; i++)
-            {
+            for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                {
-                    writer.Write($"{SNData[i]}|04377740FFFFFFFF|{cardtype}|{startdate}|{fnishdate}|2020202020202020202020202020202020202020|2020202020202020202020202020202020202020202020202020202020202020|00|00|0000|0000000000|");
-                }
+                    writer.Write(
+                        $"{SNData[i]}|04377740FFFFFFFF|{cardtype}|{startdate}|{fnishdate}|2020202020202020202020202020202020202020|2020202020202020202020202020202020202020202020202020202020202020|00|00|0000|0000000000|");
                 else
-                {
-                    writer.WriteLine($"{SNData[i]}|04377740FFFFFFFF|{cardtype}|{startdate}|{fnishdate}|2020202020202020202020202020202020202020|2020202020202020202020202020202020202020202020202020202020202020|00|00|0000|0000000000|");
-
-                }
-            }
+                    writer.WriteLine(
+                        $"{SNData[i]}|04377740FFFFFFFF|{cardtype}|{startdate}|{fnishdate}|2020202020202020202020202020202020202020|2020202020202020202020202020202020202020202020202020202020202020|00|00|0000|0000000000|");
         }
-        Message.ShowSnack();   
+
+        Message.ShowSnack();
     }
 }

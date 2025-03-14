@@ -14,84 +14,84 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <Optimize>True</Optimize>
-      <IsPublishable>True</IsPublishable>
-      <Prefer32bit>false</Prefer32bit>
-      <PlatformTarget>AnyCPU</PlatformTarget>
+        <Optimize>True</Optimize>
+        <IsPublishable>True</IsPublishable>
+        <Prefer32bit>false</Prefer32bit>
+        <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <Optimize>True</Optimize>
-      <IsPublishable>True</IsPublishable>
+        <Optimize>True</Optimize>
+        <IsPublishable>True</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="photo\**" />
-      <EmbeddedResource Remove="photo\**" />
-      <None Remove="photo\**" />
-      <Page Remove="photo\**" />
-      <None Update="temple\淄博血站.mdb">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Config\config.toml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+        <Compile Remove="photo\**"/>
+        <EmbeddedResource Remove="photo\**"/>
+        <None Remove="photo\**"/>
+        <Page Remove="photo\**"/>
+        <None Update="temple\淄博血站.mdb">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Config\config.toml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="icon\csv.png" />
-      <None Remove="icon\file.png" />
-      <None Remove="icon\ini.png" />
-      <None Remove="icon\pdi.png" />
-      <None Remove="icon\save.png" />
-      <None Remove="icon\snd.png" />
-      <None Remove="icon\sndevts.png" />
+        <None Remove="icon\csv.png"/>
+        <None Remove="icon\file.png"/>
+        <None Remove="icon\ini.png"/>
+        <None Remove="icon\pdi.png"/>
+        <None Remove="icon\save.png"/>
+        <None Remove="icon\snd.png"/>
+        <None Remove="icon\sndevts.png"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="icon\csv.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="icon\ini.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="icon\save.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <None Remove="temple\kahao.mdb" />
-      <Resource Include="temple\kahao.mdb" />
-      <None Remove="icon\logo.jpg" />
-      <Resource Include="icon\logo.jpg" />
+        <Resource Include="icon\csv.png">
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="icon\ini.png">
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="icon\save.png">
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="temple\kahao.mdb"/>
+        <Resource Include="temple\kahao.mdb"/>
+        <None Remove="icon\logo.jpg"/>
+        <Resource Include="icon\logo.jpg"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EPPlus" Version="7.5.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="Prism.Unity" Version="9.0.537" />
-      <PackageReference Include="Prism.Wpf" Version="9.0.537" />
-      <PackageReference Include="System.Data.OleDb" Version="9.0.1" />
-      <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.1" />
-      <PackageReference Include="Tommy" Version="3.1.2" />
-      <PackageReference Include="WPF-UI" Version="4.0.0-rc.2" />
+        <PackageReference Include="EPPlus" Version="7.5.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Prism.Unity" Version="9.0.537"/>
+        <PackageReference Include="Prism.Wpf" Version="9.0.537"/>
+        <PackageReference Include="System.Data.OleDb" Version="9.0.1"/>
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.1"/>
+        <PackageReference Include="Tommy" Version="3.1.2"/>
+        <PackageReference Include="WPF-UI" Version="4.0.0-rc.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Properties\Settings.Designer.cs">
-        <DesignTimeSharedInput>True</DesignTimeSharedInput>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Settings.settings</DependentUpon>
-      </Compile>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Properties\Settings.settings">
-        <Generator>SettingsSingleFileGenerator</Generator>
-        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      </None>
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="temple\" />
+        <Folder Include="temple\"/>
     </ItemGroup>
 
 </Project>

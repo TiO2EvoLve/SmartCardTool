@@ -6,9 +6,6 @@ namespace WindowUI.Tool;
 
 public static class Message
 {
-    private static ISnackbarService snackbarService { get; set; }
-    private static IContentDialogService dialogService { get; set; }
-
     //构造函数
     static Message()
     {
@@ -27,6 +24,9 @@ public static class Message
         }
     }
 
+    private static ISnackbarService snackbarService { get; }
+    private static IContentDialogService dialogService { get; }
+
     // 显示MessageBox消息框
     public static void ShowMessageBox()
     {
@@ -37,8 +37,8 @@ public static class Message
             CloseButtonText = "确定"
         };
         uiMessageBox.ShowDialogAsync();
-        
     }
+
     // 显示MessageBox消息框重载
     public static void ShowMessageBox(string Title, string Content)
     {
@@ -50,6 +50,7 @@ public static class Message
         };
         uiMessageBox.ShowDialogAsync();
     }
+
     // 显示Snackbar消息框
     public static void ShowSnack()
     {
@@ -57,10 +58,12 @@ public static class Message
             "文件已保存到桌面",
             ControlAppearance.Success,
             new SymbolIcon(SymbolRegular.Checkmark20), TimeSpan.FromSeconds(3));
-            LogManage.AddLog("执行成功，文件已保存到桌面");
+        LogManage.AddLog("执行成功，文件已保存到桌面");
     }
+
     // 显示Snackbar消息框重载
-    public static void ShowSnack(string Title, string Message, ControlAppearance ControlAppearance, SymbolIcon SymbolIcon, int Seconds)
+    public static void ShowSnack(string Title, string Message, ControlAppearance ControlAppearance,
+        SymbolIcon SymbolIcon, int Seconds)
     {
         try
         {
@@ -68,10 +71,10 @@ public static class Message
                 Message,
                 ControlAppearance,
                 SymbolIcon, TimeSpan.FromSeconds(Seconds));
-        }catch (Exception e)
+        }
+        catch (Exception e)
         {
             ShowMessageBox("错误", e.Message);
         }
-       
     }
 }

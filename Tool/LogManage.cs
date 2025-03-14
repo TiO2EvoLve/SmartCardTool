@@ -6,28 +6,27 @@ namespace WindowUI.Tool;
 
 public static class LogManage
 {
-    static RichTextBox richTextBox { get; set; }
-    
     static LogManage()
     {
         var rccWindow = Application.Current.Windows.OfType<RCC>().FirstOrDefault();
-        if (rccWindow != null)
-        {
-            richTextBox = rccWindow.log_text;
-        }
+        if (rccWindow != null) richTextBox = rccWindow.log_text;
     }
+
+    private static RichTextBox richTextBox { get; }
+
     public static void Clear()
     {
         richTextBox.Document.Blocks.Clear();
-        Paragraph paragraph = new Paragraph();
+        var paragraph = new Paragraph();
         paragraph.LineHeight = 5;
         paragraph.FontFamily = new FontFamily("Microsoft YaHei");
         paragraph.FontSize = 12;
         richTextBox.Document.Blocks.Add(paragraph);
     }
+
     public static void AddLog(string log)
     {
-        DateTime now = DateTime.Now;
+        var now = DateTime.Now;
         log = $"[{now:HH:mm:ss}] {log}";
         richTextBox.AppendText(log + "\n");
         richTextBox.ScrollToEnd();

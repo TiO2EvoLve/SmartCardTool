@@ -2,29 +2,30 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
+using Tommy;
 using WindowUI.Sort;
 using Wpf.Ui.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace WindowUI;
 
 public partial class RCC
 {
-    private string mkFileName { get; set; } //  记录MK文件名
-    private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
-    private string FileName { get; set; } // 记录文件名
-    private MemoryStream ZhikaStream { get; set; }// 临时存储读取的卡文件数据
-    private string FilePath { get; set; } // 记录文件的路径
-    private string Region { get; set; } // 下拉框选则的地区
-    private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
-    private OpenFileDialog openFileDialog2 { get; set; } // 文件处理流
     // 定义需要MK文件的地区
-    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交","琴岛通1280"];
-    
+    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交", "琴岛通1280"];
+
     public RCC()
     {
         InitializeComponent();
     }
+
+    private string mkFileName { get; set; } //  记录MK文件名
+    private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
+    private string FileName { get; set; } // 记录文件名
+    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的卡文件数据
+    private string FilePath { get; set; } // 记录文件的路径
+    private string Region { get; set; } // 下拉框选则的地区
+    private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
+    private OpenFileDialog openFileDialog2 { get; set; } // 文件处理流
 
     //打开MK文件
     private void OpenMKFile(object sender, RoutedEventArgs e)
@@ -41,11 +42,13 @@ public partial class RCC
             //如果什么也没有就返回
             if (openFileDialog.FileName == "") return;
             //判断文件名是否以MK或者KC开头,如果不是就不是MK文件
-            if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK") && !Path.GetFileName(openFileDialog.FileName).StartsWith("KC"))
-            { 
-                Message.ShowMessageBox("错误","请选择正确的MK文件");
-                return; 
+            if (!Path.GetFileName(openFileDialog.FileName).StartsWith("MK") &&
+                !Path.GetFileName(openFileDialog.FileName).StartsWith("KC"))
+            {
+                Message.ShowMessageBox("错误", "请选择正确的MK文件");
+                return;
             }
+
             try
             {
                 //将文件暂时存储到MKDate中
@@ -57,11 +60,11 @@ public partial class RCC
                 mk.Foreground = Brushes.LightGreen;
                 mktextbox.Foreground = Brushes.LimeGreen;
                 mktextbox.Text = mkFileName;
-            }catch
-            {
-                Message.ShowMessageBox("错误","MK文件读取错误");
             }
-            
+            catch
+            {
+                Message.ShowMessageBox("错误", "MK文件读取错误");
+            }
         }
     }
 
@@ -92,7 +95,8 @@ public partial class RCC
             {
                 Message.ShowMessageBox("错误", "文件已被占用，请先关闭其他程序");
                 return;
-            } 
+            }
+
             datatextbox.Text = FileName;
             data.Foreground = Brushes.LightGreen;
             datatextbox.Foreground = Brushes.LimeGreen;
@@ -108,15 +112,13 @@ public partial class RCC
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
-                try
-                {
-                    LogManage.AddLog($"选择地区为：{Region}");
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-                
+                LogManage.AddLog($"选择地区为：{Region}");
+                var configPath = "Config/config.toml";
+                TextReader tomlText = new StreamReader(configPath);
+                var table = TOML.Parse(tomlText);
+                tip.Text = table[Region]["tip"];
+                LogManage.AddLog($"{Region}地区需要{table[Region]["file"]}文件格式，提示信息为：{table[Region]["tip"]}");
+
                 SelectMKButton.IsEnabled = Array.Exists(NeedMKFileRegions, region => region == Region);
                 if (!SelectMKButton.IsEnabled)
                 {
@@ -130,24 +132,23 @@ public partial class RCC
                 }
             }
 
-            
-            
+
             //根据不同地区进行提示
-            switch (Region)
-            {
-                case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
-                case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
-                case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
-                case "洪城": tip.Text = "多个文件注意修改编号"; break;
-                case "潍坊": tip.Text = "需要手动修改序号"; break;
-                case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
-                case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"; break;
-                case "南通地铁": tip.Text = "具体格式要求见生产通知单"; break;
-                case "滨州公交": tip.Text = "芯片号的名字叫法复旦跟华翼相反";break;
-                case "淄博公交": tip.Text = "分为开通和不开通两种类型"; break;
-                case "淄博血站不开通": tip.Text = "开通的类型使用淄博公交的逻辑即可";break;
-                default: tip.Text = "该地区暂无提示"; break;
-            }
+            // switch (Region)
+            // {
+            //     case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
+            //     case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
+            //     case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
+            //     case "洪城": tip.Text = "多个文件注意修改编号"; break;
+            //     case "潍坊": tip.Text = "需要手动修改序号"; break;
+            //     case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
+            //     case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"; break;
+            //     case "南通地铁": tip.Text = "具体格式要求见生产通知单"; break;
+            //     case "滨州公交": tip.Text = "芯片号的名字叫法复旦跟华翼相反"; break;
+            //     case "淄博公交": tip.Text = "分为开通和不开通两种类型"; break;
+            //     case "淄博血站不开通": tip.Text = "开通的类型使用淄博公交的逻辑即可"; break;
+            //     default: tip.Text = "该地区暂无提示"; break;
+            // }
         }
     }
 
@@ -159,62 +160,64 @@ public partial class RCC
             Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
+
         LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
         try
         {
-        switch (Region)
-        {
-            case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
-            case "兰州": 兰州.Run(ZhikaStream, FileName, MKData, mkFileName); break;       
-            case "兰州工作证": 兰州工作证.Run(ZhikaStream,FileName);break;
-            case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
-            case "抚顺": 抚顺.Run(ZhikaStream, FileName); break;
-            case "郴州": 郴州.Run(MKData, mkFileName,FilePath); break;
-            case "潍坊": 潍坊.Run(FilePath, FileName); break;
-            case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
-            case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, FileName); break;
-            case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
-            case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
-            case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
-            case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
-            case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;
-            case "青岛理工大学菜单": 青岛理工大学.Run(ZhikaStream, FileName); break;
-            case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;
-            case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
-            case "重庆": 重庆.Run(FilePath, FileName); break;
-            case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
-            case "西藏拉萨": 西藏拉萨.Run(ZhikaStream); break;
-            case "淄博公交": 淄博公交.Run(FilePath); break;
-            case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;
-            case "平凉公交": 平凉公交.Run(ZhikaStream, FileName); break;
-            case "桂林公交": 桂林公交.Run(FilePath); break;
-            case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, FileName); break;
-            case "西安文理学院": 西安文理学院.Run(ZhikaStream, FileName); break;
-            case "滨州公交": 滨州公交.Run(FilePath, FileName); break;
-            case "云南朗坤": 云南朗坤.Run(ZhikaStream, FileName); break;
-            case "盱眙": 盱眙.Run(ZhikaStream, FileName); break;
-            case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
-            case "漯河": 漯河.Run(FilePath); break;
-            case "随州": 随州.Run(ZhikaStream, FileName); break;
-            case "昆明": 昆明.Run(ZhikaStream, FileName); break;
-            case "徐州地铁": 徐州地铁.Run(FilePath,ZhikaStream, FileName); break;
-            case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
-            case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
-            case "淮北": 淮北.Run(ZhikaStream); break;
-            case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
-            case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
-            case "洪城": 洪城.Run(ZhikaStream); break;
-            case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
-            case "邹平": 邹平.Run(ZhikaStream, FileName); break;
-            case "盐城": 盐城.Run(FilePath, FileName); break;
-            case "穆棱" : 穆棱.Run(FilePath, FileName);break;
-            case "上海树维" : 上海树维.Run(FilePath, FileName);break;
-            case "琴岛通" : 琴岛通.Run(FilePath, FileName);break;
-            case "琴岛通1280" : 琴岛通1280.Run(MKData, mkFileName,FilePath, FileName);break;
-            case "广水" : 广水.Run(FilePath, FileName);break;
-            default: Message.ShowMessageBox("警告","请先选择地区"); break;
-        }
+            switch (Region)
+            {
+                case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
+                case "兰州": 兰州.Run(ZhikaStream, FileName, MKData, mkFileName); break;
+                case "兰州工作证": 兰州工作证.Run(ZhikaStream, FileName); break;
+                case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
+                case "抚顺": 抚顺.Run(ZhikaStream, FileName); break;
+                case "郴州": 郴州.Run(MKData, mkFileName, FilePath); break;
+                case "潍坊": 潍坊.Run(FilePath, FileName); break;
+                case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
+                case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, FileName); break;
+                case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
+                case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
+                case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
+                case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
+                case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;
+                case "青岛理工大学": 青岛理工大学.Run(ZhikaStream, FileName); break;
+                case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;
+                case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
+                case "重庆": 重庆.Run(FilePath, FileName); break;
+                case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
+                case "西藏拉萨": 西藏拉萨.Run(ZhikaStream); break;
+                case "淄博公交": 淄博公交.Run(FilePath); break;
+                case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;
+                case "平凉公交": 平凉公交.Run(ZhikaStream, FileName); break;
+                case "桂林公交": 桂林公交.Run(FilePath); break;
+                case "陕西师范大学": 陕西师范大学.Run(ZhikaStream, FileName); break;
+                case "西安文理学院": 西安文理学院.Run(ZhikaStream, FileName); break;
+                case "滨州公交": 滨州公交.Run(FilePath, FileName); break;
+                case "云南朗坤": 云南朗坤.Run(ZhikaStream, FileName); break;
+                case "盱眙": 盱眙.Run(ZhikaStream, FileName); break;
+                case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
+                case "漯河": 漯河.Run(FilePath); break;
+                case "随州": 随州.Run(ZhikaStream, FileName); break;
+                case "昆明": 昆明.Run(ZhikaStream, FileName); break;
+                case "徐州地铁": 徐州地铁.Run(FilePath, ZhikaStream, FileName); break;
+                case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
+                case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
+                case "淮北": 淮北.Run(ZhikaStream); break;
+                case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
+                case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
+                case "洪城": 洪城.Run(ZhikaStream); break;
+                case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
+                case "邹平": 邹平.Run(ZhikaStream, FileName); break;
+                case "盐城": 盐城.Run(FilePath, FileName); break;
+                case "穆棱": 穆棱.Run(FilePath, FileName); break;
+                case "上海树维": 上海树维.Run(FilePath, FileName); break;
+                case "琴岛通": 琴岛通.Run(FilePath, FileName); break;
+                case "琴岛通1280": 琴岛通1280.Run(MKData, mkFileName, FilePath, FileName); break;
+                case "广水": 广水.Run(FilePath, FileName); break;
+                case "新开普": 新开普.Run(FilePath, FileName); break;
+                default: Message.ShowMessageBox("警告", "请先选择地区"); break;
+            }
         }
         catch (Exception exception)
         {
@@ -222,12 +225,13 @@ public partial class RCC
             LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
         }
     }
+
     private void Test(object sender, RoutedEventArgs e)
     {
-       Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
-       LogManage.AddLog("未开发");
-       
+        Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
+        LogManage.AddLog("未开发");
     }
+
     private void ClearLog(object sender, MouseButtonEventArgs e)
     {
         LogManage.Clear();

@@ -7,70 +7,72 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         WindowStartupLocation="CenterScreen"
         Title="脚本转换器 V2024.11.28 " Height="800" Width="1000">
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel>
             <Menu>
                 <MenuItem Header="_文件">
-                    <MenuItem Header="_打开" Click="SelectFile"/>
-                    <MenuItem Header="_保存" Click="SaveFile"/>
-                    <MenuItem Header="_退出" Click="ExitWindow"/>
+                    <MenuItem Header="_打开" Click="SelectFile" />
+                    <MenuItem Header="_保存" Click="SaveFile" />
+                    <MenuItem Header="_退出" Click="ExitWindow" />
                 </MenuItem>
                 <MenuItem Header="_编辑">
                     <MenuItem Header="_剪切" />
                     <MenuItem Header="_复制" />
-                    <MenuItem Header="_粘贴"/>
+                    <MenuItem Header="_粘贴" />
                 </MenuItem>
                 <MenuItem Header="_帮助">
                     <MenuItem Header="_关于" />
                 </MenuItem>
             </Menu>
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" >
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                 <Image Source="/icon/csv.png" Margin="5" Height="20" Width="20" MouseDown="SelectFile" />
                 <Image Source="/icon/ini.png" Margin="5" Height="20" Width="20" MouseDown="Image_MouseDown_OpenScript" />
                 <Image Source="/icon/save.png" Margin="5" Height="20" Width="20" MouseDown="SaveFile" />
             </StackPanel>
         </StackPanel>
 
-        <Border Grid.Row="1" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10" Background="#FFFEFEFE">
+        <Border Grid.Row="1" BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10"
+                Background="#FFFEFEFE">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
-                <ui:AutoSuggestBox PlaceholderText="Search..." Width="500px" x:Name="ScriptName"/>
+                <ui:AutoSuggestBox PlaceholderText="Search..." Width="500px" x:Name="ScriptName" />
                 <ui:Button
-                Click="SelectFile"
-                Background="#409EFF"
-                Content="选择文件"
-                MouseOverBackground="#66b1ff" Margin="10,0,0,0"
-                Foreground="#E4FFFFFF" />
+                    Click="SelectFile"
+                    Background="#409EFF"
+                    Content="选择文件"
+                    MouseOverBackground="#66b1ff" Margin="10,0,0,0"
+                    Foreground="#E4FFFFFF" />
                 <ui:Button
-                Background="#67C23A"
-                Content="处理文件"
-                MouseOverBackground="#A8E063"
-                Margin="10,0,0,0" Foreground="#E4FFFFFF" />
+                    Background="#67C23A"
+                    Content="处理文件"
+                    MouseOverBackground="#A8E063"
+                    Margin="10,0,0,0" Foreground="#E4FFFFFF" />
                 <ui:Button
-                Background="#E6A23C"
-                Content="保存文件"
-                Click="SaveFile"
-                MouseOverBackground="#ffbc58"
-                Margin="10,0,10,0" Foreground="#E4FFFFFF"/>
+                    Background="#E6A23C"
+                    Content="保存文件"
+                    Click="SaveFile"
+                    MouseOverBackground="#ffbc58"
+                    Margin="10,0,10,0" Foreground="#E4FFFFFF" />
             </StackPanel>
         </Border>
 
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*" />
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10" Background="#FFFEFEFE">
-                <TabControl Margin="10" >
+            <Border BorderBrush="#FFF6F6F6" BorderThickness="2" CornerRadius="5,5,5,5" Margin="20,10,20,10"
+                    Background="#FFFEFEFE">
+                <TabControl Margin="10">
                     <TabItem IsSelected="True">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="Code24" />
-                                <TextBlock Text="源文件"/>
+                                <TextBlock Text="源文件" />
                             </StackPanel>
                         </TabItem.Header>
                         <RichTextBox x:Name="Script" Height="Auto" Width="Auto" />
@@ -79,10 +81,10 @@
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Margin="0,0,6,0" Symbol="ArrowDownload16" />
-                                <TextBlock Text="转换后"/>
+                                <TextBlock Text="转换后" />
                             </StackPanel>
                         </TabItem.Header>
-                             <RichTextBox x:Name="MyScript" Height="Auto" Width="Auto" />
+                        <RichTextBox x:Name="MyScript" Height="Auto" Width="Auto" />
                     </TabItem>
                 </TabControl>
             </Border>

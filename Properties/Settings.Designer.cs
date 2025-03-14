@@ -19,7 +19,7 @@ namespace WindowUI.Properties {
     [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
+        private static Settings defaultInstance  =  ((Settings)(Synchronized(new Settings())));
         
         public static Settings Default {
             get {

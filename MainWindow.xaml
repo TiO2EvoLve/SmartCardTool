@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         xmlns:samples="clr-namespace:WindowUI.Pages"
-        Title="智能卡工具箱" Height="800" Width="1000"
-        >
+        Title="智能卡工具箱" Height="800" Width="1000">
     <Grid Background="#FEFEFE">
         <ui:NavigationView
             MinHeight="300"
@@ -25,8 +24,7 @@
                 <ui:NavigationViewItem
                     Content="主页"
                     Icon="{ui:SymbolIcon Home24}"
-                    TargetPageType="{x:Type samples:Home}"
-                     />
+                    TargetPageType="{x:Type samples:Home}" />
                 <ui:NavigationViewItem
                     Content="解析"
                     Icon="{ui:SymbolIcon ArrowSync24}"
@@ -35,9 +33,9 @@
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
                     TargetPageType="{x:Type samples:CardRead}" />
-                
+
             </ui:NavigationView.MenuItems>
-            
+
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
                     Content="设置"
@@ -58,8 +56,7 @@
                             Foreground="Gray"
                             FontFamily="kaiti"
                             FontSize="20"
-                            Text="稍等获取每日一言"
-                        />
+                            Text="稍等获取每日一言" />
                     </StackPanel>
                 </Border>
             </ui:NavigationView.Header>
@@ -68,7 +65,7 @@
                     Margin="0,0,0,8"
                     Background="{DynamicResource StripedBackgroundBrush}"
                     CornerRadius="4">
-                    <Image Source="icon/logo.jpg"></Image>
+                    <Image Source="icon/logo.jpg" />
                 </Border>
             </ui:NavigationView.PaneHeader>
             <ui:NavigationView.PaneFooter>
@@ -83,7 +80,7 @@
                         VerticalAlignment="Center"
                         FontWeight="Medium"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        x:Name="TimeTextBlock" Text="{Binding CurrentTime}"/>
+                        x:Name="TimeTextBlock" Text="{Binding CurrentTime}" />
                 </Border>
             </ui:NavigationView.PaneFooter>
         </ui:NavigationView>

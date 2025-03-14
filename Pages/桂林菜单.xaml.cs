@@ -11,9 +11,10 @@ public partial class 桂林菜单
     {
         if (SN.Text.Length != 20 || Count.Text.Length != 8)
         {
-            Message.ShowMessageBox("错误","输入数据有误！");
+            Message.ShowMessageBox("错误", "输入数据有误！");
             return;
         }
+
         Close();
     }
 }

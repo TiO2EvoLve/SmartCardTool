@@ -10,22 +10,10 @@ namespace WindowUI;
 
 public partial class MainWindow : INotifyPropertyChanged
 {
-    private string _currentTime;
-    private DispatcherTimer _timer;
-    public event PropertyChangedEventHandler? PropertyChanged;
-    
     // 创建一个静态的HttpClient实例
-    private static readonly HttpClient client = new ();
-
-    public string CurrentTime
-    {
-        get => _currentTime;
-        set
-        {
-            _currentTime = value;
-            OnPropertyChanged(nameof(CurrentTime));
-        }
-    }
+    private static readonly HttpClient client = new();
+    private readonly DispatcherTimer _timer;
+    private string _currentTime;
 
     public MainWindow()
     {
@@ -38,9 +26,21 @@ public partial class MainWindow : INotifyPropertyChanged
         };
         _timer.Tick += Timer_Tick;
         _timer.Start();
-        
+
         LoadApiDataAsync();
     }
+
+    public string CurrentTime
+    {
+        get => _currentTime;
+        set
+        {
+            _currentTime = value;
+            OnPropertyChanged(nameof(CurrentTime));
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void Timer_Tick(object sender, EventArgs e)
     {
@@ -58,6 +58,7 @@ public partial class MainWindow : INotifyPropertyChanged
         var navigationView = sender as NavigationView;
         navigationView?.Navigate(typeof(Home));
     }
+
     private async void LoadApiDataAsync()
     {
         try
@@ -72,18 +73,18 @@ public partial class MainWindow : INotifyPropertyChanged
             TitleTextBlock.Text = "当前无网络连接";
         }
     }
+
     //异步获取每日一句
     private static async Task<string> GetApiDataAsync(string url)
     {
-       
         // 发送异步GET请求
-        HttpResponseMessage response = await client.GetAsync(url);
+        var response = await client.GetAsync(url);
 
         // 确保请求成功
         response.EnsureSuccessStatusCode();
 
         // 读取响应内容
-        string responseBody = await response.Content.ReadAsStringAsync();
+        var responseBody = await response.Content.ReadAsStringAsync();
         return responseBody;
     }
 

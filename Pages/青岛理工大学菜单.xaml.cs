@@ -8,25 +8,22 @@ public partial class 青岛理工大学菜单 : Window
     {
         InitializeComponent();
     }
+
     public string SelectedCampus { get; set; }
 
     private void RadioButton_Checked(object sender, RoutedEventArgs e)
     {
-        if (sender is RadioButton radioButton)
-        {
-            SelectedCampus = radioButton.Content.ToString();
-        }
+        if (sender is RadioButton radioButton) SelectedCampus = radioButton.Content.ToString();
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(SelectedCampus))
         {
-            Message.ShowMessageBox("错误","请先选择校区");
+            Message.ShowMessageBox("错误", "请先选择校区");
             return;
         }
+
         Close();
     }
-
-   
 }

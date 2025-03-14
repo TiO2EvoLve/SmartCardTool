@@ -10,7 +10,7 @@ public class 漯河
         漯河菜单 window = new();
         window.ShowDialog();
         cardtype = window.CardType;
-        
+
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
@@ -18,7 +18,7 @@ public class 漯河
         string StartSN;
         string EndSN;
 
-        string sql = "SELECT SerialNum FROM kahao order by SerialNum asc";
+        var sql = "SELECT SerialNum FROM kahao order by SerialNum asc";
         List<string> SN = Mdb.Select(FilePath, sql);
 
         sql = "SELECT UID_16_ FROM kahao order by SerialNum asc";
@@ -26,72 +26,69 @@ public class 漯河
 
         Console.WriteLine(int.MaxValue);
         if (window.英才卡)
-        {
-            for (int i = 0; i < SN.Count; i++)
+            for (var i = 0; i < SN.Count; i++)
             {
-                long number = long.Parse(window.英才卡卡号);
+                var number = long.Parse(window.英才卡卡号);
                 number += i;
-                SN[i] ="31050714" + number.ToString("D" + window.英才卡卡号.Length);
+                SN[i] = "31050714" + number.ToString("D" + window.英才卡卡号.Length);
             }
-        }
 
         StartSN = SN[0];
         EndSN = SN[SN.Count - 1];
 
-        for (int i = 0; i < SN.Count; i++)
+        for (var i = 0; i < SN.Count; i++)
         {
-            string SNValue = SN[i];
-            string UIDValue = UID[i];
+            var SNValue = SN[i];
+            var UIDValue = UID[i];
             //计算UID校验码
-            string stra = UIDValue.Substring(0, 2);
-            string strb = UIDValue.Substring(2, 2);
-            string strc = UIDValue.Substring(4, 2);
-            string strd = UIDValue.Substring(6, 2);
-            int a = Convert.ToInt32(stra, 16);
-            int b = Convert.ToInt32(strb, 16);
-            int c = Convert.ToInt32(strc, 16);
-            int d = Convert.ToInt32(strd, 16);
-            int s = a ^ b ^ c ^ d;
+            var stra = UIDValue.Substring(0, 2);
+            var strb = UIDValue.Substring(2, 2);
+            var strc = UIDValue.Substring(4, 2);
+            var strd = UIDValue.Substring(6, 2);
+            var a = Convert.ToInt32(stra, 16);
+            var b = Convert.ToInt32(strb, 16);
+            var c = Convert.ToInt32(strc, 16);
+            var d = Convert.ToInt32(strd, 16);
+            var s = a ^ b ^ c ^ d;
             UIDValue += s.ToString("X").PadLeft(2, '0');
             UIDValue = UIDValue.ToUpper();
             //计算SN校验码
-            string strNUM = SNValue + "F";
-            string stre = strNUM.Substring(0, 2);
-            string strf = strNUM.Substring(2, 2);
-            string strg = strNUM.Substring(4, 2);
-            string strh = strNUM.Substring(6, 2);
-            string stri = strNUM.Substring(8, 2);
-            string strj = strNUM.Substring(10, 2);
-            string strk = strNUM.Substring(12, 2);
-            string strl = strNUM.Substring(14, 2);
-            string strm = strNUM.Substring(16, 2);
-            string strn = strNUM.Substring(18, 2);
-            Int32 intnew = (Convert.ToInt32(stre, 16) ^ Convert.ToInt32(strf, 16) ^ Convert.ToInt32(strg, 16) ^
-                            Convert.ToInt32(strh, 16) ^ Convert.ToInt32(stri, 16) ^ Convert.ToInt32(strj, 16) ^
-                            Convert.ToInt32(strk, 16) ^ Convert.ToInt32(strl, 16) ^ Convert.ToInt32(strm, 16) ^
-                            Convert.ToInt32(strn, 16));
-            string strXOR_2 = intnew.ToString("X").PadLeft(2, '0');
+            var strNUM = SNValue + "F";
+            var stre = strNUM.Substring(0, 2);
+            var strf = strNUM.Substring(2, 2);
+            var strg = strNUM.Substring(4, 2);
+            var strh = strNUM.Substring(6, 2);
+            var stri = strNUM.Substring(8, 2);
+            var strj = strNUM.Substring(10, 2);
+            var strk = strNUM.Substring(12, 2);
+            var strl = strNUM.Substring(14, 2);
+            var strm = strNUM.Substring(16, 2);
+            var strn = strNUM.Substring(18, 2);
+            var intnew = Convert.ToInt32(stre, 16) ^ Convert.ToInt32(strf, 16) ^ Convert.ToInt32(strg, 16) ^
+                         Convert.ToInt32(strh, 16) ^ Convert.ToInt32(stri, 16) ^ Convert.ToInt32(strj, 16) ^
+                         Convert.ToInt32(strk, 16) ^ Convert.ToInt32(strl, 16) ^ Convert.ToInt32(strm, 16) ^
+                         Convert.ToInt32(strn, 16);
+            var strXOR_2 = intnew.ToString("X").PadLeft(2, '0');
             SNValue = strNUM + strXOR_2;
             SNData.Add(SNValue);
             UIDData.Add(UIDValue);
         }
 
-        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"CardNoHY{StartSN} - {EndSN}.xml";
-        string filePath = Path.Combine(desktopPath, fileName);
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var fileName = $"CardNoHY{StartSN} - {EndSN}.xml";
+        var filePath = Path.Combine(desktopPath, fileName);
 
-        using (StreamWriter writer = new StreamWriter(filePath))
+        using (var writer = new StreamWriter(filePath))
         {
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
             writer.WriteLine(
                 $"<CardList Total=\"{SNData.Count}\" CardType=\"{cardtype}\" Start=\"{StartSN}\" End=\"{EndSN}\">");
-            for (int j = 0; j < SNData.Count; j++)
-            {
+            for (var j = 0; j < SNData.Count; j++)
                 writer.WriteLine($"<Card UID=\"{UIDData[j]}\" AppID=\"{SNData[j]}\"/>");
-            }
 
             writer.Write("</CardList>");
         }
+
         Message.ShowSnack();
     }
 }

@@ -12,13 +12,13 @@ public class 盱眙
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            var rowCount = worksheet.Dimension.Rows; // 获取行数
 
             // 异步遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
-                string SNValue = worksheet.Cells[row, 6].Text;
-                string UidValue = worksheet.Cells[row, 2].Text;
+                var SNValue = worksheet.Cells[row, 6].Text;
+                var UidValue = worksheet.Cells[row, 2].Text;
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);
             }
@@ -31,7 +31,7 @@ public class 盱眙
             worksheet.Cells[1, 1].Value = "SerialNumber";
             worksheet.Cells[1, 2].Value = "UID";
             worksheet.Cells[1, 3].Value = "CUSTOMUID";
-            for (int i = 0; i < UidData.Count; i++)
+            for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 worksheet.Cells[i + 2, 2].Value = UidData[i];
@@ -39,9 +39,9 @@ public class 盱眙
             }
 
             //保存文件到桌面
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string fileName = $"{excelFileName}.xlsx";
-            string filePath = Path.Combine(desktopPath, fileName);
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var fileName = $"{excelFileName}.xlsx";
+            var filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
             Message.ShowSnack();

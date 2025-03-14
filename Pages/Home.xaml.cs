@@ -1,34 +1,33 @@
-﻿using System.Net.Http;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WindowUI.Pages
+namespace WindowUI.Pages;
+
+public partial class Home : Page
 {
-    public partial class Home : Page
+    public Home()
     {
-        public Home()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void OpenMKtoRC_Window(object sender, MouseButtonEventArgs e)
-        {
-            new RCC().Show();
-        }
-        private void OpenScriptWindow(object sender, MouseButtonEventArgs e)
-        {
-            new ScriptChange().Show();
-        }
+    private void OpenMKtoRC_Window(object sender, MouseButtonEventArgs e)
+    {
+        new RCC().Show();
+    }
 
-        private void Test(object sender, MouseButtonEventArgs e)
-        {
-            Message.ShowMessageBox("提示","暂未开发");
-        }
+    private void OpenScriptWindow(object sender, MouseButtonEventArgs e)
+    {
+        new ScriptChange().Show();
+    }
 
-        private void OpenCheckWindow(object sender, MouseButtonEventArgs e)
-        {
-            DataCheck check = new();
-            check.ShowDialog();
-        }
+    private void Test(object sender, MouseButtonEventArgs e)
+    {
+        Message.ShowMessageBox("提示", "暂未开发");
+    }
+
+    private void OpenCheckWindow(object sender, MouseButtonEventArgs e)
+    {
+        DataCheck check = new();
+        check.ShowDialog();
     }
 }

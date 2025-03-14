@@ -11,12 +11,12 @@ public class 随州
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            var rowCount = worksheet.Dimension.Rows; // 获取行数
             // 遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
-                string SNValue = worksheet.Cells[row, 8].Text;
-                string UidValue = worksheet.Cells[row, 3].Text;
+                var SNValue = worksheet.Cells[row, 8].Text;
+                var UidValue = worksheet.Cells[row, 3].Text;
                 UidValue = Convert.ToUInt32(UidValue, 16).ToString();
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);
@@ -28,20 +28,20 @@ public class 随州
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
 
-            for (int i = 0; i < UidData.Count; i++)
+            for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = SNData[i];
                 worksheet.Cells[i + 1, 2].Value = UidData[i];
             }
 
             // 保存文件到桌面
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string fileName = $"{excelFileName}.xlsx";
-            string filePath = Path.Combine(desktopPath, fileName);
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var fileName = $"{excelFileName}.xlsx";
+            var filePath = Path.Combine(desktopPath, fileName);
             // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
             // 显示提示消息
-            Message.ShowSnack(); 
+            Message.ShowSnack();
         }
     }
 }

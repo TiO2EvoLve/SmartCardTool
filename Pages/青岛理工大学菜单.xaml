@@ -8,21 +8,23 @@
         mc:Ignorable="d"
         Title="青岛理工大学附加菜单" Height="300" Width="500">
     <Grid>
-        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="请选择校区：" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
+                Background="#FFFEFEFE">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="请选择校区：" Margin="0,0,0,10" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <RadioButton
                         Content="临沂校区"
                         Checked="RadioButton_Checked"
-                        GroupName="radio_group"/>
+                        GroupName="radio_group" />
                     <RadioButton
                         Content="青岛校区"
                         Checked="RadioButton_Checked"
-                        GroupName="radio_group"/>
+                        GroupName="radio_group" />
+                </StackPanel>
+                <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center"
+                           Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
             </StackPanel>
-            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
-        </StackPanel>
         </Border>
     </Grid>
 </Window>

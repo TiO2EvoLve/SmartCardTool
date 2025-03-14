@@ -12,37 +12,32 @@ public class 抚顺
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            int rowCount = worksheet.Dimension.Rows; // 获取行数
+            var rowCount = worksheet.Dimension.Rows; // 获取行数
 
             //遍历Excel文件的每一行
-            for (int row = 1; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
-                string snValue = worksheet.Cells[row, 7].Text;
-                string uidValue = worksheet.Cells[row, 3].Text;
+                var snValue = worksheet.Cells[row, 7].Text;
+                var uidValue = worksheet.Cells[row, 3].Text;
                 uidValue = Tools.ChangeDecimalSystem(uidValue);
                 SnData.Add(snValue);
                 UidData.Add(uidValue);
             }
         }
-        
+
         //保存为txt文件
-        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string fileName = $"{excelFileName}.txt";
-        string filePath = Path.Combine(desktopPath, fileName);
-        using (StreamWriter writer = new StreamWriter(filePath))
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var fileName = $"{excelFileName}.txt";
+        var filePath = Path.Combine(desktopPath, fileName);
+        using (var writer = new StreamWriter(filePath))
         {
-            for (int i = 0; i < SnData.Count; i++)
-            {
+            for (var i = 0; i < SnData.Count; i++)
                 if (i == SnData.Count - 1)
-                {
                     writer.Write($"{SnData[i]} {UidData[i]}");
-                }
                 else
-                {
                     writer.WriteLine($"{SnData[i]} {UidData[i]}");
-                }
-            }
         }
+
         Message.ShowSnack();
     }
 }

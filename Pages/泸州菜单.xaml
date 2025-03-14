@@ -8,30 +8,32 @@
         WindowStartupLocation="CenterScreen"
         Title="泸州公交附加菜单" Height="300" Width="500">
     <Grid>
-        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10" Background="#FFFEFEFE">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="请完善信息：" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                <TextBlock Text="卡类型" VerticalAlignment="Center"/>
-                <ComboBox
-                     x:Name="LuZhouCardType"
-                     SelectionChanged="ComboBox_SelectionChanged"
-                     MinWidth="300"
-                     Margin="10,0,0,0"
-                     SelectedIndex="0">
-                    <ComboBoxItem Content="请选择卡类型" DataContext=""/>
-                    <ComboBoxItem Content="标准卡" DataContext="47806083" />
-                    <ComboBoxItem Content="学生卡" DataContext="47806183" />
-                    <ComboBoxItem Content="老年卡" DataContext="47806283" />
-                    <ComboBoxItem Content="异型卡" DataContext="47806783" />
-                    <ComboBoxItem Content="老年异型卡" DataContext="47806983" />
-                    <ComboBoxItem Content="学生异型卡" DataContext="47806683" />
-                    <ComboBoxItem Content="博爱卡" DataContext="47806883" />
-                </ComboBox>
+        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
+                Background="#FFFEFEFE">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="请完善信息：" Margin="0,0,0,10" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="卡类型" VerticalAlignment="Center" />
+                    <ComboBox
+                        x:Name="LuZhouCardType"
+                        SelectionChanged="ComboBox_SelectionChanged"
+                        MinWidth="300"
+                        Margin="10,0,0,0"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="请选择卡类型" DataContext="" />
+                        <ComboBoxItem Content="标准卡" DataContext="47806083" />
+                        <ComboBoxItem Content="学生卡" DataContext="47806183" />
+                        <ComboBoxItem Content="老年卡" DataContext="47806283" />
+                        <ComboBoxItem Content="异型卡" DataContext="47806783" />
+                        <ComboBoxItem Content="老年异型卡" DataContext="47806983" />
+                        <ComboBoxItem Content="学生异型卡" DataContext="47806683" />
+                        <ComboBoxItem Content="博爱卡" DataContext="47806883" />
+                    </ComboBox>
+                </StackPanel>
+
+                <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center"
+                           Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
             </StackPanel>
-           
-            <ui:Button Content="确定" Width="100" Click="Button_Click"  HorizontalAlignment="Center" Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
-        </StackPanel>
-            </Border>
+        </Border>
     </Grid>
 </Window>

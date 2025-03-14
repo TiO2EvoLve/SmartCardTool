@@ -1,9 +1,240 @@
 ﻿
+["上海数维"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["云南朗坤"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["兰州"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["兰州工作证"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["南通地铁"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["合肥通"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["呼和浩特"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["哈尔滨城市通"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["国网技术学院"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["天津"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["山西医科大学"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["平凉公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["广水"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["徐州地铁"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["抚顺"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["昆明"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["柳州公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["桂林公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["江苏乾翔"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["泸州公交"]
+mk = false
+file = "xlsx"
+tip = "根据卡类型进行制作"
+
+["洪城"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["济南地铁 UL"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["淄博公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["淄博血站不开通"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["淮北"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["滨州公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["漯河"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["潍坊"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["琴岛通"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["琴岛通 1280"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
 ["盐城"]
-mk=false
-file="mdb"
-tip="当前地区无注意事项"
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
 
+["盱眙"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
 
+["石家庄"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
 
-    
+["穆棱"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["第一医科大学"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["西安交通大学"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["西安文理学院"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["西藏拉萨"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["西藏林芝"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["运城盐湖王府学校"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["邹平"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["郴州"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["重庆"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["长沙公交"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["陕西师范大学"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["随州"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["青岛博研加气站"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["青岛理工大学"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"

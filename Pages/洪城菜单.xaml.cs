@@ -8,22 +8,22 @@ public partial class 洪城菜单 : Window
     {
         InitializeComponent();
     }
+
     public string Cardtype { get; set; }
+
     private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
     {
-        if (sender is RadioButton radioButton)
-        {
-            Cardtype = radioButton.DataContext.ToString();
-        }
+        if (sender is RadioButton radioButton) Cardtype = radioButton.DataContext.ToString();
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(Cardtype))
         {
-            Message.ShowMessageBox("错误","请先选择校区");
+            Message.ShowMessageBox("错误", "请先选择校区");
             return;
         }
+
         Close();
     }
 }

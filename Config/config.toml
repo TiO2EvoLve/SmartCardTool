@@ -238,3 +238,8 @@ tip = "当前地区无注意事项"
 mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
+
+["洛阳"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"

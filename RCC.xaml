@@ -88,6 +88,7 @@
                     <ComboBoxItem Content="琴岛通" />
                     <ComboBoxItem Content="琴岛通1280" />
                     <ComboBoxItem Content="广水" />
+                    <ComboBoxItem Content="洛阳" />
                     <ComboBoxItem Content="新开普" />
                 </ComboBox>
                 <ui:Button

@@ -13,7 +13,7 @@ public partial class MainWindow : INotifyPropertyChanged
     // 创建一个静态的HttpClient实例
     private static readonly HttpClient client = new();
     private readonly DispatcherTimer _timer;
-    private string _currentTime;
+    private string _currentTime = "";
 
     public MainWindow()
     {
@@ -68,7 +68,7 @@ public partial class MainWindow : INotifyPropertyChanged
             var json = JObject.Parse(apiResponse);
             TitleTextBlock.Text = json["yiyan"]?.ToString();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             TitleTextBlock.Text = "当前无网络连接";
         }

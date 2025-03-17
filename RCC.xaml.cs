@@ -163,8 +163,8 @@ public partial class RCC
 
         LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
-        try
-        {
+        // try
+        // {
             switch (Region)
             {
                 case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
@@ -186,7 +186,7 @@ public partial class RCC
                 case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
                 case "重庆": 重庆.Run(FilePath, FileName); break;
                 case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
-                case "西藏拉萨": 西藏拉萨.Run(ZhikaStream); break;
+                case "西藏拉萨": 西藏拉萨.Run(FilePath); break;
                 case "淄博公交": 淄博公交.Run(FilePath); break;
                 case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;
                 case "平凉公交": 平凉公交.Run(ZhikaStream, FileName); break;
@@ -219,12 +219,12 @@ public partial class RCC
                 case "新开普": 新开普.Run(FilePath, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
-        }
-        catch (Exception exception)
-        {
-            Message.ShowMessageBox("错误", exception.Message);
-            LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
-        }
+        // }
+        // catch (Exception exception)
+        // {
+        //     Message.ShowMessageBox("错误", exception.Message);
+        //     LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
+        // }
     }
 
     private void Test(object sender, RoutedEventArgs e)

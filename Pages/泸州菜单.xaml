@@ -22,11 +22,11 @@
                         SelectedIndex="0">
                         <ComboBoxItem Content="请选择卡类型" DataContext="" />
                         <ComboBoxItem Content="标准卡" DataContext="47806083" />
-                        <ComboBoxItem Content="学生卡" DataContext="47806183" />
-                        <ComboBoxItem Content="老年卡" DataContext="47806283" />
                         <ComboBoxItem Content="异型卡" DataContext="47806783" />
-                        <ComboBoxItem Content="老年异型卡" DataContext="47806983" />
+                        <ComboBoxItem Content="学生卡" DataContext="47806183" />
                         <ComboBoxItem Content="学生异型卡" DataContext="47806683" />
+                        <ComboBoxItem Content="老年卡" DataContext="47806283" />
+                        <ComboBoxItem Content="老年异型卡" DataContext="47806983" />
                         <ComboBoxItem Content="博爱卡" DataContext="47806883" />
                     </ComboBox>
                 </StackPanel>

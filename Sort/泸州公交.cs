@@ -18,7 +18,14 @@ public class 泸州公交
 
         for (var i = 0; i < SnData.Count; i++)
         {
-            SnData[i] = SnData[i].Substring(3, 16);
+            if (SnData[i].Length == 8)
+            {
+                SnData[i] = $"{cardtype}{SnData[i]}";
+            }
+            else
+            {
+                SnData[i] = SnData[i].Substring(3, 16); 
+            }
             if (!SnData[i].StartsWith(cardtype))
             {
                 Message.ShowMessageBox("错误", "检查到卡类型不正确");

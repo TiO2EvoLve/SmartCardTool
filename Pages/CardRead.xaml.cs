@@ -37,10 +37,7 @@ public partial class CardRead : Page
 
     [DllImport("dcrf32.dll")]
     public static extern short dc_reset(int icdev, int Msec);
-
-    [DllImport("HDMATH20B.dll", CharSet = CharSet.Ansi)]
-    private static extern ushort HD_3DES_Encrypt(string svHex, string svKey, short ivMode, ref byte srHex);
-
+    
     private void OpenPort(object sender, RoutedEventArgs e)
     {
         try
@@ -49,7 +46,6 @@ public partial class CardRead : Page
             var Port = Convert.ToInt16(strport);
 
             st = dc_init(Port, hz);
-            Console.WriteLine(st);
             if (st < 0)
             {
                 Message.ShowMessageBox("失败", "打开端口失败");

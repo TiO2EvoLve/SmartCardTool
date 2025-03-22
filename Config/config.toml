@@ -10,7 +10,7 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["兰州"]
-mk = false
+mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"
 

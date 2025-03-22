@@ -4,43 +4,33 @@ namespace WindowUI.Sort;
 
 public class 兰州
 {
-    public static void Run(MemoryStream ExcelData, string excelFileName, List<string> MKData, string mkFileName)
+    public static void Run(string FilePath, string FileName, List<string> MKData, string mkFileName)
     {
         兰州菜单 lanzhou = new();
         lanzhou.ShowDialog();
         var cardtype = lanzhou.CardType;
 
         if (cardtype == "0")
-            兰州公交(ExcelData, excelFileName, MKData, mkFileName, 0);
-        else if (cardtype == "1") 兰州公交(ExcelData, excelFileName, MKData, mkFileName, 1);
+            兰州公交(FilePath, FileName, MKData, mkFileName, 0);
+        else if (cardtype == "1") 兰州公交(FilePath, FileName, MKData, mkFileName, 1);
     }
 
-    private static void 兰州公交(MemoryStream ExcelData, string excelFileName, List<string> MKData, string mkFileName,
+    private static void 兰州公交(string FilePath, string excelFileName, List<string> MKData, string mkFileName,
         int type)
     {
-        //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var firstColumnValue = worksheet.Cells[row, 1].Text;
-                var secondColumnValue = worksheet.Cells[row, 2].Text;
-                var newRow =
-                    $"{firstColumnValue}      {firstColumnValue}      {secondColumnValue}          00                         FFFFFFFFFFFFFFFFFFFF";
-                processedData.Add(newRow);
-            }
-        }
-
+        List<string> SnData = new List<string>();
+        List<string> ATSData = new List<string>();
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
+        SnData = Mdb.Select(FilePath, sql);
+        sql = "select ATS from kahao order by SerialNum ASC ";
+        ATSData = Mdb.Select(FilePath, sql);
+        
         //处理MK文件
         //截取MK文件第二行的前42个字节
         MKData[1] = MKData[1].Substring(0, 42);
         //获取Excel总数据的条数
-        var totalLines = processedData.Count;
+        var totalLines = SnData.Count;
         //将总数据条数转为6位数
         var totalLinesFormatted = totalLines.ToString("D6");
         //将MK文件的第二行的后6位替换为总数据条数
@@ -54,11 +44,11 @@ public class 兰州
             writer.WriteLine(MKData[0]);
             writer.WriteLine(MKData[1]);
 
-            for (var i = 0; i < processedData.Count; i++)
-                if (i == processedData.Count - 1)
-                    writer.Write(processedData[i]);
+            for (var i = 0; i < SnData.Count; i++)
+                if (i == SnData.Count - 1)
+                    writer.Write($"{SnData[i]}      {SnData[i]}      {ATSData[i]}          00                         FFFFFFFFFFFFFFFFFFFF");
                 else
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{SnData[i]}      {SnData[i]}      {ATSData[i]}          00                         FFFFFFFFFFFFFFFFFFFF");
         }
 
         if (type == 0)
@@ -69,39 +59,20 @@ public class 兰州
 
         //异型卡需要两个文件
         //第二个文件
-        List<string> SNData = new List<string>();
-        var UIDData = new List<string>();
-        //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
-            {
-                var firstColumnValue = worksheet.Cells[row, 8].Text;
-                SNData.Add(firstColumnValue);
-                firstColumnValue = worksheet.Cells[row, 3].Text;
-                var firstColumnValue2 = Convert.ToUInt32(firstColumnValue, 16).ToString();
-                UIDData.Add(firstColumnValue2);
-            }
-        }
-
-        //将processedData和processedData2合并起来，中间用','分隔，最后保存为txt文件到桌面
-        List<string> mergedData = new List<string>();
-        for (var i = 0; i < SNData.Count; i++)
-        {
-            var mergedRow = $"{SNData[i]},{UIDData[i]}";
-            mergedData.Add(mergedRow);
-        }
+        List<string> UidData = new List<string>();
+        sql = "select UID_10 from kahao order by SerialNum ASC ";
+        UidData = Mdb.Select(FilePath, sql);
 
         desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         fileName = excelFileName + ".txt";
         filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
-            foreach (var line in mergedData) writer.WriteLine(line);
+            for (var i = 0; i < SnData.Count; i++)
+                if (i == SnData.Count - 1)
+                    writer.Write($"{SnData[i]},{UidData[i]}");
+                else
+                    writer.WriteLine($"{SnData[i]},{UidData[i]}");
         }
 
         Message.ShowSnack();

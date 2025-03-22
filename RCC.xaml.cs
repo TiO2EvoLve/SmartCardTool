@@ -11,7 +11,7 @@ namespace WindowUI;
 public partial class RCC
 {
     // 定义需要MK文件的地区
-    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州菜单", "柳州公交", "琴岛通1280"];
+    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州", "柳州公交", "琴岛通1280"];
 
     public RCC()
     {
@@ -163,12 +163,12 @@ public partial class RCC
 
         LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
-        // try
-        // {
+        try
+        {
             switch (Region)
             {
                 case "天津": 天津.Run(ZhikaStream, MKData, mkFileName); break;
-                case "兰州": 兰州.Run(ZhikaStream, FileName, MKData, mkFileName); break;
+                case "兰州": 兰州.Run(FilePath, FileName, MKData, mkFileName); break;
                 case "兰州工作证": 兰州工作证.Run(ZhikaStream, FileName); break;
                 case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
                 case "抚顺": 抚顺.Run(ZhikaStream, FileName); break;
@@ -219,12 +219,12 @@ public partial class RCC
                 case "新开普": 新开普.Run(FilePath, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
-        // }
-        // catch (Exception exception)
-        // {
-        //     Message.ShowMessageBox("错误", exception.Message);
-        //     LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
-        // }
+        }
+        catch (Exception exception)
+        {
+            Message.ShowMessageBox("错误", exception.Message);
+            LogManage.AddLog($"处理文件出错，错误信息：{exception.Message}");
+        }
     }
 
     private void Test(object sender, RoutedEventArgs e)

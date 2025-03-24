@@ -13,14 +13,6 @@ public partial class Setting : Page
     {
         if (ThemeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
         {
-            var item = selectedItem.Content.ToString() ?? throw new InvalidOperationException();
-            Console.WriteLine(item);
-            if (item == "Dark")
-            {
-            }
-
-            var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];
-            foreach (var dictionary in resourceDictionary.MergedDictionaries) Console.WriteLine(item);
         }
     }
 }

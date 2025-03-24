@@ -2,29 +2,21 @@
 
 public class 天津
 {
-    public static void Run(MemoryStream ExcelData, List<string> MKData, string mkFileName)
+    public static void Run(string FilePath, List<string> MKData, string mkFileName)
     {
-        //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var firstColumnValue = worksheet.Cells[row, 1].Text;
-                var secondColumnValue = worksheet.Cells[row, 2].Text;
-                var newRow =
-                    $"{firstColumnValue}      {firstColumnValue}      {secondColumnValue}              FFFFFFFFFFFFFFFFFFFF";
-                processedData.Add(newRow);
-            }
-        }
-
+        
+        List<string> SNData = new List<string>();
+        List<string> ATSData = new List<string>();
+        
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
+        SNData = Mdb.Select(FilePath, sql);
+        sql = "select ATS from kahao order by SerialNum ASC ";
+        ATSData = Mdb.Select(FilePath, sql);
+        
         //截取MK文件第二行的前42个字节
         MKData[1] = MKData[1].Substring(0, 42);
         //获取Excel总数据的条数
-        var totalLines = processedData.Count;
+        var totalLines = SNData.Count;
         //将总数据条数转为6位数
         var totalLinesFormatted = totalLines.ToString("D6");
         //将MK文件的第二行的后6位替换为总数据条数
@@ -39,13 +31,12 @@ public class 天津
             writer.WriteLine(MKData[0]);
             writer.WriteLine(MKData[1]);
 
-            for (var i = 0; i < processedData.Count; i++)
-                if (i == processedData.Count - 1)
-                    writer.Write(processedData[i]);
+            for (var i = 0; i < SNData.Count; i++)
+                if (i == SNData.Count - 1)
+                    writer.Write($"{SNData[i]}      {SNData[i]}      {ATSData[i]}              FFFFFFFFFFFFFFFFFFFF");
                 else
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{SNData[i]}      {SNData[i]}      {ATSData[i]}              FFFFFFFFFFFFFFFFFFFF");
         }
-
         Message.ShowSnack();
     }
 }

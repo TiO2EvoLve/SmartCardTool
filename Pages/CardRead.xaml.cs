@@ -45,7 +45,9 @@ public partial class CardRead : Page
             var strport = port_input.Text;
             var Port = Convert.ToInt16(strport);
 
+            Console.WriteLine(Port + "-----" + hz );
             st = dc_init(Port, hz);
+            Console.WriteLine("返回值" + st);
             if (st < 0)
             {
                 Message.ShowMessageBox("失败", "打开端口失败");

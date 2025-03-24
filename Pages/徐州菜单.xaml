@@ -16,7 +16,8 @@
                     <RadioButton
                         Content=".mdb"
                         Checked="RadioButton_Checked"
-                        GroupName="radio_group" />
+                        GroupName="radio_group" 
+                        IsChecked="True"/>
                     <RadioButton
                         Content=".xlsx"
                         Checked="RadioButton_Checked"

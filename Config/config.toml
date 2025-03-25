@@ -17,15 +17,15 @@ tip = "当前地区无注意事项"
 ["兰州工作证"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "兰州工作证不需要MK文件，异型卡需要提供两个"
 
 ["南通地铁"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "具体格式要求见生产通知单"
 
 ["合肥通"]
-mk = false
+mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"
 
@@ -45,8 +45,8 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["天津"]
-mk = false
-file = "xlsx"
+mk = true
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["山西医科大学"]
@@ -66,7 +66,7 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["抚顺"]
@@ -80,7 +80,7 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["柳州公交"]
-mk = false
+mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"
 
@@ -102,7 +102,7 @@ tip = "根据卡类型进行制作，特别注意老年卡和普通卡"
 ["洪城"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "多个文件注意修改编号"
 
 ["济南地铁 UL"]
 mk = false
@@ -112,12 +112,12 @@ tip = "当前地区无注意事项"
 ["淄博公交"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "分为开通和不开通两种类型"
 
 ["淄博血站不开通"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "开通的类型使用淄博公交的逻辑即可"
 
 ["淮北"]
 mk = false
@@ -127,7 +127,7 @@ tip = "当前地区无注意事项"
 ["滨州公交"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "处理逻辑跟芯片类型有关"
 
 ["漯河"]
 mk = false
@@ -137,7 +137,7 @@ tip = "当前地区无注意事项"
 ["潍坊"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "需要手动修改序号"
 
 ["琴岛通"]
 mk = false
@@ -145,7 +145,7 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["琴岛通 1280"]
-mk = false
+mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"
 
@@ -205,14 +205,14 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["郴州"]
-mk = false
+mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["重庆"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"
 
 ["长沙公交"]
 mk = false
@@ -227,7 +227,7 @@ tip = "当前地区无注意事项"
 ["随州"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "Excel文件有时列数会不对应，需自行修改"
 
 ["青岛博研加气站"]
 mk = false
@@ -242,4 +242,9 @@ tip = "当前地区无注意事项"
 ["洛阳"]
 mk = false
 file = "mdb"
+tip = "当前地区无注意事项"
+
+["新开普"]
+mk = false
+file = "xlsx"
 tip = "当前地区无注意事项"

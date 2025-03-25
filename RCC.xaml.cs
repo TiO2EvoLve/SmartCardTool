@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
+﻿
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
-using Tommy;
 using WindowUI.Sort;
 using Wpf.Ui.Controls;
 
@@ -10,22 +10,18 @@ namespace WindowUI;
 
 public partial class RCC
 {
-    // 定义需要MK文件的地区
-    private readonly string[] NeedMKFileRegions = ["天津", "郴州", "合肥", "兰州", "柳州公交", "琴岛通1280"];
-
     public RCC()
     {
         InitializeComponent();
     }
-
     private string mkFileName { get; set; } //  记录MK文件名
     private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
     private string FileName { get; set; } // 记录文件名
-    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的卡文件数据
+    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的文件数据
     private string FilePath { get; set; } // 记录文件的路径
     private string Region { get; set; } // 下拉框选则的地区
     private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
-    private OpenFileDialog openFileDialog2 { get; set; } // 文件处理流
+    private OpenFileDialog openFileDialog2 { get; set; } // 数据文件处理流
 
     //打开MK文件
     private void OpenMKFile(object sender, RoutedEventArgs e)
@@ -71,9 +67,10 @@ public partial class RCC
     //打开Excel或Mdb文件
     private void OpenFile(object sender, RoutedEventArgs e)
     {
+        string file = Toml.GetToml(Region, "file");
         openFileDialog2 = new OpenFileDialog
         {
-            Filter = "Access文件(*.mdb)|*.mdb|Excel文件(*.xlsx)|*.xlsx",
+            Filter = $"数据文件(*.{file})|*.{file}",
             Title = "选择一个文件"
         };
         if (openFileDialog2.ShowDialog() == true)
@@ -113,42 +110,25 @@ public partial class RCC
             if (SelectMKButton != null)
             {
                 LogManage.AddLog($"选择地区为：{Region}");
-                var configPath = "Config/config.toml";
-                TextReader tomlText = new StreamReader(configPath);
-                var table = TOML.Parse(tomlText);
-                tip.Text = table[Region]["tip"];
-                LogManage.AddLog($"{Region}地区需要{table[Region]["file"]}文件格式，提示信息为：{table[Region]["tip"]}");
-
-                SelectMKButton.IsEnabled = Array.Exists(NeedMKFileRegions, region => region == Region);
-                if (!SelectMKButton.IsEnabled)
+                
+                string tips = Toml.GetToml(Region, "tip");
+                tip.Text = tips;
+                string file = Toml.GetToml(Region, "file");
+                LogManage.AddLog($"{Region}地区需要{file}文件格式，提示信息为：{tips}");
+                
+                if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
                 {
+                    SelectMKButton.IsEnabled = true;
                     mk.Foreground = Brushes.LightGreen;
                     mktextbox.Foreground = Brushes.LimeGreen;
                 }
                 else
                 {
+                    SelectMKButton.IsEnabled = false;
                     mk.Foreground = Brushes.Red;
                     mktextbox.Foreground = Brushes.Red;
                 }
             }
-
-
-            //根据不同地区进行提示
-            // switch (Region)
-            // {
-            //     case "泸州公交": tip.Text = "根据卡类型进行制作"; break;
-            //     case "兰州菜单": tip.Text = "兰州工作证不需要MK文件，异型卡需要提供两个"; break;
-            //     case "随州": tip.Text = "Excel文件有时列数会不对应，需自行修改"; break;
-            //     case "洪城": tip.Text = "多个文件注意修改编号"; break;
-            //     case "潍坊": tip.Text = "需要手动修改序号"; break;
-            //     case "滨州": tip.Text = "处理逻辑跟芯片类型有关"; break;
-            //     case "重庆": tip.Text = "目前默认支持的是331-A1，遇到其他芯片类型则需要修改"; break;
-            //     case "南通地铁": tip.Text = "具体格式要求见生产通知单"; break;
-            //     case "滨州公交": tip.Text = "芯片号的名字叫法复旦跟华翼相反"; break;
-            //     case "淄博公交": tip.Text = "分为开通和不开通两种类型"; break;
-            //     case "淄博血站不开通": tip.Text = "开通的类型使用淄博公交的逻辑即可"; break;
-            //     default: tip.Text = "该地区暂无提示"; break;
-            // }
         }
     }
 
@@ -160,7 +140,6 @@ public partial class RCC
             Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
-
         LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
         try

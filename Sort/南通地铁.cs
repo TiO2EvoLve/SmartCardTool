@@ -8,13 +8,13 @@ public class 南通地铁
     {
         //先处理Excel文件
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
-        List<string> timeData = new List<string>();
-        List<string> uidData = new List<string>();
+        List<string> TimeData = new List<string>();
+        List<string> UidData = new List<string>();
 
         var sql = "SELECT UID_16_ FROM kahao order by SerialNum Asc";
-        uidData = Mdb.Select(FilePath, sql);
+        UidData = Mdb.Select(FilePath, sql);
         sql = "SELECT 其他1 FROM kahao order by SerialNum Asc";
-        timeData = Mdb.Select(FilePath, sql);
+        TimeData = Mdb.Select(FilePath, sql);
 
         // 保存文件到桌面
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -25,17 +25,16 @@ public class 南通地铁
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
             // 插入数据
-            for (var i = 0; i < uidData.Count; i++)
+            for (var i = 0; i < UidData.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = uidData[i];
-                var parsedDate = DateTime.ParseExact(timeData[i], "yyyy/M/d H:mm:ss", CultureInfo.InvariantCulture);
-                timeData[i] = $"HG{parsedDate.ToString("yyyyMMdd")}{uidData[i]}";
-                worksheet.Cells[i + 1, 2].Value = timeData[i];
+                worksheet.Cells[i + 1, 1].Value = UidData[i];
+                var parsedDate = DateTime.ParseExact(TimeData[i], "yyyy/M/d H:mm:ss", CultureInfo.InvariantCulture);
+                TimeData[i] = $"HG{parsedDate.ToString("yyyyMMdd")}{UidData[i]}";
+                worksheet.Cells[i + 1, 2].Value = TimeData[i];
             }
 
             package.SaveAs(new FileInfo(filePath));
         }
-
         Message.ShowSnack();
     }
 }

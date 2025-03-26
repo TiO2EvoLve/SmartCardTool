@@ -111,12 +111,12 @@ tip = "当前地区无注意事项"
 
 ["淄博公交"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "分为开通和不开通两种类型"
 
 ["淄博血站不开通"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "开通的类型使用淄博公交的逻辑即可"
 
 ["淮北"]
@@ -226,8 +226,8 @@ tip = "当前地区无注意事项"
 
 ["随州"]
 mk = false
-file = "xlsx"
-tip = "Excel文件有时列数会不对应，需自行修改"
+file = "mdb"
+tip = "当前地区无注意事项"
 
 ["青岛博研加气站"]
 mk = false

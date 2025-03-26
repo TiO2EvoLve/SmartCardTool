@@ -2,27 +2,22 @@
 
 public class 随州
 {
-    public static void Run(MemoryStream ExcelData, string excelFileName)
+    public static void Run(string FilePath, string excelFileName)
     {
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; // 获取行数
-            // 遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
-            {
-                var SNValue = worksheet.Cells[row, 8].Text;
-                var UidValue = worksheet.Cells[row, 3].Text;
-                UidValue = Convert.ToUInt32(UidValue, 16).ToString();
-                SNData.Add(SNValue);
-                UidData.Add(UidValue);
-            }
-        }
+        
+        string sql = "SELECT outsidelasercode From print order by outsidelasercode ASC";
+        SNData = Mdb.Select(FilePath, sql);
+        sql = "SELECT insidecode From print order by outsidelasercode ASC";
+        UidData = Mdb.Select(FilePath, sql);
 
+        // 保存文件到桌面
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var fileName = $"{excelFileName}.xlsx";
+        var filePath = Path.Combine(desktopPath, fileName);
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -31,17 +26,12 @@ public class 随州
             for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = UidData[i];
+                worksheet.Cells[i + 1, 2].Value = Convert.ToUInt32(UidData[i], 16);
             }
-
-            // 保存文件到桌面
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fileName = $"{excelFileName}.xlsx";
-            var filePath = Path.Combine(desktopPath, fileName);
-            // 使用异步的文件保存
             package.SaveAs(new FileInfo(filePath));
-            // 显示提示消息
-            Message.ShowSnack();
+            
         }
+        // 显示提示消息
+        Message.ShowSnack();
     }
 }

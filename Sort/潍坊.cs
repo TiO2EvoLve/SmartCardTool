@@ -16,20 +16,10 @@ public class 潍坊
         // 读取ATS参数
         var sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
-        if (ATS.Count == 0)
-        {
-            Message.ShowMessageBox("错误", "ATS数据读取失败");
-            return;
-        }
 
         // 读取卡标识参数
         sql = "SELECT 卡标识 FROM kahao order by SerialNum ASC";
         CardID = Mdb.Select(FilePath, sql);
-        if (CardID.Count == 0)
-        {
-            Message.ShowMessageBox("错误", "卡标识数据读取失败");
-            return;
-        }
 
         // 使用正则表达式匹配数量和日期
         var regex = new Regex(@"(\d+)-(\d{8})");

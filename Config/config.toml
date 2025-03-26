@@ -1,9 +1,4 @@
 ﻿
-["上海数维"]
-mk = false
-file = "mdb"
-tip = "当前地区无注意事项"
-
 ["云南朗坤"]
 mk = false
 file = "xlsx"
@@ -165,6 +160,11 @@ file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["穆棱"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
+["上海数维"]
 mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"

@@ -110,8 +110,8 @@ public partial class RCC
             if (SelectMKButton != null)
             {
                 LogManage.AddLog($"选择地区为：{Region}");
-                
                 string tips = Toml.GetToml(Region, "tip");
+                
                 tip.Text = tips;
                 string file = Toml.GetToml(Region, "file");
                 LogManage.AddLog($"{Region}地区需要{file}文件格式，提示信息为：{tips}");

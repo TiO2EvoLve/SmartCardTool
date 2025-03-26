@@ -6,15 +6,15 @@ public class 潍坊
 {
     public static void Run(string FilePath, string FileName)
     {
-        var Count = 0; // 记录文件的数量
-        var Date = ""; // 记录日期
+        int Count; // 记录文件的数量
+        string Date; // 记录日期
 
         // 读取mdb文件
         List<string> ATS = new List<string>();
         var CardID = new List<string>();
 
         // 读取ATS参数
-        var sql = "SELECT ATS FROM kahao order by SerialNum ASC";
+        string sql = "SELECT ATS FROM kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
 
         // 读取卡标识参数
@@ -74,7 +74,6 @@ public class 潍坊
                     return;
                 }
         }
-
         Message.ShowSnack();
     }
 }

@@ -139,7 +139,7 @@ mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
 
-["琴岛通 1280"]
+["琴岛通1280"]
 mk = true
 file = "xlsx"
 tip = "当前地区无注意事项"

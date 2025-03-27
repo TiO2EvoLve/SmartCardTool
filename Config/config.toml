@@ -16,12 +16,12 @@ tip = "兰州工作证不需要MK文件，异型卡需要提供两个"
 
 ["南通地铁"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "具体格式要求见生产通知单"
 
 ["合肥通"]
 mk = true
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["呼和浩特"]

@@ -109,13 +109,9 @@ public partial class RCC
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
-                LogManage.AddLog($"选择地区为：{Region}");
-                string tips = Toml.GetToml(Region, "tip");
-                
-                tip.Text = tips;
-                string file = Toml.GetToml(Region, "file");
-                LogManage.AddLog($"{Region}地区需要{file}文件格式，提示信息为：{tips}");
-                
+               
+                try
+                {
                 if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
                 {
                     SelectMKButton.IsEnabled = true;
@@ -128,6 +124,18 @@ public partial class RCC
                     mk.Foreground = Brushes.Red;
                     mktextbox.Foreground = Brushes.Red;
                 }
+                }
+                catch
+                {
+                    Message.ShowMessageBox("提示", "请选择地区");
+                    return;
+                }
+                LogManage.AddLog($"选择地区为：{Region}");
+                string tips = Toml.GetToml(Region, "tip");
+                
+                tip.Text = tips;
+                string file = Toml.GetToml(Region, "file");
+                LogManage.AddLog($"{Region}地区需要{file}文件格式");
             }
         }
     }

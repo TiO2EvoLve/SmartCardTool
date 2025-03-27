@@ -13,9 +13,9 @@ public class Toml
             TextReader tomlText = new StreamReader(configPath);
             var table = TOML.Parse(tomlText);
             toml =  table[root][key];
-        }catch
+        }catch(Exception e)
         {
-            Message.ShowMessageBox("错误", "可能未找到该数据");
+            Message.ShowMessageBox("错误", "未找到该数据");
         }
 
         return toml;

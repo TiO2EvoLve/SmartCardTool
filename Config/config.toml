@@ -6,12 +6,12 @@ tip = "当前地区无注意事项"
 
 ["兰州"]
 mk = true
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["兰州工作证"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "兰州工作证不需要MK文件，异型卡需要提供两个"
 
 ["南通地铁"]

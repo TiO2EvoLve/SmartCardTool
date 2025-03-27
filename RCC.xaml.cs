@@ -148,7 +148,7 @@ public partial class RCC
             {
                 case "天津": 天津.Run(FilePath, MKData, mkFileName); break;
                 case "兰州": 兰州.Run(FilePath, FileName, MKData, mkFileName); break;
-                case "兰州工作证": 兰州工作证.Run(ZhikaStream, FileName); break;
+                case "兰州工作证": 兰州工作证.Run(FilePath, FileName); break;
                 case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
                 case "抚顺": 抚顺.Run(FilePath, FileName); break;
                 case "郴州": 郴州.Run(MKData, mkFileName, FilePath); break;

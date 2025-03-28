@@ -1,5 +1,4 @@
-﻿
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
@@ -14,14 +13,14 @@ public partial class RCC
     {
         InitializeComponent();
     }
-    private string mkFileName { get; set; } //  记录MK文件名
-    private List<string> MKData { get; set; } // 临时存储读取的MK文件的数据
-    private string FileName { get; set; } // 记录文件名
-    private MemoryStream ZhikaStream { get; set; } // 临时存储读取的文件数据
-    private string FilePath { get; set; } // 记录文件的路径
-    private string Region { get; set; } // 下拉框选则的地区
-    private OpenFileDialog openFileDialog { get; set; } // MK文件处理流
-    private OpenFileDialog openFileDialog2 { get; set; } // 数据文件处理流
+    private string mkFileName { get; set; } = null!; //  记录MK文件名
+    private List<string> MKData { get; set; } = null!; // 临时存储读取的MK文件的数据
+    private string FileName { get; set; } = null!; // 记录文件名
+    private MemoryStream ZhikaStream { get; set; } = null!; // 临时存储读取的文件数据
+    private string FilePath { get; set; } = null!; // 记录文件的路径
+    private string Region { get; set; } = null!; // 下拉框选则的地区
+    private OpenFileDialog openFileDialog { get; set; } = null!; // MK文件处理流
+    private OpenFileDialog openFileDialog2 { get; set; } = null!; // 数据文件处理流
 
     //打开MK文件
     private void OpenMKFile(object sender, RoutedEventArgs e)

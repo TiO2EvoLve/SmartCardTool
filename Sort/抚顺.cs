@@ -7,9 +7,9 @@ public class 抚顺
         List<string> SnData = new List<string>();
         List<string> UidData = new List<string>();
         
-        string sql = "select NUM from kahao order by NUM ASC";
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
         SnData = Mdb.Select(FilePath, sql);
-        sql = "select UID10 from kahao order by NUM ASC ";
+        sql = "select UID_16 from kahao order by SerialNum ASC ";
         UidData = Mdb.Select(FilePath, sql);
         
         //保存为txt文件
@@ -20,9 +20,9 @@ public class 抚顺
         {
             for (var i = 0; i < SnData.Count; i++)
                 if (i == SnData.Count - 1)
-                    writer.Write($"{SnData[i]} {UidData[i]}");
+                    writer.Write($"{SnData[i]} {Tools.ChangeDecimalSystem(UidData[i])}");
                 else
-                    writer.WriteLine($"{SnData[i]} {UidData[i]}");
+                    writer.WriteLine($"{SnData[i]} {Tools.ChangeDecimalSystem(UidData[i])}");
         }
 
         Message.ShowSnack();

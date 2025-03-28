@@ -5,7 +5,7 @@ using Microsoft.Win32;
 
 namespace WindowUI;
 
-public partial class ScriptChange : Window
+public partial class ScriptChange
 {
     private string _currentFilePath = string.Empty; //文件路径
     private string fileContent = string.Empty;

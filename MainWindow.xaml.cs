@@ -24,7 +24,7 @@ public partial class MainWindow : INotifyPropertyChanged
         {
             Interval = TimeSpan.FromSeconds(1)
         };
-        _timer.Tick += Timer_Tick;
+        _timer.Tick += Timer_Tick!;
         _timer.Start();
 
         LoadApiDataAsync();

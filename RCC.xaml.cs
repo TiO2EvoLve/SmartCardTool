@@ -202,7 +202,7 @@ public partial class RCC
                 case "琴岛通1280": 琴岛通1280.Run(MKData, mkFileName, FilePath, FileName); break;
                 case "广水": 广水.Run(FilePath, FileName); break;
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
-                case "新开普": 新开普.Run(FilePath, FileName); break;
+                case "新开普": 新开普.Run(FilePath,ZhikaStream, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

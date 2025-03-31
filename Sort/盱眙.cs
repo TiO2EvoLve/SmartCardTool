@@ -2,32 +2,30 @@
 
 public class 盱眙
 {
-    public static void Run(MemoryStream ExcelData, string excelFileName)
+    public static void Run(string FilePath, string FileName)
     {
         // 取出Excel文件的数据
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
+        List<string> CustomUidData = new List<string>();
+        
+        string sql = "SELECT SerialNum From kahao order by SerialNum ASC";
+        SNData = Mdb.Select(FilePath, sql);
+        sql = "SELECT UID_16_ From kahao order by SerialNum ASC";
+        UidData = Mdb.Select(FilePath, sql);
+        sql = "SELECT UID_16 From kahao order by SerialNum ASC";
+        CustomUidData = Mdb.Select(FilePath, sql);
+       
 
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; // 获取行数
-
-            // 异步遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
-            {
-                var SNValue = worksheet.Cells[row, 6].Text;
-                var UidValue = worksheet.Cells[row, 2].Text;
-                SNData.Add(SNValue);
-                UidData.Add(UidValue);
-            }
-        }
-
+        //保存文件到桌面
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var fileName = $"{FileName}.xlsx";
+        var filePath = Path.Combine(desktopPath, fileName);
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
-            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            var worksheet = package.Workbook.Worksheets.Add(FileName);
             worksheet.Cells[1, 1].Value = "SerialNumber";
             worksheet.Cells[1, 2].Value = "UID";
             worksheet.Cells[1, 3].Value = "CUSTOMUID";
@@ -35,16 +33,11 @@ public class 盱眙
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 worksheet.Cells[i + 2, 2].Value = UidData[i];
-                worksheet.Cells[i + 2, 3].Value = Tools.ChangeHexPairs(UidData[i]);
+                worksheet.Cells[i + 2, 3].Value = CustomUidData[i];
             }
-
-            //保存文件到桌面
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fileName = $"{excelFileName}.xlsx";
-            var filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            // 显示提示消息
-            Message.ShowSnack();
+           
         }
+        Message.ShowSnack();
     }
 }

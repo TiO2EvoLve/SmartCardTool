@@ -3,6 +3,8 @@
 mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
+format = "xlsx"
+rcc = "SN + UID16 + UID16_ + UID10 + uid10_"
 
 ["兰州"]
 mk = true
@@ -131,7 +133,7 @@ tip = "当前地区无注意事项"
 
 ["潍坊"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "需要手动修改序号"
 
 ["琴岛通"]
@@ -151,7 +153,7 @@ tip = "当前地区无注意事项"
 
 ["盱眙"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["石家庄"]

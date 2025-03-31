@@ -7,9 +7,9 @@ public class 兰州工作证
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         
-        string sql = "SELECT outsidelasercode From print order by outsidelasercode ASC";
+        string sql = "SELECT NUM From kahao order by NUM ASC";
         SNData = Mdb.Select(FilePath, sql);
-        sql = "SELECT insidecode From print order by outsidelasercode ASC";
+        sql = "SELECT UID10_ From kahao order by NUM ASC";
         UidData = Mdb.Select(FilePath, sql);
 
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -19,11 +19,10 @@ public class 兰州工作证
         {
             for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]},{Tools.ChangeDecimalSystem(UidData[i])}");
+                    writer.Write($"{SNData[i]},{UidData[i]}");
                 else
-                    writer.WriteLine($"{SNData[i]},{Tools.ChangeDecimalSystem(UidData[i])}");
+                    writer.WriteLine($"{SNData[i]},{UidData[i]}");
         }
-
         Message.ShowSnack();
     }
 }

@@ -13,6 +13,7 @@ public partial class RCC
     {
         InitializeComponent();
     }
+
     private string mkFileName { get; set; } = null!; //  记录MK文件名
     private List<string> MKData { get; set; } = null!; // 临时存储读取的MK文件的数据
     private string FileName { get; set; } = null!; // 记录文件名
@@ -108,33 +109,34 @@ public partial class RCC
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
-               
                 try
                 {
-                if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
-                {
-                    SelectMKButton.IsEnabled = true;
-                    mk.Foreground = Brushes.LightGreen;
-                    mktextbox.Foreground = Brushes.LimeGreen;
-                }
-                else
-                {
-                    SelectMKButton.IsEnabled = false;
-                    mk.Foreground = Brushes.Red;
-                    mktextbox.Foreground = Brushes.Red;
-                }
+                    if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
+                    {
+                        SelectMKButton.IsEnabled = true;
+                        mk.Foreground = Brushes.LightGreen;
+                        mktextbox.Foreground = Brushes.LimeGreen;
+                    }
+                    else
+                    {
+                        SelectMKButton.IsEnabled = false;
+                        mk.Foreground = Brushes.Red;
+                        mktextbox.Foreground = Brushes.Red;
+                    }
                 }
                 catch
                 {
                     Message.ShowMessageBox("提示", "请选择地区");
                     return;
                 }
+
                 LogManage.AddLog($"选择地区为：{Region}");
                 string tips = Toml.GetToml(Region, "tip");
-                
+
                 tip.Text = tips;
                 string file = Toml.GetToml(Region, "file");
                 LogManage.AddLog($"{Region}地区需要{file}文件格式");
+                
             }
         }
     }
@@ -147,6 +149,7 @@ public partial class RCC
             Message.ShowMessageBox("错误", "未选择数据文件");
             return;
         }
+
         LogManage.AddLog("开始处理文件...");
         //根据不同地区处理文件
         try
@@ -202,7 +205,7 @@ public partial class RCC
                 case "琴岛通1280": 琴岛通1280.Run(MKData, mkFileName, FilePath, FileName); break;
                 case "广水": 广水.Run(FilePath, FileName); break;
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
-                case "新开普": 新开普.Run(FilePath,ZhikaStream, FileName); break;
+                case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

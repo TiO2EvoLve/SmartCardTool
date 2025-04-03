@@ -116,12 +116,14 @@ public partial class RCC
                     if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
                     {
                         SelectMKButton.IsEnabled = true;
+                        mk.Foreground = Brushes.Red;
+                        mktextbox.Foreground = Brushes.Red;
                     }
                     else
                     {
                         SelectMKButton.IsEnabled = false;
-                        mk.Foreground = Brushes.Red;
-                        mktextbox.Foreground = Brushes.Red;
+                        mk.Foreground = Brushes.LightGreen;
+                        mktextbox.Foreground = Brushes.LightGreen;
                     }
                 }
                 catch

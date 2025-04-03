@@ -44,7 +44,7 @@ public partial class RCC
                 Message.ShowMessageBox("错误", "请选择正确的MK文件");
                 return;
             }
-
+            
             try
             {
                 //将文件暂时存储到MKDate中
@@ -61,6 +61,8 @@ public partial class RCC
             {
                 Message.ShowMessageBox("错误", "MK文件读取错误");
             }
+            mk.Foreground = Brushes.LightGreen;
+            mktextbox.Foreground = Brushes.LimeGreen;
         }
     }
 
@@ -114,8 +116,6 @@ public partial class RCC
                     if (Convert.ToBoolean(Toml.GetToml(Region, "mk")))
                     {
                         SelectMKButton.IsEnabled = true;
-                        mk.Foreground = Brushes.LightGreen;
-                        mktextbox.Foreground = Brushes.LimeGreen;
                     }
                     else
                     {
@@ -169,12 +169,12 @@ public partial class RCC
                 case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
                 case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
                 case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
-                case "合肥通": 合肥通.Run(ZhikaStream, MKData, mkFileName); break;
+                case "合肥通": 合肥通.Run(FilePath, MKData, mkFileName); break;
                 case "青岛理工大学": 青岛理工大学.Run(ZhikaStream, FileName); break;
                 case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;
                 case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
                 case "重庆": 重庆.Run(FilePath, FileName); break;
-                case "西藏林芝": 西藏林芝.Run(ZhikaStream); break;
+                case "西藏林芝": 西藏林芝.Run(FilePath); break;
                 case "西藏拉萨": 西藏拉萨.Run(FilePath); break;
                 case "淄博公交": 淄博公交.Run(FilePath); break;
                 case "淄博血站不开通": 淄博血站不开通.Run(ZhikaStream); break;

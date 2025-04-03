@@ -33,7 +33,6 @@ public class Mdb
                     new SymbolIcon(SymbolRegular.ErrorCircle20), 3);
                 LogManage.AddLog("数据库指令执行出错！\n" + ex.Message);
             }
-
             return null;
         }
     }

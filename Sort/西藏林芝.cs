@@ -2,23 +2,12 @@
 
 public class 西藏林芝
 {
-    public static void Run(MemoryStream ExcelData)
+    public static void Run(string FilePath)
     {
-        //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var SNValue = worksheet.Cells[row, 1].Text;
-                SNData.Add(SNValue);
-            }
-        }
-
+        var sql = "SELECT SN FROM RCC order by SN Asc";
+        SNData = Mdb.Select(FilePath, sql);
+        
         var date = "20241115";
         var cardtype = "01";
         var startdate = "20241107";

@@ -9,6 +9,7 @@ public class 西藏拉萨
         var cardtype = "01";
         var startdate = DateTime.Now.ToString("yyyyMMdd");
         var finishdate = "20401231";
+        string 启动标识 = "00";
         
         List<string> SNData = new List<string>();
         var sql = "SELECT SN FROM RCC order by SN Asc";
@@ -26,9 +27,9 @@ public class 西藏拉萨
             writer.WriteLine($"{SNData.Count}|{date.Substring(0,8)}|");
             for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]}|04357710FFFFFFFF|{cardtype}|{startdate}|{finishdate}||||01|0000||");
+                    writer.Write($"{SNData[i]}|04357710FFFFFFFF|{cardtype}|{startdate}|{finishdate}||||{启动标识}|0000||");
                 else
-                    writer.WriteLine($"{SNData[i]}|04357710FFFFFFFF|{cardtype}|{startdate}|{finishdate}||||01|0000||");
+                    writer.WriteLine($"{SNData[i]}|04357710FFFFFFFF|{cardtype}|{startdate}|{finishdate}||||{启动标识}|0000||");
         }
 
         Message.ShowSnack();

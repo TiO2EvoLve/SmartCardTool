@@ -7,7 +7,7 @@ public class Tools
     //调整16进制与不调整16进制互相转换
     public static string ChangeHexPairs(string hex)
     {
-        if (hex.Length % 2 != 0) Message.ShowMessageBox("错误", "数据不合法，可能需要删除表头行");
+        if (hex.Length % 2 != 0) Message.ShowMessageBox("错误", "数据位数不合法");
         var reversedHex = new char[hex.Length];
         var j = 0;
         for (var i = hex.Length - 2; i >= 0; i -= 2)
@@ -15,7 +15,6 @@ public class Tools
             reversedHex[j++] = hex[i];
             reversedHex[j++] = hex[i + 1];
         }
-
         return new string(reversedHex);
     }
 

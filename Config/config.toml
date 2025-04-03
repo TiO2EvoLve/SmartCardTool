@@ -188,12 +188,12 @@ tip = "当前地区无注意事项"
 
 ["西藏拉萨"]
 mk = false
-file = "xlsx"
-tip = "当前地区无注意事项"
+file = "mdb"
+tip = "请注意根据制卡数据修改启用标识"
 
 ["西藏林芝"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["运城盐湖王府学校"]

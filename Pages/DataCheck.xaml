@@ -10,7 +10,6 @@
     <Grid>
         <Border
             Background="{DynamicResource StripedBackgroundBrush}" />
-
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="Aquamarine">
             <ui:Button Click="CheckZhiKaFile" Height="40">盐城文件检查</ui:Button>
         </StackPanel>

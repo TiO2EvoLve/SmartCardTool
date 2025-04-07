@@ -1,10 +1,9 @@
-﻿
+﻿Title = "地区参数配置"
+
 ["云南朗坤"]
 mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
-format = "xlsx"
-rcc = "SN + UID16 + UID16_ + UID10 + uid10_"
 
 ["兰州"]
 mk = true
@@ -99,7 +98,7 @@ tip = "根据卡类型进行制作，特别注意老年卡和普通卡"
 ["洪城"]
 mk = false
 file = "xlsx"
-tip = "多个文件注意修改编号，备卡要分开"
+tip = "备卡要分开提供"
 
 ["济南地铁 UL"]
 mk = false

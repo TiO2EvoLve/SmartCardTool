@@ -23,7 +23,7 @@ public class 洪城
     private static void 住建部(MemoryStream ExcelData)
     {
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> processedData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {
@@ -60,7 +60,7 @@ public class 洪城
     private static void 交通部(MemoryStream ExcelData)
     {
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> processedData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {

@@ -5,7 +5,6 @@ public class 石家庄
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         // 第一个rcc文件，excel格式
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
         List<string> SNData = new List<string>();
         List<string> Uid_16_Data = new List<string>();
         using (var package = new ExcelPackage(ExcelData))

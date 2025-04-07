@@ -5,7 +5,7 @@ public class 随州
     public static void Run(string FilePath, string excelFileName)
     {
         // 取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         

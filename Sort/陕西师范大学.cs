@@ -5,7 +5,7 @@ public class 陕西师范大学
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))

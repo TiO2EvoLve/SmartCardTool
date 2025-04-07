@@ -5,7 +5,7 @@ public class 青岛博研加气站
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         //取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> snData = new List<string>();
         List<string> uidData = new List<string>();
 

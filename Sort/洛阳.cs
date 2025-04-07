@@ -5,7 +5,7 @@ public class 洛阳
     public static void Run(string FilePath, string excelFileName)
     {
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
 

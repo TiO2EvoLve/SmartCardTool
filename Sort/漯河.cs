@@ -12,7 +12,7 @@ public class 漯河
         cardtype = window.CardType;
 
         // 取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         List<string> UIDData = new List<string>();
         string StartSN;

@@ -6,7 +6,7 @@ public class 淄博血站不开通
     {
         var cardtype = "0801";
         // 取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         var UIDData = new List<string>();
         string StartSN;

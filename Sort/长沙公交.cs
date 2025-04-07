@@ -5,7 +5,7 @@ public class 长沙公交
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SerialNumData = new List<string>();
         List<string> uid_16Data = new List<string>();
         List<string> uid_16_Data = new List<string>();

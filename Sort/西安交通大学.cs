@@ -5,7 +5,7 @@ public class 西安交通大学
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         //取出Excle文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         //取出第七列流水号数据
         List<string> Data = new List<string>();
         List<string> UidData = new List<string>();

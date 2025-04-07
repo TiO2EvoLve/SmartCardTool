@@ -6,7 +6,7 @@ public class 哈尔滨城市通
     {
         int rowCount; //execl文件的行数
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> processedData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {

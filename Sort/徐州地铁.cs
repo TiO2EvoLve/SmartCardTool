@@ -22,7 +22,7 @@ public class 徐州地铁
         else if (filetype == ".xlsx")
         {
             //取出Excel文件的数据
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+            
             using (var package = new ExcelPackage(ExcelData))
             {
                 var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表

@@ -7,7 +7,7 @@ public class 运城盐湖王府学校
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         //先处理Excel文件
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> snData = new List<string>();
         List<string> uidData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))

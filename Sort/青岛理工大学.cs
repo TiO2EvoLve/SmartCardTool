@@ -20,7 +20,7 @@ public class 青岛理工大学
     private static void 青岛理工大学临沂校区(MemoryStream ExcelData, string excelFileName)
     {
         //取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> DateData = new List<string>();
         var uidData = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
@@ -64,7 +64,7 @@ public class 青岛理工大学
     private static void 青岛理工大学青岛校区(MemoryStream ExcelData, string excelFileName)
     {
         //取出Excel文件的数据
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 避免出现许可证错误
+        
         List<string> SNData = new List<string>();
         var uid6Data = new List<string>();
         using (var package = new ExcelPackage(ExcelData))

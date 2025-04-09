@@ -25,7 +25,6 @@
                         <ComboBoxItem Content="兰州公交异型卡" DataContext="1" />
                     </ComboBox>
                 </StackPanel>
-
                 <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center"
                            Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
             </StackPanel>

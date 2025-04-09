@@ -44,8 +44,6 @@ public partial class CardRead : Page
         {
             var strport = port_input.Text;
             var Port = Convert.ToInt16(strport);
-
-            Console.WriteLine(Port + "-----" + hz );
             st = dc_init(Port, hz);
             Console.WriteLine("返回值" + st);
             if (st < 0)
@@ -56,7 +54,7 @@ public partial class CardRead : Page
             {
                 port_show.Foreground = Brushes.LimeGreen;
                 icdev = st;
-                dc_beep(icdev, 10);
+                dc_beep(icdev, 10);//蜂鸣
             }
         }
         catch (DllNotFoundException)
@@ -99,20 +97,13 @@ public partial class CardRead : Page
             }
 
             var strUID = Convert.ToString(icCardNo, 16).PadLeft(8, '0').ToUpper();
-            var strUID_ = strUID;
+            
+            uid16.Text = Tools.ChangeHexPairs(strUID);
+            uid16_.Text = strUID;
 
-            var x1 = strUID.Substring(0, 2);
-            var x2 = strUID.Substring(2, 2);
-            var x3 = strUID.Substring(4, 2);
-            var x4 = strUID.Substring(6, 2);
-            strUID = x4 + x3 + x2 + x1;
-
-            uid16.Text = strUID;
-            uid16_.Text = strUID_;
-
-            var iUID = uint.Parse(strUID, NumberStyles.HexNumber);
+            var iUID = uint.Parse(Tools.ChangeHexPairs(strUID), NumberStyles.HexNumber);
             var strUID10 = iUID.ToString().PadLeft(10, '0'); //10进制不调整芯片号
-            var iUID_ = uint.Parse(strUID_, NumberStyles.HexNumber);
+            var iUID_ = uint.Parse(strUID, NumberStyles.HexNumber);
             var strUID10_ = iUID_.ToString().PadLeft(10, '0'); //10进制调整芯片号
 
             uid10.Text = strUID10;
@@ -149,23 +140,10 @@ public partial class CardRead : Page
                 Console.WriteLine($"Error: {ex.Message}");
                 return;
             }
-
-            var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={destinationFilePath};";
-
-            //将结果保存到数据库
-            using (var connection = new OleDbConnection(_connectionString))
-            {
-                connection.Open();
-                var strNum = sn.Text;
-                var sql = "insert into kahao(CARD_UID,CARD_UID_,CARD_UID10,CARD_UID10_,Card_ATS,NUM) values('" +
-                          strUID + "','" + strUID_ + "','" + strUID10 + "','" + strUID10_ + "','" + textaaa + "','" +
-                          strNum + "')";
-                var command = new OleDbCommand(sql, connection);
-                var reader = command.ExecuteReader();
-            }
-
-            tip_text.Text = "OK";
-            dc_beep(icdev, 10);
+            string sql = "insert into kahao(CARD_UID,CARD_UID_,CARD_UID10,CARD_UID10_,Card_ATS,NUM) values('" +
+                          strUID + "'," + Tools.ChangeHexPairs(strUID)+ "','" + strUID10 + "','" + strUID10_ + "','" + textaaa + "','" +
+                          sn.Text + "')";
+            Mdb.Execute(sql, destinationFilePath);
         }
     }
 

@@ -32,6 +32,11 @@ public class 运城盐湖王府学校
             worksheet.Cells[1, 1].Value = "Index";
             worksheet.Cells[1, 2].Value = "SerialNumber";
             worksheet.Cells[1, 3].Value = "UID";
+            
+            // 保存文件到桌面
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var fileName = $"{excelFileName}.xlsx";
+            var filePath = Path.Combine(desktopPath, fileName);
             // 插入数据
             for (var i = 0; i < snData.Count; i++)
             {
@@ -39,14 +44,10 @@ public class 运城盐湖王府学校
                 worksheet.Cells[i + 2, 2].Value = snData[i];
                 worksheet.Cells[i + 2, 3].Value = uidData[i];
             }
-
-            // 保存文件到桌面
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fileName = $"{excelFileName}.xlsx";
-            var filePath = Path.Combine(desktopPath, fileName);
             package.SaveAs(new FileInfo(filePath));
-            Message.ShowSnack("成功", "文件已保存到桌面,请根据制卡数据重命名RCC文件", ControlAppearance.Success,
-                new SymbolIcon(SymbolRegular.Checkmark20), 3);
+            
         }
+        Message.ShowSnack("成功", "文件已保存到桌面,请根据制卡数据重命名RCC文件", ControlAppearance.Success,
+            new SymbolIcon(SymbolRegular.Checkmark20), 3);
     }
 }

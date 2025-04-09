@@ -16,10 +16,8 @@
         <ui:CardControl Margin="10">
             <ui:CardControl.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
                     <Button Click="OpenPort" Background="DodgerBlue" Foreground="Azure">打开端口</Button>
                     <ui:SymbolIcon x:Name="port_show" Symbol="Circle48" FontSize="20" Filled="True" Foreground="Red" />
-
                     <ui:CardControl Margin="10,0,0,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
                         <ui:CardControl.Header>
                             <ui:TextBlock
@@ -175,7 +173,6 @@
                         Text="保存数据:" />
                     <ui:ToggleSwitch IsChecked="True" Margin="10,0,0,0" />
                 </StackPanel>
-
             </ui:CardControl.Header>
 
         </ui:CardControl>

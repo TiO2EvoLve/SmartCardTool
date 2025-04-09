@@ -26,7 +26,6 @@ public class 重庆
                 else
                     writer.WriteLine(SNData[i] + ";" + SNData[i] + ";" + ATSData[i] + ";");
         }
-
         Message.ShowSnack();
     }
 }

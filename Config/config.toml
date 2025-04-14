@@ -52,7 +52,7 @@ tip = "当前地区无注意事项"
 
 ["平凉公交"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["广水"]
@@ -127,7 +127,7 @@ tip = "处理逻辑跟芯片类型有关"
 
 ["漯河"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["潍坊"]

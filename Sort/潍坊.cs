@@ -6,8 +6,8 @@ public class 潍坊
 {
     public static void Run(string FilePath, string FileName)
     {
-        int Count; // 记录文件的数量
-        string Date; // 记录日期
+        int Count = 1; // 记录文件的数量
+        string Date = "00000000"; // 记录日期
 
         // 读取mdb文件
         List<string> ATS = new List<string>();
@@ -37,7 +37,7 @@ public class 潍坊
                 Message.ShowMessageBox("异常", "无法解析数量");
                 return;
             }
-
+        
             // 提取并解析日期
             var dateStr = match.Groups[2].Value;
             if (dateStr.Length == 8)

@@ -14,7 +14,7 @@ public class 西安文理学院
             //遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 8].Text;
+                var SNValue = worksheet.Cells[row, 7].Text;
                 var UidValue = worksheet.Cells[row, 2].Text;
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);

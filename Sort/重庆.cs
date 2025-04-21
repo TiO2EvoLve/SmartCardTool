@@ -10,7 +10,6 @@ public class 重庆
 
         var sql = "select 打码特殊算法 from kahao order by 打码特殊算法 ASC ";
         SNData = Mdb.Select(FilePath, sql);
-        foreach (var item in SNData) Console.WriteLine(item);
         sql = "select ATS from kahao order by 打码特殊算法 ASC ";
         ATSData = Mdb.Select(FilePath, sql);
 

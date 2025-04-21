@@ -79,10 +79,8 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         // 发送异步GET请求
         var response = await client.GetAsync(url);
-
         // 确保请求成功
         response.EnsureSuccessStatusCode();
-
         // 读取响应内容
         var responseBody = await response.Content.ReadAsStringAsync();
         return responseBody;

@@ -208,6 +208,7 @@ public partial class RCC
                 case "广水": 广水.Run(FilePath, FileName); break;
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
                 case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
+                case "济南员工卡": 济南员工卡.Run(ZhikaStream, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

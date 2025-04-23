@@ -90,6 +90,7 @@
                     <ComboBoxItem Content="广水" />
                     <ComboBoxItem Content="洛阳" />
                     <ComboBoxItem Content="新开普" />
+                    <ComboBoxItem Content="济南员工卡" />
                 </ComboBox>
                 <ui:Button
                     x:Name="SelectMKButton"

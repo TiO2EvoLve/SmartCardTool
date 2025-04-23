@@ -249,3 +249,8 @@ tip = "当前地区无注意事项"
 mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
+
+["济南员工卡"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"

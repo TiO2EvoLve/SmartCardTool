@@ -63,9 +63,9 @@ public class 淮北
 
         using (var writer = new StreamWriter(filePath))
         {
-            writer.WriteLine("<?xml version = \"1.0\" encoding = \"GB2312\"?>");
+            writer.WriteLine("<?xml version=\"1.0\" encoding=\"GB2312\"?>");
             writer.WriteLine(
-                $"<CardList Total = \"{SNData.Count}\" CardType = \"{cardtype}\" Start = \"{StartSN}\" End = \"{EndSN}\">");
+                $"<CardList Total=\"{SNData.Count}\" CardType=\"{cardtype}\" Start=\"{StartSN}\" End=\"{EndSN}\">");
             for (var i = 0; i < SNData.Count; i++)
                 writer.WriteLine($"<Card UID=\"{UIDData[i]}\" AppID=\"{SNData[i]}\"/>");
 

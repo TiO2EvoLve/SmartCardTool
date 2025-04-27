@@ -35,6 +35,11 @@ mk = false
 file = "xlsx"
 tip = "当前地区无注意事项"
 
+["哈尔滨学院"]
+mk = false
+file = "mdb"
+tip = "注意芯片厂商"
+
 ["国网技术学院"]
 mk = false
 file = "xlsx"
@@ -47,7 +52,7 @@ tip = "当前地区无注意事项"
 
 ["山西医科大学"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["平凉公交"]
@@ -62,7 +67,7 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["抚顺"]

@@ -50,6 +50,7 @@
                     <ComboBoxItem Content="潍坊" />
                     <ComboBoxItem Content="国网技术学院" />
                     <ComboBoxItem Content="哈尔滨城市通" />
+                    <ComboBoxItem Content="哈尔滨学院" />
                     <ComboBoxItem Content="运城盐湖王府学校" />
                     <ComboBoxItem Content="南通地铁" />
                     <ComboBoxItem Content="长沙公交" />

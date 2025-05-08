@@ -21,7 +21,7 @@ public class 新开普
             // 遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 8].Text;
+                var SNValue = worksheet.Cells[row, 7].Text;
                 var Uid16Value = worksheet.Cells[row, 2].Text;
                 SNData.Add(SNValue);
                 UidData.Add(Uid16Value);

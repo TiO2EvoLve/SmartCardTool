@@ -33,6 +33,7 @@
                     Content="读写"
                     Icon="{ui:SymbolIcon CalendarEdit24}"
                     TargetPageType="{x:Type samples:CardRead}" />
+                
 
             </ui:NavigationView.MenuItems>
 

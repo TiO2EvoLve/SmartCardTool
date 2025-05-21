@@ -16,10 +16,12 @@ public class 滨州公交
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "SerialNum";
+            worksheet.Cells[1, 2].Value = "UID_10_";
             for (var i = 0; i < UidData.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = UidData[i];
+                worksheet.Cells[i + 2, 1].Value = SNData[i];
+                worksheet.Cells[i + 2, 2].Value = UidData[i];
             }
 
             // 保存文件到桌面

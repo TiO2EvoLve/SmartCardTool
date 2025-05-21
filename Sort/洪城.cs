@@ -1,97 +1,50 @@
-﻿using WindowUI.Pages;
-
+﻿
 namespace WindowUI.Sort;
 
 public class 洪城
 {
-    public static void Run(MemoryStream ExcelData)
+    public static void Run(string FilePath)
     {
-        洪城菜单 hongCheng = new();
-        hongCheng.ShowDialog();
-        switch (hongCheng.Cardtype)
-        {
-            case "1208": 住建部(ExcelData); break;
-            case "1280": 交通部(ExcelData); break;
-            case "all":
-                住建部(ExcelData);
-                交通部(ExcelData);
-                break;
-            default: return;
-        }
-    }
-
-    private static void 住建部(MemoryStream ExcelData)
-    {
-        //先处理Excel文件
+        List<string> SN = new();
+        List<string> SN_s = new();
+        List<string> ATS = new();
         
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var ATS = worksheet.Cells[row, 2].Text;
-                var code = worksheet.Cells[row, 11].Text;
-                var newRow =
-                    $"{ATS}                {code}        000033000000000000000000";
-                processedData.Add(newRow);
-            }
-        }
-
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
+        SN = Mdb.Select(FilePath, sql);
+        sql = "select 打码特殊算法 from kahao order by SerialNum ASC";
+        SN_s = Mdb.Select(FilePath, sql);
+        sql = "select ATS from kahao order by SerialNum ASC";
+        ATS = Mdb.Select(FilePath, sql);
+        
+        //住建部文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var date = DateTime.Now.ToString("yyyyMMdd");
         var fileName = $"住建部_回盘_山东华冠_{date}_001.rcc";
         var filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
-            writer.WriteLine(processedData.Count);
-            for (var i = 0; i < processedData.Count; i++)
-                if (i == processedData.Count - 1)
-                    writer.Write(processedData[i]);
+            writer.WriteLine(SN.Count);
+            for (var i = 0; i < SN.Count; i++)
+                if (i == SN.Count - 1)
+                    writer.Write($"{ATS[i]}                {SN_s[i]}        000033000000000000000000");
                 else
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{ATS[i]}                {SN_s[i]}        000033000000000000000000");
         }
-
-        Message.ShowSnack();
-    }
-
-    private static void 交通部(MemoryStream ExcelData)
-    {
-        //先处理Excel文件
-        
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var SN = worksheet.Cells[row, 1].Text;
-                var ATS = worksheet.Cells[row, 2].Text;
-                var newRow =
-                    $"{SN}      {SN}      {ATS}                FFFFFFFFFFFFFFFFFFFF";
-                processedData.Add(newRow);
-            }
-        }
-
-        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var date = DateTime.Now.ToString("yyyyMMddHHmmss");
-        var fileName = $"RCHG{date}000001.rcc";
-        var filePath = Path.Combine(desktopPath, fileName);
+        //交通部文件
+        date = DateTime.Now.ToString("yyyyMMddHHmmss");
+        fileName = $"RCHG{date}000000.rcc";
+        filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
             writer.WriteLine("01");
-            var number = processedData.Count.ToString().PadLeft(6, '0');
+            var number = SN.Count.ToString().PadLeft(6, '0');
             writer.WriteLine($"ORD202401250912301542024012400020016{number}");
 
-            for (var i = 0; i < processedData.Count; i++)
-                if (i == processedData.Count - 1)
-                    writer.Write(processedData[i]);
+            for (var i = 0; i < SN.Count; i++)
+                if (i == SN.Count - 1)
+                    writer.Write($"{SN[i]}      {SN[i]}      {ATS[i]}                FFFFFFFFFFFFFFFFFFFF");
                 else
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{SN[i]}      {SN[i]}      {ATS[i]}                FFFFFFFFFFFFFFFFFFFF");
         }
 
         Message.ShowSnack();

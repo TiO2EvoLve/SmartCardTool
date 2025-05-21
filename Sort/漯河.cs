@@ -10,8 +10,6 @@ public class 漯河
         漯河菜单 window = new();
         window.ShowDialog();
         cardtype = window.CardType;
-
-        // 取出Excel文件的数据
         
         List<string> SNData = new List<string>();
         List<string> UIDData = new List<string>();
@@ -23,8 +21,7 @@ public class 漯河
 
         sql = "SELECT UID_16_ FROM kahao order by SerialNum asc";
         List<string> UID = Mdb.Select(FilePath, sql);
-
-        Console.WriteLine(int.MaxValue);
+        
         if (window.英才卡)
             for (var i = 0; i < SN.Count; i++)
             {

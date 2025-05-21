@@ -12,7 +12,7 @@ tip = "异型卡需要提供两个"
 
 ["兰州工作证"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "兰州工作证不需要MK文件"
 
 ["南通地铁"]
@@ -32,7 +32,7 @@ tip = "当前地区无注意事项"
 
 ["哈尔滨城市通"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["哈尔滨学院"]
@@ -102,7 +102,7 @@ tip = "根据卡类型进行制作，特别注意老年卡和普通卡"
 
 ["洪城"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "备卡要分开提供"
 
 ["济南地铁 UL"]
@@ -127,7 +127,7 @@ tip = "当前地区无注意事项"
 
 ["滨州公交"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "处理逻辑跟芯片类型有关"
 
 ["漯河"]
@@ -152,7 +152,7 @@ tip = "当前地区无注意事项"
 
 ["盐城"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["盱眙"]
@@ -257,5 +257,5 @@ tip = "当前地区无注意事项"
 
 ["济南员工卡"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"

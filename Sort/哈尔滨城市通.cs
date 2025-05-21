@@ -2,39 +2,28 @@
 
 public class 哈尔滨城市通
 {
-    public static void Run(MemoryStream ExcelData, string excelFileName)
+    public static void Run(string FilePath)
     {
-        int rowCount; //execl文件的行数
-        //先处理Excel文件
+        List<string> SN = new();
+        List<string> ATS = new();
         
-        List<string> processedData = new List<string>();
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
-            {
-                var firstColumnValue = worksheet.Cells[row, 2].Text;
-                var secondColumnValue = worksheet.Cells[row, 11].Text;
-                var newRow = $"{firstColumnValue}|{secondColumnValue}";
-                processedData.Add(newRow);
-            }
-        }
+        string sql = "select 打码特殊算法 from kahao order by SerialNum ASC";
+        SN = Mdb.Select(FilePath, sql);
+        sql = "select ATS from kahao order by SerialNum ASC";
+        ATS = Mdb.Select(FilePath, sql);
 
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var fileName = $"HY1500{excelFileName}01.rcc";
+        var fileName = $"HY1500{DateTime.Now:yyyyMMdd}01.rcc";
         var filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
-            writer.WriteLine(rowCount - 1);
-            for (var i = 0; i < processedData.Count; i++)
-                if (i == processedData.Count - 1)
-                    writer.Write(processedData[i]);
+            writer.WriteLine(SN.Count - 1);
+            for (var i = 0; i < SN.Count; i++)
+                if (i == SN.Count - 1)
+                    writer.Write($"{ATS[i]}|{SN[i]}");
                 else
-                    writer.WriteLine(processedData[i]);
+                    writer.WriteLine($"{ATS[i]}|{SN[i]}");
         }
-
         Message.ShowSnack();
     }
 }

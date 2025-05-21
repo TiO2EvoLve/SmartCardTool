@@ -160,13 +160,13 @@ public partial class RCC
             {
                 case "天津": 天津.Run(FilePath, MKData, mkFileName); break;
                 case "兰州": 兰州.Run(FilePath, FileName, MKData, mkFileName); break;
-                case "兰州工作证": 兰州工作证.Run(FilePath, FileName); break;
+                case "兰州工作证": 兰州工作证.Run(ZhikaStream,FilePath, FileName); break;
                 case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
                 case "抚顺": 抚顺.Run(FilePath, FileName); break;
                 case "郴州": 郴州.Run(MKData, mkFileName, FilePath); break;
                 case "潍坊": 潍坊.Run(FilePath, FileName); break;
                 case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
-                case "哈尔滨城市通": 哈尔滨城市通.Run(ZhikaStream, FileName); break;
+                case "哈尔滨城市通": 哈尔滨城市通.Run(FilePath); break;
                 case "哈尔滨学院": 哈尔滨学院.Run(FilePath); break;
                 case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
                 case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
@@ -198,7 +198,7 @@ public partial class RCC
                 case "淮北": 淮北.Run(ZhikaStream); break;
                 case "山西医科大学": 山西医科大学.Run(FilePath, FileName); break;
                 case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
-                case "洪城": 洪城.Run(ZhikaStream); break;
+                case "洪城": 洪城.Run(FilePath); break;
                 case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
                 case "邹平": 邹平.Run(ZhikaStream, FileName); break;
                 case "盐城": 盐城.Run(FilePath, FileName); break;
@@ -209,7 +209,7 @@ public partial class RCC
                 case "广水": 广水.Run(FilePath, FileName); break;
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
                 case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
-                case "济南员工卡": 济南员工卡.Run(ZhikaStream, FileName); break;
+                case "济南员工卡": 济南员工卡.Run(FilePath, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

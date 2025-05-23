@@ -1,0 +1,31 @@
+﻿<Window x:Class="WindowUI.Pages.重庆菜单"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="重庆菜单" Height="300" Width="500">
+    <Grid>
+        <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
+                Background="#FFFEFEFE">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="请选择文件格式：" Margin="0,0,0,10" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <RadioButton
+                        Content="交通部"
+                        Checked="RadioButton_Checked"
+                        GroupName="radio_group" 
+                        IsChecked="True"/>
+                    <RadioButton
+                        Content="住建部"
+                        Checked="RadioButton_Checked"
+                        GroupName="radio_group" />
+                </StackPanel>
+                <ui:Button Content="确定" Width="100" Click="Button_Click" HorizontalAlignment="Center"
+                           Background="#67C23A" MouseOverBackground="#A8E063" Foreground="White" Margin="0,30,0,0" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -17,7 +17,7 @@ public class 哈尔滨城市通
         var filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
-            writer.WriteLine(SN.Count - 1);
+            writer.WriteLine(SN.Count);
             for (var i = 0; i < SN.Count; i++)
                 if (i == SN.Count - 1)
                     writer.Write($"{ATS[i]}|{SN[i]}");

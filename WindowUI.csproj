@@ -11,6 +11,8 @@
         <Authors>TiO2 EvoLve</Authors>
         <UserSecretsId>83b02913-18c0-4d30-81ed-1b5c23238911</UserSecretsId>
         <TargetFramework>net9.0-windows</TargetFramework>
+        <ApplicationIcon>logo.ico</ApplicationIcon>
+        <PackageIcon>icon\logo.jpg</PackageIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

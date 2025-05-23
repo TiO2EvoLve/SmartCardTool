@@ -34,8 +34,17 @@ public partial class DataCheck
                 // 检查文件行数
                 try
                 {
-                    var lines = File.ReadAllLines(file);
-                    if (lines.Length != 46) Console.WriteLine($"[行数错误] {file}（实际行数：{lines.Length}）");
+                    using var stream = new StreamReader(file);
+                    string? line;
+                    int lineCount = 0;
+                    while ((line = stream.ReadLine()) != null)
+                    {
+                        lineCount++;
+                    }
+                    if (lineCount != 46) 
+                    {
+                        Console.WriteLine($"[行数错误] {file}（实际行数：{lineCount}）");
+                    }
                 }
                 catch (Exception ex)
                 {

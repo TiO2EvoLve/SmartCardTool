@@ -1,0 +1,20 @@
+﻿["山西医科大学"]
+SN_Column = 2
+Uid_Column = 7
+SkipRow = true
+
+["西安交通大学"]
+SN_Column = 1
+Uid_Column = 2
+SkipRow = false
+
+["西安文理学院"]
+SN_Column = 4
+Uid_Column = 7
+SkipRow = true
+
+["陕西师范大学"]
+SN_Column = 5
+Uid_Column = 3
+SkipRow = true
+

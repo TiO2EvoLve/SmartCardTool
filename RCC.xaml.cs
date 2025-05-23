@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
+using Tommy;
 using WindowUI.Sort;
 using Wpf.Ui.Controls;
 
@@ -12,6 +13,7 @@ public partial class RCC
     public RCC()
     {
         InitializeComponent();
+        LoadComboBoxItems();
     }
 
     private string mkFileName { get; set; } = null!; //  记录MK文件名
@@ -108,6 +110,7 @@ public partial class RCC
         if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
         {
             Region = selectedItem.Content.ToString() ?? throw new InvalidOperationException();
+            TODO: LocationComboBox.Text = Region;
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
@@ -223,7 +226,22 @@ public partial class RCC
     private void Test(object sender, RoutedEventArgs e)
     {
         Message.ShowSnack("警告", "该功能未开发", ControlAppearance.Caution, new SymbolIcon(SymbolRegular.DismissSquare20), 3);
-        LogManage.AddLog("未开发");
+    }
+    
+    //加载复选框内容
+    private void LoadComboBoxItems()
+    {
+        var tomlFilePath = "Config/config.toml";
+        if (File.Exists(tomlFilePath))
+        {
+            TextReader reader = new StreamReader(tomlFilePath);
+            var table = TOML.Parse(reader);
+
+            foreach (var key in table.Keys)
+            {
+                LocationComboBox.Items.Add(new ComboBoxItem { Content = key });
+            }
+        }
     }
 
     private void ClearLog(object sender, MouseButtonEventArgs e)

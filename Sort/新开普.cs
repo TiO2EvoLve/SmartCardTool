@@ -1,30 +1,63 @@
-﻿namespace WindowUI.Sort;
+﻿using WindowUI.Pages;
+
+namespace WindowUI.Sort;
 
 public class 新开普
 {
+   
     public static void Run(string FilePath,MemoryStream ExcelData, string FileName)
     {
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
-
-
-        // var sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
-        // SNData = Mdb.Select(FilePath, sql);
-        // sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
-        // UidData = Mdb.Select(FilePath, sql);
-
-        using (var package = new ExcelPackage(ExcelData))
+        新开普菜单 page = new 新开普菜单();
+        page.ShowDialog();
+        
+        int SN_Column = page.viewmodel.sn_Column;
+        int Uid_Column = page.viewmodel.uid_Column;
+        bool IsSkipFirstRow = page.viewmodel.isSkipFirstRow;
+        
+        //获取文件的类型
+        string fileExtension = Path.GetExtension(FileName).ToLower();
+        if (string.IsNullOrEmpty(fileExtension))
+        {   
+            return;
+        }
+        
+        if (fileExtension == "mdb")
         {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; // 获取行数
-
-            // 遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
+            MdbExcute(FilePath);
+        }else if(fileExtension == "xlsx")
+        {
+            ExcelExcute(ExcelData);
+        }else 
+        {
+            Message.ShowMessageBox("错误", "不支持的文件类型");
+        }
+        //mdb文件处理逻辑
+        void MdbExcute(string FilePath)
+        {
+            var sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
+            SNData = Mdb.Select(FilePath, sql);
+            sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
+            UidData = Mdb.Select(FilePath, sql);
+            
+        }
+        //Excel文件处理逻辑
+        void ExcelExcute(MemoryStream ExcelData)
+        {
+            using (var package = new ExcelPackage(ExcelData))
             {
-                var SNValue = worksheet.Cells[row, 7].Text;
-                var Uid16Value = worksheet.Cells[row, 2].Text;
-                SNData.Add(SNValue);
-                UidData.Add(Uid16Value);
+                var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+                var rowCount = worksheet.Dimension.Rows; // 获取行数
+
+                // 遍历Excel文件的每一行
+                for (var row = IsSkipFirstRow?1:2; row <= rowCount; row++)
+                {
+                    var SNValue = worksheet.Cells[row, SN_Column].Text;
+                    var Uid16Value = worksheet.Cells[row, Uid_Column].Text;
+                    SNData.Add(SNValue);
+                    UidData.Add(Uid16Value);
+                }
             }
         }
 
@@ -47,7 +80,7 @@ public class 新开普
             // 保存文件到桌面
             package.SaveAs(new FileInfo(filePath));
         }
-
         Message.ShowSnack();
     }
+   
 }

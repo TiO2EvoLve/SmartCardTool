@@ -26,7 +26,7 @@ public partial class MainWindow : INotifyPropertyChanged
         };
         _timer.Tick += Timer_Tick!;
         _timer.Start();
-
+        
         LoadApiDataAsync();
     }
 
@@ -59,14 +59,23 @@ public partial class MainWindow : INotifyPropertyChanged
         navigationView?.Navigate(typeof(Home));
     }
 
-    private async void LoadApiDataAsync()
+    public async void LoadApiDataAsync()
     {
         try
         {
-            var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
-            //解析json
-            var json = JObject.Parse(apiResponse);
-            TitleTextBlock.Text = json["yiyan"]?.ToString();
+            if (Properties.Settings.Default.ShowYiYan)
+            {
+                var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
+                //解析json
+                var json = JObject.Parse(apiResponse);
+                TitleTextBlock.Text = json["yiyan"]?.ToString(); 
+            }
+            else
+            {
+                TitleTextBlock.Text = ""; 
+
+            }
+           
         }
         catch (Exception)
         {

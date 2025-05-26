@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WindowUI.Pages;
 
@@ -8,11 +9,12 @@ public partial class Setting : Page
     {
         InitializeComponent();
     }
-
-    private void ChangeTheme(object sender, RoutedEventArgs e)
+    private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
     {
-        if (ThemeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
-        {
-        }
+        // 更新设置值
+        Properties.Settings.Default.ShowYiYan = ToggleSwitch.IsChecked ?? false;
+        // 保存设置
+        Properties.Settings.Default.Save();
     }
+
 }

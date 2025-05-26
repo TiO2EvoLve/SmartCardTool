@@ -3,6 +3,13 @@
   <Profiles>
     <Profile Name="(Default)" />
   </Profiles>
-  <Settings />
+  <Settings>
+    <Setting Name="Theme" Type="System.String" Scope="应用程序">
+      <Value Profile="(Default)">Dark</Value>
+    </Setting>
+    <Setting Name="ShowYiYan" Type="System.Boolean" Scope="应用程序">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
 

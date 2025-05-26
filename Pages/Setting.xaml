@@ -37,7 +37,7 @@
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox
-                MinWidth="200" SelectionChanged="ChangeTheme" x:Name="ThemeComboBox" SelectedIndex="0">
+                MinWidth="200" SelectedIndex="0">
                 <ComboBoxItem Content="亮色" />
                 <ComboBoxItem Content="暗色" />
             </ComboBox>
@@ -48,15 +48,12 @@
                 <ui:TextBlock
                     Grid.Row="0"
                     FontTypography="Body"
-                    Text="界面风格" />
+                    Text="显示每日一言" />
             </ui:CardControl.Header>
-            <ComboBox
-                MinWidth="200" SelectedIndex="0">
-                <ComboBoxItem Content="靠左" />
-                <ComboBoxItem Content="靠右" />
-                <ComboBoxItem Content="靠上" />
-                <ComboBoxItem Content="靠下" />
-            </ComboBox>
+            <ui:ToggleSwitch x:Name="ToggleSwitch" Checked="ToggleSwitch_Checked"
+                             Unchecked="ToggleSwitch_Checked"
+                             OffContent="关" OnContent="开"
+                             IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowYiYan, Mode=TwoWay}" />
         </ui:CardControl>
 
         <ui:TextBlock

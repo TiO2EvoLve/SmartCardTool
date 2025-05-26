@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:samples="clr-namespace:WindowUI.Pages"
         Title="智能卡工具箱" Height="800" Width="1000">
-    <Grid Background="#FEFEFE">
+    <Grid Background="{Binding Properties.Settings.Default.Theme}">
         <ui:NavigationView
             MinHeight="300"
             Margin="0"

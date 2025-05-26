@@ -17,10 +17,13 @@ public static class LogManage
     public static void Clear()
     {
         richTextBox.Document.Blocks.Clear();
-        var paragraph = new Paragraph();
-        paragraph.LineHeight = 5;
-        paragraph.FontFamily = new FontFamily("Microsoft YaHei");
-        paragraph.FontSize = 12;
+        var paragraph = new Paragraph
+        {
+            LineHeight = 5,
+            FontFamily = new FontFamily("Microsoft YaHei"),
+            FontSize = 12
+        };
+
         richTextBox.Document.Blocks.Add(paragraph);
     }
 

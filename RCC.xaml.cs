@@ -198,7 +198,7 @@ public partial class RCC
                 case "徐州地铁": 徐州地铁.Run(FilePath, ZhikaStream, FileName); break;
                 case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
                 case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
-                case "淮北": 淮北.Run(ZhikaStream); break;
+                case "淮北": 淮北.Run(FilePath); break;
                 case "山西医科大学": 山西医科大学.Run(FilePath, FileName); break;
                 case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
                 case "洪城": 洪城.Run(FilePath); break;

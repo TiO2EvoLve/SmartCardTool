@@ -15,6 +15,12 @@ public partial class Setting : Page
         Properties.Settings.Default.ShowYiYan = ToggleSwitch.IsChecked ?? false;
         // 保存设置
         Properties.Settings.Default.Save();
+        // 获取主窗口实例并调用 LoadApiDataAsync 方法
+        if (Application.Current.MainWindow is MainWindow mainWindow)
+        {
+            mainWindow.LoadApiDataAsync();
+        }
+
     }
 
 }

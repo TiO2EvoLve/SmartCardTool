@@ -1,4 +1,9 @@
 ﻿
+["新开普"]
+mk = false
+file = "both"
+tip = "当前地区无注意事项"
+
 ["云南朗坤"]
 mk = false
 file = "xlsx"
@@ -66,12 +71,12 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["抚顺"]
 mk = false
-file = "mdb"
+file = "both"
 tip = "当前地区无注意事项"
 
 ["昆明"]
@@ -241,17 +246,12 @@ tip = "当前地区无注意事项"
 
 ["青岛理工大学"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["洛阳"]
 mk = false
 file = "mdb"
-tip = "当前地区无注意事项"
-
-["新开普"]
-mk = false
-file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["济南员工卡"]

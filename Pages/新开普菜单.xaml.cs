@@ -80,7 +80,7 @@ public partial class ViewModel : ObservableObject
     [ObservableProperty]
     public bool isSkipFirstRow = true;//是否跳过首行
     [ObservableProperty]
-    private string selectedRegion;
+    public string convert = "不转换";
 
 
 }

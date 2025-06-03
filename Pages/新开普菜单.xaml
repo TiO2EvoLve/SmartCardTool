@@ -47,8 +47,8 @@
                         <ComboBox
                             MinWidth="100"
                             HorizontalAlignment="Left"
-                            SelectedItem="{Binding SelectedRegion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedIndex="1">
+                            SelectedItem="{Binding Convert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedIndex="0">
                             <ComboBoxItem Content="不转换" />
                             <ComboBoxItem Content="16进制调整"/>
                             <ComboBoxItem Content="16进制不调整" />

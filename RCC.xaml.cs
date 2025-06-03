@@ -72,9 +72,14 @@ public partial class RCC
     private void OpenFile(object sender, RoutedEventArgs e)
     {
         string file = Toml.GetToml(Region, "file");
+        string FileSelect = $"数据文件(*.{file})|*.{file}";
+        if (file == "both")
+        {
+            FileSelect = "所有支持的文件 (*.mdb;*.xlsx)|*.mdb;*.xlsx";
+        }
         openFileDialog2 = new OpenFileDialog
         {
-            Filter = $"数据文件(*.{file})|*.{file}",
+            Filter = FileSelect,
             Title = "选择一个文件"
         };
         if (openFileDialog2.ShowDialog() == true)
@@ -165,7 +170,7 @@ public partial class RCC
                 case "兰州": 兰州.Run(FilePath, FileName, MKData, mkFileName); break;
                 case "兰州工作证": 兰州工作证.Run(ZhikaStream,FilePath, FileName); break;
                 case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
-                case "抚顺": 抚顺.Run(FilePath, FileName); break;
+                case "抚顺": 抚顺.Run(FilePath,ZhikaStream, FileName); break;
                 case "郴州": 郴州.Run(MKData, mkFileName, FilePath); break;
                 case "潍坊": 潍坊.Run(FilePath, FileName); break;
                 case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
@@ -176,7 +181,7 @@ public partial class RCC
                 case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
                 case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
                 case "合肥通": 合肥通.Run(FilePath, MKData, mkFileName); break;
-                case "青岛理工大学": 青岛理工大学.Run(ZhikaStream, FileName); break;
+                case "青岛理工大学": 青岛理工大学.Run(FilePath, FileName); break;
                 case "西安交通大学": 西安交通大学.Run(ZhikaStream, FileName); break;
                 case "呼和浩特": 呼和浩特.Run(ZhikaStream, FileName); break;
                 case "重庆": 重庆.Run(FilePath, FileName); break;

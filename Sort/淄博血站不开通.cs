@@ -15,12 +15,12 @@ public class 淄博血站不开通
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             var rowCount = worksheet.Dimension.Rows; // 获取行数
-            StartSN = worksheet.Cells[1, 7].Text;
-            EndSN = worksheet.Cells[rowCount, 7].Text;
-            for (var row = 1; row <= rowCount; row++)
+            StartSN = worksheet.Cells[2, 1].Text;
+            EndSN = worksheet.Cells[rowCount, 1].Text;
+            for (var row = 2; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 7].Text;
-                var UIDValue = worksheet.Cells[row, 2].Text;
+                var SNValue = worksheet.Cells[row, 1].Text;
+                var UIDValue = worksheet.Cells[row, 4].Text;
                 //计算UID校验码
                 var stra = UIDValue.Substring(0, 2);
                 var strb = UIDValue.Substring(2, 2);

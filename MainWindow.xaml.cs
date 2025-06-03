@@ -65,6 +65,7 @@ public partial class MainWindow : INotifyPropertyChanged
         {
             if (Properties.Settings.Default.ShowYiYan)
             {
+                TitleTextBlock.Text = "加载中。。。"; 
                 var apiResponse = await GetApiDataAsync("https://api.nxvav.cn/api/yiyan/");
                 //解析json
                 var json = JObject.Parse(apiResponse);
@@ -73,7 +74,6 @@ public partial class MainWindow : INotifyPropertyChanged
             else
             {
                 TitleTextBlock.Text = ""; 
-
             }
            
         }

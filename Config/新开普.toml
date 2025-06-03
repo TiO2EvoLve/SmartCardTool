@@ -18,5 +18,8 @@ SN_Column = 5
 Uid_Column = 3
 SkipRow = true
 
-
+["青岛理工大学"]
+SN_Column = 1
+Uid_Column = 4
+SkipRow = true
 

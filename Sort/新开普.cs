@@ -4,9 +4,10 @@ namespace WindowUI.Sort;
 
 public class 新开普
 {
-   
+    
     public static void Run(string FilePath,MemoryStream ExcelData, string FileName)
     {
+  
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         新开普菜单 page = new 新开普菜单();
@@ -15,18 +16,14 @@ public class 新开普
         int SN_Column = page.viewmodel.sn_Column;
         int Uid_Column = page.viewmodel.uid_Column;
         bool IsSkipFirstRow = page.viewmodel.isSkipFirstRow;
+        string IsConvert = page.viewmodel.convert;
         
         //获取文件的类型
-        string fileExtension = Path.GetExtension(FileName).ToLower();
-        if (string.IsNullOrEmpty(fileExtension))
-        {   
-            return;
-        }
-        
-        if (fileExtension == "mdb")
+        string fileExtension = Path.GetExtension(FilePath).ToLower();
+        if (fileExtension == ".mdb")
         {
             MdbExcute(FilePath);
-        }else if(fileExtension == "xlsx")
+        }else if(fileExtension == ".xlsx")
         {
             ExcelExcute(ExcelData);
         }else 
@@ -65,6 +62,7 @@ public class 新开普
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var fileName = $"{FileName}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
+        
 
         using (var package = new ExcelPackage())
         {
@@ -82,5 +80,5 @@ public class 新开普
         }
         Message.ShowSnack();
     }
-   
+    
 }

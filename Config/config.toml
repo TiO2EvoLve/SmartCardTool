@@ -258,3 +258,8 @@ tip = "当前地区无注意事项"
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"
+
+["牡丹江"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"

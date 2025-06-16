@@ -115,7 +115,7 @@ public partial class RCC
         if (LocationComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Content != null)
         {
             Region = selectedItem.Content.ToString() ?? throw new InvalidOperationException();
-            TODO: LocationComboBox.Text = Region;
+            LocationComboBox.Text = Region;
             // 根据选择的地区禁用或启用按钮
             if (SelectMKButton != null)
             {
@@ -218,6 +218,7 @@ public partial class RCC
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
                 case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
                 case "济南员工卡": 济南员工卡.Run(FilePath, FileName); break;
+                case "牡丹江": 牡丹江.Run(FilePath, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

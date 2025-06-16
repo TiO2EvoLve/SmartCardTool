@@ -1,4 +1,4 @@
-﻿using System.Data.OleDb;
+﻿
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
@@ -6,11 +6,10 @@ using System.Windows.Media;
 
 namespace WindowUI.Pages;
 
-public partial class CardRead : Page
+public partial class CardRead
 {
     private int hz = 115200;
     private int icdev;
-    private string revalue = "";
 
     private int st;
 
@@ -20,23 +19,23 @@ public partial class CardRead : Page
     }
 
     [DllImport("dcrf32.dll")]
-    public static extern int dc_init(short port, int baud);
+    private static extern int dc_init(short port, int baud);
 
     [DllImport("dcrf32.dll")]
-    public static extern short dc_beep(int icdev, uint _Msec);
+    private static extern short dc_beep(int icdev, uint _Msec);
 
     [DllImport("dcrf32.dll")]
-    public static extern short dc_pro_resethex(int icdev, ref byte rlen, ref byte rbuff);
+    private static extern short dc_pro_resethex(int icdev, ref byte rlen, ref byte rbuff);
 
     [DllImport("dcrf32.dll")]
-    public static extern short dc_card(int icdev, char _Mode, ref long Snr);
+    private static extern short dc_card(int icdev, char _Mode, ref long Snr);
 
     [DllImport("dcrf32.dll")]
-    public static extern short dc_pro_commandlink_hex(int icdev, byte len, ref byte sbuff, ref byte rlen,
+    private static extern short dc_pro_commandlink_hex(int icdev, byte len, ref byte sbuff, ref byte rlen,
         ref byte rbuff, byte tt, byte FG);
 
     [DllImport("dcrf32.dll")]
-    public static extern short dc_reset(int icdev, int Msec);
+    private static extern short dc_reset(int icdev, int Msec);
     
     private void OpenPort(object sender, RoutedEventArgs e)
     {
@@ -63,7 +62,7 @@ public partial class CardRead : Page
         }
     }
 
-    private void bt_start_Click(object sender, EventArgs e)
+    private void bt_start_Click()
     {
         if (sn.Text == "")
         {

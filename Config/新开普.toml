@@ -23,3 +23,11 @@ SN_Column = 1
 Uid_Column = 4
 SkipRow = true
 
+["西安交通大学"]
+SN_Column = 7
+Uid_Column = 2
+SkipRow = false
+
+
+
+

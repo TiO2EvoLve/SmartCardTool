@@ -18,6 +18,7 @@ public partial class 制卡数据 : Page
     private string XdFilePath { get; set; }
     private string KeyFilePath { get; set; }
 
+    //选择xd文件
     private void SelectXdFile(object sender, RoutedEventArgs e)
     {
         _openFileDialog.Filter = "xd files (*.xd)|*.xd";
@@ -25,7 +26,7 @@ public partial class 制卡数据 : Page
         if (_openFileDialog.ShowDialog() == true && !string.IsNullOrEmpty(_openFileDialog.FileName))
             XdFilePath = _openFileDialog.FileName;
     }
-
+    //选择key文件
     private void SelectKeyFile(object sender, RoutedEventArgs e)
     {
         _openFileDialog.Filter = "xd files (*.key)|*.key";
@@ -33,7 +34,7 @@ public partial class 制卡数据 : Page
         if (_openFileDialog.ShowDialog() == true && !string.IsNullOrEmpty(_openFileDialog.FileName))
             KeyFilePath = _openFileDialog.FileName;
     }
-
+    //复制数据库到桌面
     private void CreateFile(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(XdFilePath) || string.IsNullOrEmpty(KeyFilePath))

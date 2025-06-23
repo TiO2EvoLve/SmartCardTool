@@ -73,7 +73,14 @@ public class 新开普
             for (var i = 0; i < SNData.Count; i++)
             {
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
-                worksheet.Cells[i + 2, 2].Value = UidData[i];
+                switch (IsConvert)
+                {
+                    case "16进制调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    case "16进制不调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    case "10进制调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    case "10进制不调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    default:worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                }
             }
             // 保存文件到桌面
             package.SaveAs(new FileInfo(filePath));

@@ -59,4 +59,34 @@ public class Mdb
             }
         }
     }
+
+    //批量执行sql
+    public static void ExecuteBatch(string filePath, List<string> sqls)
+    {
+        var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
+        using (var connection = new OleDbConnection(_connectionString))
+        {
+            connection.Open();
+            var transaction = connection.BeginTransaction();
+            var command = new OleDbCommand { Connection = connection, Transaction = transaction };
+
+            try
+            {
+                foreach (var sql in sqls)
+                {
+                    command.CommandText = sql;
+                    command.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Message.ShowSnack("错误", ex.Message, ControlAppearance.Danger,
+                    new SymbolIcon(SymbolRegular.ErrorCircle20), 3);
+                LogManage.AddLog("数据库指令执行出错！\n" + ex.Message);
+            }
+        }
+    }
 }

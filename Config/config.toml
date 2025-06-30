@@ -61,7 +61,7 @@ tip = "当前地区无注意事项"
 
 ["平凉公交"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["广水"]
@@ -82,6 +82,11 @@ tip = "当前地区无注意事项"
 ["昆明"]
 mk = false
 file = "xlsx"
+tip = "当前地区无注意事项"
+
+["昆明轨道"]
+mk = false
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["柳州公交"]

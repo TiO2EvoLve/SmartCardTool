@@ -2,18 +2,34 @@
 
 public class 淮北
 {
-    public static void Run(string FilePath)
+    public static void Run(MemoryStream ExcelData)
     {
         string cardtype;
         List<string> SNData = new ();
         List<string> UIDData = new ();
         string StartSN;
         string EndSN;
+        
+        //取出文件数据
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            var rowCount = worksheet.Dimension.Rows; // 获取行数
+            // 遍历Excel文件的每一行
+            for (var row = 2; row < rowCount; row++)
+            {
+                var SNValue = worksheet.Cells[row, 7].Text;
+                var UidValue = worksheet.Cells[row, 2].Text;
+                UidValue = Tools.ChangeHexPairs(UidValue);
+                SNData.Add(SNValue);
+                UIDData.Add(UidValue);
+            }
+        }
 
-        string sql = "Select SerialNum from kahao order by SerialNum asc";
-        SNData = Mdb.Select(FilePath, sql);
-        sql = "Select UID_16_ from kahao order by SerialNum asc";
-        UIDData = Mdb.Select(FilePath, sql);
+        // string sql = "Select SerialNum from kahao order by SerialNum asc";
+        // SNData = Mdb.Select(FilePath, sql);
+        // sql = "Select UID_16_ from kahao order by SerialNum asc";
+        // UIDData = Mdb.Select(FilePath, sql);
 
         StartSN = SNData[0];
         EndSN = SNData[^1];

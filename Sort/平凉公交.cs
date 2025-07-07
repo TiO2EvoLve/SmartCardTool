@@ -8,7 +8,6 @@ public class 平凉公交
         
         List<string> UIDData = new List<string>();
         List<string> SNData = new List<string>();
-        //
         // string sql = "SELECT outsidelasercode From print order by outsidelasercode ASC";
         // SNData = Mdb.Select(FilePath, sql);
         // sql = "SELECT insidecode From print order by outsidelasercode ASC";

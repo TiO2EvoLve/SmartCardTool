@@ -31,23 +31,22 @@ public class 平凉公交
                 SNData.Add(SNValue);
             }
         }
-
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var fileName = $"{excelFileName}.txt";
+        var fileName = $"{excelFileName}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
-        using (var writer = new StreamWriter(filePath))
+
+        using (var package = new ExcelPackage())
         {
-            for (var i = 0; i < SNData.Count; i++)
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            for (var i = 0; i < UIDData.Count; i++)
             {
-                if (i < UIDData.Count)
-                {
-                    writer.WriteLine($"{UIDData[i]}\t74400000{SNData[i]}\t1");
-                }
-                else
-                {
-                    writer.Write($"{SNData[i]}\t74400000{SNData[i]}\t1");
-                }
+                worksheet.Cells[i + 1, 1].Value = UIDData[i];
+                worksheet.Cells[i + 1, 2].Value = $"74400000{SNData[i]}";
+                worksheet.Cells[i + 1, 3].Value = "1";
             }
+
+            // 保存文件到桌面
+            package.SaveAs(new FileInfo(filePath));
         }
 
         Message.ShowSnack();

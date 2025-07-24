@@ -75,10 +75,10 @@ public class 新开普
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 switch (IsConvert)
                 {
-                    case "16进制调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    case "16进制调整":  worksheet.Cells[i + 2, 2].Value = Tools.ChangeHexPairs(UidData[i]);break;
                     case "16进制不调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
-                    case "10进制调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
-                    case "10进制不调整":  worksheet.Cells[i + 2, 2].Value = UidData[i];break;
+                    case "10进制调整":  worksheet.Cells[i + 2, 2].Value = Tools.ChangeDecimalSystem(Tools.ChangeHexPairs(UidData[i]));break;
+                    case "10进制不调整":  worksheet.Cells[i + 2, 2].Value = Tools.ChangeDecimalSystem(UidData[i]);break;
                     default:worksheet.Cells[i + 2, 2].Value = UidData[i];break;
                 }
             }

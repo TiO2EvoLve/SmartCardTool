@@ -1,4 +1,5 @@
-﻿["山西医科大学"]
+﻿
+["山西医科大学"]
 SN_Column = 2
 Uid_Column = 7
 SkipRow = true
@@ -23,7 +24,7 @@ SN_Column = 1
 Uid_Column = 4
 SkipRow = true
 
-["西安交通大学"]
+["吉利汽车"]
 SN_Column = 7
 Uid_Column = 2
 SkipRow = false

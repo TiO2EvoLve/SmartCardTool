@@ -2,28 +2,21 @@
 
 public class 绵州通
 {
-    public static void Run(MemoryStream ExcelData, string FileName)
+    public static void Run(string FilePath, string FileName)
     {
-        List<string> SerialNumber = new List<string>();
+        List<string> SN = new List<string>();
         List<string> UID = new List<string>();
         
-        using (var package = new ExcelPackage(ExcelData))
-        {
-            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-            var rowCount = worksheet.Dimension.Rows; //获取行数
-            //遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
-            {
-                var SNValue = worksheet.Cells[row, 7].Text;
-                var UIDValue = worksheet.Cells[row, 2].Text;
-                SerialNumber.Add(SNValue);
-                UID.Add(UIDValue);
-            }
-        }
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
+        SN = Mdb.Select(FilePath, sql);
+        sql = "select UID_16_ from kahao order by SerialNum ASC ";
+        UID = Mdb.Select(FilePath, sql);
 
         // 创建一个新的Excel文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var fileName = $"{FileName}.xlsx";
+        //获取当前日期
+        var currentDate = DateTime.Now.ToString("yyyyMMdd");
+        var fileName = $"绵州通华冠-数据准备文件-{currentDate}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
 
         using (var package = new ExcelPackage())
@@ -36,7 +29,7 @@ public class 绵州通
             worksheet.Cells[1, 4].Value = "卡商代码";
             for (var i = 0; i < UID.Count; i++)
             {
-                worksheet.Cells[i + 2, 1].Value = SerialNumber[i];
+                worksheet.Cells[i + 2, 1].Value = SN[i];
                 worksheet.Cells[i + 2, 2].Value = UID[i];
                 worksheet.Cells[i + 2, 3].Value = "华冠";
                 worksheet.Cells[i + 2, 4].Value = "8670";

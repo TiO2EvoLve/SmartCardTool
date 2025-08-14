@@ -55,7 +55,7 @@ tip = "当前地区无注意事项"
 
 ["山西医科大学"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["平凉公交"]
@@ -264,6 +264,11 @@ file = "mdb"
 tip = "当前地区无注意事项"
 
 ["牡丹江"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["绵州通"]
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"

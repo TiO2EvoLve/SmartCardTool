@@ -4,7 +4,7 @@ using System.Xml;
 using Microsoft.Win32;
 namespace WindowUI.Pages;
 
-public partial class 制卡数据 : Page
+public partial class 制卡数据
 {
     private readonly OpenFileDialog _openFileDialog = new();
 
@@ -53,16 +53,15 @@ public partial class 制卡数据 : Page
         try
         {
             await Task.Run(() => File.Copy(sourceFilePath, destinationFilePath, true));
-            Console.WriteLine("文件已复制到桌面");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
             return;
         }
 
         await Task.Run(() => Readout(rootElem, destinationFilePath));
         await Task.Run(() => ReadKey(KeyFilePath, destinationFilePath));
+        MessageBox.Show("数据生成成功!!!");
     }
 
     public static void Readout(XmlElement rootElem, string destinationFilePath)
@@ -81,7 +80,7 @@ public partial class 制卡数据 : Page
         }
 
         BatchSaveToDatabase(dicryList, destinationFilePath);
-        MessageBox.Show("数据生成成功!!!");
+        
     }
 
     private static void ProcessNode(XmlNode node, string nodeName, Dictionary<string, string> dicry,

@@ -7,9 +7,9 @@ public class 济南员工卡
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         
-        string sql = "SELECT NUM FROM kahao order by NUM ASC";
+        string sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
         SNData = Mdb.Select(FilePath, sql);
-        sql = "SELECT UID_ FROM kahao order by NUM ASC";
+        sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
         UidData = Mdb.Select(FilePath, sql);
         
         //保存为txt文件

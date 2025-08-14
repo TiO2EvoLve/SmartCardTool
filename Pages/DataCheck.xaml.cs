@@ -126,4 +126,5 @@ public partial class DataCheck
             candidate++;
         return candidate;
     }
+    
 }

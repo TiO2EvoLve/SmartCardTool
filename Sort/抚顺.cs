@@ -55,9 +55,9 @@ public class 抚顺
         {
             for (var i = 0; i < SnData.Count; i++)
                 if (i == SnData.Count - 1)
-                    writer.Write($"{SnData[i]} {Tools.ChangeDecimalSystem(UidData[i])}");
+                    writer.Write($"{SnData[i]} {UidData[i]}");
                 else
-                    writer.WriteLine($"{SnData[i]} {Tools.ChangeDecimalSystem(UidData[i])}");
+                    writer.WriteLine($"{SnData[i]} {UidData[i]}");
         }
 
         Message.ShowSnack();

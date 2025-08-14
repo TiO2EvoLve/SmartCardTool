@@ -6,12 +6,13 @@ public class 随州
     {
         // 取出Excel文件的数据
         
+        
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         
-        string sql = "SELECT outsidelasercode From print order by outsidelasercode ASC";
+        string sql = "SELECT SerialNum From kahao order by SerialNum ASC";
         SNData = Mdb.Select(FilePath, sql);
-        sql = "SELECT insidecode From print order by outsidelasercode ASC";
+        sql = "SELECT UID_10 From kahao order by SerialNum ASC";
         UidData = Mdb.Select(FilePath, sql);
 
         // 保存文件到桌面
@@ -26,7 +27,7 @@ public class 随州
             for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = Convert.ToUInt32(UidData[i], 16);
+                worksheet.Cells[i + 1, 2].Value = UidData[i];
             }
             package.SaveAs(new FileInfo(filePath));
             

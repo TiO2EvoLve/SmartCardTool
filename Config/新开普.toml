@@ -29,7 +29,10 @@ SN_Column = 7
 Uid_Column = 2
 SkipRow = false
 
-
+["河南大学"]
+SN_Column = 7
+Uid_Column = 2
+SkipRow = false
 
 
 

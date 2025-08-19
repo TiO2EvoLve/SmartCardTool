@@ -29,9 +29,8 @@ public class 兰州工作证
             //遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 2].Text;
+                var SNValue = worksheet.Cells[row, 7].Text;
                 var UidValue = worksheet.Cells[row, 3].Text;
-                UidValue = Tools.ChangeDecimalSystem(Tools.ChangeHexPairs(UidValue));
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);
             }
@@ -44,9 +43,9 @@ public class 兰州工作证
         {
             for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]},{UidData[i]}");
+                    writer.Write($"{SNData[i]},{Tools.ChangeDecimalSystem(UidData[i])}");
                 else
-                    writer.WriteLine($"{SNData[i]},{UidData[i]}");
+                    writer.WriteLine($"{SNData[i]},{Tools.ChangeDecimalSystem(UidData[i])}");
         }
         Message.ShowSnack();
     }

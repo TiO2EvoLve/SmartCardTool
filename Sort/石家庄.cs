@@ -20,6 +20,10 @@ public class 石家庄
                 Uid_16_Data.Add(Uid_16_Value);
             }
         }
+        // string sql = "select SerialNum from kahao order by SerialNum ASC";
+        // SN = Mdb.Select(FilePath, sql);
+        // sql = "select ATS from kahao order by SerialNum ASC ";
+        // Uid = Mdb.Select(FilePath, sql);
 
         //新建一个Excel文件
         using (var package = new ExcelPackage())

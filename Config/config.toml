@@ -260,7 +260,7 @@ tip = "当前地区无注意事项"
 
 ["济南员工卡"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["牡丹江"]
@@ -269,6 +269,11 @@ file = "mdb"
 tip = "当前地区无注意事项"
 
 ["绵州通"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["内江"]
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"

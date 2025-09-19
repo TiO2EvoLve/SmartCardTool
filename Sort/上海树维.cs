@@ -6,19 +6,15 @@ public class 上海树维
     {
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
-
-
+        
         var sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
         SNData = Mdb.Select(FilePath, sql);
         sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
         UidData = Mdb.Select(FilePath, sql);
-
-
         // 创建一个新的Excel文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var fileName = $"{excelFileName}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
-
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
@@ -33,7 +29,6 @@ public class 上海树维
             // 保存文件到桌面
             package.SaveAs(new FileInfo(filePath));
         }
-
         Message.ShowSnack();
     }
 }

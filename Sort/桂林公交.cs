@@ -23,12 +23,17 @@ public class 桂林公交
         using (var writer = new StreamWriter(filePath))
         {
             for (var i = 0; i < SNData.Count; i++)
+            {
                 if (i == SNData.Count - 1)
                     writer.Write($"00908670{UIDData[i]} {SNData[i]}");
                 else
                     writer.WriteLine($"00908670{UIDData[i]} {SNData[i]}");
+            }
+            if (SNData.Count == 1)
+            {
+                writer.WriteLine();
+            }
         }
-
         Message.ShowSnack();
     }
 }

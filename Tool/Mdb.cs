@@ -82,10 +82,8 @@ public class Mdb
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
-                Message.ShowSnack("错误", ex.Message, ControlAppearance.Danger,
-                    new SymbolIcon(SymbolRegular.ErrorCircle20), 3);
-                LogManage.AddLog("数据库指令执行出错！\n" + ex.Message);
+               // transaction.Rollback();
+               throw;
             }
         }
     }

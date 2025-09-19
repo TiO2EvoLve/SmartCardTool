@@ -177,7 +177,7 @@ public partial class RCC
                 case "哈尔滨城市通": 哈尔滨城市通.Run(FilePath); break;
                 case "哈尔滨学院": 哈尔滨学院.Run(FilePath); break;
                 case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
-                case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
+                case "南通地铁": 南通地铁.Run(ZhikaStream, FileName); break;
                 case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
                 case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
                 case "合肥通": 合肥通.Run(FilePath, MKData, mkFileName); break;
@@ -217,7 +217,7 @@ public partial class RCC
                 case "广水": 广水.Run(FilePath, FileName); break;
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
                 case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
-                case "济南员工卡": 济南员工卡.Run(ZhikaStream, FileName); break;
+                case "济南员工卡": 济南员工卡.Run(FilePath, FileName); break;
                 case "牡丹江": 牡丹江.Run(FilePath, FileName); break;
                 case "昆明轨道": 昆明轨道.Run(FilePath, FileName); break;
                 case "绵州通": 绵州通.Run(FilePath, FileName); break;

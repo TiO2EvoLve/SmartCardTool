@@ -41,6 +41,9 @@
         <None Update="Config\新开普.toml">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="temple\淮南公交.mdb">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

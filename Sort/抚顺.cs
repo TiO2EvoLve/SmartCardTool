@@ -36,12 +36,12 @@ public class 抚顺
                 var rowCount = worksheet.Dimension.Rows; // 获取行数
 
                 // 遍历Excel文件的每一行
-                for (var row = 1; row <= rowCount; row++)
+                for (var row = 2; row <= rowCount; row++)
                 {
-                    var SNValue = worksheet.Cells[row, 7].Text;
-                    var Uid16Value = worksheet.Cells[row, 3].Text;
+                    var SNValue = worksheet.Cells[row, 8].Text;
+                    var UidValue = worksheet.Cells[row, 3].Text;
                     SnData.Add(SNValue);
-                    UidData.Add(Uid16Value);
+                    UidData.Add(UidValue);
                 }
             }
         }

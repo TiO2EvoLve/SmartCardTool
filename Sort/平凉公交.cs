@@ -23,7 +23,7 @@ public class 平凉公交
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             var rowCount = worksheet.Dimension.Rows; //获取行数
             //遍历Excel文件的每一行
-            for (var row = 1; row <= rowCount; row++)
+            for (var row = 2; row <= rowCount; row++)
             {
                 var UIDValue = worksheet.Cells[row, 3].Text;
                 UIDData.Add(UIDValue);
@@ -38,11 +38,15 @@ public class 平凉公交
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "卡片芯号";
+            worksheet.Cells[1, 2].Value = "卡号(16位)";
+            worksheet.Cells[1, 3].Value = "卡商标志";
             for (var i = 0; i < UIDData.Count; i++)
             {
-                worksheet.Cells[i + 1, 1].Value = UIDData[i];
-                worksheet.Cells[i + 1, 2].Value = $"74400000{SNData[i]}";
-                worksheet.Cells[i + 1, 3].Value = "1";
+                //worksheet.Cells[i + 2, 1].Value = Tools.ChangeDecimalSystem(UIDData[i]);
+                worksheet.Cells[i + 2, 1].Value = UIDData[i];
+                worksheet.Cells[i + 2, 2].Value = $"74400000{SNData[i]}";
+                worksheet.Cells[i + 2, 3].Value = "8670";
             }
 
             // 保存文件到桌面

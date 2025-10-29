@@ -171,13 +171,13 @@ public partial class RCC
                 case "兰州工作证": 兰州工作证.Run(ZhikaStream,FilePath, FileName); break;
                 case "青岛博研加气站": 青岛博研加气站.Run(ZhikaStream, FileName); break;
                 case "抚顺": 抚顺.Run(FilePath,ZhikaStream, FileName); break;
-                case "郴州": 郴州.Run(MKData, mkFileName, FilePath); break;
+                case "郴州": 郴州.Run(MKData, mkFileName, ZhikaStream); break;
                 case "潍坊": 潍坊.Run(FilePath, FileName); break;
                 case "国网技术学院": 国网技术学院.Run(ZhikaStream, FileName); break;
                 case "哈尔滨城市通": 哈尔滨城市通.Run(FilePath); break;
                 case "哈尔滨学院": 哈尔滨学院.Run(FilePath); break;
                 case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
-                case "南通地铁": 南通地铁.Run(ZhikaStream, FileName); break;
+                case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
                 case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
                 case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
                 case "合肥通": 合肥通.Run(FilePath, MKData, mkFileName); break;
@@ -201,9 +201,10 @@ public partial class RCC
                 case "随州": 随州.Run(FilePath, FileName); break;
                 case "昆明": 昆明.Run(ZhikaStream, FileName); break;
                 case "徐州地铁": 徐州地铁.Run(FilePath, ZhikaStream, FileName); break;
+                case "徐州地铁UL": 徐州地铁UL.Run(ZhikaStream, FileName); break;
                 case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
                 case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
-                case "淮北": 淮北.Run(ZhikaStream); break;
+                case "淮北": 淮北.Run(FilePath); break;
                 case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
                 case "济南地铁UL": 济南地铁UL.Run(ZhikaStream, FileName); break;
                 case "洪城": 洪城.Run(FilePath); break;
@@ -222,6 +223,7 @@ public partial class RCC
                 case "昆明轨道": 昆明轨道.Run(FilePath, FileName); break;
                 case "绵州通": 绵州通.Run(FilePath, FileName); break;
                 case "内江": 内江.Run(FilePath, FileName); break;
+                case "淮南": 淮南.Run(FilePath); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

@@ -83,5 +83,23 @@
                 </StackPanel>
             </ui:CardControl.Header>
         </ui:CardControl>
+        
+        <ui:CardControl Grid.Row="3" Margin="20,0,20,0" Icon="{ui:SymbolIcon CalendarAgenda20}">
+            <ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" FontSize="15">桂林公交</TextBlock>
+                    <ui:Button
+                        Background="#67C23A"
+                        Content="选择mdb文件"
+                        MouseOverBackground="#A8E063"
+                        Margin="10,0,0,0" Foreground="#E4FFFFFF" />
+                    <ui:Button
+                        Background="#E6A23C"
+                        Content="处理文件"
+                        MouseOverBackground="#ffbc58"
+                        Margin="10,0,10,0" Foreground="#E4FFFFFF" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
     </Grid>
 </Page>

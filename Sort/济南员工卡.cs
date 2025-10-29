@@ -7,9 +7,9 @@ public class 济南员工卡
         List<string> SNData = new List<string>();
         List<string> UidData = new List<string>();
         
-            string sql = "SELECT SN FROM kahao order by SN ASC";
+            string sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
         SNData = Mdb.Select(FilePath, sql);
-        sql = "SELECT UID16 FROM kahao order by SN ASC";
+        sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
         UidData = Mdb.Select(FilePath, sql);
         // using (var package = new ExcelPackage(ExcelData))
         // {

@@ -29,13 +29,12 @@ public class 兰州工作证
             //遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 7].Text;
-                var UidValue = worksheet.Cells[row, 3].Text;
+                var SNValue = worksheet.Cells[row, 2].Text;
+                var UidValue = worksheet.Cells[row, 4].Text;
                 SNData.Add(SNValue);
                 UidData.Add(UidValue);
             }
         }
-
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var fileName = excelFileName + ".txt";
         var filePath = Path.Combine(desktopPath, fileName);

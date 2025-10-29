@@ -24,7 +24,7 @@ public class 抚顺
         {
             string sql = "select SerialNum from kahao order by SerialNum ASC";
             SnData = Mdb.Select(FilePath, sql);
-            sql = "select UID_16 from kahao order by SerialNum ASC ";
+            sql = "select UID_10 from kahao order by SerialNum ASC ";
             UidData = Mdb.Select(FilePath, sql); 
         }
 
@@ -45,8 +45,6 @@ public class 抚顺
                 }
             }
         }
-        
-        
         //保存为txt文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var fileName = $"{excelFileName}.txt";
@@ -59,7 +57,6 @@ public class 抚顺
                 else
                     writer.WriteLine($"{SnData[i]} {UidData[i]}");
         }
-
         Message.ShowSnack();
     }
 

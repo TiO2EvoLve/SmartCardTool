@@ -18,7 +18,7 @@ public class 郴州
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             var rowCount = worksheet.Dimension.Rows; // 获取行数
             // 遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
                 var SNValue = worksheet.Cells[row, 9].Text;
                 var atsValue = worksheet.Cells[row, 4].Text;

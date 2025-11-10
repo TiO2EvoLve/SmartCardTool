@@ -70,7 +70,7 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["徐州地铁UL"]
@@ -118,9 +118,9 @@ mk = false
 file = "mdb"
 tip = "备卡要分开提供，卡号要连续"
 
-["济南地铁 UL"]
+["济南地铁UL"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["淄博公交"]

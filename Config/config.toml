@@ -287,3 +287,8 @@ tip = "当前地区无注意事项"
 mk = false
 file = "mdb"
 tip = "卡类型要转为16进制"
+
+["咸宁枫丹"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"

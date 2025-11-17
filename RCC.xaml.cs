@@ -224,6 +224,7 @@ public partial class RCC
                 case "绵州通": 绵州通.Run(FilePath, FileName); break;
                 case "内江": 内江.Run(FilePath, FileName); break;
                 case "淮南": 淮南.Run(FilePath); break;
+                case "咸宁枫丹": 咸宁枫丹.Run(FilePath,FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

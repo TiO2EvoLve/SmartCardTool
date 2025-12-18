@@ -11,8 +11,7 @@ public class 盐城
         SNData = Mdb.Select(FilePath, sql);
         sql = "SELECT UID_16 FROM kahao order by SerialNum ASC";
         UidData = Mdb.Select(FilePath, sql);
-
-
+        
         // 创建一个新的Excel文件
         using (var package = new ExcelPackage())
         {
@@ -26,10 +25,9 @@ public class 盐城
                 // 判断是否有4结尾的卡号
                 if (SNData[i].EndsWith("4"))
                 {
-                    Message.ShowMessageBox("严重错误", "SN具有4结尾的卡号，请通知个性化");
+                    Message.ShowMessageBox("严重错误", "SN具有4结尾的卡号");
                     return;
                 }
-
                 worksheet.Cells[i + 2, 1].Value = SNData[i];
                 worksheet.Cells[i + 2, 2].Value = UidData[i];
                 worksheet.Cells[i + 2, 3].Value = "山东华冠智能卡";

@@ -20,8 +20,8 @@ tip = "兰州工作证不需要MK文件"
 
 ["南通地铁"]
 mk = false
-file = "mdb"
-tip = "具体格式要求见生产通知单"
+file = "xlsx"
+tip = "时间要按卡上的来"
 
 ["合肥通"]
 mk = true
@@ -61,7 +61,7 @@ tip = "当前地区无注意事项"
 ["平凉公交"]
 mk = false
 file = "xlsx"
-tip = "当前地区无注意事项"
+tip = "格式更改为Excel文件"
 
 ["广水"]
 mk = false
@@ -70,7 +70,7 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["徐州地铁UL"]
@@ -160,8 +160,8 @@ tip = "最后要加回车"
 
 ["琴岛通1280"]
 mk = true
-file = "xlsx"
-tip = "当前地区无注意事项"
+file = "mdb"
+tip = "需要两个回盘文件"
 
 ["盐城"]
 mk = false
@@ -175,7 +175,7 @@ tip = "当前地区无注意事项"
 
 ["石家庄"]
 mk = false
-file = "xlsx"
+file = "mdb"
 tip = "当前地区无注意事项"
 
 ["穆棱"]
@@ -245,7 +245,7 @@ tip = "当前地区无注意事项"
 
 ["随州"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["青岛博研加气站"]
@@ -289,6 +289,11 @@ file = "mdb"
 tip = "卡类型要转为16进制"
 
 ["咸宁枫丹"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["沈阳地铁"]
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"

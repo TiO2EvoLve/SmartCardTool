@@ -6,8 +6,7 @@ public class 咸宁枫丹
     {
         List<string> SN = new List<string>();
         List<string> Uid = new List<string>();
-
-
+        
         var sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
         sql = "SELECT UID_16 FROM kahao order by SerialNum ASC";
@@ -21,7 +20,6 @@ public class 咸宁枫丹
             for (var i = 0; i < SN.Count; i++)
                 writer.WriteLine($"{SN[i]} {Uid[i]}");
         }
-
         Message.ShowSnack();
     }
 }

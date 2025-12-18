@@ -28,6 +28,8 @@
                         <ComboBoxItem Content="普通卡" DataContext="50" />
                         <!-- 中学生卡85 -->
                         <ComboBoxItem Content="中学生卡" DataContext="55" />
+                        <!-- 荣誉卡95 -->
+                        <ComboBoxItem Content="荣誉卡" DataContext="5F" />
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Left">

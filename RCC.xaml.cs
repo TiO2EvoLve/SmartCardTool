@@ -14,6 +14,7 @@ public partial class RCC
     {
         InitializeComponent();
         LoadComboBoxItems();
+        LoadRegion();
     }
 
     private string mkFileName { get; set; } = null!; //  记录MK文件名
@@ -177,7 +178,7 @@ public partial class RCC
                 case "哈尔滨城市通": 哈尔滨城市通.Run(FilePath); break;
                 case "哈尔滨学院": 哈尔滨学院.Run(FilePath); break;
                 case "运城盐湖王府学校": 运城盐湖王府学校.Run(ZhikaStream, FileName); break;
-                case "南通地铁": 南通地铁.Run(FilePath, FileName); break;
+                case "南通地铁": 南通地铁.Run(ZhikaStream, FileName); break;
                 case "长沙公交": 长沙公交.Run(ZhikaStream, FileName); break;
                 case "泸州公交": 泸州公交.Run(FilePath, FileName); break;
                 case "合肥通": 合肥通.Run(FilePath, MKData, mkFileName); break;
@@ -198,12 +199,12 @@ public partial class RCC
                 case "盱眙": 盱眙.Run(FilePath, FileName); break;
                 case "柳州公交": 柳州公交.Run(FilePath, MKData); break;
                 case "漯河": 漯河.Run(FilePath); break;
-                case "随州": 随州.Run(FilePath, FileName); break;
+                case "随州": 随州.Run(FilePath,ZhikaStream, FileName); break;
                 case "昆明": 昆明.Run(ZhikaStream, FileName); break;
                 case "徐州地铁": 徐州地铁.Run(FilePath, ZhikaStream, FileName); break;
                 case "徐州地铁UL": 徐州地铁UL.Run(ZhikaStream, FileName); break;
                 case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
-                case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
+                case "石家庄": 石家庄.Run(FilePath, FileName); break;
                 case "淮北": 淮北.Run(FilePath); break;
                 case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
                 case "济南地铁UL": 济南地铁UL.Run(FilePath, FileName); break;
@@ -225,6 +226,7 @@ public partial class RCC
                 case "内江": 内江.Run(FilePath, FileName); break;
                 case "淮南": 淮南.Run(FilePath); break;
                 case "咸宁枫丹": 咸宁枫丹.Run(FilePath,FileName); break;
+                case "沈阳地铁": 沈阳地铁.Run(FilePath,FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }
@@ -259,5 +261,11 @@ public partial class RCC
     private void ClearLog(object sender, MouseButtonEventArgs e)
     {
         LogManage.Clear();
+    }
+
+    private void LoadRegion()
+    {
+        //加载地区配置
+        
     }
 }

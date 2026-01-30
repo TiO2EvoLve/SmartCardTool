@@ -16,7 +16,7 @@ public class 徐州地铁
         {
             var sql = "SELECT NUM FROM kahao order by NUM ASC";
             SNData = Mdb.Select(FilePath, sql);
-            sql = "SELECT Card_UID FROM kahao order by NUM ASC";
+            sql = "SELECT UID_ FROM kahao order by NUM ASC";
             UidData = Mdb.Select(FilePath, sql);
         }
         else if (filetype == ".xlsx")
@@ -31,7 +31,7 @@ public class 徐州地铁
                 //遍历Excel文件的每一行
                 for (var row = 1; row <= rowCount; row++)
                 {
-                    var SNValue = worksheet.Cells[row, 9].Text;
+                    var SNValue = worksheet.Cells[row, 8].Text;
                     var uidValue = worksheet.Cells[row, 2].Text;
                     SNData.Add(SNValue);
                     UidData.Add(uidValue);

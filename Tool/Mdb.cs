@@ -1,14 +1,83 @@
-﻿using System.Data.OleDb;
+using System.Data.OleDb;
+using System.Runtime.InteropServices;
 using Wpf.Ui.Controls;
 
 namespace WindowUI.Tool;
 
 public class Mdb
 {
+    // 动态创建mdb数据库文件（默认委托到带标志的重载）
+    public static void CreateDatabase(string filePath)
+    {
+        CreateDatabase(filePath, false);
+    }
+
+    // 支持创建旧版 Jet (.mdb) 的重载，用于兼容旧电脑上的旧程序
+    public static void CreateDatabase(string filePath, bool useLegacyJet)
+    {
+        // 如果文件已存在，先删除
+        if (File.Exists(filePath))
+        {
+            try
+            {
+                File.Delete(filePath);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"无法删除已存在的文件: {ex.Message}");
+            }
+        }
+
+        // 确保目录存在
+        var directory = Path.GetDirectoryName(filePath);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        // 使用 ADOX COM 组件创建数据库
+        try
+        {
+            // 动态创建 ADOX.Catalog COM 对象
+            Type catalogType = Type.GetTypeFromProgID("ADOX.Catalog");
+            if (catalogType == null)
+            {
+                throw new Exception("无法创建 ADOX.Catalog 对象，请确保已安装 Microsoft Access Database Engine 或 MDAC/JET");
+            }
+
+            object catalog = Activator.CreateInstance(catalogType);
+
+            // 构建连接字符串：根据 useLegacyJet 决定使用 Jet 4.0（旧电脑兼容）还是 ACE 12.0（默认）
+            string connectionString;
+            if (useLegacyJet)
+            {
+                connectionString = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={filePath};Jet OLEDB:Engine Type=5";
+            }
+            else
+            {
+                connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
+            }
+
+            // 调用 Create 方法创建数据库
+            catalogType.InvokeMember("Create",
+                System.Reflection.BindingFlags.InvokeMethod,
+                null,
+                catalog,
+                new object[] { connectionString });
+
+            // 释放 COM 对象
+            Marshal.ReleaseComObject(catalog);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"创建数据库文件失败: {ex.Message}");
+        }
+    }
+
     //执行查找并将数据返回
     public static List<string> Select(string filePath, string sql)
     {
-        var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
+        var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.4.0;Data Source={filePath};";
 
         using (var connection = new OleDbConnection(_connectionString))
         {

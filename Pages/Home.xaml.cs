@@ -30,4 +30,10 @@ public partial class Home : Page
         DataCheck check = new();
         check.ShowDialog();
     }
+
+    private void OpenFileWindow(object sender, MouseButtonEventArgs e)
+    {
+        前置处理 pre = new();
+        pre.ShowDialog();
+    }
 }

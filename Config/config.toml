@@ -53,6 +53,11 @@ mk = true
 file = "mdb"
 tip = "当前地区无注意事项"
 
+["天津敬老卡"]
+mk = false
+file = "xlsx"
+tip = "当前地区无注意事项"
+
 ["山西医科大学"]
 mk = false
 file = "xlsx"
@@ -70,7 +75,7 @@ tip = "当前地区无注意事项"
 
 ["徐州地铁"]
 mk = false
-file = "mdb"
+file = "both"
 tip = "当前地区无注意事项"
 
 ["徐州地铁UL"]
@@ -120,13 +125,18 @@ tip = "备卡要分开提供，卡号要连续"
 
 ["济南地铁UL"]
 mk = false
-file = "mdb"
+file = "both"
 tip = "当前地区无注意事项"
 
 ["淄博公交"]
 mk = false
 file = "mdb"
 tip = "分为开通和不开通两种类型"
+
+["淄博齐达通"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
 
 ["淄博血站不开通"]
 mk = false
@@ -175,7 +185,7 @@ tip = "当前地区无注意事项"
 
 ["石家庄"]
 mk = false
-file = "mdb"
+file = "xlsx"
 tip = "当前地区无注意事项"
 
 ["穆棱"]
@@ -268,6 +278,16 @@ mk = false
 file = "mdb"
 tip = "当前地区无注意事项"
 
+["济南交通联合"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["济南公交"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
 ["牡丹江"]
 mk = false
 file = "mdb"
@@ -297,3 +317,8 @@ tip = "当前地区无注意事项"
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"
+
+["泉城脉动"]
+mk = false
+file = "xlsx"
+tip = "前缀看生产通知单要求"

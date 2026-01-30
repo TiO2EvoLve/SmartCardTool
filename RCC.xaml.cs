@@ -204,10 +204,10 @@ public partial class RCC
                 case "徐州地铁": 徐州地铁.Run(FilePath, ZhikaStream, FileName); break;
                 case "徐州地铁UL": 徐州地铁UL.Run(ZhikaStream, FileName); break;
                 case "江苏乾翔": 江苏乾翔.Run(ZhikaStream, FileName); break;
-                case "石家庄": 石家庄.Run(FilePath, FileName); break;
+                case "石家庄": 石家庄.Run(ZhikaStream, FileName); break;
                 case "淮北": 淮北.Run(FilePath); break;
                 case "山西医科大学": 山西医科大学.Run(ZhikaStream, FileName); break;
-                case "济南地铁UL": 济南地铁UL.Run(FilePath, FileName); break;
+                case "济南地铁UL": 济南地铁UL.Run(ZhikaStream,FilePath, FileName); break;
                 case "洪城": 洪城.Run(FilePath); break;
                 case "第一医科大学": 第一医科大学.Run(ZhikaStream, FileName); break;
                 case "邹平": 邹平.Run(ZhikaStream, FileName); break;
@@ -220,6 +220,8 @@ public partial class RCC
                 case "洛阳": 洛阳.Run(FilePath, FileName); break;
                 case "新开普": 新开普.Run(FilePath, ZhikaStream, FileName); break;
                 case "济南员工卡": 济南员工卡.Run(FilePath, FileName); break;
+                case "济南公交": 济南公交.Run(FilePath, FileName); break;
+                case "济南交通联合": 济南交通联合.Run(FilePath, FileName); break;
                 case "牡丹江": 牡丹江.Run(FilePath, FileName); break;
                 case "昆明轨道": 昆明轨道.Run(FilePath, FileName); break;
                 case "绵州通": 绵州通.Run(FilePath, FileName); break;
@@ -227,6 +229,9 @@ public partial class RCC
                 case "淮南": 淮南.Run(FilePath); break;
                 case "咸宁枫丹": 咸宁枫丹.Run(FilePath,FileName); break;
                 case "沈阳地铁": 沈阳地铁.Run(FilePath,FileName); break;
+                case "淄博齐达通": 淄博齐达通.Run(FilePath); break;
+                case "天津敬老卡": 天津敬老卡.Run(ZhikaStream); break;
+                case "泉城脉动": 泉城脉动.Run(ZhikaStream,FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

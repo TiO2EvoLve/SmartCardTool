@@ -19,9 +19,9 @@ public class 随州
             //遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var UIDValue = worksheet.Cells[row, 3].Text;
+                var UIDValue = worksheet.Cells[row, 2].Text;
                 UidData.Add(UIDValue);
-                var SNValue = worksheet.Cells[row, 8].Text;
+                var SNValue = worksheet.Cells[row, 6].Text;
                 SNData.Add(SNValue);
             }
         }
@@ -37,7 +37,7 @@ public class 随州
             for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = Tools.ChangeDecimalSystem(UidData[i]);
+                worksheet.Cells[i + 1, 2].Value =Tools.ChangeDecimalSystem(UidData[i]);
             }
             package.SaveAs(new FileInfo(filePath));
         }

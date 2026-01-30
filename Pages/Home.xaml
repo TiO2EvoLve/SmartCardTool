@@ -47,11 +47,11 @@
                             <GradientStop Color="#8379f0" Offset="1" />
                         </LinearGradientBrush>
                     </Border.Background>
-                    <Label MouseDown="Test" Background="Transparent" HorizontalContentAlignment="Center"
+                    <Label MouseDown="OpenFileWindow" Background="Transparent" HorizontalContentAlignment="Center"
                            VerticalContentAlignment="Center">
                         <TextBlock FontSize="15px" HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Foreground="#FEFEFE">
-                            数据解密
+                            前置处理
                         </TextBlock>
                     </Label>
                 </Border>

@@ -2,28 +2,28 @@
 
 public class 济南地铁UL
 {
-    public static void Run(string FilePath, string FileName)
+    public static void Run(MemoryStream ExcelData,string FilePath, string FileName)
     {
-        // // 取出Excel文件的数据
+        // 取数据
         List<string> CustomUIDData = new List<string>();
         List<string> UIDData = new List<string>();
-        string sql = "select 打码特殊算法 from kahao order by SerialNum ASC";
-        CustomUIDData = Mdb.Select(FilePath, sql);
-        sql = "select UID_16 from kahao order by SerialNum ASC ";
-        UIDData = Mdb.Select(FilePath, sql);
-        // using (var package = new ExcelPackage(ExcelData))
-        // {
-        //     var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
-        //     var rowCount = worksheet.Dimension.Rows; // 获取行数
-        //     // 遍历Excel文件的每一行
-        //     for (var row = 2; row <= rowCount; row++)
-        //     {
-        //         var CustomUIDValue = worksheet.Cells[row, 11].Text;
-        //         CustomUIDData.Add(CustomUIDValue);
-        //         var UIDValue = CustomUIDValue.Substring(8, 14);
-        //         UIDData.Add(UIDValue);
-        //     }
-        // }
+        // string sql = "select 打码特殊算法 from kahao order by SerialNum ASC";
+        // CustomUIDData = Mdb.Select(FilePath, sql);
+        // sql = "select UID_16 from kahao order by SerialNum ASC ";
+        // UIDData = Mdb.Select(FilePath, sql);
+        using (var package = new ExcelPackage(ExcelData))
+        {
+            var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
+            var rowCount = worksheet.Dimension.Rows; // 获取行数
+            // 遍历Excel文件的每一行
+            for (var row = 1; row <= rowCount; row++)
+            {
+                var CustomUIDValue = worksheet.Cells[row, 9].Text;
+                CustomUIDData.Add(CustomUIDValue);
+                var UIDValue = worksheet.Cells[row, 2].Text;
+                UIDData.Add(UIDValue);
+            }
+        }
 
         //新建一个Excel文件
         using (var package = new ExcelPackage())

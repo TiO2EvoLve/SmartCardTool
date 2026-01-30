@@ -1,8 +1,4 @@
 ﻿using System.Text;
-using System.Windows.Controls;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 using Microsoft.Win32;
 using WindowUI.Pages.DataParse;
 
@@ -48,5 +44,10 @@ public partial class 制卡数据
     private async void 淄博解析(object sender, RoutedEventArgs e)
     {
         await 淄博.Parse(XdFilePath, KeyFilePath);
+    }
+
+    private async void 凯里解析(object sender, RoutedEventArgs e)
+    {
+        await 凯里.Parse(XdFilePath, KeyFilePath);
     }
 }

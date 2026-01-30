@@ -25,7 +25,8 @@ public class 平凉公交
             //遍历Excel文件的每一行
             for (var row = 2; row <= rowCount; row++)
             {
-                var UIDValue = worksheet.Cells[row, 3].Text;
+                var UIDValue = worksheet.Cells[row, 2].Text;
+                UIDValue = Tools.ChangeHexPairs(UIDValue);
                 UIDData.Add(UIDValue);
                 var SNValue = worksheet.Cells[row, 7].Text;
                 SNData.Add(SNValue);
@@ -44,7 +45,7 @@ public class 平凉公交
             for (var i = 0; i < UIDData.Count; i++)
             {
                 //worksheet.Cells[i + 2, 1].Value = Tools.ChangeDecimalSystem(UIDData[i]);
-                worksheet.Cells[i + 2, 1].Value = UIDData[i];
+                worksheet.Cells[i + 2, 1].Value = Tools.ChangeDecimalSystem(UIDData[i]);
                 worksheet.Cells[i + 2, 2].Value = $"74400000{SNData[i]}";
                 worksheet.Cells[i + 2, 3].Value = "8670";
             }

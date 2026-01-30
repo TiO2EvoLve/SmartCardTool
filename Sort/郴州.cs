@@ -20,7 +20,7 @@ public class 郴州
             // 遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 8].Text;
+                var SNValue = worksheet.Cells[row, 9].Text;
                 var ATSValue = worksheet.Cells[row, 4].Text;
                 SN.Add(SNValue);
                 ATS.Add(ATSValue);

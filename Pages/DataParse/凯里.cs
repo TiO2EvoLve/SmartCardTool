@@ -1,4 +1,4 @@
-using System.Data.OleDb;
+﻿using System.Data.OleDb;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
@@ -198,16 +198,39 @@ public class 凯里
             Message.ShowMessageBox("错误", "未解析到任何卡片数据");
             return;
         }
-        // 动态创建 mdb 文件到桌面，然后写入 Zhika 表
+        // 复制模板 temple/凯里.mdb 到桌面，再写入 Zhika 表
+        var sourceFilePath = "temple/凯里.mdb";
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var destinationFilePath = Path.Combine(desktopPath, "凯里.mdb");
 
         try
         {
-            await Task.Run(() => Mdb.CreateDatabase(destinationFilePath));
-            // 构造一行数据并保存，若表不存在 SaveToMdb 会创建它
+            await Task.Run(() => File.Copy(sourceFilePath, destinationFilePath, true));
+        }
+        catch (Exception ex)
+        {
+            Message.ShowMessageBox("错误", "复制模板失败：" + ex.Message);
+            return;
+        }
+
+        try
+        {
+            // 将传输密钥写入模板的 safekey 表的 KK 字段（与 淮南 一致）
+            if (!string.IsNullOrEmpty(Key))
+            {
+                try
+                {
+                    var sql = $"update safekey set KK = '{Key}'";
+                    await Task.Run(() => Mdb.Execute(destinationFilePath, sql));
+                }
+                catch (Exception ex)
+                {
+                    // 不阻塞主流程，记录或提示错误
+                    Message.ShowMessageBox("警告", "写入safekey失败：" + ex.Message);
+                }
+            }
             await Task.Run(() => SaveToMdb(destinationFilePath, "Zhika", CardDataList));
-            Message.ShowMessageBox("成功", $"数据已保存到桌面：{destinationFilePath}");
+            Message.ShowMessageBox("成功", "数据生成成功！！！");
         }
         catch (Exception ex)
         {

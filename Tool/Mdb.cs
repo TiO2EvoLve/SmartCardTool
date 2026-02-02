@@ -9,12 +9,6 @@ public class Mdb
     // 动态创建mdb数据库文件（默认委托到带标志的重载）
     public static void CreateDatabase(string filePath)
     {
-        CreateDatabase(filePath, false);
-    }
-
-    // 支持创建旧版 Jet (.mdb) 的重载，用于兼容旧电脑上的旧程序
-    public static void CreateDatabase(string filePath, bool useLegacyJet)
-    {
         // 如果文件已存在，先删除
         if (File.Exists(filePath))
         {
@@ -49,14 +43,7 @@ public class Mdb
 
             // 构建连接字符串：根据 useLegacyJet 决定使用 Jet 4.0（旧电脑兼容）还是 ACE 12.0（默认）
             string connectionString;
-            if (useLegacyJet)
-            {
-                connectionString = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={filePath};Jet OLEDB:Engine Type=5";
-            }
-            else
-            {
-                connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
-            }
+            connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
 
             // 调用 Create 方法创建数据库
             catalogType.InvokeMember("Create",
@@ -77,7 +64,7 @@ public class Mdb
     //执行查找并将数据返回
     public static List<string> Select(string filePath, string sql)
     {
-        var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.4.0;Data Source={filePath};";
+        var _connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};";
 
         using (var connection = new OleDbConnection(_connectionString))
         {

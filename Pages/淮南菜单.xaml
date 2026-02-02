@@ -31,7 +31,9 @@
                         <!-- 荣誉卡95 -->
                         <ComboBoxItem Content="荣誉卡" DataContext="5F" />
                         <!-- 异型卡83 -->
-                        <ComboBoxItem Content="异型p卡" DataContext="53" />
+                        <ComboBoxItem Content="异型卡" DataContext="53" />
+                        <!-- 异型卡87 -->
+                        <ComboBoxItem Content="爱心卡" DataContext="57" />
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Left">

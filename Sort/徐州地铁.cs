@@ -14,9 +14,9 @@ public class 徐州地铁
         var filetype = xuzhou.SelectedCampus;
         if (filetype == ".mdb")
         {
-            var sql = "SELECT NUM FROM kahao order by NUM ASC";
+            var sql = "SELECT 批次 FROM kahao order by 批次 ASC";
             SNData = Mdb.Select(FilePath, sql);
-            sql = "SELECT UID_ FROM kahao order by NUM ASC";
+            sql = "SELECT Card_UID_16 FROM kahao order by 批次 ASC";
             UidData = Mdb.Select(FilePath, sql);
         }
         else if (filetype == ".xlsx")
@@ -48,9 +48,9 @@ public class 徐州地铁
         {
             for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]}\t{UidData[i]}00000000");
+                    writer.Write($"{SNData[i]}\t{UidData[i]}00");
                 else
-                    writer.WriteLine($"{SNData[i]}\t{UidData[i]}00000000");
+                    writer.WriteLine($"{SNData[i]}\t{UidData[i]}00");
         }
 
         Message.ShowSnack();

@@ -232,6 +232,10 @@ public partial class RCC
                 case "淄博齐达通": 淄博齐达通.Run(FilePath); break;
                 case "天津敬老卡": 天津敬老卡.Run(ZhikaStream); break;
                 case "泉城脉动": 泉城脉动.Run(ZhikaStream,FileName); break;
+                case "南京功夫豆": 南京功夫豆.Run(FilePath,FileName); break;
+                case "三门峡": 三门峡.Run(FilePath,FileName); break;
+                case "凯里": 凯里.Run(FilePath); break;
+                case "海口": 海口.Run(FilePath,FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

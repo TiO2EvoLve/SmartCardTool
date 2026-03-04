@@ -4,12 +4,10 @@ public class 天津敬老卡
 {
     public static void Run(MemoryStream ExcelData)
     {
-        
         List<string> 身份证号 = new List<string>();
         List<string> 老年卡号 = new List<string>();
-        List<string> 卡面号 = new List<string>();
         List<string> 申请订单号 = new List<string>();
-        
+        List<string> 卡面号 = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表

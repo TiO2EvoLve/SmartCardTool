@@ -4,7 +4,6 @@ public class 昆明轨道
 {
       public static void Run(string FilePath, string excelFileName)
     {
-        // 取出Excel文件的数据
         
         List<string> SNData = new List<string>();
         List<string> UID_16_ = new List<string>();
@@ -13,7 +12,7 @@ public class 昆明轨道
         SNData = Mdb.Select(FilePath, sql);
         sql = "select UID_16_ from kahao order by SerialNum ASC ";
         UID_16_ = Mdb.Select(FilePath, sql);
-
+        
         // 保存文件到桌面
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var fileName = $"{excelFileName}.xlsx";

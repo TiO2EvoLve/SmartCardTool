@@ -4,8 +4,6 @@ public class 广水
 {
     public static void Run(string FilePath, string excelFileName)
     {
-        //先处理Excel文件
-        
         List<string> SN = new List<string>();
         List<string> UID = new List<string>();
 

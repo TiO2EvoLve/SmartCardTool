@@ -322,3 +322,23 @@ tip = "当前地区无注意事项"
 mk = false
 file = "xlsx"
 tip = "前缀看生产通知单要求"
+
+["南京功夫豆"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["三门峡"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["凯里"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["海口"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"

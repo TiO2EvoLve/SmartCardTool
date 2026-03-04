@@ -14,11 +14,11 @@
                 <TextBlock Text="请完善信息：" Margin="0,0,0,10" HorizontalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="制卡数据首序列号" VerticalAlignment="Center" />
-                    <TextBox x:Name="SN" Width="200" Margin="10,0,0,0" Text="03104840298000089017" />
+                    <TextBox x:Name="SN" Width="200" Margin="10,0,0,0" Text="03104840298000109010" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="制卡数据八位数量" VerticalAlignment="Center" />
-                    <TextBox x:Name="Count" Width="200" Margin="10,0,0,0" Text="00002000" />
+                    <TextBox x:Name="Count" Width="200" Margin="10,0,0,0" Text="00010000" />
                 </StackPanel>
                 <TextBlock FontSize="12" Foreground="Red" HorizontalAlignment="Center" Margin="0,20,0,20">tips:根据对应的批次数据而更改</TextBlock>
                 <ui:Button Content="确定" Width="100" Click="ButtonBase_OnClick" HorizontalAlignment="Center"

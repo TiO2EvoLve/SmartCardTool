@@ -29,7 +29,7 @@ public class 徐州地铁
                 var rowCount = worksheet.Dimension.Rows; // 获取行数
 
                 //遍历Excel文件的每一行
-                for (var row = 1; row <= rowCount; row++)
+                for (var row = 2; row <= rowCount; row++)
                 {
                     var SNValue = worksheet.Cells[row, 8].Text;
                     var uidValue = worksheet.Cells[row, 2].Text;
@@ -48,9 +48,9 @@ public class 徐州地铁
         {
             for (var i = 0; i < SNData.Count; i++)
                 if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]}\t{UidData[i]}00");
+                    writer.Write($"{SNData[i]}\t{UidData[i]}00000000");
                 else
-                    writer.WriteLine($"{SNData[i]}\t{UidData[i]}00");
+                    writer.WriteLine($"{SNData[i]}\t{UidData[i]}00000000");
         }
 
         Message.ShowSnack();

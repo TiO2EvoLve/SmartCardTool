@@ -1,4 +1,4 @@
-﻿using System.Data.OleDb;
+using System.Data.OleDb;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
@@ -114,6 +114,7 @@ public class 凯里
             Message.ShowMessageBox("错误", "请先选择文件");
             return;
         }
+        //解析密钥
         try
         {
             var buffer = await File.ReadAllBytesAsync(KeyFilePath);
@@ -125,7 +126,7 @@ public class 凯里
             Message.ShowMessageBox("错误", "key文件读取失败");
             return;
         }
-
+        // 解析 XD 文件
         XDocument doc = XDocument.Load(XdFilePath);
 
         // 获取所有 card_data 元素
@@ -175,6 +176,10 @@ public class 凯里
                         {
                             var keyName = data.Attribute("name")?.Value ?? string.Empty;
                             var keyValue = data.Value ?? string.Empty;
+                            if (keyName.Equals("ef15"))
+                            {
+                                SetValue(dicry, appName+keyName, keyValue);
+                            }
                             // 验证是否为预期值
                             if (expectedEfValues.TryGetValue(keyName, out var expectedValue))
                             {
@@ -189,7 +194,7 @@ public class 凯里
                     }
                 }
             }
-            //保存数据库
+            //保存数据
             CardDataList.Add(dicry);
         }
 
@@ -215,7 +220,7 @@ public class 凯里
 
         try
         {
-            // 将传输密钥写入模板的 safekey 表的 KK 字段（与 淮南 一致）
+            // 将传输密钥写入模板的 safekey 表的 KK 字段
             if (!string.IsNullOrEmpty(Key))
             {
                 try
@@ -230,7 +235,7 @@ public class 凯里
                 }
             }
             await Task.Run(() => SaveToMdb(destinationFilePath, "Zhika", CardDataList));
-            Message.ShowMessageBox("成功", "数据生成成功！！！");
+            Message.ShowMessageBox("成功", "数据保存成功！！！");
         }
         catch (Exception ex)
         {
@@ -238,45 +243,42 @@ public class 凯里
         }
     }
 
+    /// <summary>Zhika 表固定字段（与模板 mdb 一致）</summary>
+    private static readonly string[] ZhikaColumns =
+    {
+        "SN", "EP主控", "EP主控CC", "EP维护1", "EP维护2", "EP维护3", "EP消费", "EP圈存", "EPTAC", "EP锁定", "EP解锁", "EPef15", "ef17",
+        "EX主控", "EX主控CC", "EX维护1", "EX维护2", "EX消费", "EX圈存", "EXTAC", "EX锁定", "EX解锁", "EX透支", "EXPIN", "EXef15", 
+        "TC1主控", "TC1主控CC", "TC1维护1", "TC1维护2", "TC1消费", "TC1圈存", "TC1TAC", "TC1锁定", "TC1解锁", "TC1透支", "TC1PIN", "TC1ef15",
+        "TC2主控", "TC2主控CC", "TC2维护1", "TC2维护2", "TC2消费", "TC2圈存", "TC2TAC", "TC2锁定", "TC2解锁", "TC2透支", "TC2PIN", "TC2ef15"
+    };
+
     private static void SaveToMdb(string mdbFilePath, string tableName, List<Dictionary<string, string>> rows)
     {
         var cs = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={mdbFilePath};";
         using var conn = new OleDbConnection(cs);
         conn.Open();
 
-        EnsureTableAndColumns(conn, tableName, rows);
+        var colList = string.Join(",", ZhikaColumns.Select(c => EscapeIdentifier(c)));
+        var paramList = string.Join(",", ZhikaColumns.Select(_ => "?"));
+        var insertSql = $"INSERT INTO [{tableName}] ({colList}) VALUES ({paramList})";
+
+        using var cmd = new OleDbCommand(insertSql, conn);
+        foreach (var _ in ZhikaColumns)
+            cmd.Parameters.Add(new OleDbParameter { OleDbType = OleDbType.VarWChar });
 
         using var tx = conn.BeginTransaction();
+        cmd.Transaction = tx;
         try
         {
-            // 使用“全字段集合”做一次性插入模板（缺失字段写空）
-            var allKeys = rows
-                .SelectMany(d => d.Keys)
-                .Where(k => !string.IsNullOrWhiteSpace(k))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList();
-
-            // 表头 = 字典 key（用 [] 包起来，并对 ']' 做转义）
-            var colList = string.Join(",", allKeys.Select(k => EscapeIdentifier(k)));
-            var paramList = string.Join(",", allKeys.Select(_ => "?"));
-            var insertSql = $"INSERT INTO [{tableName}] ({colList}) VALUES ({paramList})";
-
-            using var cmd = new OleDbCommand(insertSql, conn, tx);
-            foreach (var _ in allKeys)
-                cmd.Parameters.Add(new OleDbParameter { OleDbType = OleDbType.LongVarWChar });
-
             foreach (var row in rows)
             {
-                for (int i = 0; i < allKeys.Count; i++)
+                for (int i = 0; i < ZhikaColumns.Length; i++)
                 {
-                    var k = allKeys[i];
-                    row.TryGetValue(k, out var v);
+                    row.TryGetValue(ZhikaColumns[i], out var v);
                     cmd.Parameters[i].Value = v ?? string.Empty;
                 }
-
                 cmd.ExecuteNonQuery();
             }
-
             tx.Commit();
         }
         catch
@@ -286,75 +288,14 @@ public class 凯里
         }
     }
 
-    private static void EnsureTableAndColumns(OleDbConnection conn, string tableName, List<Dictionary<string, string>> rows)
-    {
-        // 取出所有 key（= 列名）
-        var allCols = rows
-            .SelectMany(d => d.Keys)
-            .Where(k => !string.IsNullOrWhiteSpace(k))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .ToList();
-
-        if (!TableExists(conn, tableName))
-        {
-            // Access 建表：MEMO 存大文本，不占 2KB 行内限制，单字段约 65KB
-            var colsSql = string.Join(",", allCols.Select(c => $"{EscapeIdentifier(c)} TEXT(200)"));
-            var createSql = string.IsNullOrEmpty(colsSql)
-                ? $"CREATE TABLE [{tableName}] ([ID] COUNTER PRIMARY KEY)"
-                : $"CREATE TABLE [{tableName}] ([ID] COUNTER PRIMARY KEY, {colsSql})";
-
-            using var createCmd = new OleDbCommand(createSql, conn);
-            createCmd.ExecuteNonQuery();
-            return;
-        }
-
-        // 表已存在：补齐缺失列
-        var existing = GetExistingColumns(conn, tableName);
-        foreach (var col in allCols)
-        {
-            if (existing.Contains(col)) continue;
-            var alterSql = $"ALTER TABLE [{tableName}] ADD COLUMN {EscapeIdentifier(col)} TEXT(200)";
-            using var alterCmd = new OleDbCommand(alterSql, conn);
-            alterCmd.ExecuteNonQuery();
-        }
-    }
-
-    private static bool TableExists(OleDbConnection conn, string tableName)
-    {
-        var schema = conn.GetSchema("Tables");
-        foreach (System.Data.DataRow row in schema.Rows)
-        {
-            var name = row["TABLE_NAME"]?.ToString();
-            if (string.Equals(name, tableName, StringComparison.OrdinalIgnoreCase))
-                return true;
-        }
-
-        return false;
-    }
-
-    private static HashSet<string> GetExistingColumns(OleDbConnection conn, string tableName)
-    {
-        var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var schema = conn.GetSchema("Columns", new[] { null, null, tableName, null });
-        foreach (System.Data.DataRow row in schema.Rows)
-        {
-            var name = row["COLUMN_NAME"]?.ToString();
-            if (!string.IsNullOrWhiteSpace(name))
-                set.Add(name);
-        }
-
-        return set;
-    }
-
-    // Access/ACE 标识符转义：用 [] 包裹，并把 ']' 变成 ']]'
+    // Access/ACE 列名转义：用 [] 包裹，']' 改为 ']]'
     private static string EscapeIdentifier(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) name = "COL";
-        // Access 列名长度上限通常为 64，这里做保守截断
-        if (name.Length > 60) name = name[..60];
         name = name.Replace("]", "]]");
         return $"[{name}]";
     }
+
     private static void SetValue(Dictionary<string, string> dicry, string key, string val)
     {
         if (string.IsNullOrWhiteSpace(key)) return;

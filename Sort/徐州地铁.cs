@@ -14,9 +14,9 @@ public class 徐州地铁
         var filetype = xuzhou.SelectedCampus;
         if (filetype == ".mdb")
         {
-            var sql = "SELECT 批次 FROM kahao order by 批次 ASC";
+            var sql = "SELECT SerialNum FROM kahao order by SerialNum ASC";
             SNData = Mdb.Select(FilePath, sql);
-            sql = "SELECT Card_UID_16 FROM kahao order by 批次 ASC";
+            sql = "SELECT UID_16_ FROM kahao order by SerialNum ASC";
             UidData = Mdb.Select(FilePath, sql);
         }
         else if (filetype == ".xlsx")

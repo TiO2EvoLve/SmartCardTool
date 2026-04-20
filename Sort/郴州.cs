@@ -18,9 +18,9 @@ public class 郴州
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             var rowCount = worksheet.Dimension.Rows; // 获取行数
             // 遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row,8 ].Text;
+                var SNValue = worksheet.Cells[row,8].Text;
                 var ATSValue = worksheet.Cells[row, 4].Text;
                 SN.Add(SNValue);
                 ATS.Add(ATSValue);
@@ -39,7 +39,7 @@ public class 郴州
         MKData[1] = MKData[1].Substring(0, MKData[1].Length - 6) + totalLinesFormatted;
         if (MKData[1].Length != 42)
         {
-            Message.ShowMessageBox("1错误", "MK文件格式错误");
+            Message.ShowMessageBox("错误", "MK文件格式错误");
             return;
         }
 

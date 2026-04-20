@@ -14,7 +14,7 @@ public class 山西医科大学
             // 遍历Excel文件的每一行
             for (var row = 2; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 7].Text;
+                var SNValue = worksheet.Cells[row, 8].Text;
                 var UidValue = worksheet.Cells[row, 2].Text;
                 UidValue = Convert.ToUInt32(UidValue, 16).ToString();
                 SNData.Add(SNValue);
@@ -35,7 +35,7 @@ public class 山西医科大学
             for (var i = 0; i < UidData.Count; i++)
             {
                 worksheet.Cells[i + 1, 1].Value = SNData[i];
-                worksheet.Cells[i + 1, 2].Value = UidData[i];
+                worksheet.Cells[i + 1, 2].Value = Tools.ChangeDecimalSystem(UidData[i]);
             }
 
             // 保存文件到桌面

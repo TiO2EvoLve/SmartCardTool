@@ -23,7 +23,7 @@ public class 平凉公交
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
             var rowCount = worksheet.Dimension.Rows; //获取行数
             //遍历Excel文件的每一行
-            for (var row = 2; row <= rowCount; row++)
+            for (var row = 1; row <= rowCount; row++)
             {
                 var UIDValue = worksheet.Cells[row, 2].Text;
                 UIDValue = Tools.ChangeHexPairs(UIDValue);

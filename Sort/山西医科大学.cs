@@ -14,7 +14,7 @@ public class 山西医科大学
             // 遍历Excel文件的每一行
             for (var row = 2; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 8].Text;
+                var SNValue = worksheet.Cells[row, 7].Text;
                 var UidValue = worksheet.Cells[row, 2].Text;
                 UidValue = Convert.ToUInt32(UidValue, 16).ToString();
                 SNData.Add(SNValue);

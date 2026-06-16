@@ -23,8 +23,8 @@ public class 云南朗坤
             // 遍历Excel文件的每一行
             for (var row = 1; row <= rowCount; row++)
             {
-                var SNValue = worksheet.Cells[row, 7].Text;
-                var Uid16Value = worksheet.Cells[row, 2].Text;
+                var SNValue = worksheet.Cells[row, 2].Text;
+                var Uid16Value = worksheet.Cells[row, 3].Text;
                 SNData.Add(SNValue);
                 UID16.Add(Uid16Value);
             }

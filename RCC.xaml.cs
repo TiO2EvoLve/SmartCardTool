@@ -236,6 +236,8 @@ public partial class RCC
                 case "三门峡": 三门峡.Run(FilePath,FileName); break;
                 case "凯里": 凯里.Run(FilePath); break;
                 case "海口": 海口.Run(FilePath,FileName); break;
+                case "南通市民卡": 南通市民卡.Run(FilePath); break;
+                case "成都锐视&四川中科": 成都锐视_中科.Run(ZhikaStream, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

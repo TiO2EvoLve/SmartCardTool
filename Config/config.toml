@@ -342,3 +342,13 @@ tip = "当前地区无注意事项"
 mk = false
 file = "mdb"
 tip = "当前地区无注意事项"
+
+["南通市民卡"]
+mk = false
+file = "mdb"
+tip = "当前地区无注意事项"
+
+["成都锐视&四川中科"]
+mk = false
+file = "xlsx"
+tip = "成都锐视和四川中科格式相同"

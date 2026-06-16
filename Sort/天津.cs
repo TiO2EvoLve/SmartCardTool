@@ -10,8 +10,20 @@ public class 天津
         
         string sql = "select SerialNum from kahao order by SerialNum ASC";
         SNData = Mdb.Select(FilePath, sql);
+        //检查位数是否为19位
+        if(SNData.Any(sn => sn.Length != 19))
+        {
+            Message.ShowMessageBox("错误", "SN数据位数错误，请检查数据！");
+            return;
+        }
         sql = "select ATS from kahao order by SerialNum ASC ";
         ATSData = Mdb.Select(FilePath, sql);
+        //检查位数是否为34位
+        if(ATSData.Any(ats => ats.Length != 34))
+        {
+            Message.ShowMessageBox("错误", "ATS数据位数错误，请检查数据！");
+            return;
+        }
         
         //截取MK文件第二行的前42个字节
         MKData[1] = MKData[1].Substring(0, 42);

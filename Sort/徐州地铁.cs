@@ -16,13 +16,12 @@ public class 徐州地铁
         {
             var sql = "SELECT NUM FROM kahao order by NUM ASC";
             SNData = Mdb.Select(FilePath, sql);
-            sql = "SELECT UID_ FROM kahao order by NUM ASC";
+            sql = "SELECT Card_UID FROM kahao order by NUM ASC";
             UidData = Mdb.Select(FilePath, sql);
         }
         else if (filetype == ".xlsx")
         {
             //取出Excel文件的数据
-            
             using (var package = new ExcelPackage(ExcelData))
             {
                 var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表

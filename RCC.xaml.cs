@@ -143,7 +143,10 @@ public partial class RCC
 
                 LogManage.AddLog($"选择地区为：{Region}");
                 string tips = Toml.GetToml(Region, "tip");
-
+                if (string.IsNullOrEmpty(tips))
+                {
+                    tip.Text = "当前地区无注意事项";
+                }
                 tip.Text = tips;
                 string file = Toml.GetToml(Region, "file");
                 LogManage.AddLog($"{Region}地区需要{file}文件格式");
@@ -238,6 +241,7 @@ public partial class RCC
                 case "海口": 海口.Run(FilePath,FileName); break;
                 case "南通市民卡": 南通市民卡.Run(FilePath); break;
                 case "成都锐视&四川中科": 成都锐视_中科.Run(ZhikaStream, FileName); break;
+                case "青岛公交": 青岛公交.Run(FilePath, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

@@ -18,7 +18,7 @@ public class 天津
         }
         sql = "select ATS from kahao order by SerialNum ASC ";
         ATSData = Mdb.Select(FilePath, sql);
-        //检查位数是否为34位
+        //检查位数是否为34q位
         if(ATSData.Any(ats => ats.Length != 34))
         {
             Message.ShowMessageBox("错误", "ATS数据位数错误，请检查数据！");

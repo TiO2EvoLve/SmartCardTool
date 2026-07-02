@@ -241,7 +241,9 @@ public partial class RCC
                 case "海口": 海口.Run(FilePath,FileName); break;
                 case "南通市民卡": 南通市民卡.Run(FilePath); break;
                 case "成都锐视&四川中科": 成都锐视_中科.Run(ZhikaStream, FileName); break;
+                case "玉林公交": 玉林.Run(FilePath); break;
                 case "青岛公交": 青岛公交.Run(FilePath, FileName); break;
+                case "西安地铁": 西安地铁.Run(FilePath); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

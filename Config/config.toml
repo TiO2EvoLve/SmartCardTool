@@ -357,3 +357,13 @@ tip = "成都锐视和四川中科格式相同"
 mk = false
 file = "mdb"
 tip = ""
+
+["玉林公交"]
+mk = false
+file = "mdb"
+tip = ""
+
+["西安地铁"]
+mk = false
+file = "mdb"
+tip = ""

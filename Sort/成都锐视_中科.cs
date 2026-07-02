@@ -22,7 +22,7 @@ public class 成都锐视_中科
                 var UIDValue = worksheet.Cells[row, 2].Text;
                 UIDValue = Tools.ChangeHexPairs(UIDValue);
                 UID.Add(UIDValue);
-                var SNValue = worksheet.Cells[row, 9].Text;
+                var SNValue = worksheet.Cells[row, 8].Text;
                 SN.Add(SNValue);
             }
         }

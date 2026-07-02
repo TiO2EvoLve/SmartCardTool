@@ -17,17 +17,19 @@ public class 柳州公交
 
         var sql = "select SerialNum from kahao order by SerialNum ASC ";
         SNData = Mdb.Select(FilePath, sql);
-        if (SNData.Count == 0)
+        //检查位数是否为19位
+        if(SNData.Any(sn => sn.Length != 16))
         {
-            Message.ShowMessageBox("错误", "卡号读取失败");
+            Message.ShowMessageBox("错误", "SN数据位数错误，请检查数据！");
             return;
         }
 
         sql = "select ATS from kahao order by SerialNum ASC ";
         ATSData = Mdb.Select(FilePath, sql);
-        if (ATSData.Count == 0)
+        //检查位数是否为34q位
+        if(ATSData.Any(ats => ats.Length != 36))
         {
-            Message.ShowMessageBox("错误", "ATS读取失败");
+            Message.ShowMessageBox("错误", "ATS数据位数错误，请检查数据！");
             return;
         }
 

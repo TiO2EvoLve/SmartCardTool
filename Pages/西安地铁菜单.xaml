@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="西安地铁菜单" Height="200" Width="350">
+        Title="西安地铁菜单" Height="300" Width="500">
     <Grid>
         <Border BorderBrush="#FFF6F6F6" BorderThickness="5" CornerRadius="10,10,10,10" Margin="10"
                 Background="#FFFEFEFE">

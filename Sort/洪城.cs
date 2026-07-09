@@ -16,6 +16,8 @@ public class 洪城
         sql = "select ATS from kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
         
+        
+        
         //住建部文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var date = DateTime.Now.ToString("yyyyMMdd");
@@ -25,10 +27,28 @@ public class 洪城
         {
             writer.WriteLine(SN.Count);
             for (var i = 0; i < SN.Count; i++)
+            {
+                if (SN[i].Length != 19)
+                {
+                    Message.ShowMessageBox("错误", $"第{i + 1}行的卡号位数错误！");
+                    return;
+                }
+                if (ATS[i].Length != 32)
+                {
+                    Message.ShowMessageBox("错误", $"第{i + 1}行的芯片使用错误！");
+                    return;
+                }
+                if (SN_s[i].Length != 8)
+                {
+                    Message.ShowMessageBox("错误", $"第{i + 1}行的短号拼接错误！");
+                    return;
+                }
+                
                 if (i == SN.Count - 1)
                     writer.Write($"{ATS[i]}                {SN_s[i]}        000033000000000000000000");
                 else
                     writer.WriteLine($"{ATS[i]}                {SN_s[i]}        000033000000000000000000");
+            }
         }
         //交通部文件
         date = DateTime.Now.ToString("yyyyMMddHHmmss");

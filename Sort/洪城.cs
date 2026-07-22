@@ -16,8 +16,6 @@ public class 洪城
         sql = "select ATS from kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);
         
-        
-        
         //住建部文件
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var date = DateTime.Now.ToString("yyyyMMdd");

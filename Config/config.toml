@@ -251,7 +251,7 @@ tip = ""
 ["陕西师范大学"]
 mk = false
 file = "xlsx"
-tip = ""
+tip = "带信息的需要提供信息"
 
 ["随州"]
 mk = false
@@ -366,4 +366,14 @@ tip = ""
 ["西安地铁"]
 mk = false
 file = "mdb"
+tip = ""
+
+["绿城通"]
+mk = false
+file = "mdb"
+tip = ""
+
+["射洪公交"]
+mk = false
+file = "xlsx"
 tip = ""

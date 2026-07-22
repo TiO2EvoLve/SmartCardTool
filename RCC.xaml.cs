@@ -244,6 +244,8 @@ public partial class RCC
                 case "玉林公交": 玉林.Run(FilePath); break;
                 case "青岛公交": 青岛公交.Run(FilePath, FileName); break;
                 case "西安地铁": 西安地铁.Run(FilePath); break;
+                case "绿城通": 绿城通.Run(FilePath); break;
+                case "射洪公交": 射洪公交.Run(ZhikaStream, FileName); break;
                 default: Message.ShowMessageBox("警告", "请先选择地区"); break;
             }
         }

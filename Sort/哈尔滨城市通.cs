@@ -7,7 +7,7 @@ public class 哈尔滨城市通
         List<string> SN = new();
         List<string> ATS = new();
         
-        string sql = "select 打码特殊算法 from kahao order by SerialNum ASC";
+        string sql = "select SerialNum from kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
         sql = "select ATS from kahao order by SerialNum ASC";
         ATS = Mdb.Select(FilePath, sql);

@@ -90,8 +90,8 @@ tip = ""
 
 ["昆明"]
 mk = false
-file = "xlsx"
-tip = ""
+file = "mdb"
+tip = "两个文件给不同的人"
 
 ["昆明轨道"]
 mk = false
@@ -146,7 +146,7 @@ tip = "开通的类型使用淄博公交的逻辑即可"
 ["淮北"]
 mk = false
 file = "mdb"
-tip = ""
+tip = "卡类型从卡号截取，滴胶卡的卡类型为15"
 
 ["滨州公交"]
 mk = false
@@ -376,4 +376,9 @@ tip = ""
 ["射洪公交"]
 mk = false
 file = "xlsx"
+tip = ""
+
+["六安"]
+mk = false
+file = "mdb"
 tip = ""

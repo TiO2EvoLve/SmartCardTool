@@ -1,5 +1,4 @@
-﻿using WindowUI.Pages;
-
+﻿
 namespace WindowUI.Sort;
 
 public class 三门峡

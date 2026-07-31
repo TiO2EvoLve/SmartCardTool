@@ -1,4 +1,6 @@
-﻿namespace WindowUI.Sort;
+﻿using OfficeOpenXml.Style;
+
+namespace WindowUI.Sort;
 
 public class 六安
 {
@@ -26,9 +28,13 @@ public class 六安
             worksheet.Cells[1, 2].Value = "卡片芯片号";
             for (var i = 0; i < UID.Count; i++)
             {
+                if (SN[i].Length != 19) throw new Exception($"第{i}个数据卡号位数错误");
                 worksheet.Cells[i + 2, 1].Value = SN[i];
                 worksheet.Cells[i + 2, 2].Value = UID[i];
             }
+            //自动适应、居中
+            worksheet.Cells.AutoFitColumns();
+            worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             package.SaveAs(new FileInfo(filePath));
         }
         Message.ShowSnack();

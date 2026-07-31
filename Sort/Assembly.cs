@@ -2,3 +2,4 @@
 global using System.Windows;
 global using OfficeOpenXml;
 global using WindowUI.Tool;
+global using WindowUI.Pages;

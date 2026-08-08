@@ -46,6 +46,7 @@ public class 泸州公交
             worksheet.Cells[1, 3].Value = "卡商标志";
             for (var i = 0; i < Uid10Data.Count; i++)
             {
+                if(SnData[i].Length != 16) throw new Exception($"第{i}个数据卡号位数错误");
                 worksheet.Cells[i + 2, 1].Value = Uid10Data[i];
                 worksheet.Cells[i + 2, 2].Value = SnData[i];
                 worksheet.Cells[i + 2, 3].Value = 8670;

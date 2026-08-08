@@ -1,4 +1,6 @@
 ﻿
+using OfficeOpenXml.Style;
+
 namespace WindowUI.Sort;
 
 public class 三门峡
@@ -8,29 +10,38 @@ public class 三门峡
         三门峡菜单 menu= new();
         menu.ShowDialog();
         var cardtype = menu.CardType;
-        List<string> SNData = new List<string>();
-        var UidData = new List<string>();
+        List<string> SN = new List<string>();
+        var UID = new List<string>();
 
         var sql = "select SerialNum from kahao order by SerialNum ASC";
-        SNData = Mdb.Select(FilePath, sql);
+        SN = Mdb.Select(FilePath, sql);
 
         sql = "select UID_10 from kahao order by SerialNum ASC ";
-        UidData = Mdb.Select(FilePath, sql);
-
-        // 创建一个新的TXT件
+        UID = Mdb.Select(FilePath, sql);
+        
+        // 保存文件到桌面
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var fileName = excelFileName + ".txt";
+        var fileName = $"{excelFileName}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
         
-        using (var writer = new StreamWriter(filePath))
+        using (var package = new ExcelPackage())
         {
-            for (var i = 0; i < SNData.Count; i++)
-                if (i == SNData.Count - 1)
-                    writer.Write($"{UidData[i].PadLeft(10, '0')}\t{cardtype}{SNData[i]}\t0");
-                else
-                    writer.WriteLine($"{UidData[i].PadLeft(10, '0')}\t{cardtype}{SNData[i]}\t0");
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "卡片芯号";
+            worksheet.Cells[1, 2].Value = "卡号(16位)";
+            worksheet.Cells[1, 3].Value = "卡商标志";
+            
+            for (var i = 0; i < UID.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value = UID[i];
+                worksheet.Cells[i + 2, 2].Value = cardtype + SN[i];
+                worksheet.Cells[i + 2, 3].Value = "8670";
+            }
+            worksheet.Cells.AutoFitColumns();
+            worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            
+            package.SaveAs(new FileInfo(filePath));
         }
         Message.ShowSnack();
-        
     }
 }

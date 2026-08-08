@@ -6,8 +6,8 @@ public class 石家庄
     public static void Run(MemoryStream ExcelData, string excelFileName)
     {
         // 第一个rcc文件，excel格式
-        List<string> SNData = new List<string>();
-        List<string> uid16Data = new List<string>();
+        List<string> SN = new List<string>();
+        List<string> UID = new List<string>();
         using (var package = new ExcelPackage(ExcelData))
         {
             var worksheet = package.Workbook.Worksheets[0]; // 获取第一个工作表
@@ -16,9 +16,13 @@ public class 石家庄
             for (var row = 1; row <= rowCount; row++)
             {
                 var SNValue = worksheet.Cells[row, 8].Text;
-                var Uid_16_Value = worksheet.Cells[row, 2].Text;
-                SNData.Add(SNValue);
-                uid16Data.Add(Uid_16_Value);
+                var Uid16 = worksheet.Cells[row, 2].Text;
+                if (SNValue.Length != 16)
+                {
+                    SNValue = "05052608" + Uid16;
+                }
+                SN.Add(SNValue);
+                UID.Add(Uid16);
             }
         }
         // string sql = "select SerialNum from kahao order by SerialNum ASC";
@@ -32,10 +36,10 @@ public class 石家庄
             var worksheet = package.Workbook.Worksheets.Add(excelFileName);
             worksheet.Cells[1, 1].Value = "SerialNum";
             worksheet.Cells[1, 2].Value = "UID_16_";
-            for (var i = 0; i < uid16Data.Count; i++)
+            for (var i = 0; i < UID.Count; i++)
             {
-                worksheet.Cells[i + 2, 1].Value = SNData[i];
-                worksheet.Cells[i + 2, 2].Value = uid16Data[i];
+                worksheet.Cells[i + 2, 1].Value = SN[i];
+                worksheet.Cells[i + 2, 2].Value = UID[i];
             }
 
             // 保存文件到桌面
@@ -53,11 +57,11 @@ public class 石家庄
         using (var writer = new StreamWriter(filePath1))
         {
             writer.WriteLine("SerialNum\tUID");
-            for (var i = 0; i < SNData.Count; i++)
-                if (i == SNData.Count - 1)
-                    writer.Write($"{SNData[i]}\t{uid16Data[i]}");
+            for (var i = 0; i < SN.Count; i++)
+                if (i == SN.Count - 1)
+                    writer.Write($"{SN[i]}\t{UID[i]}");
                 else
-                    writer.WriteLine($"{SNData[i]}\t{uid16Data[i]}");
+                    writer.WriteLine($"{SN[i]}\t{UID[i]}");
         }
 
         Message.ShowSnack();

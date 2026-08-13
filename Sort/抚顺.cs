@@ -1,11 +1,13 @@
-﻿namespace WindowUI.Sort;
+﻿using OfficeOpenXml.Style;
+
+namespace WindowUI.Sort;
 
 public class 抚顺
 {
     public static void Run(string FilePath,MemoryStream ExcelData, string excelFileName)
     {
-        List<string> SnData = new ();
-        List<string> UidData = new ();
+        List<string> SN = new ();
+        List<string> UID = new ();
         
         //获取文件的类型
         string fileExtension = Path.GetExtension(FilePath).ToLower();
@@ -23,9 +25,9 @@ public class 抚顺
         void MdbExcute(string FilePath)
         {
             string sql = "select SerialNum from kahao order by SerialNum ASC";
-            SnData = Mdb.Select(FilePath, sql);
+            SN = Mdb.Select(FilePath, sql);
             sql = "select UID_10 from kahao order by SerialNum ASC ";
-            UidData = Mdb.Select(FilePath, sql); 
+            UID = Mdb.Select(FilePath, sql); 
         }
 
         void ExcelExcute(MemoryStream ExcelData)
@@ -40,22 +42,32 @@ public class 抚顺
                 {
                     var SNValue = worksheet.Cells[row, 7].Text;
                     var UidValue = worksheet.Cells[row, 3].Text;
-                    SnData.Add(SNValue);
-                    UidData.Add(UidValue);
+                    SN.Add(SNValue);
+                    UID.Add(UidValue);
                 }
             }
         }
-        //保存为txt文件
+        
+        // 保存文件到桌面
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var fileName = $"{excelFileName}.txt";
+        var fileName = $"{excelFileName}.xlsx";
         var filePath = Path.Combine(desktopPath, fileName);
-        using (var writer = new StreamWriter(filePath))
+        
+        using (var package = new ExcelPackage())
         {
-            for (var i = 0; i < SnData.Count; i++)
-                if (i == SnData.Count - 1)
-                    writer.Write($"{SnData[i]} {UidData[i]}");
-                else
-                    writer.WriteLine($"{SnData[i]} {UidData[i]}");
+            var worksheet = package.Workbook.Worksheets.Add(excelFileName);
+            worksheet.Cells[1, 1].Value = "卡号";
+            worksheet.Cells[1, 2].Value = "芯片号";
+            
+            for (var i = 0; i < UID.Count; i++)
+            {
+                worksheet.Cells[i + 2, 1].Value = SN[i];
+                worksheet.Cells[i + 2, 2].Value = Tools.ChangeDecimalSystem(UID[i]);
+            }
+            worksheet.Cells.AutoFitColumns();
+            worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            
+            package.SaveAs(new FileInfo(filePath));
         }
         Message.ShowSnack();
     }

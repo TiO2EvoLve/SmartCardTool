@@ -47,6 +47,9 @@
         <None Update="temple\凯里.mdb">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="temple\合肥通.mdb">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

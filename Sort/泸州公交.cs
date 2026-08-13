@@ -1,4 +1,5 @@
-﻿using WindowUI.Pages;
+﻿using OfficeOpenXml.Style;
+using WindowUI.Pages;
 
 namespace WindowUI.Sort;
 
@@ -51,7 +52,9 @@ public class 泸州公交
                 worksheet.Cells[i + 2, 2].Value = SnData[i];
                 worksheet.Cells[i + 2, 3].Value = 8670;
             }
-
+            //自动适应、居中
+            worksheet.Cells.AutoFitColumns();
+            worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             // 保存文件到桌面
             var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var filePath = Path.Combine(desktopPath, $"{excelFileName}.xlsx");

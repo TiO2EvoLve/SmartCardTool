@@ -14,6 +14,26 @@ public class 琴岛通
         ATS = Mdb.Select(FilePath, sql);
         sql = "SELECT 特殊卡号 FROM kahao order by SerialNum ASC";
         SN = Mdb.Select(FilePath, sql);
+
+        foreach (var ats in ATS)
+        {
+            if(ats.Length != 48)
+            {
+                Message.ShowMessageBox("异常", "ATS长度不为32位，请检查数据");
+                return;
+            }
+        }
+
+        foreach (var sn in SN)
+        {
+            if(sn.Length != 40)
+            {
+                Message.ShowMessageBox("异常", "特殊卡号长度不为40位，请检查数据");
+                return;
+            }
+        }
+        
+        
         // 使用正则表达式匹配数量和日期
         var regex = new Regex(@"(\d+)-(\d{8})");
         var match = regex.Match(FileName);
@@ -43,6 +63,7 @@ public class 琴岛通
         var filePath = Path.Combine(desktopPath, fileName);
         using (var writer = new StreamWriter(filePath))
         {
+            
             writer.WriteLine(ATS.Count);
             for (var i = 0; i < ATS.Count; i++) writer.WriteLine($"{ATS[i]}{SN[i]}");
         }

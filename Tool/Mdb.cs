@@ -138,7 +138,7 @@ public class Mdb
             }
             catch (Exception ex)
             {
-               // transaction.Rollback();
+               transaction.Rollback();
                throw;
             }
         }
